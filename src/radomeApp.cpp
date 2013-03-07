@@ -200,7 +200,7 @@ void radomeApp::draw() {
                 _shader.setUniform1f("videoMix", 0.0);
             }
                         
-            _cam.setDistance(DOME_DIAMETER*2);
+            _cam.setDistance(DOME_DIAMETER*2.05);
             _cam.begin();
             drawDome();
             drawGroundPlane();
@@ -302,18 +302,18 @@ void radomeApp::keyPressed(int key) {
     float accel = 2.0;
     
     switch (key) {
-        case 'w': _domeOrigin.y += accel; break;
-        case 's': _domeOrigin.y -= accel; break;
-        case 'a': _domeOrigin.x -= accel; break;
-        case 'd': _domeOrigin.x += accel; break;
-        case 'z': _domeOrigin.z += accel; break;
-        case 'x': _domeOrigin.z -= accel; break;
-        case 'W': _domeOrigin.y += accel * 10; break;
-        case 'S': _domeOrigin.y -= accel * 10; break;
-        case 'A': _domeOrigin.x -= accel * 10; break;
-        case 'D': _domeOrigin.x += accel * 10; break;
-        case 'Z': _domeOrigin.z += accel * 10; break;
-        case 'X': _domeOrigin.z -= accel * 10; break;
+        case 'w': _domeOrigin.y -= accel; break;
+        case 's': _domeOrigin.y += accel; break;
+        case 'a': _domeOrigin.x += accel; break;
+        case 'd': _domeOrigin.x -= accel; break;
+        case 'z': _domeOrigin.z -= accel; break;
+        case 'x': _domeOrigin.z += accel; break;
+        case 'W': _domeOrigin.y -= accel * 10; break;
+        case 'S': _domeOrigin.y += accel * 10; break;
+        case 'A': _domeOrigin.x += accel * 10; break;
+        case 'D': _domeOrigin.x -= accel * 10; break;
+        case 'Z': _domeOrigin.z -= accel * 10; break;
+        case 'X': _domeOrigin.z += accel * 10; break;
         case 'l': loadFile(); break;
         case 'm':
             {
