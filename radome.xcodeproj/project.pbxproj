@@ -14,6 +14,7 @@
 		5B1440D416E7F97F00836D41 /* Syphon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B1440AD16E7F92E00836D41 /* Syphon.framework */; };
 		5B15C1CD16D2CA8E004E20D4 /* icosohedron.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5B15C1CB16D2CA8E004E20D4 /* icosohedron.cpp */; };
 		5B78A8EC16E8717E00CBDB28 /* radomeSyphonClient.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5B78A8EA16E8717E00CBDB28 /* radomeSyphonClient.cpp */; };
+		5B78A8EF16E88B7500CBDB28 /* radome.icns in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5B78A8ED16E88ACC00CBDB28 /* radome.icns */; };
 		5BD6E52016D9BC2C00C39777 /* turntableCam.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5BD6E51E16D9BC2C00C39777 /* turntableCam.cpp */; };
 		5BEE6CCF16D358A0007786AB /* tinyxml.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5BEE6CC816D358A0007786AB /* tinyxml.cpp */; };
 		5BEE6CD016D358A0007786AB /* tinyxmlerror.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5BEE6CCA16D358A0007786AB /* tinyxmlerror.cpp */; };
@@ -66,6 +67,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		5B78A8EE16E88B7000CBDB28 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 7;
+			files = (
+				5B78A8EF16E88B7500CBDB28 /* radome.icns in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E4C2427710CC5ABF004149E2 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -93,6 +104,7 @@
 		5B15C1CC16D2CA8E004E20D4 /* icosohedron.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = icosohedron.h; sourceTree = "<group>"; };
 		5B78A8EA16E8717E00CBDB28 /* radomeSyphonClient.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = radomeSyphonClient.cpp; sourceTree = "<group>"; };
 		5B78A8EB16E8717E00CBDB28 /* radomeSyphonClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = radomeSyphonClient.h; sourceTree = "<group>"; };
+		5B78A8ED16E88ACC00CBDB28 /* radome.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = radome.icns; path = resources/macos/radome.icns; sourceTree = "<group>"; };
 		5BD6E51E16D9BC2C00C39777 /* turntableCam.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = turntableCam.cpp; sourceTree = "<group>"; };
 		5BD6E51F16D9BC2C00C39777 /* turntableCam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = turntableCam.h; sourceTree = "<group>"; };
 		5BEE6BFC16D35423007786AB /* ofxUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxUI.h; sourceTree = "<group>"; };
@@ -640,6 +652,7 @@
 			children = (
 				E4B6FCAD0C3E899E008CF71C /* openFrameworks-Info.plist */,
 				E4EB6923138AFD0F00A09F29 /* Project.xcconfig */,
+				5B78A8ED16E88ACC00CBDB28 /* radome.icns */,
 				E4B69E1C0A3A1BDC003C02F2 /* src */,
 				5BF5F24216D1A68E0026DF72 /* data */,
 				E4EEC9E9138DF44700A80321 /* openFrameworks */,
@@ -685,6 +698,7 @@
 				E4B69B590A3A1756003C02F2 /* Frameworks */,
 				E4B6FFFD0C3F9AB9008CF71C /* ShellScript */,
 				E4C2427710CC5ABF004149E2 /* CopyFiles */,
+				5B78A8EE16E88B7000CBDB28 /* CopyFiles */,
 			);
 			buildRules = (
 			);
