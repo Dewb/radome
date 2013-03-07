@@ -1,0 +1,88 @@
+uniform samplerCube EnvMap;
+varying vec3 ReflectDir;
+varying vec4 position;
+
+uniform sampler2DRect video;
+uniform vec2 videoSize;
+uniform float videoMix;
+uniform int mixMode;
+uniform int mappingMode;
+
+vec2 getUV() {
+    vec2 normalUV;
+    if (mappingMode == 0) {
+        // Basic latitude/longitude mapping
+        normalUV = vec2(0.5 + atan(position.x, position.z)/(2.0*3.141592),
+                        4.0 * asin(position.y/320.0)/(2.0*3.141592));
+    } else if (mappingMode == 1) {
+        // Mirrored quadrants
+        normalUV = vec2(abs(position.x)/300.0,
+                        4.0 * asin(position.y/320.0)/(2.0*3.141592));
+    } else {
+        // Default UV
+        normalUV = gl_TexCoord[0].st;
+    }
+    
+    return vec2(normalUV.s * videoSize.x, normalUV.t * videoSize.y);
+}
+
+vec4 mixColors(vec4 envColor, vec4 videoColor, float videoMix) {
+    if (mixMode == 0) {
+        // Underlay
+        return mix(videoColor, envColor, envColor.a * videoMix);
+    } else if (mixMode == 1) {
+        // Overlay
+        return mix(envColor, videoColor, videoColor.a * videoMix);
+    } else if (mixMode == 2) {
+        // Mask
+        return mix(envColor, videoColor, envColor.a * (1.0-videoMix));
+    } else {
+        return vec4(0.0,0.0,0.0,0.0);
+    }
+}
+
+/*
+vec4 multiLayerMix(vec4 envColor,
+                   vec4 videoOverlayColor, float videoOverlayMix,
+                   vec4 videoUnderlayColor, float videoUnderlayMix,
+                   vec4 videoMaskColor, float videoMaskMix)
+{
+    vec4 mask = mix(envColor, videoMaskColor, envColor.a * videoMaskMix);
+    vec4 under = mix(videoUnderlayColor, mask, envColor.a * videoUnderlayMix);
+    vec4 over = mix(under, videoOverlayColor, videoOverlayColor.a * videoOverlayMix);
+    return over;
+}
+*/
+
+void main()
+{
+    // clip below the y-plane
+    if (position.y < 0.0) discard;
+
+    // draw a green line at the y-plane
+    if (position.y < 3.0) {
+        if (position.x*position.x+position.z*position.z < 89900.0) { // unless it's under the dome
+            discard;
+        } else {
+            gl_FragColor = vec4(0.15, 0.75, 0.3, 1.0);
+        }
+    } else {
+        // everywhere else, reflect the environment map back onto the dome
+        vec3 lookupVec = ReflectDir;
+ 
+        // Look up texture pixel in cube map
+        vec4 envColor = textureCube(EnvMap, lookupVec);
+
+        // Get 2D video overlay color from the mapping mode and the input video texture
+        vec2 uv = getUV();
+        vec4 videoColor = texture2DRect(video, uv);
+
+        // Blend according to the mix mode and mix level
+        vec4 mixed = mixColors(envColor, videoColor, videoMix);
+        
+        // Blend any remaining alpha against black
+        gl_FragColor = mix(vec4(0.0,0.0,0.0,1.0), mixed, mixed.a);
+        gl_FragColor.a = 1.0;
+    }
+}
+
