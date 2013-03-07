@@ -14,4 +14,4 @@ Radome is built with openFrameworks 0073.  The following addons are required:
 * ofxSyphon
 
 These dependencies will probably be incorporated into this repo in the near future, but for now you'll
-need to install them in the of addons folder yourself.
+need to install them in the openFramework addons folder yourself.
