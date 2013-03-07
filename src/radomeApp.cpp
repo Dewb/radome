@@ -3,6 +3,8 @@
 #define SIDEBAR_WIDTH 150
 #define DEFAULT_SYPHON_APP "Arena"
 #define DEFAULT_SYPHON_SERVER "Composition"
+#define DOME_DIAMETER 300
+#define DOME_HEIGHT 110
 
 void radomeApp::setup() {
     ofSetFrameRate(45);
@@ -18,7 +20,7 @@ void radomeApp::setup() {
     _domeOrigin.z = 0.0;
     
     _cam.setRotation(0.66, 0.5);
-    _cam.setTarget(ofVec3f(0.0, 80.0, 0.0));
+    _cam.setTarget(ofVec3f(0.0, DOME_HEIGHT*0.5, 0.0));
 
     _displayMode = DisplayScene;
     _mixMode = 0;
@@ -67,7 +69,6 @@ void radomeApp::initGUI() {
 
 	_pUI->addWidgetDown(new ofxUILabel("PROJECTORS", OFX_UI_FONT_MEDIUM));
     _pUI->addWidgetDown(new ofxUILabelButton("Windows...", false, 0, 30, 0, 0, OFX_UI_FONT_SMALL));
-
     _pUI->addSpacer(0, 12);
 
 	_pUI->addWidgetDown(new ofxUILabel("CONTENT", OFX_UI_FONT_MEDIUM));
@@ -93,7 +94,7 @@ void radomeApp::initGUI() {
 	addRadioAndSetFirstItem(_pUI, "MAPPING MODE", _mappingModeNames, OFX_UI_ORIENTATION_VERTICAL, 16, 16);
     _pUI->addSpacer(0, 12);
     
-    ofBackground(40,20,32);
+    ofBackground(40, 20, 32);
 
     ofAddListener(_pUI->newGUIEvent, this, &radomeApp::guiEvent);
 }
@@ -112,7 +113,10 @@ void radomeApp::update() {
     if (_animationTime >= 1.0) {
         _animationTime = 0.0;
     }
-    //_model.setNormalizedTime(_animationTime);
+    for (auto iter = _modelList.begin(); iter != _modelList.end(); ++iter)
+    {
+        iter->setNormalizedTime(_animationTime);
+    }
 }
 
 void radomeApp::updateCubeMap() {
@@ -134,7 +138,7 @@ void radomeApp::draw() {
             ofPushStyle();
             ofEnableBlendMode(OF_BLENDMODE_ALPHA);
 
-            _cam.setDistance(1000);
+            _cam.setDistance(DOME_DIAMETER*3.3);
             _cam.begin();
             
             ofPushMatrix();
@@ -175,7 +179,7 @@ void radomeApp::draw() {
         case DisplayDome: {
             updateCubeMap();
 
-            ofClear(20,100,50);
+            ofClear(20, 100, 50);
             
             _shader.begin();
 
@@ -185,6 +189,8 @@ void radomeApp::draw() {
             if (_vidOverlay.maybeBind()) {
                 _shader.setUniform1i("mixMode", _mixMode);
                 _shader.setUniform1i("mappingMode", _mappingMode);
+                _shader.setUniform1f("domeDiameter", DOME_DIAMETER*1.0);
+                _shader.setUniform1f("domeHeight", DOME_HEIGHT*1.0);
                 _shader.setUniform1f("videoMix", _vidOverlay.getFaderValue());
                 _shader.setUniform2f("videoSize", _vidOverlay.getWidth(), _vidOverlay.getHeight());
                 _shader.setUniformTexture("video",
@@ -194,7 +200,7 @@ void radomeApp::draw() {
                 _shader.setUniform1f("videoMix", 0.0);
             }
                         
-            _cam.setDistance(625);
+            _cam.setDistance(DOME_DIAMETER*2);
             _cam.begin();
             drawDome();
             drawGroundPlane();
@@ -218,7 +224,7 @@ void radomeApp::draw() {
 }
 
 void radomeApp::drawScene() {
-    ofSetColor(180,192,192);
+    ofSetColor(180, 192, 192);
     for (auto iter = _modelList.begin(); iter != _modelList.end(); ++iter)
     {
         iter->drawFaces();
@@ -238,30 +244,30 @@ void radomeApp::drawDome() {
         
         std::vector<icosohedron::Triangle>::iterator i = _triangles.begin();
         glBegin(GL_TRIANGLES);
-        int sx = 300, sy = 320, sz = 300;
+        int sx = DOME_DIAMETER, sy = DOME_HEIGHT*2, sz = DOME_DIAMETER;
         while (i != _triangles.end())
         {
             icosohedron::Triangle& t = *i++;
 
             float dx, dy, dz;
 
-            dx = t.v0[0]*sx;
-            dy = t.v0[1]*sy;
-            dz = t.v0[2]*sz;
+            dx = t.v0[0] * sx;
+            dy = t.v0[1] * sy;
+            dz = t.v0[2] * sz;
             //glTexCoord2f(0.5 + atan2(dz, dx)/(2*3.14159), 0.5 - 2*asin(dy)/(2*3.14159));
             glNormal3f(dx, dy, dz);
             glVertex3f(dx, dy, dz);
             
-            dx = t.v1[0]*sx;
-            dy = t.v1[1]*sy;
-            dz = t.v1[2]*sz;
+            dx = t.v1[0] * sx;
+            dy = t.v1[1] * sy;
+            dz = t.v1[2] * sz;
             //glTexCoord2f(0.5 + atan2(dz, dx)/(2*3.14159), 0.5 - 2*asin(dy)/(2*3.14159));
             glNormal3f(dx, dy, dz);
             glVertex3f(dx, dy, dz);
             
-            dx = t.v2[0]*sx;
-            dy = t.v2[1]*sy;
-            dz = t.v2[2]*sz;
+            dx = t.v2[0] * sx;
+            dy = t.v2[1] * sy;
+            dz = t.v2[2] * sz;
             //glTexCoord2f(0.5 + atan2(dz, dx)/(2*3.14159), 0.5 - 2*asin(dy)/(2*3.14159));
             glNormal3f(dx, dy, dz);
             glVertex3f(dx, dy, dz);
@@ -272,7 +278,7 @@ void radomeApp::drawDome() {
 }
 
 void radomeApp::drawGroundPlane() {
-    float size = 1000.0;
+    float size = DOME_DIAMETER * 3.3;
     float ticks = 20.0;
     
     float step = size / ticks;
@@ -302,12 +308,12 @@ void radomeApp::keyPressed(int key) {
         case 'd': _domeOrigin.x += accel; break;
         case 'z': _domeOrigin.z += accel; break;
         case 'x': _domeOrigin.z -= accel; break;
-        case 'W': _domeOrigin.y += accel*10; break;
-        case 'S': _domeOrigin.y -= accel*10; break;
-        case 'A': _domeOrigin.x -= accel*10; break;
-        case 'D': _domeOrigin.x += accel*10; break;
-        case 'Z': _domeOrigin.z += accel*10; break;
-        case 'X': _domeOrigin.z -= accel*10; break;
+        case 'W': _domeOrigin.y += accel * 10; break;
+        case 'S': _domeOrigin.y -= accel * 10; break;
+        case 'A': _domeOrigin.x -= accel * 10; break;
+        case 'D': _domeOrigin.x += accel * 10; break;
+        case 'Z': _domeOrigin.z += accel * 10; break;
+        case 'X': _domeOrigin.z -= accel * 10; break;
         case 'l': loadFile(); break;
         case 'm':
             {
@@ -339,32 +345,37 @@ void radomeApp::changeDisplayMode(DisplayMode mode) {
     }
 }
 
+namespace {
+    bool matchRadioButton(string widgetName, vector<string> names, int* pValue)
+    {
+        for (int ii = 0; ii < names.size(); ii++) {
+            if (widgetName == names[ii]) {
+                if (pValue) {
+                    *pValue = ii;
+                }
+                return true;
+            }
+        }
+        return false;
+    }
+}
+
 void radomeApp::guiEvent(ofxUIEventArgs &e) {
     string name = e.widget->getName();
 	int kind = e.widget->getKind();
     
-    int ii;
-    for (ii = 0; ii < _displayModeNames.size(); ii++) {
-        if (name == _displayModeNames[ii]) {
-            changeDisplayMode((DisplayMode)ii);
-            return;
-        }
+    int radio;
+    if(matchRadioButton(name, _displayModeNames, &radio)) {
+        changeDisplayMode((DisplayMode)radio);
+        return;
     }
     
-    for (ii = 0; ii < _mixModeNames.size(); ii++) {
-        if (name == _mixModeNames[ii]) {
-            _mixMode = ii;
-            return;
-        }
-    }
-    
-    for (ii = 0; ii < _mappingModeNames.size(); ii++) {
-        if (name == _mappingModeNames[ii]) {
-            _mappingMode = ii;
-            return;
-        }
-    }
-    
+    if (matchRadioButton(name, _mixModeNames, &_mixMode))
+        return;
+
+    if (matchRadioButton(name, _mappingModeNames, &_mappingMode))
+        return;
+            
     if (name == "XFADE") {
         auto slider = dynamic_cast<ofxUISlider*>(e.widget);
         if (slider) {

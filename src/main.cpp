@@ -1,10 +1,8 @@
 #include "radomeApp.h"
 #include "ofAppGlutWindow.h"
 
-//--------------------------------------------------------------
-int main(){
-	ofAppGlutWindow window; // create a window
-	// set width, height, mode (OF_WINDOW or OF_FULLSCREEN)
+int main() {
+	ofAppGlutWindow window;
 	ofSetupOpenGL(&window, 1216, 812, OF_WINDOW);
-	ofRunApp(new radomeApp()); // start the app
+	ofRunApp(new radomeApp());
 }

@@ -1,3 +1,5 @@
+// Radome fragment shader
+
 uniform samplerCube EnvMap;
 varying vec3 ReflectDir;
 varying vec4 position;
@@ -7,17 +9,19 @@ uniform vec2 videoSize;
 uniform float videoMix;
 uniform int mixMode;
 uniform int mappingMode;
+uniform float domeHeight;
+uniform float domeDiameter;
 
 vec2 getUV() {
     vec2 normalUV;
     if (mappingMode == 0) {
         // Basic latitude/longitude mapping
         normalUV = vec2(0.5 + atan(position.x, position.z)/(2.0*3.141592),
-                        4.0 * asin(position.y/320.0)/(2.0*3.141592));
+                        4.0 * asin(position.y/(2.0*domeHeight))/(2.0*3.141592));
     } else if (mappingMode == 1) {
         // Mirrored quadrants
-        normalUV = vec2(abs(position.x)/300.0,
-                        4.0 * asin(position.y/320.0)/(2.0*3.141592));
+        normalUV = vec2(abs(position.x)/domeDiameter,
+                        4.0 * asin(position.y/(2.0*domeHeight))/(2.0*3.141592));
     } else {
         // Default UV
         normalUV = gl_TexCoord[0].st;
@@ -32,7 +36,7 @@ vec4 mixColors(vec4 envColor, vec4 videoColor, float videoMix) {
         return mix(videoColor, envColor, envColor.a * videoMix);
     } else if (mixMode == 1) {
         // Overlay
-        return mix(envColor, videoColor, videoColor.a * videoMix);
+        return mix(envColor, videoColor, videoColor.a * (1.0-videoMix));
     } else if (mixMode == 2) {
         // Mask
         return mix(envColor, videoColor, envColor.a * (1.0-videoMix));
@@ -61,7 +65,7 @@ void main()
 
     // draw a green line at the y-plane
     if (position.y < 3.0) {
-        if (position.x*position.x+position.z*position.z < 89900.0) { // unless it's under the dome
+        if (position.x*position.x+position.z*position.z < (domeDiameter*domeDiameter)-100.0) { // unless it's under the dome
             discard;
         } else {
             gl_FragColor = vec4(0.15, 0.75, 0.3, 1.0);

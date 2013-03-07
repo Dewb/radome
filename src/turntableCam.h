@@ -1,5 +1,7 @@
 #pragma once
 
+// ofxTurntableCam: an ofEasyCam-inspired camera that does turntable rotation
+
 #include "ofCamera.h"
 #include "ofEvents.h"
 

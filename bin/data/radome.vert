@@ -1,3 +1,5 @@
+// Radome vertex shader
+
 varying vec3 ReflectDir;
 varying vec4 position;
 

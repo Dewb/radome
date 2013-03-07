@@ -21,6 +21,7 @@ void radomeSyphonClient::initialize(string app, string server) {
     setServerName(server);
 }
 
+// Binds only if the client is actually connected to a server and receiving frames.
 bool radomeSyphonClient::maybeBind() {
     if (!isEnabled())
         return false;
