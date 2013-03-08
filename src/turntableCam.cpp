@@ -4,14 +4,14 @@
 #include "ofUtils.h"
 
 ofxTurntableCam::ofxTurntableCam() {
-	reset();
-	ofAddListener(ofEvents().update , this, &ofxTurntableCam::update);
+    reset();
+    ofAddListener(ofEvents().update , this, &ofxTurntableCam::update);
     _mouseDown = false;
     setTarget(ofVec3f(0,0,0));
 }
 
 ofxTurntableCam::~ofxTurntableCam() {
-	ofRemoveListener(ofEvents().update , this, &ofxTurntableCam::update);
+    ofRemoveListener(ofEvents().update , this, &ofxTurntableCam::update);
 }
 
 void ofxTurntableCam::update(ofEventArgs& args) {
@@ -37,7 +37,6 @@ void ofxTurntableCam::setRotation(float dx, float dy) {
     ofVec3f p = ofCamera::getPosition();
     ofVec3f uy = ofCamera::getUpDir();
     ofVec3f ux = ofCamera::getSideDir();
-    float ar = float(ofGetViewportWidth()) / float(ofGetViewportHeight());
     
     ofVec3f arcEnd(dx, -dy, -0.5f);
     arcEnd = arcEnd;
@@ -57,27 +56,27 @@ void ofxTurntableCam::setRotation(float dx, float dy) {
 }
 
 void ofxTurntableCam::begin(ofRectangle viewport) {
-	_viewport = viewport;
-	ofCamera::begin(_viewport);
+    _viewport = viewport;
+    ofCamera::begin(_viewport);
 }
 
 void ofxTurntableCam::reset() {
-	_target.resetTransform();
-	
-	_target.setPosition(0,0, 0);
-	lookAt(_target);
+    _target.resetTransform();
+    
+    _target.setPosition(0,0, 0);
+    lookAt(_target);
 
-	resetTransform();
-	setPosition(0, 0, _distance);
+    resetTransform();
+    setPosition(0, 0, _distance);
 }
 
 void ofxTurntableCam::setTarget(const ofVec3f& targetPoint){
-	_target.setPosition(targetPoint);
-	lookAt(_target);
+    _target.setPosition(targetPoint);
+    lookAt(_target);
 }
 
 ofVec3f ofxTurntableCam::getTarget() {
-	return _target.getPosition();
+    return _target.getPosition();
 }
 
 void ofxTurntableCam::setDistance(float distance){
@@ -86,6 +85,6 @@ void ofxTurntableCam::setDistance(float distance){
 }
 
 float ofxTurntableCam::getDistance() const {
-	return _target.getPosition().distance(getPosition());
+    return _target.getPosition().distance(getPosition());
 }
 

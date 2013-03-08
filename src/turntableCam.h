@@ -7,20 +7,20 @@
 
 class ofxTurntableCam : public ofCamera {
 public:
-	ofxTurntableCam();
-	~ofxTurntableCam();
+    ofxTurntableCam();
+    ~ofxTurntableCam();
 
-	virtual void begin(ofRectangle viewport = ofGetCurrentViewport());
-	void reset();
+    virtual void begin(ofRectangle viewport = ofGetCurrentViewport());
+    void reset();
 
-	void setTarget(const ofVec3f& target);
+    void setTarget(const ofVec3f& target);
     ofVec3f getTarget();
 
-	void setDistance(float distance);
-	float getDistance() const;
+    void setDistance(float distance);
+    float getDistance() const;
     
     void setRotation(float dx, float dy);
-	
+    
 protected:
     void update(ofEventArgs& args);
     
@@ -29,8 +29,8 @@ protected:
     ofVec2f _mouseStart;
     
     float _distance;
-	ofNode _target;
-	ofQuaternion _rotation;
-	ofRectangle _viewport;
+    ofNode _target;
+    ofQuaternion _rotation;
+    ofRectangle _viewport;
 };
     

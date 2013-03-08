@@ -1,89 +1,96 @@
 #include "radomeApp.h"
+#include "radomeUtils.h"
 
-#define SIDEBAR_WIDTH 150
+#define SIDEBAR_WIDTH 140
 #define DEFAULT_SYPHON_APP "Arena"
 #define DEFAULT_SYPHON_SERVER "Composition"
 #define DOME_DIAMETER 300
 #define DOME_HEIGHT 110
+#define NUM_PROJECTORS 3
+
+radomeApp::radomeApp() {
+}
+
+radomeApp::~radomeApp() {
+    if (_pUI)
+        delete (_pUI);
+    deletePointerCollection(_projectorList);
+    deletePointerCollection(_modelList);
+}
 
 void radomeApp::setup() {
     ofSetFrameRate(45);
     ofEnableSmoothing();
-    _fullscreen = false;
     
-    _cubeMap.initEmptyTextures(2048, GL_RGBA);
-    _shader.load("radome");
-    _cubeMap.setNearFar(ofVec2f(0.01, 8192.0));
     
     _domeOrigin.x = 0.0;
     _domeOrigin.y = 0.0;
     _domeOrigin.z = 0.0;
     
-    _cam.setRotation(0.66, 0.5);
-    _cam.setTarget(ofVec3f(0.0, DOME_HEIGHT*0.5, 0.0));
-
     _displayMode = DisplayScene;
     _mixMode = 0;
     _mappingMode = 0;
+    _animationTime = 0.0;
+    _fullscreen = false;
+
+    _shader.load("radome");
+    
+    _cubeMap.initEmptyTextures(2048, GL_RGBA);
+    _cubeMap.setNearFar(ofVec2f(0.01, 8192.0));
+    
+    _cam.setRotation(0.66, 0.5);
+    _cam.setTarget(ofVec3f(0.0, DOME_HEIGHT*0.5, 0.0));
     
     _triangles = icosohedron::createsphere(4);
     
-	_vidOverlay.initialize(DEFAULT_SYPHON_APP, DEFAULT_SYPHON_SERVER);
+    _vidOverlay.initialize(DEFAULT_SYPHON_APP, DEFAULT_SYPHON_SERVER);
     _vidOverlay.setFaderValue(0.75);
+
+    unsigned char p[3] = {0, 0, 0};
+    _blankImage.setUseTexture(true);
+    _blankImage.setFromPixels(p, 1, 1, OF_IMAGE_COLOR);
     
-    _animationTime = 0.0;
+    for (int ii = 0; ii < NUM_PROJECTORS; ii++)
+    {
+        _projectorList.push_back(new radomeProjector(ii*360.0/(NUM_PROJECTORS*1.0), DOME_DIAMETER*3.0, DOME_HEIGHT*1.5));
+    }    
     
     initGUI();
 }
 
-namespace
-{
-    void addRadioAndSetFirstItem(ofxUICanvas* pUI, string id, vector<string> options, int orientation, int w, int h)
-    {
-        ofxUIToggle* pToggle;
-        pUI->addRadio(id, options, orientation, w, h);
-        {
-            // so silly, ofxUI needs to init radios
-            auto pToggle = dynamic_cast<ofxUIToggle*>(pUI->getWidget(options[0]));
-            if (pToggle)
-                pToggle->setValue(true);
-        }
-    }
-}
-
 void radomeApp::initGUI() {
-    _pUI = new ofxUICanvas(0, 0, SIDEBAR_WIDTH, ofGetHeight());
+    _pUI = new ofxUICanvas(5, 0, SIDEBAR_WIDTH, ofGetHeight());
     _pUI->setWidgetSpacing(5.0);
     _pUI->setDrawBack(true);
     
     _pUI->setFont("GUI/Exo-Regular.ttf", true, true, false, 0.0, OFX_UI_FONT_RESOLUTION);
-	_pUI->addWidgetDown(new ofxUILabel("RADOME 0.1", OFX_UI_FONT_LARGE));
+    _pUI->addWidgetDown(new ofxUILabel("RADOME 0.1", OFX_UI_FONT_LARGE));
     _pUI->addSpacer(0, 12);
     
     _displayModeNames.push_back("3D Scene");
     _displayModeNames.push_back("Cube Map");
     _displayModeNames.push_back("Dome Preview");
     _displayModeNames.push_back("Output Preview");
-	addRadioAndSetFirstItem(_pUI, "DISPLAY MODE", _displayModeNames, OFX_UI_ORIENTATION_VERTICAL, 16, 16);
+    addRadioAndSetFirstItem(_pUI, "DISPLAY MODE", _displayModeNames, OFX_UI_ORIENTATION_VERTICAL, 16, 16);
     _pUI->addSpacer(0, 12);
 
-	_pUI->addWidgetDown(new ofxUILabel("PROJECTORS", OFX_UI_FONT_MEDIUM));
+    _pUI->addWidgetDown(new ofxUILabel("PROJECTORS", OFX_UI_FONT_MEDIUM));
     _pUI->addWidgetDown(new ofxUILabelButton("Windows...", false, 0, 30, 0, 0, OFX_UI_FONT_SMALL));
     _pUI->addSpacer(0, 12);
 
-	_pUI->addWidgetDown(new ofxUILabel("CONTENT", OFX_UI_FONT_MEDIUM));
+    _pUI->addWidgetDown(new ofxUILabel("CONTENT", OFX_UI_FONT_MEDIUM));
     _pUI->addWidgetDown(new ofxUILabelButton("Add 3D Model...", false, 0, 30, 0, 0, OFX_UI_FONT_SMALL));
-    _pUI->addWidgetDown(new ofxUILabelButton("Select 2D Source...", false, 0, 30, 0, 0, OFX_UI_FONT_SMALL));
+    _pUI->addWidgetDown(new ofxUILabelButton("2D Input...", false, 0, 30, 0, 0, OFX_UI_FONT_SMALL));
     _pUI->addWidgetDown(new ofxUILabelButton("Plugins...", false, 0, 30, 0, 0, OFX_UI_FONT_SMALL));
     _pUI->addSpacer(0, 12);
 
     _pUI->addWidgetDown(new ofxUILabel("MIXER", OFX_UI_FONT_MEDIUM));
-    _pUI->addWidgetDown(new ofxUIBiLabelSlider(0, 0, SIDEBAR_WIDTH-20, 30, 0, 100, _vidOverlay.getFaderValue()*100.0, "XFADE", "2D", "3D", OFX_UI_FONT_MEDIUM));
+    _pUI->addWidgetDown(new ofxUIBiLabelSlider(0, 0, SIDEBAR_WIDTH-10, 30, 0, 100, _vidOverlay.getFaderValue()*100.0, "XFADE", "2D", "3D", OFX_UI_FONT_MEDIUM));
     
     _mixModeNames.push_back("Underlay");
     _mixModeNames.push_back("Overlay");
     _mixModeNames.push_back("Mask");
-	addRadioAndSetFirstItem(_pUI, "BLEND MODE", _mixModeNames, OFX_UI_ORIENTATION_VERTICAL, 16, 16);
+    addRadioAndSetFirstItem(_pUI, "BLEND MODE", _mixModeNames, OFX_UI_ORIENTATION_VERTICAL, 16, 16);
     _pUI->addSpacer(0, 12);
     
     _mappingModeNames.push_back("Lat/Long");
@@ -91,7 +98,7 @@ void radomeApp::initGUI() {
     _mappingModeNames.push_back("Geodesic");
     _mappingModeNames.push_back("Rectangles");
     _mappingModeNames.push_back("Cinematic");
-	addRadioAndSetFirstItem(_pUI, "MAPPING MODE", _mappingModeNames, OFX_UI_ORIENTATION_VERTICAL, 16, 16);
+    addRadioAndSetFirstItem(_pUI, "MAPPING MODE", _mappingModeNames, OFX_UI_ORIENTATION_VERTICAL, 16, 16);
     _pUI->addSpacer(0, 12);
     
     ofBackground(40, 20, 32);
@@ -102,8 +109,8 @@ void radomeApp::initGUI() {
 void radomeApp::loadFile() {
     ofFileDialogResult result = ofSystemLoadDialog("Load Model", false, "");
     if (result.bSuccess) {
-        ofxAssimpModelLoader model;
-        model.loadModel(result.getPath());
+        auto model = new ofxAssimpModelLoader();
+        model->loadModel(result.getPath());
         _modelList.push_back(model);
     }
 }
@@ -115,7 +122,7 @@ void radomeApp::update() {
     }
     for (auto iter = _modelList.begin(); iter != _modelList.end(); ++iter)
     {
-        iter->setNormalizedTime(_animationTime);
+        (*iter)->setNormalizedTime(_animationTime);
     }
 }
 
@@ -181,36 +188,43 @@ void radomeApp::draw() {
 
             ofClear(20, 100, 50);
             
+            _cam.setDistance(DOME_DIAMETER*2.05);
+            _cam.begin();
+            
             _shader.begin();
 
             _cubeMap.bind();
             _shader.setUniform1i("EnvMap", 0);
+            _shader.setUniform1i("mixMode", _mixMode);
+            _shader.setUniform1i("mappingMode", _mappingMode);
+            _shader.setUniform1f("domeDiameter", DOME_DIAMETER*1.0);
+            _shader.setUniform1f("domeHeight", DOME_HEIGHT*1.0);
             
             if (_vidOverlay.maybeBind()) {
-                _shader.setUniform1i("mixMode", _mixMode);
-                _shader.setUniform1i("mappingMode", _mappingMode);
-                _shader.setUniform1f("domeDiameter", DOME_DIAMETER*1.0);
-                _shader.setUniform1f("domeHeight", DOME_HEIGHT*1.0);
                 _shader.setUniform1f("videoMix", _vidOverlay.getFaderValue());
                 _shader.setUniform2f("videoSize", _vidOverlay.getWidth(), _vidOverlay.getHeight());
-                _shader.setUniformTexture("video",
-                                                 _vidOverlay.getTexture(),
-                                                 _vidOverlay.getTextureId());
+                _shader.setUniformTexture("video", _vidOverlay.getTexture(), _vidOverlay.getTextureId());
             } else {
-                _shader.setUniform1f("videoMix", 0.0);
+                _shader.setUniform1f("videoMix", -1.0);
+                _shader.setUniform2f("videoSize", 0.0, 0.0);
+                _shader.setUniformTexture("video", _blankImage.getTextureReference(),
+                                          _blankImage.getTextureReference().getTextureData().textureID);
             }
-                        
-            _cam.setDistance(DOME_DIAMETER*2.05);
-            _cam.begin();
+            
             drawDome();
             drawGroundPlane();
-            _cam.end();
-
+            
             _vidOverlay.unbind();
             _cubeMap.unbind();
             
             _shader.end();
             
+            for (auto iter = _projectorList.begin(); iter != _projectorList.end(); ++iter)
+            {
+                (*iter)->drawSceneRepresentation();
+            }
+            
+            _cam.end();
         }
         break;
         case DisplayProjectorOutput:
@@ -227,7 +241,7 @@ void radomeApp::drawScene() {
     ofSetColor(180, 192, 192);
     for (auto iter = _modelList.begin(); iter != _modelList.end(); ++iter)
     {
-        iter->drawFaces();
+        (*iter)->drawFaces();
     }
 }
 
@@ -236,44 +250,37 @@ void radomeApp::drawDome() {
     glEnable(GL_CLIP_PLANE0);
     glClipPlane(GL_CLIP_PLANE0, clipPlane);
     
-    if (0) {
-        ofSphere(0.0, 0.0, 0.0, 300.0);
-    } else {
-        
-        // TODO: move this to a VBO, performance is terrible
-        
-        std::vector<icosohedron::Triangle>::iterator i = _triangles.begin();
-        glBegin(GL_TRIANGLES);
-        int sx = DOME_DIAMETER, sy = DOME_HEIGHT*2, sz = DOME_DIAMETER;
-        while (i != _triangles.end())
-        {
-            icosohedron::Triangle& t = *i++;
+    // TODO: move this to a VBO, performance is terrible
+    
+    std::vector<icosohedron::Triangle>::iterator i = _triangles.begin();
+    glBegin(GL_TRIANGLES);
+    int sx = DOME_DIAMETER, sy = DOME_HEIGHT*2, sz = DOME_DIAMETER;
+    while (i != _triangles.end())
+    {
+        icosohedron::Triangle& t = *i++;
 
-            float dx, dy, dz;
+        float dx, dy, dz;
 
-            dx = t.v0[0] * sx;
-            dy = t.v0[1] * sy;
-            dz = t.v0[2] * sz;
-            //glTexCoord2f(0.5 + atan2(dz, dx)/(2*3.14159), 0.5 - 2*asin(dy)/(2*3.14159));
-            glNormal3f(dx, dy, dz);
-            glVertex3f(dx, dy, dz);
-            
-            dx = t.v1[0] * sx;
-            dy = t.v1[1] * sy;
-            dz = t.v1[2] * sz;
-            //glTexCoord2f(0.5 + atan2(dz, dx)/(2*3.14159), 0.5 - 2*asin(dy)/(2*3.14159));
-            glNormal3f(dx, dy, dz);
-            glVertex3f(dx, dy, dz);
-            
-            dx = t.v2[0] * sx;
-            dy = t.v2[1] * sy;
-            dz = t.v2[2] * sz;
-            //glTexCoord2f(0.5 + atan2(dz, dx)/(2*3.14159), 0.5 - 2*asin(dy)/(2*3.14159));
-            glNormal3f(dx, dy, dz);
-            glVertex3f(dx, dy, dz);
-        }
-        glEnd();
+        dx = t.v0[0] * sx;
+        dy = t.v0[1] * sy;
+        dz = t.v0[2] * sz;
+        glNormal3f(dx, dy, dz);
+        glVertex3f(dx, dy, dz);
+        
+        dx = t.v1[0] * sx;
+        dy = t.v1[1] * sy;
+        dz = t.v1[2] * sz;
+        glNormal3f(dx, dy, dz);
+        glVertex3f(dx, dy, dz);
+        
+        dx = t.v2[0] * sx;
+        dy = t.v2[1] * sy;
+        dz = t.v2[2] * sz;
+        glNormal3f(dx, dy, dz);
+        glVertex3f(dx, dy, dz);
     }
+    glEnd();
+
     glDisable(GL_CLIP_PLANE0);
 }
 
@@ -325,14 +332,9 @@ void radomeApp::keyPressed(int key) {
         case 'f':
             _fullscreen = !_fullscreen;
             ofSetFullscreen(_fullscreen);
+            break;
     }
 }
-
-void radomeApp::keyReleased(int key) {
-    switch (key) {
-    }
-}
-
 
 void radomeApp::changeDisplayMode(DisplayMode mode) {
     _displayMode = mode;
@@ -345,24 +347,8 @@ void radomeApp::changeDisplayMode(DisplayMode mode) {
     }
 }
 
-namespace {
-    bool matchRadioButton(string widgetName, vector<string> names, int* pValue)
-    {
-        for (int ii = 0; ii < names.size(); ii++) {
-            if (widgetName == names[ii]) {
-                if (pValue) {
-                    *pValue = ii;
-                }
-                return true;
-            }
-        }
-        return false;
-    }
-}
-
 void radomeApp::guiEvent(ofxUIEventArgs &e) {
     string name = e.widget->getName();
-	int kind = e.widget->getKind();
     
     int radio;
     if(matchRadioButton(name, _displayModeNames, &radio)) {

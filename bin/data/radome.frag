@@ -61,31 +61,35 @@ vec4 multiLayerMix(vec4 envColor,
 void main()
 {
     // clip below the y-plane
-    if (position.y < 0.0) discard;
-
+    if (position.y < -1.5) discard;
+    
     // draw a green line at the y-plane
-    if (position.y < 3.0) {
-        if (position.x*position.x+position.z*position.z < (domeDiameter*domeDiameter)-100.0) { // unless it's under the dome
+    if (position.y < 1.5) {
+        float distSquared = pow(position.x, 2.0) + pow(position.z, 2.0);
+        if (distSquared < pow(domeDiameter, 2.0) - 200.0) { // unless it's under the dome
             discard;
         } else {
             gl_FragColor = vec4(0.15, 0.75, 0.3, 1.0);
         }
     } else {
+        
         // everywhere else, reflect the environment map back onto the dome
         vec3 lookupVec = ReflectDir;
  
         // Look up texture pixel in cube map
-        vec4 envColor = textureCube(EnvMap, lookupVec);
+        vec4 color = textureCube(EnvMap, lookupVec);
 
-        // Get 2D video overlay color from the mapping mode and the input video texture
-        vec2 uv = getUV();
-        vec4 videoColor = texture2DRect(video, uv);
+        if (videoMix >= 0.0) {
+            // Get 2D video overlay color from the mapping mode and the input video texture
+            vec2 uv = getUV();
+            vec4 videoColor = texture2DRect(video, uv);
 
-        // Blend according to the mix mode and mix level
-        vec4 mixed = mixColors(envColor, videoColor, videoMix);
+            // Blend according to the mix mode and mix level
+            color = mixColors(color, videoColor, videoMix);
+        }
         
         // Blend any remaining alpha against black
-        gl_FragColor = mix(vec4(0.0,0.0,0.0,1.0), mixed, mixed.a);
+        gl_FragColor = mix(vec4(0.0,0.0,0.0,1.0), color, color.a);
         gl_FragColor.a = 1.0;
     }
 }

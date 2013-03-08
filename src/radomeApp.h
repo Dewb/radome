@@ -8,6 +8,7 @@
 #include "turntableCam.h"
 #include "icosohedron.h"
 #include "radomeSyphonClient.h"
+#include "radomeProjector.h"
 
 using std::list;
 using std::vector;
@@ -25,6 +26,9 @@ enum DisplayMode {
 
 class radomeApp : public ofBaseApp {
 public:
+    radomeApp();
+    ~radomeApp();
+    
     void setup();
     void update();
     void draw();
@@ -38,19 +42,22 @@ public:
     void changeDisplayMode(DisplayMode mode);
     
     void keyPressed(int key);
-    void keyReleased(int key);
 
 protected:
     void initGUI();
     void guiEvent(ofxUIEventArgs &e);
     
-    ofxCubeMap _cubeMap;
-    ofShader _shader;
-    list<ofxAssimpModelLoader> _modelList;
-    ofxTurntableCam _cam;
     ofxUICanvas* _pUI;
     
+    ofxCubeMap _cubeMap;
+    ofShader _shader;
+    ofxTurntableCam _cam;
+
+    list<ofxAssimpModelLoader*> _modelList;
+    list<radomeProjector*> _projectorList;
+    
     radomeSyphonClient _vidOverlay;
+    ofImage _blankImage;
     
     bool _fullscreen;
     ofVec3f _domeOrigin;
