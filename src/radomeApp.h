@@ -1,9 +1,12 @@
 #pragma once
 
 #include "ofMain.h"
+#include "ofAppGlutWindow.h"
+
 #include "ofxAssimpModelLoader.h"
 #include "ofxCubeMap.h"
 #include "ofxUI.h"
+#include "ofxFenster.h"
 
 #include "turntableCam.h"
 #include "icosohedron.h"
@@ -38,10 +41,16 @@ public:
     void updateCubeMap();
     
     void loadFile();
+    void showProjectorWindow();
+
     DisplayMode getDisplayMode() const { return _displayMode; }
     void changeDisplayMode(DisplayMode mode);
     
     void keyPressed(int key);
+    void mousePressed(int x, int y, int button);
+    void mouseReleased(int x, int y, int button);
+    void mouseDragged(int x, int y, int button);
+    void mouseMoved(int x, int y);
 
 protected:
     void initGUI();
@@ -58,6 +67,7 @@ protected:
     
     radomeSyphonClient _vidOverlay;
     ofImage _blankImage;
+    ofxFenster* _projectorWindow;
     
     bool _fullscreen;
     ofVec3f _domeOrigin;
@@ -72,4 +82,6 @@ protected:
     vector<string> _mappingModeNames;
 
     vector<icosohedron::Triangle> _triangles;
+    
+    int _showFileDialog;
 };

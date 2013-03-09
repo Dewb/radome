@@ -1,5 +1,6 @@
 #include "radomeApp.h"
 #include "radomeUtils.h"
+#include "ofxFensterManager.h"
 
 #define SIDEBAR_WIDTH 140
 #define DEFAULT_SYPHON_APP "Arena"
@@ -9,19 +10,29 @@
 #define NUM_PROJECTORS 3
 
 radomeApp::radomeApp() {
+    _pUI = NULL;
+    _projectorWindow = NULL;
 }
 
 radomeApp::~radomeApp() {
     if (_pUI)
         delete (_pUI);
+    
+    if (_projectorWindow) {
+        _projectorWindow->destroy();
+        ofxFensterManager::get()->deleteFenster(_projectorWindow);
+    }
+    
     deletePointerCollection(_projectorList);
     deletePointerCollection(_modelList);
 }
 
 void radomeApp::setup() {
+    
+    ofxFensterManager::get()->setWindowTitle("radome");
+    
     ofSetFrameRate(45);
     ofEnableSmoothing();
-    
     
     _domeOrigin.x = 0.0;
     _domeOrigin.y = 0.0;
@@ -32,14 +43,15 @@ void radomeApp::setup() {
     _mappingMode = 0;
     _animationTime = 0.0;
     _fullscreen = false;
+    _showFileDialog = 0;
 
     _shader.load("radome");
     
     _cubeMap.initEmptyTextures(2048, GL_RGBA);
     _cubeMap.setNearFar(ofVec2f(0.01, 8192.0));
     
-    _cam.setRotation(0.66, 0.5);
     _cam.setTarget(ofVec3f(0.0, DOME_HEIGHT*0.5, 0.0));
+    _cam.setRotation(0.66, 0.5);
     
     _triangles = icosohedron::createsphere(4);
     
@@ -75,7 +87,7 @@ void radomeApp::initGUI() {
     _pUI->addSpacer(0, 12);
 
     _pUI->addWidgetDown(new ofxUILabel("PROJECTORS", OFX_UI_FONT_MEDIUM));
-    _pUI->addWidgetDown(new ofxUILabelButton("Windows...", false, 0, 30, 0, 0, OFX_UI_FONT_SMALL));
+    _pUI->addWidgetDown(new ofxUILabelButton("Show Window", false, 0, 30, 0, 0, OFX_UI_FONT_SMALL));
     _pUI->addSpacer(0, 12);
 
     _pUI->addWidgetDown(new ofxUILabel("CONTENT", OFX_UI_FONT_MEDIUM));
@@ -107,12 +119,31 @@ void radomeApp::initGUI() {
 }
 
 void radomeApp::loadFile() {
+    
     ofFileDialogResult result = ofSystemLoadDialog("Load Model", false, "");
+    
+    // Workaround for ofxFenster modal mouse event bug
+    ofxFenster* pWin = ofxFensterManager::get()->getActiveWindow();
+    ofxFenster* pDummy = ofxFensterManager::get()->createFenster(0,0,1,1);
+    ofxFensterManager::get()->setActiveWindow(pDummy);
+    ofxFensterManager::get()->setActiveWindow(pWin);
+    ofxFensterManager::get()->deleteFenster(pDummy);
+    
     if (result.bSuccess) {
         auto model = new ofxAssimpModelLoader();
         model->loadModel(result.getPath());
         _modelList.push_back(model);
     }
+}
+
+void radomeApp::showProjectorWindow() {
+    if (_projectorWindow) {
+        _projectorWindow->destroy();
+        ofxFensterManager::get()->deleteFenster(_projectorWindow);
+    }
+    _projectorWindow = ofxFensterManager::get()->createFenster(400, 300, 300, 300, OF_WINDOW);
+    _projectorWindow->setWindowTitle("Projector Output");
+
 }
 
 void radomeApp::update() {
@@ -235,6 +266,7 @@ void radomeApp::draw() {
     }
     
     glDisable(GL_DEPTH_TEST);
+    _pUI->draw();
 }
 
 void radomeApp::drawScene() {
@@ -330,10 +362,33 @@ void radomeApp::keyPressed(int key) {
             }
             break;
         case 'f':
-            _fullscreen = !_fullscreen;
-            ofSetFullscreen(_fullscreen);
+            {
+                _fullscreen = !_fullscreen;
+                ofSetFullscreen(_fullscreen);
+            }
+            break;
+        case 'p':
+            {
+                showProjectorWindow();
+            }
             break;
     }
+}
+
+void radomeApp::mousePressed(int x, int y, int button) {
+    if (x > SIDEBAR_WIDTH)
+        _cam.mousePressed(x, y, button);
+}
+
+void radomeApp::mouseReleased(int x, int y, int button) {
+    _cam.mouseReleased(x, y, button);
+}
+
+void radomeApp::mouseDragged(int x, int y, int button) {
+    _cam.mouseDragged(x, y, button);
+}
+
+void radomeApp::mouseMoved(int x, int y) {
 }
 
 void radomeApp::changeDisplayMode(DisplayMode mode) {
@@ -369,9 +424,15 @@ void radomeApp::guiEvent(ofxUIEventArgs &e) {
         }
     } else if (name == "Add 3D Model...") {
         auto pButton = dynamic_cast<ofxUIButton*>(e.widget);
-        if (pButton && pButton->getValue())
+        if (pButton && !pButton->getValue())
         {
             loadFile();
+        }
+    } else if (name == "Show Window") {
+        auto pButton = dynamic_cast<ofxUIButton*>(e.widget);
+        if (pButton && !pButton->getValue())
+        {
+            showProjectorWindow();
         }
     }
 }

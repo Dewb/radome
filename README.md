@@ -9,6 +9,7 @@ This is a early-stage prototype.  Windows support is planned but right now the b
 Radome is built with openFrameworks 0073.  The following addons are required:
 * ofxCubeMap
 * ofxASSimpModelLoader
+* ofxFenster
 * ofxUI
 * ofxXMLSettings
 * ofxSyphon

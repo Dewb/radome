@@ -1,37 +1,69 @@
 #include "turntableCam.h"
-
 #include "ofMath.h"
 #include "ofUtils.h"
 
+#ifdef USE_OFXFENSTER
+#include "ofxFensterManager.h"
+#endif
+
 ofxTurntableCam::ofxTurntableCam() {
     reset();
+#ifndef USE_OFXFENSTER
     ofAddListener(ofEvents().update , this, &ofxTurntableCam::update);
-    _mouseDown = false;
+#endif
+    _cameraDragging = false;
     setTarget(ofVec3f(0,0,0));
 }
 
 ofxTurntableCam::~ofxTurntableCam() {
+#ifndef USE_OFXFENSTER
     ofRemoveListener(ofEvents().update , this, &ofxTurntableCam::update);
+#endif
 }
 
+#ifndef USE_OFXFENSTER
 void ofxTurntableCam::update(ofEventArgs& args) {
-    _rotationFactor = 10.0f * 180 / min(_viewport.width, _viewport.height);
     ofVec2f mouse(ofGetMouseX(), ofGetMouseY());
-    if (_viewport.inside(mouse.x, mouse.y) && !_mouseDown && ofGetMousePressed()) {
+    if (_viewport.inside(mouse.x, mouse.y) && !_cameraDragging && ofGetMousePressed()) {
         _mouseStart = mouse;
-        _mouseDown = true;
+        _cameraDragging = true;
     }
     if (_mouseDown) {
         if (!ofGetMousePressed()) {
             _mouseDown = false;
-        } else {            
+        } else {
             float dx = (mouse.x - _mouseStart.x) / ofGetViewportWidth();
             float dy = (mouse.y - _mouseStart.y) / ofGetViewportHeight();
             _mouseStart = mouse;
             setRotation(dx,dy);
         }
+    }}
+
+#else
+
+void ofxTurntableCam::mousePressed(int x, int y, int button) {
+    if (button == 0) {
+        ofVec2f mouse(x, y);
+        _mouseStart = mouse;
+        _cameraDragging = true;
     }
 }
+
+void ofxTurntableCam::mouseReleased(int x, int y, int button) {
+    _cameraDragging = false;
+}
+
+void ofxTurntableCam::mouseDragged(int x, int y, int button) {
+    if (!_cameraDragging)
+        return;
+    
+    ofVec2f mouse(x, y);
+    float dx = (mouse.x - _mouseStart.x) / ofGetViewportWidth();
+    float dy = (mouse.y - _mouseStart.y) / ofGetViewportHeight();
+    _mouseStart = mouse;
+    setRotation(dx,dy);
+}
+#endif
 
 void ofxTurntableCam::setRotation(float dx, float dy) {
     ofVec3f p = ofCamera::getPosition();
@@ -57,6 +89,7 @@ void ofxTurntableCam::setRotation(float dx, float dy) {
 
 void ofxTurntableCam::begin(ofRectangle viewport) {
     _viewport = viewport;
+    _rotationFactor = 10.0f * 180 / min(_viewport.width, _viewport.height);
     ofCamera::begin(_viewport);
 }
 

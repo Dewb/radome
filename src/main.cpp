@@ -1,8 +1,7 @@
 #include "radomeApp.h"
-#include "ofAppGlutWindow.h"
+#include "ofxFensterManager.h"
 
 int main() {
-    ofAppGlutWindow window;
-    ofSetupOpenGL(&window, 1216, 812, OF_WINDOW);
-    ofRunApp(new radomeApp());
+    ofSetupOpenGL(ofxFensterManager::get(), 1216, 812, OF_WINDOW);
+    ofRunFensterApp(new radomeApp());
 }
