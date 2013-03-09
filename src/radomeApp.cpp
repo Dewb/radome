@@ -34,16 +34,12 @@ void radomeApp::setup() {
     ofSetFrameRate(45);
     ofEnableSmoothing();
     
-    _domeOrigin.x = 0.0;
-    _domeOrigin.y = 0.0;
-    _domeOrigin.z = 0.0;
-    
     _displayMode = DisplayScene;
     _mixMode = 0;
     _mappingMode = 0;
     _animationTime = 0.0;
+    _lastSystemTime = ofGetSystemTime();
     _fullscreen = false;
-    _showFileDialog = 0;
 
     _shader.load("radome");
     
@@ -130,7 +126,7 @@ void radomeApp::loadFile() {
     ofxFensterManager::get()->deleteFenster(pDummy);
     
     if (result.bSuccess) {
-        auto model = new ofxAssimpModelLoader();
+        auto model = new radomeModel();
         model->loadModel(result.getPath());
         _modelList.push_back(model);
     }
@@ -147,18 +143,20 @@ void radomeApp::showProjectorWindow() {
 }
 
 void radomeApp::update() {
-    _animationTime += ofGetLastFrameTime();
+    unsigned long long time = ofGetSystemTime();
+    _animationTime += (time - _lastSystemTime)/1000.0;
+    _lastSystemTime = time;
+    
     if (_animationTime >= 1.0) {
         _animationTime = 0.0;
     }
     for (auto iter = _modelList.begin(); iter != _modelList.end(); ++iter)
     {
-        (*iter)->setNormalizedTime(_animationTime);
+        (*iter)->update(_animationTime);
     }
 }
 
 void radomeApp::updateCubeMap() {
-    _cubeMap.setPosition(_domeOrigin);
     for(int i = 0; i < 6; i++)
     {
         _cubeMap.beginDrawingInto3D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i);
@@ -180,7 +178,6 @@ void radomeApp::draw() {
             _cam.begin();
             
             ofPushMatrix();
-            ofTranslate(-_domeOrigin);
             drawScene();
             ofPopMatrix();
 
@@ -273,7 +270,7 @@ void radomeApp::drawScene() {
     ofSetColor(180, 192, 192);
     for (auto iter = _modelList.begin(); iter != _modelList.end(); ++iter)
     {
-        (*iter)->drawFaces();
+        (*iter)->draw();
     }
 }
 
@@ -338,21 +335,22 @@ void radomeApp::drawGroundPlane() {
 }
 
 void radomeApp::keyPressed(int key) {
-    float accel = 2.0;
+    float accel = 3.0;
+    auto model = *(_modelList.rbegin());
     
     switch (key) {
-        case 'w': _domeOrigin.y -= accel; break;
-        case 's': _domeOrigin.y += accel; break;
-        case 'a': _domeOrigin.x += accel; break;
-        case 'd': _domeOrigin.x -= accel; break;
-        case 'z': _domeOrigin.z -= accel; break;
-        case 'x': _domeOrigin.z += accel; break;
-        case 'W': _domeOrigin.y -= accel * 10; break;
-        case 'S': _domeOrigin.y += accel * 10; break;
-        case 'A': _domeOrigin.x += accel * 10; break;
-        case 'D': _domeOrigin.x -= accel * 10; break;
-        case 'Z': _domeOrigin.z -= accel * 10; break;
-        case 'X': _domeOrigin.z += accel * 10; break;
+        case 'w': if (model) model->_origin.y += accel; break;
+        case 's': if (model) model->_origin.y -= accel; break;
+        case 'a': if (model) model->_origin.x -= accel; break;
+        case 'd': if (model) model->_origin.x += accel; break;
+        case 'z': if (model) model->_origin.z += accel; break;
+        case 'x': if (model) model->_origin.z -= accel; break;
+        case 'W': if (model) model->_origin.y += accel * 4; break;
+        case 'S': if (model) model->_origin.y -= accel * 4; break;
+        case 'A': if (model) model->_origin.x -= accel * 4; break;
+        case 'D': if (model) model->_origin.x += accel * 4; break;
+        case 'Z': if (model) model->_origin.z += accel * 4; break;
+        case 'X': if (model) model->_origin.z -= accel * 4; break;
         case 'l': loadFile(); break;
         case 'm':
             {
@@ -370,6 +368,23 @@ void radomeApp::keyPressed(int key) {
         case 'p':
             {
                 showProjectorWindow();
+            }
+            break;
+        case 'r':
+            {
+                if (model) {
+                    if (model->getRotationIncrement() == 0) {
+                        model->setRotationOrigin(model->getOrigin());
+                        model->setRotation(ofVec4f(0.0,
+                                                   frand_bounded(),
+                                                   frand_bounded(),
+                                                   frand_bounded()));
+                    }
+                    model->setRotationIncrement(model->getRotationIncrement() + 2.0);
+                    if (model->getRotationIncrement() == 10.0) {
+                        model->setRotationIncrement(0.0);
+                    }
+                }
             }
             break;
     }

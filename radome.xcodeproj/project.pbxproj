@@ -25,6 +25,7 @@
 		5B78ABC316EAA96C00CBDB28 /* ofxFensterCanvas.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5B78AB9016EAA96B00CBDB28 /* ofxFensterCanvas.cpp */; };
 		5B78ABC416EAA96C00CBDB28 /* ofxFensterManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5B78AB9216EAA96B00CBDB28 /* ofxFensterManager.cpp */; };
 		5B78ABD216EAAB9F00CBDB28 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5B78ABD116EAAB9F00CBDB28 /* main.cpp */; };
+		5B78ABD516EB19D200CBDB28 /* radomeModel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5B78ABD316EB19D200CBDB28 /* radomeModel.cpp */; };
 		5BD6E52016D9BC2C00C39777 /* turntableCam.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5BD6E51E16D9BC2C00C39777 /* turntableCam.cpp */; };
 		5BEE6CCF16D358A0007786AB /* tinyxml.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5BEE6CC816D358A0007786AB /* tinyxml.cpp */; };
 		5BEE6CD016D358A0007786AB /* tinyxmlerror.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5BEE6CCA16D358A0007786AB /* tinyxmlerror.cpp */; };
@@ -184,6 +185,8 @@
 		5B78AB9216EAA96B00CBDB28 /* ofxFensterManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxFensterManager.cpp; sourceTree = "<group>"; };
 		5B78AB9316EAA96B00CBDB28 /* ofxFensterManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxFensterManager.h; sourceTree = "<group>"; };
 		5B78ABD116EAAB9F00CBDB28 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		5B78ABD316EB19D200CBDB28 /* radomeModel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = radomeModel.cpp; sourceTree = "<group>"; };
+		5B78ABD416EB19D200CBDB28 /* radomeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = radomeModel.h; sourceTree = "<group>"; };
 		5BD6E51E16D9BC2C00C39777 /* turntableCam.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = turntableCam.cpp; sourceTree = "<group>"; };
 		5BD6E51F16D9BC2C00C39777 /* turntableCam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = turntableCam.h; sourceTree = "<group>"; };
 		5BEE6BFC16D35423007786AB /* ofxUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxUI.h; sourceTree = "<group>"; };
@@ -919,6 +922,8 @@
 				5B78AA6516E9CD4A00CBDB28 /* radomeProjector.h */,
 				5B78AA6716EA94A600CBDB28 /* radomeUtils.cpp */,
 				5B78AA6816EA94A600CBDB28 /* radomeUtils.h */,
+				5B78ABD316EB19D200CBDB28 /* radomeModel.cpp */,
+				5B78ABD416EB19D200CBDB28 /* radomeModel.h */,
 			);
 			path = src;
 			sourceTree = SOURCE_ROOT;
@@ -1043,6 +1048,7 @@
 				5B78ABC316EAA96C00CBDB28 /* ofxFensterCanvas.cpp in Sources */,
 				5B78ABC416EAA96C00CBDB28 /* ofxFensterManager.cpp in Sources */,
 				5B78ABD216EAAB9F00CBDB28 /* main.cpp in Sources */,
+				5B78ABD516EB19D200CBDB28 /* radomeModel.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

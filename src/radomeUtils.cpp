@@ -32,3 +32,7 @@ bool matchRadioButton(string widgetName, vector<string> names, int* pValue)
     }
     return false;
 }
+
+float frand_bounded() {
+    return (rand()/(1.0*RAND_MAX)-0.5)*2.0;
+}

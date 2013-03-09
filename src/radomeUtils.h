@@ -36,4 +36,6 @@ void deletePointerCollection(std::list<T*> v) {
 void addRadioAndSetFirstItem(ofxUICanvas* pUI, std::string id, vector<string> options, int orientation, int w, int h);
 bool matchRadioButton(string widgetName, vector<string> names, int* pValue);
 
+float frand_bounded();
+
 #endif /* defined(__radome__radomeUtils__) */

@@ -12,6 +12,7 @@
 #include "icosohedron.h"
 #include "radomeSyphonClient.h"
 #include "radomeProjector.h"
+#include "radomeModel.h"
 
 using std::list;
 using std::vector;
@@ -62,16 +63,17 @@ protected:
     ofShader _shader;
     ofxTurntableCam _cam;
 
-    list<ofxAssimpModelLoader*> _modelList;
+    list<radomeModel*> _modelList;
     list<radomeProjector*> _projectorList;
+    ofxFenster* _projectorWindow;
     
     radomeSyphonClient _vidOverlay;
     ofImage _blankImage;
-    ofxFenster* _projectorWindow;
     
     bool _fullscreen;
-    ofVec3f _domeOrigin;
+    
     float _animationTime;
+    unsigned long long _lastSystemTime;
     
     int _mixMode;
     int _mappingMode;
@@ -82,6 +84,4 @@ protected:
     vector<string> _mappingModeNames;
 
     vector<icosohedron::Triangle> _triangles;
-    
-    int _showFileDialog;
 };
