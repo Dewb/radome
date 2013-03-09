@@ -11,7 +11,7 @@
 void radomeModel::update(float t) {
     setNormalizedTime(t);
     if (_rotationIncrement) {
-        _rotation[0] += _rotationIncrement * t;
+        _rotation[0] += _rotationIncrement;
     }
 }
 
