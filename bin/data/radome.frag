@@ -63,10 +63,10 @@ void main()
     // clip below the y-plane
     if (position.y < -1.5) discard;
     
-    // draw a green line at the y-plane
-    if (position.y < 1.5) {
+    // draw the y-plane green
+    if (position.y < 0.1) {
         float distSquared = pow(position.x, 2.0) + pow(position.z, 2.0);
-        if (distSquared < pow(domeDiameter, 2.0) - 200.0) { // unless it's under the dome
+        if (distSquared < pow(domeDiameter, 2.0) ) { // unless it's under the dome
             discard;
         } else {
             gl_FragColor = vec4(0.15, 0.75, 0.3, 1.0);

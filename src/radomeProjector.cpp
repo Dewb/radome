@@ -13,17 +13,35 @@ radomeProjector::radomeProjector(float heading, float distance, float height)
 , _distance(distance)
 , _height(height)
 {
-    _image.setUseTexture(true);
+    updateCamera();
+    
+    _fbo.allocate(1024, 768, GL_RGB);
+    _fbo.begin();
+	ofClear(0,0,0);
+    _fbo.end();
 }
 
 void radomeProjector::updateCamera() {
-    _camera.setPosition(_distance * cos(_heading), _height, _distance * sin(_heading));
+    _camera.setupPerspective(true, 30, 0, 0);
+    _camera.setPosition(_distance * cos(_heading*3.14159/180.0), _height, _distance * sin(_heading*3.14159/180.0));
+    _camera.lookAt(ofVec3f(0.0, 55.0, 0.0));
 }
 
-void radomeProjector::renderToProjector()
+void radomeProjector::renderBegin()
 {
-    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D,
-                           _image.getTextureReference().getTextureData().textureID, 0 );
+    _fbo.begin();
+	ofClear(0,0,0);
+    _camera.begin();
+}
+
+void radomeProjector::renderEnd()
+{
+    _camera.end();
+    _fbo.end();
+}
+
+void radomeProjector::drawFramebuffer(int x, int y, int w, int h) {
+    _fbo.draw(x, y, w, h);
 }
 
 void radomeProjector::drawSceneRepresentation() {
@@ -51,4 +69,25 @@ void radomeProjector::drawSceneRepresentation() {
     
     ofPopStyle();
     ofPopMatrix();
+}
+
+
+radomeProjectorWindowListener::radomeProjectorWindowListener(list<radomeProjector*>* pProjectors) {
+    _pProjectors = pProjectors;
+}
+
+void radomeProjectorWindowListener::setup() {
+    
+}
+
+void radomeProjectorWindowListener::draw() {
+    if (_pProjectors) {
+        int w = ofGetWidth() / _pProjectors->size();
+        int h = ofGetHeight();
+        int x = 0;
+        for (auto iter = _pProjectors->begin(); iter != _pProjectors->end(); ++iter) {
+            (*iter)->drawFramebuffer(x, 0, w, h);
+            x += w;
+        }
+    }
 }

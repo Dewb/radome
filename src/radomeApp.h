@@ -40,6 +40,7 @@ public:
     void drawDome();
     void drawGroundPlane();
     void updateCubeMap();
+    void updateProjectorOutput();
     
     void loadFile();
     void showProjectorWindow();
@@ -56,6 +57,8 @@ public:
 protected:
     void initGUI();
     void guiEvent(ofxUIEventArgs &e);
+    void beginShader();
+    void endShader();
     
     ofxUICanvas* _pUI;
     

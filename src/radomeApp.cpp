@@ -48,8 +48,9 @@ void radomeApp::setup() {
     
     _cam.setTarget(ofVec3f(0.0, DOME_HEIGHT*0.5, 0.0));
     _cam.setRotation(0.66, 0.5);
+    _cam.setupPerspective(false);
     
-    _triangles = icosohedron::createsphere(4);
+    _triangles = icosohedron::createsphere(3);
     
     _vidOverlay.initialize(DEFAULT_SYPHON_APP, DEFAULT_SYPHON_SERVER);
     _vidOverlay.setFaderValue(0.75);
@@ -60,10 +61,13 @@ void radomeApp::setup() {
     
     for (int ii = 0; ii < NUM_PROJECTORS; ii++)
     {
-        _projectorList.push_back(new radomeProjector(ii*360.0/(NUM_PROJECTORS*1.0), DOME_DIAMETER*3.0, DOME_HEIGHT*1.5));
+        _projectorList.push_back(new radomeProjector(ii*360.0/(NUM_PROJECTORS*1.0), DOME_DIAMETER*2.90, DOME_HEIGHT*2.0));
     }    
     
     initGUI();
+    
+    glEnable(GL_DEPTH_TEST);
+
 }
 
 void radomeApp::initGUI() {
@@ -115,7 +119,6 @@ void radomeApp::initGUI() {
 }
 
 void radomeApp::loadFile() {
-    
     ofFileDialogResult result = ofSystemLoadDialog("Load Model", false, "");
     
     // Workaround for ofxFenster modal mouse event bug
@@ -133,13 +136,13 @@ void radomeApp::loadFile() {
 }
 
 void radomeApp::showProjectorWindow() {
-    if (_projectorWindow) {
+    if (_projectorWindow && _projectorWindow->id != 0) {
         _projectorWindow->destroy();
         ofxFensterManager::get()->deleteFenster(_projectorWindow);
     }
-    _projectorWindow = ofxFensterManager::get()->createFenster(400, 300, 300, 300, OF_WINDOW);
+    _projectorWindow = ofxFensterManager::get()->createFenster(400, 300, 750, 200, OF_WINDOW);
+    _projectorWindow->addListener(new radomeProjectorWindowListener(&_projectorList));
     _projectorWindow->setWindowTitle("Projector Output");
-
 }
 
 void radomeApp::update() {
@@ -154,9 +157,13 @@ void radomeApp::update() {
     {
         (*iter)->update(_animationTime);
     }
+    
+    updateCubeMap();
+    updateProjectorOutput();
 }
 
 void radomeApp::updateCubeMap() {
+    glEnable(GL_DEPTH_TEST);
     for(int i = 0; i < 6; i++)
     {
         _cubeMap.beginDrawingInto3D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i);
@@ -166,9 +173,49 @@ void radomeApp::updateCubeMap() {
     }
 }
 
-void radomeApp::draw() {
+void radomeApp::updateProjectorOutput() {
     glEnable(GL_DEPTH_TEST);
+    for (auto iter = _projectorList.begin(); iter != _projectorList.end(); ++iter)
+    {
+        (*iter)->renderBegin();
 
+        beginShader();
+        drawDome();
+        endShader();
+
+        (*iter)->renderEnd();
+    }
+}
+
+void radomeApp::beginShader() {
+    _shader.begin();
+    _cubeMap.bind();
+
+    _shader.setUniform1i("EnvMap", 0);
+    _shader.setUniform1i("mixMode", _mixMode);
+    _shader.setUniform1i("mappingMode", _mappingMode);
+    _shader.setUniform1f("domeDiameter", DOME_DIAMETER*1.0);
+    _shader.setUniform1f("domeHeight", DOME_HEIGHT*1.0);
+    
+    if (_vidOverlay.maybeBind()) {
+        _shader.setUniform1f("videoMix", _vidOverlay.getFaderValue());
+        _shader.setUniform2f("videoSize", _vidOverlay.getWidth(), _vidOverlay.getHeight());
+        _shader.setUniformTexture("video", _vidOverlay.getTexture(), _vidOverlay.getTextureId());
+    } else {
+        _shader.setUniform1f("videoMix", -1.0);
+        _shader.setUniform2f("videoSize", 0.0, 0.0);
+        _shader.setUniformTexture("video", _blankImage.getTextureReference(),
+                                  _blankImage.getTextureReference().getTextureData().textureID);
+    }
+}
+
+void radomeApp::endShader() {
+    _vidOverlay.unbind();
+    _cubeMap.unbind();
+    _shader.end();
+}
+
+void radomeApp::draw() {
     switch (_displayMode) {
         case DisplayScene: {
             ofPushStyle();
@@ -176,7 +223,7 @@ void radomeApp::draw() {
 
             _cam.setDistance(DOME_DIAMETER*3.3);
             _cam.begin();
-            
+                        
             ofPushMatrix();
             drawScene();
             ofPopMatrix();
@@ -197,7 +244,6 @@ void radomeApp::draw() {
         }
         break;
         case DisplayCubeMap: {
-            updateCubeMap();
             ofSetColor(200,220,255);
             int margin = 2;
             int w = (ofGetWindowWidth() - SIDEBAR_WIDTH - margin*4) / 3;
@@ -212,40 +258,16 @@ void radomeApp::draw() {
         }
         break;
         case DisplayDome: {
-            updateCubeMap();
 
             ofClear(20, 100, 50);
             
             _cam.setDistance(DOME_DIAMETER*2.05);
             _cam.begin();
             
-            _shader.begin();
-
-            _cubeMap.bind();
-            _shader.setUniform1i("EnvMap", 0);
-            _shader.setUniform1i("mixMode", _mixMode);
-            _shader.setUniform1i("mappingMode", _mappingMode);
-            _shader.setUniform1f("domeDiameter", DOME_DIAMETER*1.0);
-            _shader.setUniform1f("domeHeight", DOME_HEIGHT*1.0);
-            
-            if (_vidOverlay.maybeBind()) {
-                _shader.setUniform1f("videoMix", _vidOverlay.getFaderValue());
-                _shader.setUniform2f("videoSize", _vidOverlay.getWidth(), _vidOverlay.getHeight());
-                _shader.setUniformTexture("video", _vidOverlay.getTexture(), _vidOverlay.getTextureId());
-            } else {
-                _shader.setUniform1f("videoMix", -1.0);
-                _shader.setUniform2f("videoSize", 0.0, 0.0);
-                _shader.setUniformTexture("video", _blankImage.getTextureReference(),
-                                          _blankImage.getTextureReference().getTextureData().textureID);
-            }
-            
+            beginShader();
             drawDome();
             drawGroundPlane();
-            
-            _vidOverlay.unbind();
-            _cubeMap.unbind();
-            
-            _shader.end();
+            endShader();
             
             for (auto iter = _projectorList.begin(); iter != _projectorList.end(); ++iter)
             {
@@ -257,13 +279,24 @@ void radomeApp::draw() {
         break;
         case DisplayProjectorOutput:
         case LastDisplayMode: {
-            
+            ofSetColor(200,220,255);
+            int margin = 2;
+            int w = (ofGetWindowWidth() - SIDEBAR_WIDTH - margin*4) / 2;
+            int h = (ofGetWindowHeight() - margin*3) / 2;
+            auto iter = _projectorList.begin();
+            for (int i = 0; iter != _projectorList.end(); i++, ++iter) {
+                int x = margin + i%2 * (w + margin) + SIDEBAR_WIDTH;
+                int y = margin + i/2 * (h + margin);
+                (*iter)->drawFramebuffer(x, y, w, h);
+                ofRect(x-1, y-1, w + margin, h + margin);
+            }
         }
         break;            
     }
     
     glDisable(GL_DEPTH_TEST);
     _pUI->draw();
+    glEnable(GL_DEPTH_TEST);
 }
 
 void radomeApp::drawScene() {
