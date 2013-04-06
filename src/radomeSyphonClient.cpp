@@ -5,7 +5,7 @@
 //  Created by Michael Dewberry on 3/7/13.
 //
 //
-
+#if MAC
 #include "radomeSyphonClient.h"
 
 radomeSyphonClient::radomeSyphonClient()
@@ -35,3 +35,4 @@ bool radomeSyphonClient::maybeBind() {
         return false;
     }
 }
+#endif
