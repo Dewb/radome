@@ -15,7 +15,7 @@ radomeProjector::radomeProjector(float heading, float distance, float height)
 {
     updateCamera();
     
-    _fbo.allocate(1024, 768, GL_RGB);
+    _fbo.allocate(800, 600, GL_RGB);
     _fbo.begin();
 	ofClear(0,0,0);
     _fbo.end();
@@ -24,7 +24,7 @@ radomeProjector::radomeProjector(float heading, float distance, float height)
 void radomeProjector::updateCamera() {
     _camera.setupPerspective(true, 30, 0, 0);
     _camera.setPosition(_distance * cos(_heading*3.14159/180.0), _height, _distance * sin(_heading*3.14159/180.0));
-    _camera.lookAt(ofVec3f(0.0, 55.0, 0.0));
+    _camera.lookAt(ofVec3f(0.0, 20.0, 0.0));
 }
 
 void radomeProjector::renderBegin()

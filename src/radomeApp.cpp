@@ -8,6 +8,7 @@
 #define DOME_DIAMETER 300
 #define DOME_HEIGHT 110
 #define NUM_PROJECTORS 3
+#define PROJECTOR_HEIGHT 150
 
 radomeApp::radomeApp() {
     _pUI = NULL;
@@ -59,9 +60,8 @@ void radomeApp::setup() {
     _blankImage.setUseTexture(true);
     _blankImage.setFromPixels(p, 1, 1, OF_IMAGE_COLOR);
     
-    for (int ii = 0; ii < NUM_PROJECTORS; ii++)
-    {
-        _projectorList.push_back(new radomeProjector(ii*360.0/(NUM_PROJECTORS*1.0), DOME_DIAMETER*2.90, DOME_HEIGHT*2.0));
+    for (int ii = 0; ii < NUM_PROJECTORS; ii++) {
+        _projectorList.push_back(new radomeProjector(ii*360.0/(NUM_PROJECTORS*1.0), DOME_DIAMETER*2.90, PROJECTOR_HEIGHT));
     }    
     
     initGUI();
@@ -153,8 +153,7 @@ void radomeApp::update() {
     if (_animationTime >= 1.0) {
         _animationTime = 0.0;
     }
-    for (auto iter = _modelList.begin(); iter != _modelList.end(); ++iter)
-    {
+    for (auto iter = _modelList.begin(); iter != _modelList.end(); ++iter) {
         (*iter)->update(_animationTime);
     }
     
@@ -164,8 +163,7 @@ void radomeApp::update() {
 
 void radomeApp::updateCubeMap() {
     glEnable(GL_DEPTH_TEST);
-    for(int i = 0; i < 6; i++)
-    {
+    for(int i = 0; i < 6; i++) {
         _cubeMap.beginDrawingInto3D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i);
         ofClear(0,0,0,0);
         drawScene();
@@ -175,8 +173,7 @@ void radomeApp::updateCubeMap() {
 
 void radomeApp::updateProjectorOutput() {
     glEnable(GL_DEPTH_TEST);
-    for (auto iter = _projectorList.begin(); iter != _projectorList.end(); ++iter)
-    {
+    for (auto iter = _projectorList.begin(); iter != _projectorList.end(); ++iter) {
         (*iter)->renderBegin();
 
         beginShader();
@@ -317,8 +314,7 @@ void radomeApp::drawDome() {
     std::vector<icosohedron::Triangle>::iterator i = _triangles.begin();
     glBegin(GL_TRIANGLES);
     int sx = DOME_DIAMETER, sy = DOME_HEIGHT*2, sz = DOME_DIAMETER;
-    while (i != _triangles.end())
-    {
+    while (i != _triangles.end()) {
         icosohedron::Triangle& t = *i++;
 
         float dx, dy, dz;
@@ -353,11 +349,10 @@ void radomeApp::drawGroundPlane() {
     float step = size / ticks;
     float major =  step * 2.0f;
     
-    for (float k =- size; k <= size; k += step)
-    {
+    for (float k =- size; k <= size; k += step) {
         if (fabs(k) == size || k == 0)
             ofSetLineWidth(4);
-        else if (k / major == floor(k / major) )
+        else if (k / major == floor(k / major))
             ofSetLineWidth(2);
         else
             ofSetLineWidth(1);

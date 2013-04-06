@@ -2,6 +2,6 @@
 #include "ofxFensterManager.h"
 
 int main() {
-    ofSetupOpenGL(ofxFensterManager::get(), 1216, 812, OF_WINDOW);
+    ofSetupOpenGL(ofxFensterManager::get(), 1024, 720, OF_WINDOW);
     ofRunFensterApp(new radomeApp());
 }
