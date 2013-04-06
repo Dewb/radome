@@ -8,7 +8,7 @@
 
 #ifndef __radome__radomeSyphonClient__
 #define __radome__radomeSyphonClient__
-
+#ifdef MAC
 #include "ofxSyphon.h"
 
 class radomeSyphonClient : public ofxSyphonClient {
@@ -31,5 +31,5 @@ protected:
     bool bEnabled;
     float fFader;
 };
-
+#endif // MAC
 #endif /* defined(__radome__radomeSyphonClient__) */

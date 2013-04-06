@@ -1,6 +1,14 @@
 #include "radomeApp.h"
 #include "radomeUtils.h"
 #include "ofxFensterManager.h"
+#include "ofxFenster.cpp" // <--- I hate this fucking guy
+#include "ofxxmlsettings.cpp" // <--- fuck this guy too
+#include "tinyxml.cpp"
+#include "tinyxmlparser.cpp"
+#include "tinyxmlerror.cpp"
+#include "ofxAssimpModelLoader.cpp"
+#include "ofxAssimpAnimation.cpp"
+#include "ofxAssimpMeshHelper.cpp"
 
 #define SIDEBAR_WIDTH 140
 #define DEFAULT_SYPHON_APP "Arena"
@@ -52,10 +60,10 @@ void radomeApp::setup() {
     _cam.setupPerspective(false);
     
     _triangles = icosohedron::createsphere(3);
-    
+#ifdef MAC
     _vidOverlay.initialize(DEFAULT_SYPHON_APP, DEFAULT_SYPHON_SERVER);
     _vidOverlay.setFaderValue(0.75);
-
+#endif
     unsigned char p[3] = {0, 0, 0};
     _blankImage.setUseTexture(true);
     _blankImage.setFromPixels(p, 1, 1, OF_IMAGE_COLOR);
@@ -97,8 +105,9 @@ void radomeApp::initGUI() {
     _pUI->addSpacer(0, 12);
 
     _pUI->addWidgetDown(new ofxUILabel("MIXER", OFX_UI_FONT_MEDIUM));
+#ifdef MAC
     _pUI->addWidgetDown(new ofxUIBiLabelSlider(0, 0, SIDEBAR_WIDTH-10, 30, 0, 100, _vidOverlay.getFaderValue()*100.0, "XFADE", "2D", "3D", OFX_UI_FONT_MEDIUM));
-    
+#endif    
     _mixModeNames.push_back("Underlay");
     _mixModeNames.push_back("Overlay");
     _mixModeNames.push_back("Mask");
@@ -193,7 +202,7 @@ void radomeApp::beginShader() {
     _shader.setUniform1i("mappingMode", _mappingMode);
     _shader.setUniform1f("domeDiameter", DOME_DIAMETER*1.0);
     _shader.setUniform1f("domeHeight", DOME_HEIGHT*1.0);
-    
+#ifdef MAC
     if (_vidOverlay.maybeBind()) {
         _shader.setUniform1f("videoMix", _vidOverlay.getFaderValue());
         _shader.setUniform2f("videoSize", _vidOverlay.getWidth(), _vidOverlay.getHeight());
@@ -204,10 +213,13 @@ void radomeApp::beginShader() {
         _shader.setUniformTexture("video", _blankImage.getTextureReference(),
                                   _blankImage.getTextureReference().getTextureData().textureID);
     }
+#endif
 }
 
 void radomeApp::endShader() {
+#ifdef MAC
     _vidOverlay.unbind();
+#endif
     _cubeMap.unbind();
     _shader.end();
 }
@@ -383,7 +395,7 @@ void radomeApp::keyPressed(int key) {
         case 'm':
             {
                 DisplayMode mode = getDisplayMode();
-                mode++;
+                mode = (DisplayMode)((int)mode+1);
                 changeDisplayMode(mode);
             }
             break;
@@ -463,7 +475,9 @@ void radomeApp::guiEvent(ofxUIEventArgs &e) {
     if (name == "XFADE") {
         auto slider = dynamic_cast<ofxUISlider*>(e.widget);
         if (slider) {
+#ifdef MAC
             _vidOverlay.setFaderValue(slider->getValue());
+#endif
         }
     } else if (name == "Add 3D Model...") {
         auto pButton = dynamic_cast<ofxUIButton*>(e.widget);

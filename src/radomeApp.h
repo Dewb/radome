@@ -7,7 +7,6 @@
 #include "ofxCubeMap.h"
 #include "ofxUI.h"
 #include "ofxFenster.h"
-
 #include "turntableCam.h"
 #include "icosohedron.h"
 #include "radomeSyphonClient.h"
@@ -69,8 +68,9 @@ protected:
     list<radomeModel*> _modelList;
     list<radomeProjector*> _projectorList;
     ofxFenster* _projectorWindow;
-    
+#ifdef MAC
     radomeSyphonClient _vidOverlay;
+#endif
     ofImage _blankImage;
     
     bool _fullscreen;
