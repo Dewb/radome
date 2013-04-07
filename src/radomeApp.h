@@ -60,12 +60,15 @@ protected:
     void beginShader();
     void endShader();
     
+    void prepDrawList();
+    
     ofxUICanvas* _pUI;
     ofxUICanvas* _pCalibrationUI;
     
     ofxCubeMap _cubeMap;
     ofShader _shader;
     ofxTurntableCam _cam;
+    unsigned int domeDrawIndex;
 
     list<radomeModel*> _modelList;
     vector<radomeProjector*> _projectorList;
