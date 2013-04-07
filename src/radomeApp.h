@@ -58,12 +58,13 @@ protected:
     void guiEvent(ofxUIEventArgs &e);
     void beginShader();
     void endShader();
-    
+    void prepDrawList();
     ofxUICanvas* _pUI;
     
     ofxCubeMap _cubeMap;
     ofShader _shader;
     ofxTurntableCam _cam;
+	unsigned int domeDrawIndex;
 
     list<radomeModel*> _modelList;
     list<radomeProjector*> _projectorList;

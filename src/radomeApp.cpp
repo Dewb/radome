@@ -75,6 +75,7 @@ void radomeApp::setup() {
     initGUI();
     
     glEnable(GL_DEPTH_TEST);
+	prepDrawList();
 
 }
 
@@ -126,7 +127,42 @@ void radomeApp::initGUI() {
 
     ofAddListener(_pUI->newGUIEvent, this, &radomeApp::guiEvent);
 }
+void radomeApp::prepDrawList()
+{
+	
+	domeDrawIndex = glGenLists(1);
+    std::vector<icosohedron::Triangle>::iterator i = _triangles.begin();
 
+	glNewList(domeDrawIndex, GL_COMPILE);
+    glBegin(GL_TRIANGLES);
+    int sx = DOME_DIAMETER, sy = DOME_HEIGHT*2, sz = DOME_DIAMETER;
+    while (i != _triangles.end())
+    {
+        icosohedron::Triangle& t = *i++;
+
+        float dx, dy, dz;
+
+        dx = t.v0[0] * sx;
+        dy = t.v0[1] * sy;
+        dz = t.v0[2] * sz;
+        glNormal3f(dx, dy, dz);
+        glVertex3f(dx, dy, dz);
+        
+        dx = t.v1[0] * sx;
+        dy = t.v1[1] * sy;
+        dz = t.v1[2] * sz;
+        glNormal3f(dx, dy, dz);
+        glVertex3f(dx, dy, dz);
+        
+        dx = t.v2[0] * sx;
+        dy = t.v2[1] * sy;
+        dz = t.v2[2] * sz;
+        glNormal3f(dx, dy, dz);
+        glVertex3f(dx, dy, dz);
+    }
+    glEnd();
+	glEndList();
+}
 void radomeApp::loadFile() {
     ofFileDialogResult result = ofSystemLoadDialog("Load Model", false, "");
     
@@ -320,40 +356,13 @@ void radomeApp::drawScene() {
 }
 
 void radomeApp::drawDome() {
+
     double clipPlane[4] = { 0.0, 1.0, 0.0, 0.0 };
     glEnable(GL_CLIP_PLANE0);
     glClipPlane(GL_CLIP_PLANE0, clipPlane);
     
     // TODO: move this to a VBO, performance is terrible
-    
-    std::vector<icosohedron::Triangle>::iterator i = _triangles.begin();
-    glBegin(GL_TRIANGLES);
-    int sx = DOME_DIAMETER, sy = DOME_HEIGHT*2, sz = DOME_DIAMETER;
-    while (i != _triangles.end())
-    {
-        icosohedron::Triangle& t = *i++;
-
-        float dx, dy, dz;
-
-        dx = t.v0[0] * sx;
-        dy = t.v0[1] * sy;
-        dz = t.v0[2] * sz;
-        glNormal3f(dx, dy, dz);
-        glVertex3f(dx, dy, dz);
-        
-        dx = t.v1[0] * sx;
-        dy = t.v1[1] * sy;
-        dz = t.v1[2] * sz;
-        glNormal3f(dx, dy, dz);
-        glVertex3f(dx, dy, dz);
-        
-        dx = t.v2[0] * sx;
-        dy = t.v2[1] * sy;
-        dz = t.v2[2] * sz;
-        glNormal3f(dx, dy, dz);
-        glVertex3f(dx, dy, dz);
-    }
-    glEnd();
+    glCallList(domeDrawIndex);
 
     glDisable(GL_CLIP_PLANE0);
 }
