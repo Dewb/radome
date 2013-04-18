@@ -3,3 +3,6 @@ xcuserdata/
 *.app/
 *Debug.app/
 guiSettings.xml
+*.suo
+obj/
+ipch/
