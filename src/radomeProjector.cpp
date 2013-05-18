@@ -8,10 +8,11 @@
 
 #include "radomeProjector.h"
 
-radomeProjector::radomeProjector(float heading, float distance, float height)
+radomeProjector::radomeProjector(float heading, float distance, float height, float fov)
 : _heading(heading)
 , _distance(distance)
 , _height(height)
+, _fov(fov)
 {
     updateCamera();
     
@@ -22,7 +23,7 @@ radomeProjector::radomeProjector(float heading, float distance, float height)
 }
 
 void radomeProjector::updateCamera() {
-    _camera.setupPerspective(true, 30, 0, 0);
+    _camera.setupPerspective(true, _fov, 0, 0);
     _camera.setPosition(_distance * cos(_heading*3.14159/180.0), _height, _distance * sin(_heading*3.14159/180.0));
     _camera.lookAt(ofVec3f(0.0, 20.0, 0.0));
 }

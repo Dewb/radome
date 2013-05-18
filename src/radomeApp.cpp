@@ -11,7 +11,7 @@
 #define NUM_PROJECTORS 3
 
 #define PROJECTOR_INITIAL_HEIGHT 150
-#define PROJECTOR_INITIAL_DISTANCE DOME_DIAMETER*2.90
+#define PROJECTOR_INITIAL_DISTANCE DOME_DIAMETER*2
 
 radomeApp::radomeApp() {
     _pUI = NULL;
@@ -87,14 +87,17 @@ void radomeApp::initGUI() {
     _pCalibrationUI->addSlider("PROJECTOR 1 HEIGHT", 0.0, 30.0, PROJECTOR_INITIAL_HEIGHT/10.0, 200, 25);
     _pCalibrationUI->addSlider("PROJECTOR 1 HEADING", 0.0, 120.0, 60.0, 200, 25);
     _pCalibrationUI->addSlider("PROJECTOR 1 DISTANCE", DOME_DIAMETER/20.0, DOME_DIAMETER/2.0, PROJECTOR_INITIAL_DISTANCE/10.0, 200, 25);
+    _pCalibrationUI->addSlider("PROJECTOR 1 FOV", 20.0, 90.0, 30.0, 200, 25);
     _pCalibrationUI->addSpacer(0, 12);
     _pCalibrationUI->addSlider("PROJECTOR 2 HEIGHT", 0.0, 30.0, PROJECTOR_INITIAL_HEIGHT/10.0, 200, 25);
     _pCalibrationUI->addSlider("PROJECTOR 2 HEADING", 120.0, 240.0, 180.0, 200, 25);
     _pCalibrationUI->addSlider("PROJECTOR 2 DISTANCE", DOME_DIAMETER/20.0, DOME_DIAMETER/2.0, PROJECTOR_INITIAL_DISTANCE/10.0, 200, 25);
+    _pCalibrationUI->addSlider("PROJECTOR 2 FOV", 20.0, 90.0, 30.0, 200, 25);
     _pCalibrationUI->addSpacer(0, 12);
     _pCalibrationUI->addSlider("PROJECTOR 3 HEIGHT", 0.0, 30.0, PROJECTOR_INITIAL_HEIGHT/10.0, 200, 25);
     _pCalibrationUI->addSlider("PROJECTOR 3 HEADING", 240.0, 360.0, 300.0, 200, 25);
     _pCalibrationUI->addSlider("PROJECTOR 3 DISTANCE", DOME_DIAMETER/20.0, DOME_DIAMETER/2.0, PROJECTOR_INITIAL_DISTANCE/10.0, 200, 25);
+    _pCalibrationUI->addSlider("PROJECTOR 3 FOV", 20.0, 90.0, 30.0, 200, 25);
     _pCalibrationUI->setVisible(false);
     
     
@@ -535,6 +538,11 @@ void radomeApp::guiEvent(ofxUIEventArgs &e) {
         if (slider && _projectorList.size() > 0 && _projectorList[0]) {
             _projectorList[0]->setDistance(slider->getScaledValue() * 10);
         }
+    } else if (name == "PROJECTOR 1 FOV") {
+        auto slider = dynamic_cast<ofxUISlider*>(e.widget);
+        if (slider && _projectorList.size() > 0 && _projectorList[0]) {
+            _projectorList[0]->setFOV(slider->getScaledValue());
+        }
     } else if (name == "PROJECTOR 2 HEIGHT") {
         auto slider = dynamic_cast<ofxUISlider*>(e.widget);
         if (slider && _projectorList.size() > 1 && _projectorList[1]) {
@@ -550,6 +558,11 @@ void radomeApp::guiEvent(ofxUIEventArgs &e) {
         if (slider && _projectorList.size() > 1 && _projectorList[1]) {
             _projectorList[1]->setDistance(slider->getScaledValue() * 10);
         }
+    } else if (name == "PROJECTOR 2 FOV") {
+        auto slider = dynamic_cast<ofxUISlider*>(e.widget);
+        if (slider && _projectorList.size() > 1 && _projectorList[1]) {
+            _projectorList[1]->setFOV(slider->getScaledValue());
+        }
     } else if (name == "PROJECTOR 3 HEIGHT") {
         auto slider = dynamic_cast<ofxUISlider*>(e.widget);
         if (slider && _projectorList.size() > 2 && _projectorList[2]) {
@@ -564,6 +577,11 @@ void radomeApp::guiEvent(ofxUIEventArgs &e) {
         auto slider = dynamic_cast<ofxUISlider*>(e.widget);
         if (slider && _projectorList.size() > 2 && _projectorList[2]) {
             _projectorList[2]->setDistance(slider->getScaledValue() * 10);
+        }
+    } else if (name == "PROJECTOR 3 FOV") {
+        auto slider = dynamic_cast<ofxUISlider*>(e.widget);
+        if (slider && _projectorList.size() > 2 && _projectorList[2]) {
+            _projectorList[2]->setFOV(slider->getScaledValue());
         }
     }
     
