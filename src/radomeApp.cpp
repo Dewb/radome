@@ -47,10 +47,10 @@ void radomeApp::setup() {
 
     _shader.load("radome");
     
-    _cubeMap.initEmptyTextures(2048, GL_RGBA);
+    _cubeMap.initEmptyTextures(1024, GL_RGBA);
     _cubeMap.setNearFar(ofVec2f(0.01, 8192.0));
     
-    _cam.setTarget(ofVec3f(0.0, DOME_HEIGHT*0.5, 0.0));
+    _cam.setTarget(ofVec3f(0.0, DOME_HEIGHT*0.25, 0.0));
     _cam.setRotation(0.66, 0.5);
     _cam.setupPerspective(false);
     
@@ -86,15 +86,15 @@ void radomeApp::initGUI() {
     _pCalibrationUI->addSpacer(0, 12);
     _pCalibrationUI->addSlider("PROJECTOR 1 HEIGHT", 0.0, 30.0, PROJECTOR_INITIAL_HEIGHT/10.0, 200, 25);
     _pCalibrationUI->addSlider("PROJECTOR 1 HEADING", 0.0, 120.0, 60.0, 200, 25);
-    _pCalibrationUI->addSlider("PROJECTOR 1 DISTANCE", 0.0, 360.0, PROJECTOR_INITIAL_DISTANCE/10.0, 200, 25);
+    _pCalibrationUI->addSlider("PROJECTOR 1 DISTANCE", DOME_DIAMETER/20.0, DOME_DIAMETER/2.0, PROJECTOR_INITIAL_DISTANCE/10.0, 200, 25);
     _pCalibrationUI->addSpacer(0, 12);
     _pCalibrationUI->addSlider("PROJECTOR 2 HEIGHT", 0.0, 30.0, PROJECTOR_INITIAL_HEIGHT/10.0, 200, 25);
     _pCalibrationUI->addSlider("PROJECTOR 2 HEADING", 120.0, 240.0, 180.0, 200, 25);
-    _pCalibrationUI->addSlider("PROJECTOR 2 DISTANCE", 0.0, 360.0, PROJECTOR_INITIAL_DISTANCE/10.0, 200, 25);
+    _pCalibrationUI->addSlider("PROJECTOR 2 DISTANCE", DOME_DIAMETER/20.0, DOME_DIAMETER/2.0, PROJECTOR_INITIAL_DISTANCE/10.0, 200, 25);
     _pCalibrationUI->addSpacer(0, 12);
     _pCalibrationUI->addSlider("PROJECTOR 3 HEIGHT", 0.0, 30.0, PROJECTOR_INITIAL_HEIGHT/10.0, 200, 25);
-    _pCalibrationUI->addSlider("PROJECTOR 3 HEADING", 240.0, 360.0, 240.0, 200, 25);
-    _pCalibrationUI->addSlider("PROJECTOR 3 DISTANCE", 0.0, 360.0, PROJECTOR_INITIAL_DISTANCE/10.0, 200, 25);
+    _pCalibrationUI->addSlider("PROJECTOR 3 HEADING", 240.0, 360.0, 300.0, 200, 25);
+    _pCalibrationUI->addSlider("PROJECTOR 3 DISTANCE", DOME_DIAMETER/20.0, DOME_DIAMETER/2.0, PROJECTOR_INITIAL_DISTANCE/10.0, 200, 25);
     _pCalibrationUI->setVisible(false);
     
     
@@ -150,7 +150,7 @@ void radomeApp::prepDrawList()
 
     glNewList(domeDrawIndex, GL_COMPILE);
     glBegin(GL_TRIANGLES);
-    int sx = DOME_DIAMETER, sy = DOME_HEIGHT*2, sz = DOME_DIAMETER;
+    int sx = DOME_DIAMETER/2.0, sy = DOME_HEIGHT, sz = DOME_DIAMETER/2.0;
     while (i != _triangles.end())
     {
         icosohedron::Triangle& t = *i++;
@@ -279,7 +279,7 @@ void radomeApp::draw() {
             ofPushStyle();
             ofEnableBlendMode(OF_BLENDMODE_ALPHA);
 
-            _cam.setDistance(DOME_DIAMETER*3.3);
+            _cam.setDistance(DOME_DIAMETER*1.6);
             _cam.begin();
                         
             ofPushMatrix();
@@ -319,7 +319,7 @@ void radomeApp::draw() {
 
             ofClear(20, 100, 50);
             
-            _cam.setDistance(DOME_DIAMETER*2.05);
+            _cam.setDistance(DOME_DIAMETER*1.10);
             _cam.begin();
             
             beginShader();
@@ -376,8 +376,8 @@ void radomeApp::drawDome() {
 }
 
 void radomeApp::drawGroundPlane() {
-    float size = DOME_DIAMETER * 3.3;
-    float ticks = 20.0;
+    float size = DOME_DIAMETER * 5;
+    float ticks = 40.0;
     
     float step = size / ticks;
     float major =  step * 2.0f;

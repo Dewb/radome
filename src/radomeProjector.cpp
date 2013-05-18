@@ -15,7 +15,7 @@ radomeProjector::radomeProjector(float heading, float distance, float height)
 {
     updateCamera();
     
-    _fbo.allocate(800, 600, GL_RGB);
+    _fbo.allocate(1280, 1024, GL_RGB);
     _fbo.begin();
 	ofClear(0,0,0);
     _fbo.end();
@@ -62,9 +62,9 @@ void radomeProjector::drawSceneRepresentation() {
         }
         
         ofSetLineWidth(2.0);
-        ofBox(0.0, _height, 0.0, 40);
+        ofBox(0.0, _height, 0.0, 30);
         ofSetLineWidth(5.0);
-        ofLine(0.0, _height-20.0, 0.0, 0.0, 0.0, 0.0);
+        ofLine(0.0, _height-15.0, 0.0, 0.0, 0.0, 0.0);
     }
     
     ofPopStyle();
