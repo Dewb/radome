@@ -44,11 +44,11 @@ protected:
 
 class radomeProjectorWindowListener : public ofxFensterListener {
 public:
-    radomeProjectorWindowListener(list<radomeProjector*>* pProjectors);
+    radomeProjectorWindowListener(vector<radomeProjector*>* pProjectors);
     void setup();
     void draw();
 protected:
-    list<radomeProjector*>* _pProjectors;
+    vector<radomeProjector*>* _pProjectors;
 };
 
 #endif /* defined(__radome__radomeProjector__) */

@@ -72,7 +72,7 @@ void radomeProjector::drawSceneRepresentation() {
 }
 
 
-radomeProjectorWindowListener::radomeProjectorWindowListener(list<radomeProjector*>* pProjectors) {
+radomeProjectorWindowListener::radomeProjectorWindowListener(vector<radomeProjector*>* pProjectors) {
     _pProjectors = pProjectors;
 }
 

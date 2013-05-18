@@ -61,13 +61,14 @@ protected:
     void endShader();
     
     ofxUICanvas* _pUI;
+    ofxUICanvas* _pCalibrationUI;
     
     ofxCubeMap _cubeMap;
     ofShader _shader;
     ofxTurntableCam _cam;
 
     list<radomeModel*> _modelList;
-    list<radomeProjector*> _projectorList;
+    vector<radomeProjector*> _projectorList;
     ofxFenster* _projectorWindow;
     
     radomeSyphonClient _vidOverlay;

@@ -2,13 +2,16 @@
 #include "radomeUtils.h"
 #include "ofxFensterManager.h"
 
-#define SIDEBAR_WIDTH 140
+#define SIDEBAR_WIDTH 160
+#define CALIBRATIONUI_WIDTH 210
 #define DEFAULT_SYPHON_APP "Arena"
 #define DEFAULT_SYPHON_SERVER "Composition"
 #define DOME_DIAMETER 300
 #define DOME_HEIGHT 110
 #define NUM_PROJECTORS 3
-#define PROJECTOR_HEIGHT 150
+
+#define PROJECTOR_INITIAL_HEIGHT 150
+#define PROJECTOR_INITIAL_DISTANCE DOME_DIAMETER*2.90
 
 radomeApp::radomeApp() {
     _pUI = NULL;
@@ -61,7 +64,7 @@ void radomeApp::setup() {
     _blankImage.setFromPixels(p, 1, 1, OF_IMAGE_COLOR);
     
     for (int ii = 0; ii < NUM_PROJECTORS; ii++) {
-        _projectorList.push_back(new radomeProjector(ii*360.0/(NUM_PROJECTORS*1.0), DOME_DIAMETER*2.90, PROJECTOR_HEIGHT));
+        _projectorList.push_back(new radomeProjector(ii*360.0/(NUM_PROJECTORS*1.0)+60.0, PROJECTOR_INITIAL_DISTANCE, PROJECTOR_INITIAL_HEIGHT));
     }    
     
     initGUI();
@@ -75,6 +78,26 @@ void radomeApp::initGUI() {
     _pUI->setWidgetSpacing(5.0);
     _pUI->setDrawBack(true);
     
+    _pCalibrationUI = new ofxUICanvas(SIDEBAR_WIDTH + 25, 0, CALIBRATIONUI_WIDTH, ofGetHeight());
+    _pCalibrationUI->setWidgetSpacing(5.0);
+    _pCalibrationUI->setDrawBack(true);
+    _pCalibrationUI->setFont("GUI/Exo-Regular.ttf", true, true, false, 0.0, OFX_UI_FONT_RESOLUTION);
+    _pCalibrationUI->addWidgetDown(new ofxUILabel("CALIBRATION", OFX_UI_FONT_MEDIUM));
+    _pCalibrationUI->addSpacer(0, 12);
+    _pCalibrationUI->addSlider("PROJECTOR 1 HEIGHT", 0.0, 30.0, PROJECTOR_INITIAL_HEIGHT/10.0, 200, 25);
+    _pCalibrationUI->addSlider("PROJECTOR 1 HEADING", 0.0, 120.0, 60.0, 200, 25);
+    _pCalibrationUI->addSlider("PROJECTOR 1 DISTANCE", 0.0, 360.0, PROJECTOR_INITIAL_DISTANCE/10.0, 200, 25);
+    _pCalibrationUI->addSpacer(0, 12);
+    _pCalibrationUI->addSlider("PROJECTOR 2 HEIGHT", 0.0, 30.0, PROJECTOR_INITIAL_HEIGHT/10.0, 200, 25);
+    _pCalibrationUI->addSlider("PROJECTOR 2 HEADING", 120.0, 240.0, 180.0, 200, 25);
+    _pCalibrationUI->addSlider("PROJECTOR 2 DISTANCE", 0.0, 360.0, PROJECTOR_INITIAL_DISTANCE/10.0, 200, 25);
+    _pCalibrationUI->addSpacer(0, 12);
+    _pCalibrationUI->addSlider("PROJECTOR 3 HEIGHT", 0.0, 30.0, PROJECTOR_INITIAL_HEIGHT/10.0, 200, 25);
+    _pCalibrationUI->addSlider("PROJECTOR 3 HEADING", 240.0, 360.0, 240.0, 200, 25);
+    _pCalibrationUI->addSlider("PROJECTOR 3 DISTANCE", 0.0, 360.0, PROJECTOR_INITIAL_DISTANCE/10.0, 200, 25);
+    _pCalibrationUI->setVisible(false);
+    
+    
     _pUI->setFont("GUI/Exo-Regular.ttf", true, true, false, 0.0, OFX_UI_FONT_RESOLUTION);
     _pUI->addWidgetDown(new ofxUILabel("RADOME 0.1", OFX_UI_FONT_LARGE));
     _pUI->addSpacer(0, 12);
@@ -87,6 +110,7 @@ void radomeApp::initGUI() {
     _pUI->addSpacer(0, 12);
 
     _pUI->addWidgetDown(new ofxUILabel("PROJECTORS", OFX_UI_FONT_MEDIUM));
+    _pUI->addWidgetDown(new ofxUILabelButton("Calibrate...", false, 0, 30, 0, 0, OFX_UI_FONT_SMALL));
     _pUI->addWidgetDown(new ofxUILabelButton("Show Window", false, 0, 30, 0, 0, OFX_UI_FONT_SMALL));
     _pUI->addSpacer(0, 12);
 
@@ -116,6 +140,7 @@ void radomeApp::initGUI() {
     ofBackground(40, 20, 32);
 
     ofAddListener(_pUI->newGUIEvent, this, &radomeApp::guiEvent);
+    ofAddListener(_pCalibrationUI->newGUIEvent, this, &radomeApp::guiEvent);
 }
 
 void radomeApp::loadFile() {
@@ -293,6 +318,8 @@ void radomeApp::draw() {
     
     glDisable(GL_DEPTH_TEST);
     _pUI->draw();
+    if (_pCalibrationUI->isVisible())
+        _pCalibrationUI->draw();
     glEnable(GL_DEPTH_TEST);
 }
 
@@ -419,7 +446,8 @@ void radomeApp::keyPressed(int key) {
 }
 
 void radomeApp::mousePressed(int x, int y, int button) {
-    if (x > SIDEBAR_WIDTH)
+    if ((x > SIDEBAR_WIDTH + 5) &&
+        (!_pCalibrationUI || !_pCalibrationUI->isVisible() || x > (SIDEBAR_WIDTH + CALIBRATIONUI_WIDTH + 30)))
         _cam.mousePressed(x, y, button);
 }
 
@@ -477,5 +505,60 @@ void radomeApp::guiEvent(ofxUIEventArgs &e) {
         {
             showProjectorWindow();
         }
+    } else if (name == "Calibrate...") {
+        auto pButton = dynamic_cast<ofxUIButton*>(e.widget);
+        if (pButton && !pButton->getValue())
+        {
+            if (_pCalibrationUI) {
+                bool bVis = _pCalibrationUI->isVisible();
+                _pCalibrationUI->setVisible(!bVis);
+            }
+        }
+    } else if (name == "PROJECTOR 1 HEIGHT") {
+        auto slider = dynamic_cast<ofxUISlider*>(e.widget);
+        if (slider && _projectorList.size() > 0 && _projectorList[0]) {
+            _projectorList[0]->setHeight(slider->getScaledValue() * 10);
+        }
+    } else if (name == "PROJECTOR 1 HEADING") {
+        auto slider = dynamic_cast<ofxUISlider*>(e.widget);
+        if (slider && _projectorList.size() > 0 && _projectorList[0]) {
+            _projectorList[0]->setHeading(slider->getScaledValue());
+        }
+    } else if (name == "PROJECTOR 1 DISTANCE") {
+        auto slider = dynamic_cast<ofxUISlider*>(e.widget);
+        if (slider && _projectorList.size() > 0 && _projectorList[0]) {
+            _projectorList[0]->setDistance(slider->getScaledValue() * 10);
+        }
+    } else if (name == "PROJECTOR 2 HEIGHT") {
+        auto slider = dynamic_cast<ofxUISlider*>(e.widget);
+        if (slider && _projectorList.size() > 1 && _projectorList[1]) {
+            _projectorList[1]->setHeight(slider->getScaledValue() * 10);
+        }
+    } else if (name == "PROJECTOR 2 HEADING") {
+        auto slider = dynamic_cast<ofxUISlider*>(e.widget);
+        if (slider && _projectorList.size() > 1 && _projectorList[1]) {
+            _projectorList[1]->setHeading(slider->getScaledValue());
+        }
+    } else if (name == "PROJECTOR 2 DISTANCE") {
+        auto slider = dynamic_cast<ofxUISlider*>(e.widget);
+        if (slider && _projectorList.size() > 1 && _projectorList[1]) {
+            _projectorList[1]->setDistance(slider->getScaledValue() * 10);
+        }
+    } else if (name == "PROJECTOR 3 HEIGHT") {
+        auto slider = dynamic_cast<ofxUISlider*>(e.widget);
+        if (slider && _projectorList.size() > 2 && _projectorList[2]) {
+            _projectorList[2]->setHeight(slider->getScaledValue() * 10);
+        }
+    } else if (name == "PROJECTOR 3 HEADING") {
+        auto slider = dynamic_cast<ofxUISlider*>(e.widget);
+        if (slider && _projectorList.size() > 2 && _projectorList[2]) {
+            _projectorList[2]->setHeading(slider->getScaledValue());
+        }
+    } else if (name == "PROJECTOR 3 DISTANCE") {
+        auto slider = dynamic_cast<ofxUISlider*>(e.widget);
+        if (slider && _projectorList.size() > 2 && _projectorList[2]) {
+            _projectorList[2]->setDistance(slider->getScaledValue() * 10);
+        }
     }
+    
 }

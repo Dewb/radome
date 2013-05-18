@@ -33,6 +33,18 @@ bool matchRadioButton(string widgetName, vector<string> names, int* pValue)
     return false;
 }
 
+float bindSlider(ofxUIEventArgs& e, string widgetName, void *pFn(float))
+{
+    float val = 0;
+    auto pSlider = dynamic_cast<ofxUISlider*>(e.widget);
+    if (pSlider && widgetName == pSlider->getName()) {
+        val = pSlider->getValue();
+    }
+    if (pFn)
+        (*pFn)(val);
+    return val;
+}
+
 float frand_bounded() {
     return (rand()/(1.0*RAND_MAX)-0.5)*2.0;
 }
