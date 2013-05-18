@@ -2,7 +2,7 @@
 #include "radomeUtils.h"
 #include "ofxFensterManager.h"
 
-#define SIDEBAR_WIDTH 160
+#define SIDEBAR_WIDTH 180
 #define CALIBRATIONUI_WIDTH 210
 #define DEFAULT_SYPHON_APP "Arena"
 #define DEFAULT_SYPHON_SERVER "Composition"
@@ -54,7 +54,7 @@ void radomeApp::setup() {
     _cam.setRotation(0.66, 0.5);
     _cam.setupPerspective(false);
     
-    _triangles = icosohedron::createsphere(3);
+    _triangles = icosohedron::createsphere(4);
     
     _vidOverlay.initialize(DEFAULT_SYPHON_APP, DEFAULT_SYPHON_SERVER);
     _vidOverlay.setFaderValue(0.75);
@@ -78,7 +78,7 @@ void radomeApp::initGUI() {
     _pUI->setWidgetSpacing(5.0);
     _pUI->setDrawBack(true);
     
-    _pCalibrationUI = new ofxUICanvas(SIDEBAR_WIDTH + 25, 0, CALIBRATIONUI_WIDTH, ofGetHeight());
+    _pCalibrationUI = new ofxUICanvas(SIDEBAR_WIDTH + 5, 0, CALIBRATIONUI_WIDTH, ofGetHeight());
     _pCalibrationUI->setWidgetSpacing(5.0);
     _pCalibrationUI->setDrawBack(true);
     _pCalibrationUI->setFont("GUI/Exo-Regular.ttf", true, true, false, 0.0, OFX_UI_FONT_RESOLUTION);
@@ -102,7 +102,7 @@ void radomeApp::initGUI() {
     
     
     _pUI->setFont("GUI/Exo-Regular.ttf", true, true, false, 0.0, OFX_UI_FONT_RESOLUTION);
-    _pUI->addWidgetDown(new ofxUILabel("RADOME 0.1", OFX_UI_FONT_LARGE));
+    _pUI->addWidgetDown(new ofxUILabel("RADOME 0.2", OFX_UI_FONT_LARGE));
     _pUI->addSpacer(0, 12);
     
     _displayModeNames.push_back("3D Scene");
@@ -183,7 +183,7 @@ glEnd();
 }
 
 void radomeApp::loadFile() {
-    ofFileDialogResult result = ofSystemLoadDialog("Load Model", false, "");
+    ofFileDialogResult result = ofSystemLoadDialog("Load Model", false, "/Users/dewb/dev/of_v0073_osx_release/apps/video/radome/content");
     
     // Workaround for ofxFenster modal mouse event bug
     ofxFenster* pWin = ofxFensterManager::get()->getActiveWindow();
@@ -434,6 +434,22 @@ void radomeApp::keyPressed(int key) {
                 showProjectorWindow();
             }
             break;
+        case 'c':
+            {
+                if (_pCalibrationUI)
+                    _pCalibrationUI->setVisible(!_pCalibrationUI->isVisible());
+            }
+            break;
+        case 'C':
+            {
+                if (_modelList.size() > 0)
+                {
+                    auto m = _modelList.back();
+                    _modelList.pop_back();
+                    if (m) delete(m);
+                }
+            }
+            break;
         case 'r':
             {
                 if (model) {
@@ -456,7 +472,7 @@ void radomeApp::keyPressed(int key) {
 
 void radomeApp::mousePressed(int x, int y, int button) {
     if ((x > SIDEBAR_WIDTH + 5) &&
-        (!_pCalibrationUI || !_pCalibrationUI->isVisible() || x > (SIDEBAR_WIDTH + CALIBRATIONUI_WIDTH + 30)))
+        (!_pCalibrationUI || !_pCalibrationUI->isVisible() || x > (SIDEBAR_WIDTH + CALIBRATIONUI_WIDTH + 10)))
         _cam.mousePressed(x, y, button);
 }
 
