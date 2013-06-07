@@ -17,11 +17,17 @@ vec2 getUV() {
     if (mappingMode == 0) {
         // Basic latitude/longitude mapping
         normalUV = vec2(0.5 + atan(position.x, position.z)/(2.0*3.141592),
-                        4.0 * asin(position.y/(2.0*domeHeight))/(2.0*3.141592));
+                        4.0 * asin(position.y/domeHeight)/(2.0*3.141592));
     } else if (mappingMode == 1) {
         // Mirrored quadrants
         normalUV = vec2(abs(position.x)/domeDiameter,
-                        4.0 * asin(position.y/(2.0*domeHeight))/(2.0*3.141592));
+                        4.0 * asin(position.y/domeHeight)/(2.0*3.141592));
+    } else if (mappingMode == 2) {
+        // Fisheye
+        float radians = atan(position.x, position.z);
+        float radius = 1.0 - asin(position.y/domeHeight)/(2.0*3.141592);
+        float dist = videoSize.y * 0.5 * radius * 0.2;
+        return vec2(0.5 * videoSize.x + dist * sin(radians), 0.5 * videoSize.y + dist * cos(radians));
     } else {
         // Default UV
         normalUV = gl_TexCoord[0].st;

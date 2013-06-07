@@ -17,7 +17,7 @@ using std::list;
 
 class radomeProjector {
 public:
-    radomeProjector(float heading, float distance, float height, float fov = 30);
+    radomeProjector(float heading, float distance, float height, float fov = 30, float targetHeight = 20);
     void drawSceneRepresentation();
     void drawFramebuffer(int x, int y, int w, int h);
     
@@ -32,6 +32,8 @@ public:
     float getHeight() const { return _height; }
     void setFOV(float f) { _fov = f; updateCamera(); }
     float getFOV() const { return _fov; }
+    void setTargetHeight(float h) { _targetHeight = h; updateCamera(); }
+    float getTargetHeight() const { return _targetHeight; }
     
 protected:
     void updateCamera();
@@ -43,6 +45,7 @@ protected:
     float _distance;
     float _height;
     float _fov;
+    float _targetHeight;
 };
 
 class radomeProjectorWindowListener : public ofxFensterListener {
