@@ -9,6 +9,7 @@
 #define DOME_DIAMETER 300
 #define DOME_HEIGHT 110
 #define NUM_PROJECTORS 3
+#define DEFAULT_SETTINGS_FILE "projectorSettings.xml"
 
 #define PROJECTOR_INITIAL_HEIGHT 147.5
 #define PROJECTOR_INITIAL_DISTANCE DOME_DIAMETER*1.5
@@ -160,8 +161,12 @@ void radomeApp::initGUI() {
     _pCalibrationUI->addSpacer(0, 12);
     for (int ii = 0; ii < 3; ii++) {
         createProjectorCalibrationUI(_pCalibrationUI, ii);
-        _pCalibrationUI->addSpacer(0, 12);
+        _pCalibrationUI->addSpacer(0, 8);
     }
+    
+    _pCalibrationUI->addWidgetDown(new ofxUILabelButton("Load", false, 0, 30, 0, 0, OFX_UI_FONT_SMALL));
+    _pCalibrationUI->addWidgetRight(new ofxUILabelButton("Save", false, 0, 30, 0, 0, OFX_UI_FONT_SMALL));
+
     _pCalibrationUI->setVisible(false);
     
     ofBackground(40, 20, 32);
@@ -690,6 +695,14 @@ void radomeApp::guiEvent(ofxUIEventArgs &e) {
         auto slider = dynamic_cast<ofxUISlider*>(e.widget);
         if (slider && _projectorList.size() > 2 && _projectorList[2]) {
             _projectorList[2]->setLensOffsetY(slider->getScaledValue());
+        }
+    } else if (name == "Load") {
+        if (_pCalibrationUI) {
+            _pCalibrationUI->loadSettings(DEFAULT_SETTINGS_FILE);
+        }
+    } else if (name == "Save") {
+        if (_pCalibrationUI) {
+            _pCalibrationUI->saveSettings(DEFAULT_SETTINGS_FILE);
         }
     }
 }

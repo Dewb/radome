@@ -3,3 +3,4 @@ xcuserdata/
 *.app/
 *Debug.app/
 guiSettings.xml
+bin/data/*.xml
