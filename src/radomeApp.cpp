@@ -59,10 +59,10 @@ void radomeApp::setup() {
     
     _vidOverlay.initialize(DEFAULT_SYPHON_APP, DEFAULT_SYPHON_SERVER);
     _vidOverlay.setFaderValue(0.75);
-
-    unsigned char p[3] = {0, 0, 0};
-    _blankImage.setUseTexture(true);
-    _blankImage.setFromPixels(p, 1, 1, OF_IMAGE_COLOR);
+    
+    _testPatternImage.setUseTexture(true);
+    _testPatternImage.loadImage("testpatt.jpg");
+    _showTestPattern = false;
     
     for (int ii = 0; ii < NUM_PROJECTORS; ii++) {
         _projectorList.push_back(new radomeProjector(ii*360.0/(NUM_PROJECTORS*1.0)+60.0, PROJECTOR_INITIAL_DISTANCE, PROJECTOR_INITIAL_HEIGHT));
@@ -80,7 +80,7 @@ void radomeApp::createProjectorCalibrationUI(ofxUICanvas* pCanvas, int index) {
     sprintf(buf, "PROJECTOR %d", index);
     pCanvas->addWidgetDown(new ofxUILabel(buf, OFX_UI_FONT_MEDIUM));    
     sprintf(buf, "P%d HEIGHT", index);
-    pCanvas->addMinimalSlider(buf, 5.0, 20.0, PROJECTOR_INITIAL_HEIGHT/10.0, 200, 25);
+    pCanvas->addMinimalSlider(buf, 5.0, 30.0, PROJECTOR_INITIAL_HEIGHT/10.0, 200, 25);
     sprintf(buf, "P%d HEADING", index);
     pCanvas->addMinimalSlider(buf, 0.0, 120.0, 60.0, 200, 25);
     sprintf(buf, "P%d DISTANCE", index);
@@ -90,7 +90,7 @@ void radomeApp::createProjectorCalibrationUI(ofxUICanvas* pCanvas, int index) {
     sprintf(buf, "P%d TARGET", index);
     pCanvas->addMinimalSlider(buf, 0.0, DOME_HEIGHT/5.0, 2.0, 200, 25);
     sprintf(buf, "P%d SHIFT", index);
-    pCanvas->addMinimalSlider(buf, -2.0, 2.0, 0.0, 200, 25);
+    pCanvas->addMinimalSlider(buf, -3.0, 3.0, 0.0, 200, 25);
 
 }
 
@@ -130,9 +130,9 @@ void radomeApp::initGUI() {
     addRadioAndSetFirstItem(_pUI, "BLEND MODE", _mixModeNames, OFX_UI_ORIENTATION_VERTICAL, 16, 16);
     _pUI->addSpacer(0, 12);
     
+    _mappingModeNames.push_back("Fisheye (Fulldome)");
+    _mappingModeNames.push_back("Mirrored Quadrants");
     _mappingModeNames.push_back("Lat/Long");
-    _mappingModeNames.push_back("Quadrants");
-    _mappingModeNames.push_back("Fisheye/Fulldome");
     //_mappingModeNames.push_back("Geodesic");
     //_mappingModeNames.push_back("Cinematic");
     addRadioAndSetFirstItem(_pUI, "MAPPING MODE", _mappingModeNames, OFX_UI_ORIENTATION_VERTICAL, 16, 16);
@@ -148,8 +148,10 @@ void radomeApp::initGUI() {
     addTextInput(_pInputUI, "SYPHON_APP", DEFAULT_SYPHON_APP, 180);
     _pInputUI->addWidgetDown(new ofxUILabel("SYPHON SERVER NAME", OFX_UI_FONT_MEDIUM));
     addTextInput(_pInputUI, "SYPHON_SERVER", DEFAULT_SYPHON_SERVER, 180);
+    _pInputUI->addSpacer(0, 12);
+    _pInputUI->addWidgetDown(new ofxUILabel("TEST PATTERN", OFX_UI_FONT_MEDIUM));    
+	_pInputUI->addToggle("Show Pattern", false, 30, 30);
     _pInputUI->setVisible(false);
-
     
     _pCalibrationUI = new ofxUIScrollableCanvas(SIDEBAR_WIDTH + 5, 0, CALIBRATIONUI_WIDTH, ofGetHeight());
     _pCalibrationUI->setSnapping(false);
@@ -288,20 +290,26 @@ void radomeApp::beginShader() {
     _shader.setUniform1f("domeDiameter", DOME_DIAMETER*1.0);
     _shader.setUniform1f("domeHeight", DOME_HEIGHT*1.0);
     
-    if (_vidOverlay.maybeBind()) {
+    if (_showTestPattern) {
+        _shader.setUniform1f("videoMix", 0.0);
+        _shader.setUniform2f("videoSize", _testPatternImage.getWidth(), _testPatternImage.getHeight());
+        _shader.setUniformTexture("video", _testPatternImage.getTextureReference(),
+                                  _testPatternImage.getTextureReference().getTextureData().textureID);        
+    } else if (_vidOverlay.maybeBind()) {
         _shader.setUniform1f("videoMix", _vidOverlay.getFaderValue());
         _shader.setUniform2f("videoSize", _vidOverlay.getWidth(), _vidOverlay.getHeight());
         _shader.setUniformTexture("video", _vidOverlay.getTexture(), _vidOverlay.getTextureId());
     } else {
         _shader.setUniform1f("videoMix", -1.0);
         _shader.setUniform2f("videoSize", 0.0, 0.0);
-        _shader.setUniformTexture("video", _blankImage.getTextureReference(),
-                                  _blankImage.getTextureReference().getTextureData().textureID);
+        _shader.setUniformTexture("video", _testPatternImage.getTextureReference(),
+                                  _testPatternImage.getTextureReference().getTextureData().textureID);
     }
 }
 
 void radomeApp::endShader() {
-    _vidOverlay.unbind();
+    if (_vidOverlay.isBound())
+        _vidOverlay.unbind();
     _cubeMap.unbind();
     _shader.end();
 }
@@ -476,6 +484,9 @@ void radomeApp::keyPressed(int key) {
             {
                 if (_pCalibrationUI) {
                     bool bVis = _pCalibrationUI->isVisible();
+                    if (!bVis && _pInputUI && _pInputUI->isVisible()) {
+                        _pInputUI->setVisible(false);
+                    }
                     _pCalibrationUI->setVisible(!bVis);
                 }
             }
@@ -576,7 +587,7 @@ void radomeApp::guiEvent(ofxUIEventArgs &e) {
         {
             if (_pCalibrationUI) {
                 bool bVis = _pCalibrationUI->isVisible();
-                if (bVis && _pInputUI && _pInputUI->isVisible()) {
+                if (!bVis && _pInputUI && _pInputUI->isVisible()) {
                     _pInputUI->setVisible(false);
                 }
                 _pCalibrationUI->setVisible(!bVis);
@@ -588,7 +599,7 @@ void radomeApp::guiEvent(ofxUIEventArgs &e) {
         {
             if (_pInputUI) {
                 bool bVis = _pInputUI->isVisible();
-                if (bVis && _pCalibrationUI && _pCalibrationUI->isVisible()) {
+                if (!bVis && _pCalibrationUI && _pCalibrationUI->isVisible()) {
                     _pCalibrationUI->setVisible(false);
                 }
                 _pInputUI->setVisible(!bVis);
@@ -598,13 +609,13 @@ void radomeApp::guiEvent(ofxUIEventArgs &e) {
         ofxUITextInput* pInput = (ofxUITextInput*)e.widget;
         if (pInput)
         {
-            _vidOverlay.setApplicationName(pInput->getTextString());
+            _vidOverlay.setApplicationName(trim(pInput->getTextString()));
         }
     } else if(name == "SYPHON_SERVER") {
         ofxUITextInput* pInput = (ofxUITextInput*)e.widget;
         if (pInput)
         {
-            _vidOverlay.setServerName(pInput->getTextString());
+            _vidOverlay.setServerName(trim(pInput->getTextString()));
         }
     } else if (name == "P1 HEIGHT") {
         auto slider = dynamic_cast<ofxUISlider*>(e.widget);
@@ -703,6 +714,11 @@ void radomeApp::guiEvent(ofxUIEventArgs &e) {
     } else if (name == "Save") {
         if (_pCalibrationUI) {
             _pCalibrationUI->saveSettings(DEFAULT_SETTINGS_FILE);
+        }
+    } else if (name == "Show Pattern") {
+        auto pButton = dynamic_cast<ofxUIButton*>(e.widget);
+        if (pButton) {
+            _showTestPattern = pButton->getValue();
         }
     }
 }

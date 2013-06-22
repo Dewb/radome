@@ -10,6 +10,7 @@
 
 radomeSyphonClient::radomeSyphonClient()
 : bEnabled(true)
+, bBound(false)
 , fFader(1.0)
 {
 }
@@ -29,9 +30,24 @@ bool radomeSyphonClient::maybeBind() {
     bind();
     
     if (getTexture().getWidth() > 0 && getTexture().getHeight() > 0) {
-        return true;
+        bBound = true;
     } else {
         unbind();
-        return false;
+        bBound = false;
     }
+    
+    return bBound;
+}
+
+void radomeSyphonClient::bind() {
+    ofxSyphonClient::bind();
+    bBound = true;
+}
+
+void radomeSyphonClient::unbind() {
+    if (!bBound) {
+        return;
+    }
+    ofxSyphonClient::unbind();
+    bBound = false;
 }

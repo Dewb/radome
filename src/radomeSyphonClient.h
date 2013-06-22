@@ -23,12 +23,17 @@ public:
     void setFaderValue(float f) { fFader = f; }
     
     bool maybeBind();
+    bool isBound() { return bBound; }
+    
+    void bind();
+    void unbind();
     
     ofTexture& getTexture() { return mTex; }
     int getTextureId() { return mTex.getTextureData().textureID; }
     
 protected:
     bool bEnabled;
+    bool bBound;
     float fFader;
 };
 

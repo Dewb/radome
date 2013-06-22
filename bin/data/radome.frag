@@ -14,7 +14,7 @@ uniform float domeDiameter;
 
 vec2 getUV() {
     vec2 normalUV;
-    if (mappingMode == 0) {
+    if (mappingMode == 2) {
         // Basic latitude/longitude mapping
         normalUV = vec2(0.5 + atan(position.x, position.z)/(2.0*3.141592),
                         4.0 * asin(position.y/domeHeight)/(2.0*3.141592));
@@ -22,7 +22,7 @@ vec2 getUV() {
         // Mirrored quadrants
         normalUV = vec2(abs(position.x)/domeDiameter,
                         4.0 * asin(position.y/domeHeight)/(2.0*3.141592));
-    } else if (mappingMode == 2) {
+    } else if (mappingMode == 0) {
         // Fisheye
         float theta = atan(position.x, position.z) + 3.141592;
         float r = sqrt(pow(position.x, 2.0) + pow(position.z, 2.0));

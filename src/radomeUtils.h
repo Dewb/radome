@@ -41,5 +41,8 @@ float bindSlider(ofxUIEventArgs& e, string widgetName, void *pFn(float));
 vector<ofxUIWidget*> addTextInput(ofxUICanvas* pUI, string name, string text, int width, string inlineLabel = "");
 
 float frand_bounded();
+std::string trim(const std::string& str,
+                 const std::string& whitespace = " \t");
+
 
 #endif /* defined(__radome__radomeUtils__) */

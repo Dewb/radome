@@ -80,7 +80,8 @@ protected:
     ofxFenster* _projectorWindow;
     
     radomeSyphonClient _vidOverlay;
-    ofImage _blankImage;
+    ofImage _testPatternImage;
+    bool _showTestPattern;
     
     bool _fullscreen;
     
