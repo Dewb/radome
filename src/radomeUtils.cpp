@@ -45,6 +45,31 @@ float bindSlider(ofxUIEventArgs& e, string widgetName, void *pFn(float))
     return val;
 }
 
+vector<ofxUIWidget*> addTextInput(ofxUICanvas* pUI, string name, string text, int width, string inlineLabel)
+{
+    vector<ofxUIWidget*> widgets;
+    
+    if (inlineLabel.size())
+    {
+        auto pLabel = new ofxUILabel(75, inlineLabel, OFX_UI_FONT_SMALL, 24);
+        widgets.push_back(pUI->addWidgetDown(pLabel));
+    }
+    
+    auto pInput = new ofxUITextInput(name, text, width, 0, 0, 0, OFX_UI_FONT_SMALL);
+    pInput->setAutoClear(false);
+    
+    if (inlineLabel.size())
+    {
+        widgets.push_back(pUI->addWidgetRight(pInput));
+    }
+    else
+    {
+        widgets.push_back(pUI->addWidgetDown(pInput));
+    }
+    
+    return widgets;
+}
+
 float frand_bounded() {
     return (rand()/(1.0*RAND_MAX)-0.5)*2.0;
 }

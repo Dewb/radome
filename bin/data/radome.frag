@@ -24,10 +24,11 @@ vec2 getUV() {
                         4.0 * asin(position.y/domeHeight)/(2.0*3.141592));
     } else if (mappingMode == 2) {
         // Fisheye
-        float radians = atan(position.x, position.z);
-        float radius = 1.0 - asin(position.y/domeHeight)/(2.0*3.141592);
-        float dist = videoSize.y * 0.5 * radius * 0.2;
-        return vec2(0.5 * videoSize.x + dist * sin(radians), 0.5 * videoSize.y + dist * cos(radians));
+        float theta = atan(position.x, position.z) + 3.141592;
+        float r = sqrt(pow(position.x, 2.0) + pow(position.z, 2.0));
+        float phi = 3.141592/2.0 - atan(position.y/r);
+        float radius = videoSize.y / 3.1;
+        return vec2(0.5 * videoSize.x, 0.5 * videoSize.y) + (phi * radius) * vec2(sin(theta), cos(theta));
     } else {
         // Default UV
         normalUV = gl_TexCoord[0].st;

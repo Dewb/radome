@@ -19,6 +19,7 @@ using std::string;
 
 class ofxUICanvas;
 class ofxUIEventArgs;
+class ofxUIWidget;
 
 template <typename T>
 void deletePointerCollection(std::vector<T*> v) {
@@ -37,6 +38,7 @@ void deletePointerCollection(std::list<T*> v) {
 void addRadioAndSetFirstItem(ofxUICanvas* pUI, std::string id, vector<string> options, int orientation, int w, int h);
 bool matchRadioButton(string widgetName, vector<string> names, int* pValue);
 float bindSlider(ofxUIEventArgs& e, string widgetName, void *pFn(float));
+vector<ofxUIWidget*> addTextInput(ofxUICanvas* pUI, string name, string text, int width, string inlineLabel = "");
 
 float frand_bounded();
 

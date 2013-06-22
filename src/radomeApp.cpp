@@ -2,7 +2,7 @@
 #include "radomeUtils.h"
 #include "ofxFensterManager.h"
 
-#define SIDEBAR_WIDTH 180
+#define SIDEBAR_WIDTH 190
 #define CALIBRATIONUI_WIDTH 210
 #define DEFAULT_SYPHON_APP "Arena"
 #define DEFAULT_SYPHON_SERVER "Composition"
@@ -73,39 +73,33 @@ void radomeApp::setup() {
     prepDrawList();
 }
 
+void radomeApp::createProjectorCalibrationUI(ofxUICanvas* pCanvas, int index) {
+    index++;
+    char buf[30];
+    sprintf(buf, "PROJECTOR %d", index);
+    pCanvas->addWidgetDown(new ofxUILabel(buf, OFX_UI_FONT_MEDIUM));    
+    sprintf(buf, "P%d HEIGHT", index);
+    pCanvas->addMinimalSlider(buf, 5.0, 20.0, PROJECTOR_INITIAL_HEIGHT/10.0, 200, 25);
+    sprintf(buf, "P%d HEADING", index);
+    pCanvas->addMinimalSlider(buf, 0.0, 120.0, 60.0, 200, 25);
+    sprintf(buf, "P%d DISTANCE", index);
+    pCanvas->addMinimalSlider(buf, DOME_DIAMETER/20.0, DOME_DIAMETER/5.0, PROJECTOR_INITIAL_DISTANCE/10.0, 200, 25);
+    sprintf(buf, "P%d FOV", index);
+    pCanvas->addMinimalSlider(buf, 20.0, 90.0, 30.0, 200, 25);
+    sprintf(buf, "P%d TARGET", index);
+    pCanvas->addMinimalSlider(buf, 0.0, DOME_HEIGHT/5.0, 2.0, 200, 25);
+    sprintf(buf, "P%d SHIFT", index);
+    pCanvas->addMinimalSlider(buf, -2.0, 2.0, 0.0, 200, 25);
+
+}
+
 void radomeApp::initGUI() {
     _pUI = new ofxUICanvas(5, 0, SIDEBAR_WIDTH, ofGetHeight());
     _pUI->setWidgetSpacing(5.0);
     _pUI->setDrawBack(true);
-    
-    _pCalibrationUI = new ofxUICanvas(SIDEBAR_WIDTH + 5, 0, CALIBRATIONUI_WIDTH, ofGetHeight());
-    _pCalibrationUI->setWidgetSpacing(5.0);
-    _pCalibrationUI->setDrawBack(true);
-    _pCalibrationUI->setFont("GUI/Exo-Regular.ttf", true, true, false, 0.0, OFX_UI_FONT_RESOLUTION);
-    _pCalibrationUI->addWidgetDown(new ofxUILabel("CALIBRATION", OFX_UI_FONT_MEDIUM));
-    _pCalibrationUI->addSpacer(0, 12);
-    _pCalibrationUI->addSlider("PROJECTOR 1 HEIGHT", 5.0, 20.0, PROJECTOR_INITIAL_HEIGHT/10.0, 200, 25);
-    _pCalibrationUI->addSlider("PROJECTOR 1 HEADING", 0.0, 120.0, 60.0, 200, 25);
-    _pCalibrationUI->addSlider("PROJECTOR 1 DISTANCE", DOME_DIAMETER/20.0, DOME_DIAMETER/5.0, PROJECTOR_INITIAL_DISTANCE/10.0, 200, 25);
-    _pCalibrationUI->addSlider("PROJECTOR 1 FOV", 20.0, 90.0, 30.0, 200, 25);
-    _pCalibrationUI->addSlider("PROJECTOR 1 TARGET", 0.0, DOME_HEIGHT/10.0, 2.0, 200, 25);
-    _pCalibrationUI->addSpacer(0, 12);
-    _pCalibrationUI->addSlider("PROJECTOR 2 HEIGHT", 5.0, 20.0, PROJECTOR_INITIAL_HEIGHT/10.0, 200, 25);
-    _pCalibrationUI->addSlider("PROJECTOR 2 HEADING", 120.0, 240.0, 180.0, 200, 25);
-    _pCalibrationUI->addSlider("PROJECTOR 2 DISTANCE", DOME_DIAMETER/20.0, DOME_DIAMETER/5.0, PROJECTOR_INITIAL_DISTANCE/10.0, 200, 25);
-    _pCalibrationUI->addSlider("PROJECTOR 2 FOV", 20.0, 90.0, 30.0, 200, 25);
-    _pCalibrationUI->addSlider("PROJECTOR 2 TARGET", 0.0, DOME_HEIGHT/10.0, 2.0, 200, 25);
-    _pCalibrationUI->addSpacer(0, 12);
-    _pCalibrationUI->addSlider("PROJECTOR 3 HEIGHT", 5.0, 20.0, PROJECTOR_INITIAL_HEIGHT/10.0, 200, 25);
-    _pCalibrationUI->addSlider("PROJECTOR 3 HEADING", 240.0, 360.0, 300.0, 200, 25);
-    _pCalibrationUI->addSlider("PROJECTOR 3 DISTANCE", DOME_DIAMETER/20.0, DOME_DIAMETER/5.0, PROJECTOR_INITIAL_DISTANCE/10.0, 200, 25);
-    _pCalibrationUI->addSlider("PROJECTOR 3 FOV", 20.0, 90.0, 30.0, 200, 25);
-    _pCalibrationUI->addSlider("PROJECTOR 3 TARGET", 0.0, DOME_HEIGHT/10.0, 2.0, 200, 25);
-    _pCalibrationUI->setVisible(false);
-    
-    
     _pUI->setFont("GUI/Exo-Regular.ttf", true, true, false, 0.0, OFX_UI_FONT_RESOLUTION);
     _pUI->addWidgetDown(new ofxUILabel("RADOME 0.2", OFX_UI_FONT_LARGE));
+    _pUI->addWidgetDown(new ofxUILabel("Build " __DATE__ " " __TIME__, OFX_UI_FONT_SMALL));
     _pUI->addSpacer(0, 12);
     
     _displayModeNames.push_back("3D Scene");
@@ -137,15 +131,43 @@ void radomeApp::initGUI() {
     
     _mappingModeNames.push_back("Lat/Long");
     _mappingModeNames.push_back("Quadrants");
-    _mappingModeNames.push_back("Fisheye");
-    _mappingModeNames.push_back("Geodesic");
-    _mappingModeNames.push_back("Cinematic");
+    _mappingModeNames.push_back("Fisheye/Fulldome");
+    //_mappingModeNames.push_back("Geodesic");
+    //_mappingModeNames.push_back("Cinematic");
     addRadioAndSetFirstItem(_pUI, "MAPPING MODE", _mappingModeNames, OFX_UI_ORIENTATION_VERTICAL, 16, 16);
     _pUI->addSpacer(0, 12);
+    
+    _pInputUI = new ofxUICanvas(SIDEBAR_WIDTH + 5, 0, CALIBRATIONUI_WIDTH, ofGetHeight());
+    _pInputUI->setWidgetSpacing(5.0);
+    _pInputUI->setDrawBack(true);
+    _pInputUI->setFont("GUI/Exo-Regular.ttf", true, true, false, 0.0, OFX_UI_FONT_RESOLUTION);
+    _pInputUI->addWidgetDown(new ofxUILabel("2D INPUT", OFX_UI_FONT_LARGE));
+    _pInputUI->addSpacer(0, 12);
+    _pInputUI->addWidgetDown(new ofxUILabel("SYPHON APP NAME", OFX_UI_FONT_MEDIUM));
+    addTextInput(_pInputUI, "SYPHON_APP", DEFAULT_SYPHON_APP, 180);
+    _pInputUI->addWidgetDown(new ofxUILabel("SYPHON SERVER NAME", OFX_UI_FONT_MEDIUM));
+    addTextInput(_pInputUI, "SYPHON_SERVER", DEFAULT_SYPHON_SERVER, 180);
+    _pInputUI->setVisible(false);
+
+    
+    _pCalibrationUI = new ofxUIScrollableCanvas(SIDEBAR_WIDTH + 5, 0, CALIBRATIONUI_WIDTH, ofGetHeight());
+    _pCalibrationUI->setSnapping(false);
+    _pCalibrationUI->setScrollableDirections(false, true);
+    _pCalibrationUI->setWidgetSpacing(5.0);
+    _pCalibrationUI->setDrawBack(true);
+    _pCalibrationUI->setFont("GUI/Exo-Regular.ttf", true, true, false, 0.0, OFX_UI_FONT_RESOLUTION);
+    _pCalibrationUI->addWidgetDown(new ofxUILabel("CALIBRATION", OFX_UI_FONT_LARGE));
+    _pCalibrationUI->addSpacer(0, 12);
+    for (int ii = 0; ii < 3; ii++) {
+        createProjectorCalibrationUI(_pCalibrationUI, ii);
+        _pCalibrationUI->addSpacer(0, 12);
+    }
+    _pCalibrationUI->setVisible(false);
     
     ofBackground(40, 20, 32);
 
     ofAddListener(_pUI->newGUIEvent, this, &radomeApp::guiEvent);
+    ofAddListener(_pInputUI->newGUIEvent, this, &radomeApp::guiEvent);
     ofAddListener(_pCalibrationUI->newGUIEvent, this, &radomeApp::guiEvent);
 }
 
@@ -360,8 +382,12 @@ void radomeApp::draw() {
     
     glDisable(GL_DEPTH_TEST);
     _pUI->draw();
-    if (_pCalibrationUI->isVisible())
+    if (_pCalibrationUI->isVisible()) {
         _pCalibrationUI->draw();
+    }
+    if (_pInputUI->isVisible()) {
+        _pInputUI->draw();
+    }
     glEnable(GL_DEPTH_TEST);
 }
 
@@ -402,6 +428,10 @@ void radomeApp::drawGroundPlane() {
 }
 
 void radomeApp::keyPressed(int key) {
+    
+    if (_pInputUI && _pInputUI->isVisible())
+        return;
+    
     float accel = 3.0;
     auto model = *(_modelList.rbegin());
     
@@ -439,8 +469,10 @@ void radomeApp::keyPressed(int key) {
             break;
         case 'c':
             {
-                if (_pCalibrationUI)
-                    _pCalibrationUI->setVisible(!_pCalibrationUI->isVisible());
+                if (_pCalibrationUI) {
+                    bool bVis = _pCalibrationUI->isVisible();
+                    _pCalibrationUI->setVisible(!bVis);
+                }
             }
             break;
         case 'C':
@@ -539,84 +571,125 @@ void radomeApp::guiEvent(ofxUIEventArgs &e) {
         {
             if (_pCalibrationUI) {
                 bool bVis = _pCalibrationUI->isVisible();
+                if (bVis && _pInputUI && _pInputUI->isVisible()) {
+                    _pInputUI->setVisible(false);
+                }
                 _pCalibrationUI->setVisible(!bVis);
             }
         }
-    } else if (name == "PROJECTOR 1 HEIGHT") {
+    } else if (name == "2D Input...") {
+        auto pButton = dynamic_cast<ofxUIButton*>(e.widget);
+        if (pButton && !pButton->getValue())
+        {
+            if (_pInputUI) {
+                bool bVis = _pInputUI->isVisible();
+                if (bVis && _pCalibrationUI && _pCalibrationUI->isVisible()) {
+                    _pCalibrationUI->setVisible(false);
+                }
+                _pInputUI->setVisible(!bVis);
+            }
+        }
+    } else if(name == "SYPHON_APP") {
+        ofxUITextInput* pInput = (ofxUITextInput*)e.widget;
+        if (pInput)
+        {
+            _vidOverlay.setApplicationName(pInput->getTextString());
+        }
+    } else if(name == "SYPHON_SERVER") {
+        ofxUITextInput* pInput = (ofxUITextInput*)e.widget;
+        if (pInput)
+        {
+            _vidOverlay.setServerName(pInput->getTextString());
+        }
+    } else if (name == "P1 HEIGHT") {
         auto slider = dynamic_cast<ofxUISlider*>(e.widget);
         if (slider && _projectorList.size() > 0 && _projectorList[0]) {
             _projectorList[0]->setHeight(slider->getScaledValue() * 10);
         }
-    } else if (name == "PROJECTOR 1 HEADING") {
+    } else if (name == "P1 HEADING") {
         auto slider = dynamic_cast<ofxUISlider*>(e.widget);
         if (slider && _projectorList.size() > 0 && _projectorList[0]) {
             _projectorList[0]->setHeading(slider->getScaledValue());
         }
-    } else if (name == "PROJECTOR 1 DISTANCE") {
+    } else if (name == "P1 DISTANCE") {
         auto slider = dynamic_cast<ofxUISlider*>(e.widget);
         if (slider && _projectorList.size() > 0 && _projectorList[0]) {
             _projectorList[0]->setDistance(slider->getScaledValue() * 10);
         }
-    } else if (name == "PROJECTOR 1 FOV") {
+    } else if (name == "P1 FOV") {
         auto slider = dynamic_cast<ofxUISlider*>(e.widget);
         if (slider && _projectorList.size() > 0 && _projectorList[0]) {
             _projectorList[0]->setFOV(slider->getScaledValue());
         }
-    } else if (name == "PROJECTOR 1 TARGET") {
+    } else if (name == "P1 TARGET") {
         auto slider = dynamic_cast<ofxUISlider*>(e.widget);
         if (slider && _projectorList.size() > 0 && _projectorList[0]) {
             _projectorList[0]->setTargetHeight(slider->getScaledValue() * 10);
         }
-    } else if (name == "PROJECTOR 2 HEIGHT") {
+    } else if (name == "P1 SHIFT") {
+        auto slider = dynamic_cast<ofxUISlider*>(e.widget);
+        if (slider && _projectorList.size() > 0 && _projectorList[0]) {
+            _projectorList[0]->setLensOffsetY(slider->getScaledValue());
+        }
+    } else if (name == "P2 HEIGHT") {
         auto slider = dynamic_cast<ofxUISlider*>(e.widget);
         if (slider && _projectorList.size() > 1 && _projectorList[1]) {
             _projectorList[1]->setHeight(slider->getScaledValue() * 10);
         }
-    } else if (name == "PROJECTOR 2 HEADING") {
+    } else if (name == "P2 HEADING") {
         auto slider = dynamic_cast<ofxUISlider*>(e.widget);
         if (slider && _projectorList.size() > 1 && _projectorList[1]) {
             _projectorList[1]->setHeading(slider->getScaledValue());
         }
-    } else if (name == "PROJECTOR 2 DISTANCE") {
+    } else if (name == "P2 DISTANCE") {
         auto slider = dynamic_cast<ofxUISlider*>(e.widget);
         if (slider && _projectorList.size() > 1 && _projectorList[1]) {
             _projectorList[1]->setDistance(slider->getScaledValue() * 10);
         }
-    } else if (name == "PROJECTOR 2 FOV") {
+    } else if (name == "P2 FOV") {
         auto slider = dynamic_cast<ofxUISlider*>(e.widget);
         if (slider && _projectorList.size() > 1 && _projectorList[1]) {
             _projectorList[1]->setFOV(slider->getScaledValue());
         }
-    } else if (name == "PROJECTOR 2 TARGET") {
+    } else if (name == "P2 TARGET") {
         auto slider = dynamic_cast<ofxUISlider*>(e.widget);
         if (slider && _projectorList.size() > 1 && _projectorList[1]) {
             _projectorList[1]->setTargetHeight(slider->getScaledValue() * 10);
         }
-    } else if (name == "PROJECTOR 3 HEIGHT") {
+    } else if (name == "P2 SHIFT") {
+        auto slider = dynamic_cast<ofxUISlider*>(e.widget);
+        if (slider && _projectorList.size() > 1 && _projectorList[1]) {
+            _projectorList[1]->setLensOffsetY(slider->getScaledValue());
+        }
+    } else if (name == "P3 HEIGHT") {
         auto slider = dynamic_cast<ofxUISlider*>(e.widget);
         if (slider && _projectorList.size() > 2 && _projectorList[2]) {
             _projectorList[2]->setHeight(slider->getScaledValue() * 10);
         }
-    } else if (name == "PROJECTOR 3 HEADING") {
+    } else if (name == "P3 HEADING") {
         auto slider = dynamic_cast<ofxUISlider*>(e.widget);
         if (slider && _projectorList.size() > 2 && _projectorList[2]) {
             _projectorList[2]->setHeading(slider->getScaledValue());
         }
-    } else if (name == "PROJECTOR 3 DISTANCE") {
+    } else if (name == "P3 DISTANCE") {
         auto slider = dynamic_cast<ofxUISlider*>(e.widget);
         if (slider && _projectorList.size() > 2 && _projectorList[2]) {
             _projectorList[2]->setDistance(slider->getScaledValue() * 10);
         }
-    } else if (name == "PROJECTOR 3 FOV") {
+    } else if (name == "P3 FOV") {
         auto slider = dynamic_cast<ofxUISlider*>(e.widget);
         if (slider && _projectorList.size() > 2 && _projectorList[2]) {
             _projectorList[2]->setFOV(slider->getScaledValue());
         }
-    } else if (name == "PROJECTOR 3 TARGET") {
+    } else if (name == "P3 TARGET") {
         auto slider = dynamic_cast<ofxUISlider*>(e.widget);
         if (slider && _projectorList.size() > 2 && _projectorList[2]) {
             _projectorList[2]->setTargetHeight(slider->getScaledValue() * 10);
         }
+    } else if (name == "P3 SHIFT") {
+        auto slider = dynamic_cast<ofxUISlider*>(e.widget);
+        if (slider && _projectorList.size() > 2 && _projectorList[2]) {
+            _projectorList[2]->setLensOffsetY(slider->getScaledValue());
+        }
     }
-    
 }

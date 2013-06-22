@@ -7,6 +7,7 @@
 #include "ofxCubeMap.h"
 #include "ofxUI.h"
 #include "ofxFenster.h"
+#include "ofxAutoReloadedShader.h"
 
 #include "turntableCam.h"
 #include "icosohedron.h"
@@ -55,6 +56,9 @@ public:
     void mouseMoved(int x, int y);
 
 protected:
+    
+    void createProjectorCalibrationUI(ofxUICanvas* pCanvas, int index);
+    
     void initGUI();
     void guiEvent(ofxUIEventArgs &e);
     void beginShader();
@@ -63,10 +67,11 @@ protected:
     void prepDrawList();
     
     ofxUICanvas* _pUI;
-    ofxUICanvas* _pCalibrationUI;
+    ofxUIScrollableCanvas* _pCalibrationUI;
+    ofxUICanvas* _pInputUI;
     
     ofxCubeMap _cubeMap;
-    ofShader _shader;
+    ofxAutoReloadedShader _shader;
     ofxTurntableCam _cam;
     unsigned int domeDrawIndex;
 

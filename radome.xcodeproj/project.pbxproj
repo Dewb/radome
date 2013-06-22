@@ -13,6 +13,7 @@
 		5B1440D316E7F96D00836D41 /* Syphon.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5B1440AD16E7F92E00836D41 /* Syphon.framework */; };
 		5B1440D416E7F97F00836D41 /* Syphon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B1440AD16E7F92E00836D41 /* Syphon.framework */; };
 		5B15C1CD16D2CA8E004E20D4 /* icosohedron.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5B15C1CB16D2CA8E004E20D4 /* icosohedron.cpp */; };
+		5B1CD4F417750F5F0075C2B1 /* ofxAutoReloadedShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5B1CD4E917750F5F0075C2B1 /* ofxAutoReloadedShader.cpp */; };
 		5B78A8EC16E8717E00CBDB28 /* radomeSyphonClient.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5B78A8EA16E8717E00CBDB28 /* radomeSyphonClient.cpp */; };
 		5B78A8EF16E88B7500CBDB28 /* radome.icns in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5B78A8ED16E88ACC00CBDB28 /* radome.icns */; };
 		5B78AA6616E9CD4A00CBDB28 /* radomeProjector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5B78AA6416E9CD4A00CBDB28 /* radomeProjector.cpp */; };
@@ -112,6 +113,8 @@
 		5B1440BF16E7F92E00836D41 /* ofxSyphonServer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ofxSyphonServer.mm; sourceTree = "<group>"; };
 		5B15C1CB16D2CA8E004E20D4 /* icosohedron.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = icosohedron.cpp; sourceTree = "<group>"; };
 		5B15C1CC16D2CA8E004E20D4 /* icosohedron.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = icosohedron.h; sourceTree = "<group>"; };
+		5B1CD4E917750F5F0075C2B1 /* ofxAutoReloadedShader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxAutoReloadedShader.cpp; sourceTree = "<group>"; };
+		5B1CD4EA17750F5F0075C2B1 /* ofxAutoReloadedShader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxAutoReloadedShader.h; sourceTree = "<group>"; };
 		5B78A8EA16E8717E00CBDB28 /* radomeSyphonClient.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = radomeSyphonClient.cpp; sourceTree = "<group>"; };
 		5B78A8EB16E8717E00CBDB28 /* radomeSyphonClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = radomeSyphonClient.h; sourceTree = "<group>"; };
 		5B78A8ED16E88ACC00CBDB28 /* radome.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = radome.icns; path = resources/macos/radome.icns; sourceTree = "<group>"; };
@@ -434,6 +437,24 @@
 			children = (
 				5B1440B916E7F92E00836D41 /* SyphonNameboundClient.h */,
 				5B1440BA16E7F92E00836D41 /* SyphonNameboundClient.m */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
+		5B1CD4C717750F5F0075C2B1 /* ofxAutoReloadedShader */ = {
+			isa = PBXGroup;
+			children = (
+				5B1CD4E817750F5F0075C2B1 /* src */,
+			);
+			name = ofxAutoReloadedShader;
+			path = ../../../addons/ofxAutoReloadedShader;
+			sourceTree = "<group>";
+		};
+		5B1CD4E817750F5F0075C2B1 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				5B1CD4E917750F5F0075C2B1 /* ofxAutoReloadedShader.cpp */,
+				5B1CD4EA17750F5F0075C2B1 /* ofxAutoReloadedShader.h */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -834,6 +855,7 @@
 		BB4B014C10F69532006C3DED /* addons */ = {
 			isa = PBXGroup;
 			children = (
+				5B1CD4C717750F5F0075C2B1 /* ofxAutoReloadedShader */,
 				5B78AA6A16EAA96B00CBDB28 /* ofxFenster */,
 				5B14409616E7F92E00836D41 /* ofxSyphon */,
 				5BF5F23716D186690026DF72 /* ofxCubeMap */,
@@ -1049,6 +1071,7 @@
 				5B78ABC416EAA96C00CBDB28 /* ofxFensterManager.cpp in Sources */,
 				5B78ABD216EAAB9F00CBDB28 /* main.cpp in Sources */,
 				5B78ABD516EB19D200CBDB28 /* radomeModel.cpp in Sources */,
+				5B1CD4F417750F5F0075C2B1 /* ofxAutoReloadedShader.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

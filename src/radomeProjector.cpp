@@ -14,17 +14,22 @@ radomeProjector::radomeProjector(float heading, float distance, float height, fl
 , _height(height)
 , _fov(fov)
 , _targetHeight(targetHeight)
+, _lensOffsetX(0)
+, _lensOffsetY(0)
 {
     updateCamera();
     
-    _fbo.allocate(1280, 1024, GL_RGB);
+    _resolution = ofVec2f(1280.0, 1024.0);
+    
+    _fbo.allocate(_resolution.x, _resolution.y, GL_RGB);
     _fbo.begin();
 	ofClear(0,0,0);
     _fbo.end();
 }
 
 void radomeProjector::updateCamera() {
-    _camera.setupPerspective(true, _fov, 0, 0);
+    ofVec2f offset(_lensOffsetX, _lensOffsetY);
+    _camera.setupPerspective(true, _fov, 0, 0, offset);
     _camera.setPosition(_distance * cos(_heading*3.14159/180.0), _height, _distance * sin(_heading*3.14159/180.0));
     _camera.lookAt(ofVec3f(0.0, _targetHeight, 0.0));
 }
