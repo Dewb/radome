@@ -67,7 +67,7 @@ protected:
     void prepDrawList();
     
     ofxUICanvas* _pUI;
-    ofxUIScrollableCanvas* _pCalibrationUI;
+    ofxUICanvas* _pCalibrationUI;
     ofxUICanvas* _pInputUI;
     
     ofxCubeMap _cubeMap;

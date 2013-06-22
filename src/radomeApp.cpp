@@ -3,7 +3,7 @@
 #include "ofxFensterManager.h"
 
 #define SIDEBAR_WIDTH 190
-#define CALIBRATIONUI_WIDTH 210
+#define CALIBRATIONUI_WIDTH 280
 #define DEFAULT_SYPHON_APP "Arena"
 #define DEFAULT_SYPHON_SERVER "Composition"
 #define DOME_DIAMETER 300
@@ -34,7 +34,7 @@ radomeApp::~radomeApp() {
 
 void radomeApp::setup() {
     
-    ofxFensterManager::get()->setWindowTitle("radome");
+    ofxFensterManager::get()->setWindowTitle("Radome");
     
     ofSetFrameRate(45);
     ofEnableSmoothing();
@@ -77,21 +77,33 @@ void radomeApp::setup() {
 void radomeApp::createProjectorCalibrationUI(ofxUICanvas* pCanvas, int index) {
     index++;
     char buf[30];
+    int w = CALIBRATIONUI_WIDTH - 10;
     sprintf(buf, "PROJECTOR %d", index);
     pCanvas->addWidgetDown(new ofxUILabel(buf, OFX_UI_FONT_MEDIUM));    
     sprintf(buf, "P%d HEIGHT", index);
-    pCanvas->addMinimalSlider(buf, 5.0, 30.0, PROJECTOR_INITIAL_HEIGHT/10.0, 200, 25);
+    pCanvas->addMinimalSlider(buf, 5.0, 30.0, PROJECTOR_INITIAL_HEIGHT/10.0, w, 25);
     sprintf(buf, "P%d HEADING", index);
-    pCanvas->addMinimalSlider(buf, 0.0, 120.0, 60.0, 200, 25);
+    pCanvas->addMinimalSlider(buf, 0.0, 120.0, 60.0, w, 25);
     sprintf(buf, "P%d DISTANCE", index);
-    pCanvas->addMinimalSlider(buf, DOME_DIAMETER/20.0, DOME_DIAMETER/5.0, PROJECTOR_INITIAL_DISTANCE/10.0, 200, 25);
+    pCanvas->addMinimalSlider(buf, DOME_DIAMETER/20.0, DOME_DIAMETER/5.0, PROJECTOR_INITIAL_DISTANCE/10.0, w, 25);
     sprintf(buf, "P%d FOV", index);
-    pCanvas->addMinimalSlider(buf, 20.0, 90.0, 30.0, 200, 25);
+    pCanvas->addMinimalSlider(buf, 20.0, 90.0, 30.0, w, 25);
     sprintf(buf, "P%d TARGET", index);
-    pCanvas->addMinimalSlider(buf, 0.0, DOME_HEIGHT/5.0, 2.0, 200, 25);
+    pCanvas->addMinimalSlider(buf, 0.0, 40.0, 2.0, w, 25);
     sprintf(buf, "P%d SHIFT", index);
-    pCanvas->addMinimalSlider(buf, -3.0, 3.0, 0.0, 200, 25);
+    pCanvas->addMinimalSlider(buf, -3.0, 3.0, 0.0, w, 25);
 
+}
+
+void setUIColors(ofxUICanvas* pCanvas) {
+    ofColor cb = ofColor(0, 25);
+    ofColor co = ofColor(220, 220, 255, 120);
+    ofColor coh = ofColor(240, 240, 255, 180);
+    ofColor cf = ofColor(225, 225, 255, 140);
+    ofColor cfh = ofColor(225, 225, 255, 255);
+    ofColor cp = ofColor(120, 100);
+    ofColor cpo = ofColor(255, 200);
+    pCanvas->setUIColors( cb, co, coh, cf, cfh, cp, cpo );
 }
 
 void radomeApp::initGUI() {
@@ -99,6 +111,8 @@ void radomeApp::initGUI() {
     _pUI->setWidgetSpacing(5.0);
     _pUI->setDrawBack(true);
     _pUI->setFont("GUI/Exo-Regular.ttf", true, true, false, 0.0, OFX_UI_FONT_RESOLUTION);
+    //setUIColors(_pUI);
+    
     _pUI->addWidgetDown(new ofxUILabel("RADOME 0.2", OFX_UI_FONT_LARGE));
     _pUI->addWidgetDown(new ofxUILabel("Build " __DATE__ " " __TIME__, OFX_UI_FONT_SMALL));
     _pUI->addSpacer(0, 12);
@@ -142,6 +156,8 @@ void radomeApp::initGUI() {
     _pInputUI->setWidgetSpacing(5.0);
     _pInputUI->setDrawBack(true);
     _pInputUI->setFont("GUI/Exo-Regular.ttf", true, true, false, 0.0, OFX_UI_FONT_RESOLUTION);
+    //setUIColors(_pInputUI);
+    
     _pInputUI->addWidgetDown(new ofxUILabel("2D INPUT", OFX_UI_FONT_LARGE));
     _pInputUI->addSpacer(0, 12);
     _pInputUI->addWidgetDown(new ofxUILabel("SYPHON APP NAME", OFX_UI_FONT_MEDIUM));
@@ -153,12 +169,12 @@ void radomeApp::initGUI() {
 	_pInputUI->addToggle("Show Pattern", false, 30, 30);
     _pInputUI->setVisible(false);
     
-    _pCalibrationUI = new ofxUIScrollableCanvas(SIDEBAR_WIDTH + 5, 0, CALIBRATIONUI_WIDTH, ofGetHeight());
-    _pCalibrationUI->setSnapping(false);
-    _pCalibrationUI->setScrollableDirections(false, true);
+    _pCalibrationUI = new ofxUICanvas(SIDEBAR_WIDTH + 5, 0, CALIBRATIONUI_WIDTH, ofGetHeight());
     _pCalibrationUI->setWidgetSpacing(5.0);
     _pCalibrationUI->setDrawBack(true);
     _pCalibrationUI->setFont("GUI/Exo-Regular.ttf", true, true, false, 0.0, OFX_UI_FONT_RESOLUTION);
+    //setUIColors(_pCalibrationUI);
+    
     _pCalibrationUI->addWidgetDown(new ofxUILabel("CALIBRATION", OFX_UI_FONT_LARGE));
     _pCalibrationUI->addSpacer(0, 12);
     for (int ii = 0; ii < 3; ii++) {
