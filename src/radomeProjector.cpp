@@ -37,7 +37,7 @@ void radomeProjector::updateCamera() {
 void radomeProjector::renderBegin()
 {
     _fbo.begin();
-	ofClear(0,0,0);
+	ofClear(0,0,0,0);
     _camera.begin();
 }
 
@@ -81,6 +81,7 @@ void radomeProjector::drawSceneRepresentation() {
 
 radomeProjectorWindowListener::radomeProjectorWindowListener(vector<radomeProjector*>* pProjectors) {
     _pProjectors = pProjectors;
+    _screenshot = false;
 }
 
 void radomeProjectorWindowListener::setup() {
@@ -95,6 +96,10 @@ void radomeProjectorWindowListener::draw() {
         for (auto iter = _pProjectors->begin(); iter != _pProjectors->end(); ++iter) {
             (*iter)->drawFramebuffer(x, 0, w, h);
             x += w;
+        }
+        if (_screenshot) {
+            ofSaveScreen("outputMask.jpg");
+            _screenshot = false;
         }
     }
 }

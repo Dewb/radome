@@ -78,6 +78,7 @@ protected:
     list<radomeModel*> _modelList;
     vector<radomeProjector*> _projectorList;
     ofxFenster* _projectorWindow;
+    radomeProjectorWindowListener* _projectorWindowListener;
     
     radomeSyphonClient _vidOverlay;
     ofImage _testPatternImage;

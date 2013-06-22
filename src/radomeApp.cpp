@@ -253,7 +253,8 @@ void radomeApp::showProjectorWindow() {
         ofxFensterManager::get()->deleteFenster(_projectorWindow);
     }
     _projectorWindow = ofxFensterManager::get()->createFenster(400, 300, 750, 200, OF_WINDOW);
-    _projectorWindow->addListener(new radomeProjectorWindowListener(&_projectorList));
+    _projectorWindowListener = new radomeProjectorWindowListener(&_projectorList);
+    _projectorWindow->addListener(_projectorWindowListener);
     _projectorWindow->setWindowTitle("Projector Output");
 }
 
@@ -485,6 +486,12 @@ void radomeApp::keyPressed(int key) {
                 changeDisplayMode(mode);
             }
             break;
+        case 'M':
+            {
+                if (_projectorWindowListener) {
+                    _projectorWindowListener->saveScreenshot();
+                }
+            }
         case 'f':
             {
                 _fullscreen = !_fullscreen;

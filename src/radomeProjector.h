@@ -41,7 +41,7 @@ public:
     float getLensOffsetX() const { return _lensOffsetX; }
     void setLensOffsetY(float y) { _lensOffsetY = y; updateCamera(); }
     float getLensOffsetY() const { return _lensOffsetY; }
-    
+        
 protected:
     void updateCamera();
     
@@ -64,8 +64,12 @@ public:
     radomeProjectorWindowListener(vector<radomeProjector*>* pProjectors);
     void setup();
     void draw();
+    
+    void saveScreenshot() { _screenshot = true; }
+
 protected:
     vector<radomeProjector*>* _pProjectors;
+    bool _screenshot;
 };
 
 #endif /* defined(__radome__radomeProjector__) */
