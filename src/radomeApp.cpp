@@ -83,7 +83,7 @@ void radomeApp::createProjectorCalibrationUI(ofxUICanvas* pCanvas, int index) {
     sprintf(buf, "P%d HEIGHT", index);
     pCanvas->addMinimalSlider(buf, 5.0, 30.0, PROJECTOR_INITIAL_HEIGHT/10.0, w, 25);
     sprintf(buf, "P%d HEADING", index);
-    pCanvas->addMinimalSlider(buf, 0.0, 120.0, 60.0, w, 25);
+    pCanvas->addMinimalSlider(buf, 0.0, 360.0, 120.0 * index, w, 25);
     sprintf(buf, "P%d DISTANCE", index);
     pCanvas->addMinimalSlider(buf, DOME_DIAMETER/20.0, DOME_DIAMETER/5.0, PROJECTOR_INITIAL_DISTANCE/10.0, w, 25);
     sprintf(buf, "P%d FOV", index);
