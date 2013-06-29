@@ -37,7 +37,7 @@ void radomeProjector::updateCamera() {
 void radomeProjector::renderBegin()
 {
     _fbo.begin();
-	ofClear(0,0,0);
+	ofClear(0,0,0,1);
     _camera.begin();
 }
 

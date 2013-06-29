@@ -18,11 +18,11 @@ uniform float brightness;
 
 vec2 getUV() {
     vec2 normalUV;
-    if (mappingMode == 2) {
+    if (mappingMode == 1) {
         // Basic latitude/longitude mapping
-        normalUV = vec2(0.5 + atan(position.x, position.z)/(2.0*3.141592),
+        normalUV = vec2(0.5 - atan(position.x, position.z)/(2.0*3.141592),
                         4.0 * asin(position.y/domeHeight)/(2.0*3.141592));
-    } else if (mappingMode == 1) {
+    } else if (mappingMode == 2) {
         // Mirrored quadrants
         normalUV = vec2(abs(position.x)/domeDiameter,
                         4.0 * asin(position.y/domeHeight)/(2.0*3.141592));

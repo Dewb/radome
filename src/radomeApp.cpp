@@ -38,6 +38,7 @@ void radomeApp::setup() {
     
     ofSetFrameRate(45);
     ofEnableSmoothing();
+    ofEnableAlphaBlending();
     
     _displayMode = DisplayScene;
     _mixMode = 0;
@@ -48,7 +49,7 @@ void radomeApp::setup() {
 
     _shader.load("radome");
     
-    _cubeMap.initEmptyTextures(1024);
+    _cubeMap.initEmptyTextures(1024, GL_RGBA);
     _cubeMap.setNearFar(ofVec2f(0.01, 8192.0));
     
     _cam.setTarget(ofVec3f(0.0, DOME_HEIGHT*0.25, 0.0));
