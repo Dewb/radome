@@ -92,6 +92,10 @@ protected:
     int _mixMode;
     int _mappingMode;
     
+    float _contrast;
+    float _saturation;
+    float _brightness;
+    
     enum DisplayMode _displayMode;
     vector<string> _displayModeNames;
     vector<string> _mixModeNames;

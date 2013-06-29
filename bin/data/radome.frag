@@ -12,6 +12,10 @@ uniform int mappingMode;
 uniform float domeHeight;
 uniform float domeDiameter;
 
+uniform float contrast;
+uniform float saturation;
+uniform float brightness;
+
 vec2 getUV() {
     vec2 normalUV;
     if (mappingMode == 2) {
@@ -65,6 +69,25 @@ vec4 multiLayerMix(vec4 envColor,
 }
 */
 
+// source: TGM's shader pack
+// http://irrlicht.sourceforge.net/phpBB2/viewtopic.php?t=21057
+vec3 ContrastSaturationBrightness(vec3 color, float con, float sat, float brt)
+{
+    const float AvgLumR = 0.5;
+    const float AvgLumG = 0.5;
+    const float AvgLumB = 0.5;
+
+    const vec3 LumCoeff = vec3(0.2125, 0.7154, 0.0721);
+
+    vec3 AvgLumin = vec3(AvgLumR, AvgLumG, AvgLumB);
+    vec3 brtColor = color * brt;
+    vec3 intensity = vec3(dot(brtColor, LumCoeff));
+    vec3 satColor = mix(intensity, brtColor, sat);
+    vec3 conColor = mix(AvgLumin, satColor, con);
+    
+    return conColor;
+}
+
 void main()
 {
     // clip below the y-plane
@@ -98,6 +121,8 @@ void main()
         // Blend any remaining alpha against black
         gl_FragColor = mix(vec4(0.0,0.0,0.0,1.0), color, color.a);
         gl_FragColor.a = 1.0;
+
+        gl_FragColor.rgb = ContrastSaturationBrightness(gl_FragColor.rgb, contrast, saturation, brightness);
     }
 }
 

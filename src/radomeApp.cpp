@@ -59,6 +59,10 @@ void radomeApp::setup() {
     
     _vidOverlay.initialize(DEFAULT_SYPHON_APP, DEFAULT_SYPHON_SERVER);
     _vidOverlay.setFaderValue(0.75);
+
+    _contrast = 1.0;
+    _saturation = 1.0;
+    _brightness = 1.0;
     
     _testPatternImage.setUseTexture(true);
     _testPatternImage.loadImage("testpatt.jpg");
@@ -125,18 +129,20 @@ void radomeApp::initGUI() {
     _pUI->addSpacer(0, 12);
 
     _pUI->addWidgetDown(new ofxUILabel("PROJECTORS", OFX_UI_FONT_MEDIUM));
-    _pUI->addWidgetDown(new ofxUILabelButton("Calibrate...", false, 0, 30, 0, 0, OFX_UI_FONT_SMALL));
-    _pUI->addWidgetDown(new ofxUILabelButton("Show Window", false, 0, 30, 0, 0, OFX_UI_FONT_SMALL));
+    _pUI->addWidgetDown(new ofxUILabelButton("Show", false, 0, 25, 0, 0, OFX_UI_FONT_SMALL));
+    _pUI->addWidgetRight(new ofxUILabelButton("Calibrate...", false, 0, 25, 0, 0, OFX_UI_FONT_SMALL));
     _pUI->addSpacer(0, 12);
 
     _pUI->addWidgetDown(new ofxUILabel("CONTENT", OFX_UI_FONT_MEDIUM));
-    _pUI->addWidgetDown(new ofxUILabelButton("Add 3D Model...", false, 0, 30, 0, 0, OFX_UI_FONT_SMALL));
-    _pUI->addWidgetDown(new ofxUILabelButton("2D Input...", false, 0, 30, 0, 0, OFX_UI_FONT_SMALL));
-    _pUI->addWidgetDown(new ofxUILabelButton("Plugins...", false, 0, 30, 0, 0, OFX_UI_FONT_SMALL));
+    _pUI->addWidgetDown(new ofxUILabelButton("Video Input...", false, 0, 25, 0, 0, OFX_UI_FONT_SMALL));
+    _pUI->addWidgetDown(new ofxUILabelButton("Add 3D Model...", false, 0, 25, 0, 0, OFX_UI_FONT_SMALL));
     _pUI->addSpacer(0, 12);
 
-    _pUI->addWidgetDown(new ofxUILabel("MIXER", OFX_UI_FONT_MEDIUM));
-    _pUI->addWidgetDown(new ofxUIBiLabelSlider(0, 0, SIDEBAR_WIDTH-10, 30, 0, 100, _vidOverlay.getFaderValue()*100.0, "XFADE", "2D", "3D", OFX_UI_FONT_MEDIUM));
+    _pUI->addWidgetDown(new ofxUILabel("OUTPUT MIXER", OFX_UI_FONT_MEDIUM));
+    _pUI->addWidgetDown(new ofxUIBiLabelSlider(0, 0, SIDEBAR_WIDTH-10, 12, 0, 2.0, 1, "CONTRAST", "CONTRAST", "2X", OFX_UI_FONT_MEDIUM));
+    _pUI->addWidgetDown(new ofxUIBiLabelSlider(0, 0, SIDEBAR_WIDTH-10, 12, 0, 2.0, 1, "SATURATION", "SATURATION", "2X", OFX_UI_FONT_MEDIUM));
+    _pUI->addWidgetDown(new ofxUIBiLabelSlider(0, 0, SIDEBAR_WIDTH-10, 12, 0, 2.0, 1, "BRIGHTNESS", "BRIGHTNESS", "2X", OFX_UI_FONT_MEDIUM));
+    _pUI->addWidgetDown(new ofxUIBiLabelSlider(0, 0, SIDEBAR_WIDTH-10, 25, 0, 100, _vidOverlay.getFaderValue()*100.0, "XFADE", "2D", "3D", OFX_UI_FONT_MEDIUM));
     
     _mixModeNames.push_back("Underlay");
     _mixModeNames.push_back("Overlay");
@@ -145,10 +151,8 @@ void radomeApp::initGUI() {
     _pUI->addSpacer(0, 12);
     
     _mappingModeNames.push_back("Fisheye (Fulldome)");
+    _mappingModeNames.push_back("Lat/Long (Standard)");
     _mappingModeNames.push_back("Mirrored Quadrants");
-    _mappingModeNames.push_back("Lat/Long");
-    //_mappingModeNames.push_back("Geodesic");
-    //_mappingModeNames.push_back("Cinematic");
     addRadioAndSetFirstItem(_pUI, "MAPPING MODE", _mappingModeNames, OFX_UI_ORIENTATION_VERTICAL, 16, 16);
     _pUI->addSpacer(0, 12);
     
@@ -158,7 +162,7 @@ void radomeApp::initGUI() {
     _pInputUI->setFont("GUI/Exo-Regular.ttf", true, true, false, 0.0, OFX_UI_FONT_RESOLUTION);
     //setUIColors(_pInputUI);
     
-    _pInputUI->addWidgetDown(new ofxUILabel("2D INPUT", OFX_UI_FONT_LARGE));
+    _pInputUI->addWidgetDown(new ofxUILabel("VIDEO INPUT", OFX_UI_FONT_LARGE));
     _pInputUI->addSpacer(0, 12);
     _pInputUI->addWidgetDown(new ofxUILabel("SYPHON APP NAME", OFX_UI_FONT_MEDIUM));
     addTextInput(_pInputUI, "SYPHON_APP", DEFAULT_SYPHON_APP, 180);
@@ -166,7 +170,7 @@ void radomeApp::initGUI() {
     addTextInput(_pInputUI, "SYPHON_SERVER", DEFAULT_SYPHON_SERVER, 180);
     _pInputUI->addSpacer(0, 12);
     _pInputUI->addWidgetDown(new ofxUILabel("TEST PATTERN", OFX_UI_FONT_MEDIUM));    
-	_pInputUI->addToggle("Show Pattern", false, 30, 30);
+	_pInputUI->addToggle("Show Pattern", false, 25, 25);
     _pInputUI->setVisible(false);
     
     _pCalibrationUI = new ofxUICanvas(SIDEBAR_WIDTH + 5, 0, CALIBRATIONUI_WIDTH, ofGetHeight());
@@ -182,8 +186,8 @@ void radomeApp::initGUI() {
         _pCalibrationUI->addSpacer(0, 8);
     }
     
-    _pCalibrationUI->addWidgetDown(new ofxUILabelButton("Load", false, 0, 30, 0, 0, OFX_UI_FONT_SMALL));
-    _pCalibrationUI->addWidgetRight(new ofxUILabelButton("Save", false, 0, 30, 0, 0, OFX_UI_FONT_SMALL));
+    _pCalibrationUI->addWidgetDown(new ofxUILabelButton("Load", false, 0, 25, 0, 0, OFX_UI_FONT_SMALL));
+    _pCalibrationUI->addWidgetRight(new ofxUILabelButton("Save", false, 0, 25, 0, 0, OFX_UI_FONT_SMALL));
 
     _pCalibrationUI->setVisible(false);
     
@@ -306,6 +310,10 @@ void radomeApp::beginShader() {
     _shader.setUniform1i("mappingMode", _mappingMode);
     _shader.setUniform1f("domeDiameter", DOME_DIAMETER*1.0);
     _shader.setUniform1f("domeHeight", DOME_HEIGHT*1.0);
+    _shader.setUniform1f("contrast", _contrast);
+    _shader.setUniform1f("saturation", _saturation);
+    _shader.setUniform1f("brightness", _brightness);
+    
     
     if (_showTestPattern) {
         _shader.setUniform1f("videoMix", 0.0);
@@ -598,7 +606,7 @@ void radomeApp::guiEvent(ofxUIEventArgs &e) {
         {
             loadFile();
         }
-    } else if (name == "Show Window") {
+    } else if (name == "Show") {
         auto pButton = dynamic_cast<ofxUIButton*>(e.widget);
         if (pButton && !pButton->getValue())
         {
@@ -616,7 +624,7 @@ void radomeApp::guiEvent(ofxUIEventArgs &e) {
                 _pCalibrationUI->setVisible(!bVis);
             }
         }
-    } else if (name == "2D Input...") {
+    } else if (name == "Video Input...") {
         auto pButton = dynamic_cast<ofxUIButton*>(e.widget);
         if (pButton && !pButton->getValue())
         {
@@ -742,6 +750,21 @@ void radomeApp::guiEvent(ofxUIEventArgs &e) {
         auto pButton = dynamic_cast<ofxUIButton*>(e.widget);
         if (pButton) {
             _showTestPattern = pButton->getValue();
+        }
+    } else if (name == "CONTRAST") {
+        auto slider = dynamic_cast<ofxUISlider*>(e.widget);
+        if (slider) {
+            _contrast = slider->getScaledValue();
+        }
+    } else if (name == "SATURATION") {
+        auto slider = dynamic_cast<ofxUISlider*>(e.widget);
+        if (slider) {
+            _saturation = slider->getScaledValue();
+        }
+    } else if (name == "BRIGHTNESS") {
+        auto slider = dynamic_cast<ofxUISlider*>(e.widget);
+        if (slider) {
+            _brightness = slider->getScaledValue();
         }
     }
 }
