@@ -6,13 +6,21 @@
 #define CALIBRATIONUI_WIDTH 280
 #define DEFAULT_SYPHON_APP "Arena"
 #define DEFAULT_SYPHON_SERVER "Composition"
-#define DOME_DIAMETER 300
-#define DOME_HEIGHT 110
+
+// Big dome (in deci-feet)
+//#define DOME_DIAMETER 300
+//#define DOME_HEIGHT 110
+
+// Small dome (in deci-feet)
+//#define DOME_DIAMETER 180
+//#define DOME_HEIGHT 110
+
+
 #define NUM_PROJECTORS 3
 #define DEFAULT_SETTINGS_FILE "projectorSettings.xml"
 
 #define PROJECTOR_INITIAL_HEIGHT 147.5
-#define PROJECTOR_INITIAL_DISTANCE DOME_DIAMETER*1.5
+//#define PROJECTOR_INITIAL_DISTANCE DOME_DIAMETER*1.5
 
 radomeApp::radomeApp() {
     _pUI = NULL;
@@ -52,7 +60,11 @@ void radomeApp::setup() {
     _cubeMap.initEmptyTextures(1024, GL_RGBA);
     _cubeMap.setNearFar(ofVec2f(0.01, 8192.0));
     
-    _cam.setTarget(ofVec3f(0.0, DOME_HEIGHT*0.25, 0.0));
+    _domeHeight = 110;
+    _domeDiameter = 300;
+    _domeSliceParameterization = 1.0;
+    
+    _cam.setTarget(ofVec3f(0.0, _domeHeight*0.25, 0.0));
     _cam.setRotation(0.66, 0.5);
     _cam.setupPerspective(false);
     
@@ -70,10 +82,12 @@ void radomeApp::setup() {
     _showTestPattern = false;
     
     for (int ii = 0; ii < NUM_PROJECTORS; ii++) {
-        _projectorList.push_back(new radomeProjector(ii*360.0/(NUM_PROJECTORS*1.0)+60.0, PROJECTOR_INITIAL_DISTANCE, PROJECTOR_INITIAL_HEIGHT));
+        _projectorList.push_back(new radomeProjector(ii*360.0/(NUM_PROJECTORS*1.0)+60.0, _domeDiameter*1.5, PROJECTOR_INITIAL_HEIGHT));
     }    
     
     initGUI();
+    
+    _pCalibrationUI->loadSettings(DEFAULT_SETTINGS_FILE);
     
     glEnable(GL_DEPTH_TEST);
     prepDrawList();
@@ -86,17 +100,17 @@ void radomeApp::createProjectorCalibrationUI(ofxUICanvas* pCanvas, int index) {
     sprintf(buf, "PROJECTOR %d", index);
     pCanvas->addWidgetDown(new ofxUILabel(buf, OFX_UI_FONT_MEDIUM));    
     sprintf(buf, "P%d HEIGHT", index);
-    pCanvas->addMinimalSlider(buf, 5.0, 30.0, PROJECTOR_INITIAL_HEIGHT/10.0, w, 25);
+    pCanvas->addMinimalSlider(buf, 5.0, 30.0, PROJECTOR_INITIAL_HEIGHT/10.0, w, 15);
     sprintf(buf, "P%d HEADING", index);
-    pCanvas->addMinimalSlider(buf, 0.0, 360.0, 120.0 * index, w, 25);
+    pCanvas->addMinimalSlider(buf, 0.0, 360.0, 120.0 * index, w, 15);
     sprintf(buf, "P%d DISTANCE", index);
-    pCanvas->addMinimalSlider(buf, DOME_DIAMETER/20.0, DOME_DIAMETER/5.0, PROJECTOR_INITIAL_DISTANCE/10.0, w, 25);
+    pCanvas->addMinimalSlider(buf, _domeHeight/20.0, _domeDiameter/5.0, _domeDiameter*0.15, w, 15);
     sprintf(buf, "P%d FOV", index);
-    pCanvas->addMinimalSlider(buf, 20.0, 90.0, 30.0, w, 25);
+    pCanvas->addMinimalSlider(buf, 20.0, 90.0, 30.0, w, 15);
     sprintf(buf, "P%d TARGET", index);
-    pCanvas->addMinimalSlider(buf, 0.0, 40.0, 2.0, w, 25);
+    pCanvas->addMinimalSlider(buf, 0.0, 40.0, 2.0, w, 15);
     sprintf(buf, "P%d SHIFT", index);
-    pCanvas->addMinimalSlider(buf, -3.0, 3.0, 0.0, w, 25);
+    pCanvas->addMinimalSlider(buf, -3.0, 3.0, 0.0, w, 15);
 
 }
 
@@ -182,6 +196,15 @@ void radomeApp::initGUI() {
     
     _pCalibrationUI->addWidgetDown(new ofxUILabel("CALIBRATION", OFX_UI_FONT_LARGE));
     _pCalibrationUI->addSpacer(0, 12);
+    
+    int w = CALIBRATIONUI_WIDTH - 10;
+    
+    _pCalibrationUI->addMinimalSlider("DOME HEIGHT", 5.0, 30.0, _domeHeight/10, w, 15);
+    _pCalibrationUI->addMinimalSlider("DOME DIAMETER", 5.0, 50.0, _domeDiameter/10, w, 15);
+    _pCalibrationUI->addMinimalSlider("DOME SLICE", 0.1, 1.0, _domeSliceParameterization, w, 15);
+
+    _pCalibrationUI->addSpacer(0, 12);
+    
     for (int ii = 0; ii < 3; ii++) {
         createProjectorCalibrationUI(_pCalibrationUI, ii);
         _pCalibrationUI->addSpacer(0, 8);
@@ -206,7 +229,7 @@ void radomeApp::prepDrawList()
 
     glNewList(domeDrawIndex, GL_COMPILE);
     glBegin(GL_TRIANGLES);
-    int sx = DOME_DIAMETER/2.0, sy = DOME_HEIGHT, sz = DOME_DIAMETER/2.0;
+    int sx = _domeDiameter/2.0, sy = _domeHeight, sz = _domeDiameter/2.0;
     while (i != _triangles.end())
     {
         icosohedron::Triangle& t = *i++;
@@ -309,8 +332,8 @@ void radomeApp::beginShader() {
     _shader.setUniform1i("EnvMap", 0);
     _shader.setUniform1i("mixMode", _mixMode);
     _shader.setUniform1i("mappingMode", _mappingMode);
-    _shader.setUniform1f("domeDiameter", DOME_DIAMETER*1.0);
-    _shader.setUniform1f("domeHeight", DOME_HEIGHT*1.0);
+    _shader.setUniform1f("domeDiameter", _domeDiameter);
+    _shader.setUniform1f("domeHeight", _domeHeight);
     _shader.setUniform1f("contrast", _contrast);
     _shader.setUniform1f("saturation", _saturation);
     _shader.setUniform1f("brightness", _brightness);
@@ -346,7 +369,7 @@ void radomeApp::draw() {
             ofPushStyle();
             ofEnableBlendMode(OF_BLENDMODE_ALPHA);
 
-            _cam.setDistance(DOME_DIAMETER*1.6);
+            _cam.setDistance(_domeDiameter*1.6);
             _cam.begin();
                         
             ofPushMatrix();
@@ -386,7 +409,7 @@ void radomeApp::draw() {
 
             ofClear(20, 100, 50);
             
-            _cam.setDistance(DOME_DIAMETER*1.10);
+            _cam.setDistance(_domeDiameter*1.10);
             _cam.begin();
             
             beginShader();
@@ -447,7 +470,7 @@ void radomeApp::drawDome() {
 }
 
 void radomeApp::drawGroundPlane() {
-    float size = DOME_DIAMETER * 5;
+    float size = _domeDiameter * 5;
     float ticks = 40.0;
     
     float step = size / ticks;
@@ -766,6 +789,24 @@ void radomeApp::guiEvent(ofxUIEventArgs &e) {
         auto slider = dynamic_cast<ofxUISlider*>(e.widget);
         if (slider) {
             _brightness = slider->getScaledValue();
+        }
+    } else if (name == "DOME HEIGHT") {
+        auto slider = dynamic_cast<ofxUISlider*>(e.widget);
+        if (slider) {
+            _domeHeight = slider->getScaledValue() * 10;
+            prepDrawList();
+        }
+    } else if (name == "DOME DIAMETER") {
+        auto slider = dynamic_cast<ofxUISlider*>(e.widget);
+        if (slider) {
+            _domeDiameter = slider->getScaledValue() * 10;
+            prepDrawList();
+        }
+    } else if (name == "DOME SLICE") {
+        auto slider = dynamic_cast<ofxUISlider*>(e.widget);
+        if (slider) {
+            _domeSliceParameterization = slider->getScaledValue();
+            prepDrawList();
         }
     }
 }

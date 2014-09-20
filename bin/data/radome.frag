@@ -17,6 +17,16 @@ uniform float saturation;
 uniform float brightness;
 
 vec2 getUV() {
+    
+    float theta = atan(position.x, position.z) + 3.141592;
+    float r = sqrt(pow(position.x, 2.0) + pow(position.z, 2.0));
+    float phi = (3.141592/2.0 - atan(position.y/r));
+    float radius = videoSize.y / 3.1;
+    
+    // cut out door (20' dome only)
+    //if (theta > 2.73 && theta < 3.12 && phi > 0.86)
+    //    return vec2(videoSize.x+1.0, videoSize.y + 1.0);
+    
     vec2 normalUV;
     if (mappingMode == 1) {
         // Basic latitude/longitude mapping
@@ -27,11 +37,7 @@ vec2 getUV() {
         normalUV = vec2(abs(position.x)/domeDiameter,
                         4.0 * asin(position.y/domeHeight)/(2.0*3.141592));
     } else if (mappingMode == 0) {
-        // Fisheye
-        float theta = atan(position.x, position.z) + 3.141592;
-        float r = sqrt(pow(position.x, 2.0) + pow(position.z, 2.0));
-        float phi = 3.141592/2.0 - atan(position.y/r);
-        float radius = videoSize.y / 3.1;
+        // Fisheye        
         return vec2(0.5 * videoSize.x, 0.5 * videoSize.y) + (phi * radius) * vec2(sin(theta), cos(theta));
     } else {
         // Default UV
@@ -114,6 +120,9 @@ void main()
             vec2 uv = getUV();
             vec4 videoColor = texture2DRect(video, uv);
 
+            if (uv.x > videoSize.x)
+                videoColor = vec4(0,0,0,0);
+            
             // Blend according to the mix mode and mix level
             color = mixColors(color, videoColor, videoMix);
         }

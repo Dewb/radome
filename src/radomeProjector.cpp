@@ -17,6 +17,7 @@ radomeProjector::radomeProjector(float heading, float distance, float height, fl
 , _lensOffsetX(0)
 , _lensOffsetY(0)
 {
+    _camera.setupPerspective();
     updateCamera();
     
     _resolution = ofVec2f(1280.0, 1024.0);
@@ -29,7 +30,14 @@ radomeProjector::radomeProjector(float heading, float distance, float height, fl
 
 void radomeProjector::updateCamera() {
     ofVec2f offset(_lensOffsetX, _lensOffsetY);
-    _camera.setupPerspective(true, _fov, 0, 0, offset);
+    
+    //_camera.setupPerspective(true, _fov, 1.0, 10000.0, offset);
+    //_camera.enableOrtho();
+    _camera.setFov(_fov);
+    _camera.setNearClip(1.0);
+    _camera.setFarClip(10000.0);
+    _camera.setLensOffset(offset);
+    
     _camera.setPosition(_distance * cos(_heading*3.14159/180.0), _height, _distance * sin(_heading*3.14159/180.0));
     _camera.lookAt(ofVec3f(0.0, _targetHeight, 0.0));
 }

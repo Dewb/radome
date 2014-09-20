@@ -102,4 +102,8 @@ protected:
     vector<string> _mappingModeNames;
 
     vector<icosohedron::Triangle> _triangles;
+    
+    float _domeDiameter;
+    float _domeHeight;
+    float _domeSliceParameterization;
 };
