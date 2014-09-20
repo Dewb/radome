@@ -9,7 +9,7 @@
 ofxTurntableCam::ofxTurntableCam() {
     reset();
 #ifndef USE_OFXFENSTER
-    ofAddListener(ofEvents().update , this, &ofxTurntableCam::update);
+//    ofAddListener(ofEvents().update , this, &ofxTurntableCam::update);
 #endif
     _cameraDragging = false;
     setTarget(ofVec3f(0,0,0));
@@ -17,29 +17,9 @@ ofxTurntableCam::ofxTurntableCam() {
 
 ofxTurntableCam::~ofxTurntableCam() {
 #ifndef USE_OFXFENSTER
-    ofRemoveListener(ofEvents().update , this, &ofxTurntableCam::update);
+//    ofRemoveListener(ofEvents().update , this, &ofxTurntableCam::update);
 #endif
 }
-
-#ifndef USE_OFXFENSTER
-void ofxTurntableCam::update(ofEventArgs& args) {
-    ofVec2f mouse(ofGetMouseX(), ofGetMouseY());
-    if (_viewport.inside(mouse.x, mouse.y) && !_cameraDragging && ofGetMousePressed()) {
-        _mouseStart = mouse;
-        _cameraDragging = true;
-    }
-    if (_mouseDown) {
-        if (!ofGetMousePressed()) {
-            _mouseDown = false;
-        } else {
-            float dx = (mouse.x - _mouseStart.x) / ofGetViewportWidth();
-            float dy = (mouse.y - _mouseStart.y) / ofGetViewportHeight();
-            _mouseStart = mouse;
-            setRotation(dx,dy);
-        }
-    }}
-
-#else
 
 void ofxTurntableCam::mousePressed(int x, int y, int button) {
     if (button == 0) {
@@ -63,7 +43,6 @@ void ofxTurntableCam::mouseDragged(int x, int y, int button) {
     _mouseStart = mouse;
     setRotation(dx,dy);
 }
-#endif
 
 void ofxTurntableCam::setRotation(float dx, float dy) {
     ofVec3f p = ofCamera::getPosition();

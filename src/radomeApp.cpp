@@ -1,6 +1,5 @@
 #include "radomeApp.h"
 #include "radomeUtils.h"
-#include "ofxFensterManager.h"
 
 #define SIDEBAR_WIDTH 190
 #define CALIBRATIONUI_WIDTH 280
@@ -24,17 +23,21 @@
 
 radomeApp::radomeApp() {
     _pUI = NULL;
-    _projectorWindow = NULL;
+    // removefenster
+    //_projectorWindow = NULL;
 }
 
 radomeApp::~radomeApp() {
     if (_pUI)
         delete (_pUI);
     
+    // removefenster
+    /*
     if (_projectorWindow) {
         _projectorWindow->destroy();
         ofxFensterManager::get()->deleteFenster(_projectorWindow);
     }
+    */
     
     deletePointerCollection(_projectorList);
     deletePointerCollection(_modelList);
@@ -42,7 +45,8 @@ radomeApp::~radomeApp() {
 
 void radomeApp::setup() {
     
-    ofxFensterManager::get()->setWindowTitle("Radome");
+    // removefenster
+    //ofxFensterManager::get()->setWindowTitle("Radome");
     
     ofSetFrameRate(45);
     ofEnableSmoothing();
@@ -261,13 +265,15 @@ glEnd();
 void radomeApp::loadFile() {
     ofFileDialogResult result = ofSystemLoadDialog("Load Model", false, "/Users/dewb/dev/of_v0073_osx_release/apps/video/radome/content");
     
+    // removefenster
+/*
     // Workaround for ofxFenster modal mouse event bug
     ofxFenster* pWin = ofxFensterManager::get()->getActiveWindow();
     ofxFenster* pDummy = ofxFensterManager::get()->createFenster(0,0,1,1);
     ofxFensterManager::get()->setActiveWindow(pDummy);
     ofxFensterManager::get()->setActiveWindow(pWin);
     ofxFensterManager::get()->deleteFenster(pDummy);
-    
+*/
     if (result.bSuccess) {
         auto model = new radomeModel();
         model->loadModel(result.getPath());
@@ -276,6 +282,9 @@ void radomeApp::loadFile() {
 }
 
 void radomeApp::showProjectorWindow() {
+    // removefenster
+/*
+    
     if (_projectorWindow && _projectorWindow->id != 0) {
         _projectorWindow->destroy();
         ofxFensterManager::get()->deleteFenster(_projectorWindow);
@@ -284,6 +293,7 @@ void radomeApp::showProjectorWindow() {
     _projectorWindowListener = new radomeProjectorWindowListener(&_projectorList);
     _projectorWindow->addListener(_projectorWindowListener);
     _projectorWindow->setWindowTitle("Projector Output");
+ */
 }
 
 void radomeApp::update() {
@@ -399,7 +409,7 @@ void radomeApp::draw() {
             for (int i = 0; i < 6; i++) {
                 int x = margin + i%3 * (w + margin) + SIDEBAR_WIDTH;
                 int y = margin + i/3 * (h + margin);
-                ofDrawBitmapString(_cubeMap.getDescriptiveStringForFace(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i), x+margin*1.5, y+10+margin*1.5);
+                //ofDrawBitmapString(_cubeMap.getDescriptiveStringForFace(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i), x+margin*1.5, y+10+margin*1.5);
                 _cubeMap.drawFace(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i , x, y, w, h);
                 ofRect(x-1, y-1, w + margin, h + margin);
             }
@@ -513,16 +523,19 @@ void radomeApp::keyPressed(int key) {
         case 'l': loadFile(); break;
         case 'm':
             {
-                DisplayMode mode = getDisplayMode();
+                int mode = (int)getDisplayMode();
                 mode++;
-                changeDisplayMode(mode);
+                changeDisplayMode((DisplayMode)mode);
             }
             break;
         case 'M':
             {
+                // removefenster
+/*
                 if (_projectorWindowListener) {
                     _projectorWindowListener->saveScreenshot();
                 }
+ */
             }
         case 'f':
             {

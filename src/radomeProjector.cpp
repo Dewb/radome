@@ -86,7 +86,7 @@ void radomeProjector::drawSceneRepresentation() {
     ofPopMatrix();
 }
 
-
+/*
 radomeProjectorWindowListener::radomeProjectorWindowListener(vector<radomeProjector*>* pProjectors) {
     _pProjectors = pProjectors;
     _screenshot = false;
@@ -111,3 +111,4 @@ void radomeProjectorWindowListener::draw() {
         }
     }
 }
+*/

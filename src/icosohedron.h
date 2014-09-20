@@ -7,6 +7,7 @@
 //
 
 #include <vector>
+#include <cmath>
 
 namespace icosohedron
 {

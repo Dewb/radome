@@ -5,7 +5,7 @@
 #include "ofCamera.h"
 #include "ofEvents.h"
 
-#define USE_OFXFENSTER
+//#define USE_OFXFENSTER
 
 class ofxTurntableCam : public ofCamera {
 public:
@@ -23,13 +23,9 @@ public:
     
     void setRotation(float dx, float dy);
 
-#ifndef USE_OFXFENSTER
-    void update(ofEventArgs& args);
-#else
     void mousePressed(int x, int y, int button);
     void mouseDragged(int x, int y, int button);
     void mouseReleased(int x, int y, int button);
-#endif
 
 protected:
     float _rotationFactor;
