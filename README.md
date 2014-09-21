@@ -11,6 +11,7 @@ Radome is built with openFrameworks 0073.  The following non-core addons are req
 * ofxFenster
 * ofxUI
 * ofxSyphon
+* ofxAutoReloadedShader
 
 Installation instructions:
 --------------------------
@@ -20,12 +21,14 @@ Installation instructions:
 2. Clone the following oF extensions into the addons folder:
   * ofxSyphon (head revision)
   * ofxCubeMap (head revision)
+  * ofxAutoReloadedShader (head revision)
   * ofxFenster (branch 'ghost')
   * ofxUI (commit 51b2dcb5d6bef17e18c23adf91ae94fce095f42d)
   ```
   cd of_v0.8.1_osx_release/addons
   git clone https://github.com/astellato/ofxSyphon
   git clone https://github.com/andreasmuller/ofxCubeMap
+  git clone https://github.com/andreasmuller/ofxAutoReloadedShader
   git clone https://github.com/underdoeg/ofxFenster.git
   cd ofxFenster
   git checkout ghost
