@@ -342,17 +342,15 @@ void radomeApp::beginShader() {
     if (_showTestPattern) {
         _shader.setUniform1f("videoMix", 0.0);
         _shader.setUniform2f("videoSize", _testPatternImage.getWidth(), _testPatternImage.getHeight());
-        _shader.setUniformTexture("video", _testPatternImage.getTextureReference(),
-                                  _testPatternImage.getTextureReference().getTextureData().textureID);        
+        _shader.setUniformTexture("video", _testPatternImage.getTextureReference(), 1);
     } else if (_vidOverlay.maybeBind()) {
         _shader.setUniform1f("videoMix", _vidOverlay.getFaderValue());
         _shader.setUniform2f("videoSize", _vidOverlay.getWidth(), _vidOverlay.getHeight());
-        _shader.setUniformTexture("video", _vidOverlay.getTexture(), _vidOverlay.getTextureId());
+        _shader.setUniformTexture("video", _vidOverlay.getTexture(), 1);
     } else {
         _shader.setUniform1f("videoMix", -1.0);
         _shader.setUniform2f("videoSize", 0.0, 0.0);
-        _shader.setUniformTexture("video", _testPatternImage.getTextureReference(),
-                                  _testPatternImage.getTextureReference().getTextureData().textureID);
+        _shader.setUniformTexture("video", _testPatternImage.getTextureReference(), 1);
     }
 }
 

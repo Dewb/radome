@@ -1,4 +1,5 @@
 // Radome vertex shader
+#version 120
 
 varying vec3 ReflectDir;
 varying vec4 position;
