@@ -6,7 +6,7 @@ for projection onto a fulldome installation with multiple projectors.
 
 This is a early-stage prototype.  Windows support is planned but right now the build tree is Mac only.
 
-Radome is built with openFrameworks 0073.  The following non-core addons are required:
+Radome is built with openFrameworks v0.7.4.  The following non-core addons are required:
 * ofxCubeMap
 * ofxFenster
 * ofxUI
@@ -16,7 +16,7 @@ Radome is built with openFrameworks 0073.  The following non-core addons are req
 Installation instructions:
 --------------------------
 
-1. Download [openFrameworks v0073](http://openframeworks.cc/download/older.html)
+1. Download [openFrameworks v0.7.4](http://openframeworks.cc/download/older.html)
 
 2. Clone the following oF extensions into the addons folder:
   * ofxSyphon (head revision)
