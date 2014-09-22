@@ -442,6 +442,7 @@ void radomeApp::draw() {
         break;            
     }
     
+    
     glDisable(GL_DEPTH_TEST);
     _pUI->draw();
     if (_pCalibrationUI->isVisible()) {
@@ -449,6 +450,7 @@ void radomeApp::draw() {
     }
     if (_pInputUI->isVisible()) {
         _pInputUI->draw();
+        _vidOverlay.getTexture().draw(SIDEBAR_WIDTH, 260, 290, 290 * _vidOverlay.getHeight() / _vidOverlay.getWidth());
     }
     glEnable(GL_DEPTH_TEST);
 }
