@@ -6,13 +6,37 @@ for projection onto a fulldome installation with multiple projectors.
 
 This is a early-stage prototype.  Windows support is planned but right now the build tree is Mac only.
 
-Radome is built with openFrameworks 0073.  The following addons are required:
+Radome is built with openFrameworks 0073.  The following non-core addons are required:
 * ofxCubeMap
-* ofxASSimpModelLoader
 * ofxFenster
 * ofxUI
-* ofxXMLSettings
 * ofxSyphon
+* ofxAutoReloadedShader
 
-These dependencies will probably be incorporated into this repo in the near future, but for now you'll
-need to install them in the openFramework addons folder yourself.
+Installation instructions:
+--------------------------
+
+1. Download [openFrameworks v0073](http://openframeworks.cc/download/older.html)
+
+2. Clone the following oF extensions into the addons folder:
+  * ofxSyphon (head revision)
+  * ofxCubeMap (head revision)
+  * ofxAutoReloadedShader (head revision)
+  * ofxFenster (branch 'ghost')
+  * ofxUI (commit 51b2dcb5d6bef17e18c23adf91ae94fce095f42d)
+  ```
+  cd of_v0.8.1_osx_release/addons
+  git clone https://github.com/astellato/ofxSyphon
+  git clone https://github.com/andreasmuller/ofxCubeMap
+  git clone https://github.com/andreasmuller/ofxAutoReloadedShader
+  git clone https://github.com/underdoeg/ofxFenster.git
+  cd ofxFenster
+  git checkout ghost
+  cd ..
+  git clone https://github.com/rezaali/ofxUI
+  cd ofxUI
+  git checkout 51b2dcb5d6bef17e18c23adf91ae94fce095f42d
+  ```
+
+3. Download or clone radome into the same parent folder as openFrameworks. (Do not put it in the apps folder.)
+4. Open radome/radome.xcodeproj in Xcode and build.
