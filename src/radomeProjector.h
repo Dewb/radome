@@ -35,8 +35,6 @@ public:
     void setTargetHeight(float h) { _targetHeight = h; updateCamera(); }
     float getTargetHeight() const { return _targetHeight; }
     
-    // of0073 requires patched ofCamera.cpp/.h for this:
-    // https://github.com/openframeworks/openFrameworks/commit/786a8d381aece3e638ebcd2ee08a784071d5cd40
     void setLensOffsetX(float x) { _lensOffsetX = x; updateCamera(); }
     float getLensOffsetX() const { return _lensOffsetX; }
     void setLensOffsetY(float y) { _lensOffsetY = y; updateCamera(); }

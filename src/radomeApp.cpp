@@ -259,7 +259,7 @@ glEnd();
 }
 
 void radomeApp::loadFile() {
-    ofFileDialogResult result = ofSystemLoadDialog("Load Model", false, "/Users/dewb/dev/of_v0073_osx_release/apps/video/radome/content");
+    ofFileDialogResult result = ofSystemLoadDialog("Load Model", false, "./radome/content");
     
     // Workaround for ofxFenster modal mouse event bug
     ofxFenster* pWin = ofxFensterManager::get()->getActiveWindow();
@@ -399,7 +399,7 @@ void radomeApp::draw() {
             for (int i = 0; i < 6; i++) {
                 int x = margin + i%3 * (w + margin) + SIDEBAR_WIDTH;
                 int y = margin + i/3 * (h + margin);
-                ofDrawBitmapString(_cubeMap.getDescriptiveStringForFace(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i), x+margin*1.5, y+10+margin*1.5);
+                //ofDrawBitmapString(_cubeMap.getDescriptiveStringForFace(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i), x+margin*1.5, y+10+margin*1.5);
                 _cubeMap.drawFace(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i , x, y, w, h);
                 ofRect(x-1, y-1, w + margin, h + margin);
             }
@@ -513,9 +513,9 @@ void radomeApp::keyPressed(int key) {
         case 'l': loadFile(); break;
         case 'm':
             {
-                DisplayMode mode = getDisplayMode();
+                int mode = (int)getDisplayMode();
                 mode++;
-                changeDisplayMode(mode);
+                changeDisplayMode((DisplayMode)mode);
             }
             break;
         case 'M':

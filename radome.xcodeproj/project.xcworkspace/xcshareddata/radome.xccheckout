@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>9A063A8D-2DD4-41F1-93A6-6E71FCF8288F</string>
+	<key>IDESourceControlProjectName</key>
+	<string>radome</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>0DEC208C-DB14-4E83-9EA3-643FAB823359</key>
+		<string>https://github.com/Dewb/radome.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>radome.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>0DEC208C-DB14-4E83-9EA3-643FAB823359</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/Dewb/radome.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>0DEC208C-DB14-4E83-9EA3-643FAB823359</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>0DEC208C-DB14-4E83-9EA3-643FAB823359</string>
+			<key>IDESourceControlWCCName</key>
+			<string>radome</string>
+		</dict>
+	</array>
+</dict>
+</plist>
