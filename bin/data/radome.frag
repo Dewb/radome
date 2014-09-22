@@ -1,4 +1,5 @@
 // Radome fragment shader
+#version 120
 
 uniform samplerCube EnvMap;
 varying vec3 ReflectDir;
