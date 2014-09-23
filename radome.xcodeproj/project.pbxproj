@@ -31,6 +31,7 @@
 		4FC0D2999CA3174FBAB27018 /* OscOutboundPacketStream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 66865D9E918585208CC48B40 /* OscOutboundPacketStream.cpp */; };
 		534EFFB9BC2F2535C803A07C /* ofxUIRadio.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 23F82985777C7F665EEAE505 /* ofxUIRadio.cpp */; };
 		584B084376ED7A5DEF6D394E /* ofxUIRectangle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3992DCCF8E7F65C760C66EFD /* ofxUIRectangle.cpp */; };
+		5BD6EF0419D20709008EE4C9 /* radomePlugin.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5BD6EF0219D20709008EE4C9 /* radomePlugin.cpp */; };
 		5BFD42F619CE089D00F42053 /* icosohedron.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5BFD42E819CE089D00F42053 /* icosohedron.cpp */; };
 		5BFD42F719CE089D00F42053 /* radomeApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5BFD42EA19CE089D00F42053 /* radomeApp.cpp */; };
 		5BFD42F819CE089D00F42053 /* radomeModel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5BFD42EC19CE089D00F42053 /* radomeModel.cpp */; };
@@ -216,6 +217,8 @@
 		57C8979AFBD1568CC6E0701B /* aiTexture.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = aiTexture.h; path = ../of_v0.8.4_osx_release/addons/ofxAssimpModelLoader/libs/assimp/include/aiTexture.h; sourceTree = SOURCE_ROOT; };
 		5980DFD20857847B77199FBD /* ofxAssimpAnimation.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxAssimpAnimation.h; path = ../of_v0.8.4_osx_release/addons/ofxAssimpModelLoader/src/ofxAssimpAnimation.h; sourceTree = SOURCE_ROOT; };
 		59928553B29E6636B8AA1F7B /* ofxUIDragableLabelButton.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofxUIDragableLabelButton.cpp; path = ../of_v0.8.4_osx_release/addons/ofxUI/src/ofxUIDragableLabelButton.cpp; sourceTree = SOURCE_ROOT; };
+		5BD6EF0219D20709008EE4C9 /* radomePlugin.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = radomePlugin.cpp; sourceTree = "<group>"; };
+		5BD6EF0319D20709008EE4C9 /* radomePlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = radomePlugin.h; sourceTree = "<group>"; };
 		5BFD42E819CE089D00F42053 /* icosohedron.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = icosohedron.cpp; sourceTree = "<group>"; };
 		5BFD42E919CE089D00F42053 /* icosohedron.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = icosohedron.h; sourceTree = "<group>"; };
 		5BFD42EA19CE089D00F42053 /* radomeApp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = radomeApp.cpp; sourceTree = "<group>"; };
@@ -329,7 +332,7 @@
 		E45BE9770E8CC7DD009D7055 /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = /System/Library/Frameworks/CoreServices.framework; sourceTree = "<absolute>"; };
 		E45BE9790E8CC7DD009D7055 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = /System/Library/Frameworks/OpenGL.framework; sourceTree = "<absolute>"; };
 		E45BE97A0E8CC7DD009D7055 /* QuickTime.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickTime.framework; path = /System/Library/Frameworks/QuickTime.framework; sourceTree = "<absolute>"; };
-		E4B69B5B0A3A1756003C02F2 /* radomeDebug.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = radomeDebug.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E4B69B5B0A3A1756003C02F2 /* radomeDebug.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = radomeDebug.app; path = RadomeDebug.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4B69E1D0A3A1BDC003C02F2 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = src/main.cpp; sourceTree = SOURCE_ROOT; };
 		E4B6FCAD0C3E899E008CF71C /* openFrameworks-Info.plist */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.plist.xml; path = "openFrameworks-Info.plist"; sourceTree = "<group>"; };
 		E4C2424410CC5A17004149E2 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
@@ -841,6 +844,8 @@
 		E4B69E1C0A3A1BDC003C02F2 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				5BD6EF0219D20709008EE4C9 /* radomePlugin.cpp */,
+				5BD6EF0319D20709008EE4C9 /* radomePlugin.h */,
 				5BFD42E819CE089D00F42053 /* icosohedron.cpp */,
 				5BFD42E919CE089D00F42053 /* icosohedron.h */,
 				5BFD42EA19CE089D00F42053 /* radomeApp.cpp */,
@@ -1089,6 +1094,7 @@
 				A8E5A243757EEB1C141DFDC0 /* ofxUISuperCanvas.cpp in Sources */,
 				CD63672907D93CAFED34406A /* ofxUITabBar.cpp in Sources */,
 				5BFD42F719CE089D00F42053 /* radomeApp.cpp in Sources */,
+				5BD6EF0419D20709008EE4C9 /* radomePlugin.cpp in Sources */,
 				8BBCC76CF52F4ABF182D5111 /* ofxUITextArea.cpp in Sources */,
 				88643097EDADDCEE20180459 /* ofxUITextInput.cpp in Sources */,
 				4C1817940939B54992699A30 /* ofxUIToggle.cpp in Sources */,
