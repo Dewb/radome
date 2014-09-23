@@ -44,3 +44,8 @@ Installation instructions:
 
 3. Download or clone radome into the same parent folder as openFrameworks. (Do not put it in the apps folder.)
 4. Open radome/radome.xcodeproj in Xcode and build.
+
+License
+-------
+
+Radome is built on openFrameworks and its many addons, most of which are MIT licensed. The code in this repository is licensed under the GPLv3.
