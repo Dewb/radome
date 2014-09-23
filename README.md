@@ -1,4 +1,4 @@
-radome
+Radome
 ======
 
 Radome is a platform for realtime interactive animation on a dome. It manages both 2D and 3D content
