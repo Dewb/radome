@@ -1,5 +1,7 @@
 #include "radomeApp.h"
 #include "radomeUtils.h"
+#include "radomePlugin.h"
+
 
 #define SIDEBAR_WIDTH 190
 #define CALIBRATIONUI_WIDTH 280
@@ -95,6 +97,13 @@ void radomeApp::setup() {
     
     glEnable(GL_DEPTH_TEST);
     prepDrawList();
+    
+    instantiatePlugins();
+    for (auto plug : PluginLibrary::getList()) {
+        plug->initialize();
+    }
+    
+    _oscReceiver.setup(6000);
 }
 
 void radomeApp::createProjectorCalibrationUI(ofxUICanvas* pCanvas, int index) {
@@ -310,6 +319,14 @@ void radomeApp::update() {
     
     updateCubeMap();
     updateProjectorOutput();
+    
+    while(_oscReceiver.hasWaitingMessages()){
+		ofxOscMessage m;
+		_oscReceiver.getNextMessage(&m);
+        for (auto plug : PluginLibrary::getList()) {
+            plug->receiveOscMessage(m);
+        }
+    }
 }
 
 void radomeApp::updateCubeMap() {
@@ -465,10 +482,21 @@ void radomeApp::draw() {
 
 void radomeApp::drawScene() {
     ofSetColor(180, 192, 192);
-    for (auto iter = _modelList.begin(); iter != _modelList.end(); ++iter)
+    
+    // Draw static and animated 3D models
+    for (auto model : _modelList)
     {
-        (*iter)->draw();
+        model->draw();
     }
+    
+    // Draw 3D scene plugins
+    for (auto plug : PluginLibrary::getList()) {
+        DomeInfo dome;
+        dome.height = _domeHeight;
+        dome.radius = _domeDiameter/2;
+        plug->renderScene(dome);
+    }
+
 }
 
 void radomeApp::drawDome() {
