@@ -4,7 +4,11 @@ radome
 Radome is a platform for realtime interactive animation on a dome. It manages both 2D and 3D content
 for projection onto a fulldome installation with multiple projectors.
 
-This is a early-stage prototype.  Windows support is planned but right now the build tree is Mac only.
+This is pre-release software optimized for our particular circumstances and hardware, but it should
+theoretically deliver value in other use cases involving rear projection onto domes.
+
+Radome has been tested on OSX 10.8 and 10.9. Windows support (without Syphon) is planned,
+but at the moment the build tree is Mac only.
 
 Radome is built with openFrameworks v0.7.4.  The following non-core addons are required:
 * ofxCubeMap
@@ -25,7 +29,7 @@ Installation instructions:
   * ofxFenster (branch 'ghost')
   * ofxUI (commit 51b2dcb5d6bef17e18c23adf91ae94fce095f42d)
   ```
-  cd of_v0.8.1_osx_release/addons
+  cd of_v0.7.4_osx_release/addons
   git clone https://github.com/astellato/ofxSyphon
   git clone https://github.com/andreasmuller/ofxCubeMap
   git clone https://github.com/andreasmuller/ofxAutoReloadedShader
