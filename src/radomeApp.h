@@ -8,6 +8,7 @@
 #include "ofxUI.h"
 #include "ofxFenster.h"
 #include "ofxAutoReloadedShader.h"
+#include "ofxOsc.h"
 
 #include "turntableCam.h"
 #include "icosohedron.h"
@@ -106,4 +107,6 @@ protected:
     float _domeDiameter;
     float _domeHeight;
     float _domeSliceParameterization;
+    
+    ofxOscReceiver _oscReceiver;
 };
