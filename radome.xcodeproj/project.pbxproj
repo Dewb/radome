@@ -8,6 +8,18 @@
 
 /* Begin PBXBuildFile section */
 		5B15C1CD16D2CA8E004E20D4 /* icosohedron.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5B15C1CB16D2CA8E004E20D4 /* icosohedron.cpp */; };
+		5B4D495419D0F18100A9FC01 /* ofxOscBundle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5B4D492F19D0F18100A9FC01 /* ofxOscBundle.cpp */; };
+		5B4D495519D0F18100A9FC01 /* ofxOscMessage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5B4D493119D0F18100A9FC01 /* ofxOscMessage.cpp */; };
+		5B4D495619D0F18100A9FC01 /* ofxOscReceiver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5B4D493319D0F18100A9FC01 /* ofxOscReceiver.cpp */; };
+		5B4D495719D0F18100A9FC01 /* ofxOscSender.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5B4D493519D0F18100A9FC01 /* ofxOscSender.cpp */; };
+		5B4D495819D0F18100A9FC01 /* IpEndpointName.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5B4D493B19D0F18100A9FC01 /* IpEndpointName.cpp */; };
+		5B4D495919D0F18100A9FC01 /* NetworkingUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5B4D494019D0F18100A9FC01 /* NetworkingUtils.cpp */; };
+		5B4D495A19D0F18100A9FC01 /* UdpSocket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5B4D494119D0F18100A9FC01 /* UdpSocket.cpp */; };
+		5B4D495B19D0F18100A9FC01 /* OscOutboundPacketStream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5B4D494B19D0F18100A9FC01 /* OscOutboundPacketStream.cpp */; };
+		5B4D495C19D0F18100A9FC01 /* OscPrintReceivedElements.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5B4D494E19D0F18100A9FC01 /* OscPrintReceivedElements.cpp */; };
+		5B4D495D19D0F18100A9FC01 /* OscReceivedElements.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5B4D495019D0F18100A9FC01 /* OscReceivedElements.cpp */; };
+		5B4D495E19D0F18100A9FC01 /* OscTypes.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5B4D495219D0F18100A9FC01 /* OscTypes.cpp */; };
+		5B4D496219D0F1B200A9FC01 /* radomePlugin.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5B4D496019D0F1B200A9FC01 /* radomePlugin.cpp */; };
 		5B78A8EC16E8717E00CBDB28 /* radomeSyphonClient.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5B78A8EA16E8717E00CBDB28 /* radomeSyphonClient.cpp */; };
 		5B78A8EF16E88B7500CBDB28 /* radome.icns in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5B78A8ED16E88ACC00CBDB28 /* radome.icns */; };
 		5B78AA6616E9CD4A00CBDB28 /* radomeProjector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5B78AA6416E9CD4A00CBDB28 /* radomeProjector.cpp */; };
@@ -96,6 +108,38 @@
 /* Begin PBXFileReference section */
 		5B15C1CB16D2CA8E004E20D4 /* icosohedron.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = icosohedron.cpp; sourceTree = "<group>"; };
 		5B15C1CC16D2CA8E004E20D4 /* icosohedron.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = icosohedron.h; sourceTree = "<group>"; };
+		5B4D492D19D0F18100A9FC01 /* ofxOsc.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxOsc.h; sourceTree = "<group>"; };
+		5B4D492E19D0F18100A9FC01 /* ofxOscArg.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxOscArg.h; sourceTree = "<group>"; };
+		5B4D492F19D0F18100A9FC01 /* ofxOscBundle.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ofxOscBundle.cpp; sourceTree = "<group>"; };
+		5B4D493019D0F18100A9FC01 /* ofxOscBundle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxOscBundle.h; sourceTree = "<group>"; };
+		5B4D493119D0F18100A9FC01 /* ofxOscMessage.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ofxOscMessage.cpp; sourceTree = "<group>"; };
+		5B4D493219D0F18100A9FC01 /* ofxOscMessage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxOscMessage.h; sourceTree = "<group>"; };
+		5B4D493319D0F18100A9FC01 /* ofxOscReceiver.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ofxOscReceiver.cpp; sourceTree = "<group>"; };
+		5B4D493419D0F18100A9FC01 /* ofxOscReceiver.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxOscReceiver.h; sourceTree = "<group>"; };
+		5B4D493519D0F18100A9FC01 /* ofxOscSender.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ofxOscSender.cpp; sourceTree = "<group>"; };
+		5B4D493619D0F18100A9FC01 /* ofxOscSender.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxOscSender.h; sourceTree = "<group>"; };
+		5B4D493B19D0F18100A9FC01 /* IpEndpointName.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = IpEndpointName.cpp; sourceTree = "<group>"; };
+		5B4D493C19D0F18100A9FC01 /* IpEndpointName.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IpEndpointName.h; sourceTree = "<group>"; };
+		5B4D493D19D0F18100A9FC01 /* NetworkingUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NetworkingUtils.h; sourceTree = "<group>"; };
+		5B4D493E19D0F18100A9FC01 /* PacketListener.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PacketListener.h; sourceTree = "<group>"; };
+		5B4D494019D0F18100A9FC01 /* NetworkingUtils.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = NetworkingUtils.cpp; sourceTree = "<group>"; };
+		5B4D494119D0F18100A9FC01 /* UdpSocket.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = UdpSocket.cpp; sourceTree = "<group>"; };
+		5B4D494219D0F18100A9FC01 /* TimerListener.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TimerListener.h; sourceTree = "<group>"; };
+		5B4D494319D0F18100A9FC01 /* UdpSocket.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UdpSocket.h; sourceTree = "<group>"; };
+		5B4D494819D0F18100A9FC01 /* MessageMappingOscPacketListener.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MessageMappingOscPacketListener.h; sourceTree = "<group>"; };
+		5B4D494919D0F18100A9FC01 /* OscException.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OscException.h; sourceTree = "<group>"; };
+		5B4D494A19D0F18100A9FC01 /* OscHostEndianness.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OscHostEndianness.h; sourceTree = "<group>"; };
+		5B4D494B19D0F18100A9FC01 /* OscOutboundPacketStream.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = OscOutboundPacketStream.cpp; sourceTree = "<group>"; };
+		5B4D494C19D0F18100A9FC01 /* OscOutboundPacketStream.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OscOutboundPacketStream.h; sourceTree = "<group>"; };
+		5B4D494D19D0F18100A9FC01 /* OscPacketListener.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OscPacketListener.h; sourceTree = "<group>"; };
+		5B4D494E19D0F18100A9FC01 /* OscPrintReceivedElements.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = OscPrintReceivedElements.cpp; sourceTree = "<group>"; };
+		5B4D494F19D0F18100A9FC01 /* OscPrintReceivedElements.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OscPrintReceivedElements.h; sourceTree = "<group>"; };
+		5B4D495019D0F18100A9FC01 /* OscReceivedElements.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = OscReceivedElements.cpp; sourceTree = "<group>"; };
+		5B4D495119D0F18100A9FC01 /* OscReceivedElements.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OscReceivedElements.h; sourceTree = "<group>"; };
+		5B4D495219D0F18100A9FC01 /* OscTypes.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = OscTypes.cpp; sourceTree = "<group>"; };
+		5B4D495319D0F18100A9FC01 /* OscTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OscTypes.h; sourceTree = "<group>"; };
+		5B4D496019D0F1B200A9FC01 /* radomePlugin.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = radomePlugin.cpp; sourceTree = "<group>"; };
+		5B4D496119D0F1B200A9FC01 /* radomePlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = radomePlugin.h; sourceTree = "<group>"; };
 		5B78A8EA16E8717E00CBDB28 /* radomeSyphonClient.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = radomeSyphonClient.cpp; sourceTree = "<group>"; };
 		5B78A8EB16E8717E00CBDB28 /* radomeSyphonClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = radomeSyphonClient.h; sourceTree = "<group>"; };
 		5B78A8ED16E88ACC00CBDB28 /* radome.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = radome.icns; path = resources/macos/radome.icns; sourceTree = "<group>"; };
@@ -346,6 +390,101 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5B4D492B19D0F18100A9FC01 /* ofxOsc */ = {
+			isa = PBXGroup;
+			children = (
+				5B4D492C19D0F18100A9FC01 /* src */,
+				5B4D493719D0F18100A9FC01 /* libs */,
+			);
+			name = ofxOsc;
+			sourceTree = "<group>";
+		};
+		5B4D492C19D0F18100A9FC01 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				5B4D492D19D0F18100A9FC01 /* ofxOsc.h */,
+				5B4D492E19D0F18100A9FC01 /* ofxOscArg.h */,
+				5B4D492F19D0F18100A9FC01 /* ofxOscBundle.cpp */,
+				5B4D493019D0F18100A9FC01 /* ofxOscBundle.h */,
+				5B4D493119D0F18100A9FC01 /* ofxOscMessage.cpp */,
+				5B4D493219D0F18100A9FC01 /* ofxOscMessage.h */,
+				5B4D493319D0F18100A9FC01 /* ofxOscReceiver.cpp */,
+				5B4D493419D0F18100A9FC01 /* ofxOscReceiver.h */,
+				5B4D493519D0F18100A9FC01 /* ofxOscSender.cpp */,
+				5B4D493619D0F18100A9FC01 /* ofxOscSender.h */,
+			);
+			name = src;
+			path = ../../of_v0.7.4_osx_release/addons/ofxOsc/src;
+			sourceTree = "<group>";
+		};
+		5B4D493719D0F18100A9FC01 /* libs */ = {
+			isa = PBXGroup;
+			children = (
+				5B4D493819D0F18100A9FC01 /* oscpack */,
+			);
+			name = libs;
+			path = ../../of_v0.7.4_osx_release/addons/ofxOsc/libs;
+			sourceTree = "<group>";
+		};
+		5B4D493819D0F18100A9FC01 /* oscpack */ = {
+			isa = PBXGroup;
+			children = (
+				5B4D493919D0F18100A9FC01 /* src */,
+			);
+			path = oscpack;
+			sourceTree = "<group>";
+		};
+		5B4D493919D0F18100A9FC01 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				5B4D493A19D0F18100A9FC01 /* ip */,
+				5B4D494719D0F18100A9FC01 /* osc */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
+		5B4D493A19D0F18100A9FC01 /* ip */ = {
+			isa = PBXGroup;
+			children = (
+				5B4D493B19D0F18100A9FC01 /* IpEndpointName.cpp */,
+				5B4D493C19D0F18100A9FC01 /* IpEndpointName.h */,
+				5B4D493D19D0F18100A9FC01 /* NetworkingUtils.h */,
+				5B4D493E19D0F18100A9FC01 /* PacketListener.h */,
+				5B4D493F19D0F18100A9FC01 /* posix */,
+				5B4D494219D0F18100A9FC01 /* TimerListener.h */,
+				5B4D494319D0F18100A9FC01 /* UdpSocket.h */,
+			);
+			path = ip;
+			sourceTree = "<group>";
+		};
+		5B4D493F19D0F18100A9FC01 /* posix */ = {
+			isa = PBXGroup;
+			children = (
+				5B4D494019D0F18100A9FC01 /* NetworkingUtils.cpp */,
+				5B4D494119D0F18100A9FC01 /* UdpSocket.cpp */,
+			);
+			path = posix;
+			sourceTree = "<group>";
+		};
+		5B4D494719D0F18100A9FC01 /* osc */ = {
+			isa = PBXGroup;
+			children = (
+				5B4D494819D0F18100A9FC01 /* MessageMappingOscPacketListener.h */,
+				5B4D494919D0F18100A9FC01 /* OscException.h */,
+				5B4D494A19D0F18100A9FC01 /* OscHostEndianness.h */,
+				5B4D494B19D0F18100A9FC01 /* OscOutboundPacketStream.cpp */,
+				5B4D494C19D0F18100A9FC01 /* OscOutboundPacketStream.h */,
+				5B4D494D19D0F18100A9FC01 /* OscPacketListener.h */,
+				5B4D494E19D0F18100A9FC01 /* OscPrintReceivedElements.cpp */,
+				5B4D494F19D0F18100A9FC01 /* OscPrintReceivedElements.h */,
+				5B4D495019D0F18100A9FC01 /* OscReceivedElements.cpp */,
+				5B4D495119D0F18100A9FC01 /* OscReceivedElements.h */,
+				5B4D495219D0F18100A9FC01 /* OscTypes.cpp */,
+				5B4D495319D0F18100A9FC01 /* OscTypes.h */,
+			);
+			path = osc;
+			sourceTree = "<group>";
+		};
 		5BF5F24216D1A68E0026DF72 /* data */ = {
 			isa = PBXGroup;
 			children = (
@@ -359,6 +498,7 @@
 		5BFD48BB19CF922100F42053 /* addons */ = {
 			isa = PBXGroup;
 			children = (
+				5B4D492B19D0F18100A9FC01 /* ofxOsc */,
 				5BFD48FA19CF922100F42053 /* ofxAutoReloadedShader */,
 				5BFD492719CF922100F42053 /* ofxFenster */,
 				5BFD4B1519CF922200F42053 /* ofxSyphon */,
@@ -960,6 +1100,8 @@
 				5B78AA6816EA94A600CBDB28 /* radomeUtils.h */,
 				5B78ABD316EB19D200CBDB28 /* radomeModel.cpp */,
 				5B78ABD416EB19D200CBDB28 /* radomeModel.h */,
+				5B4D496019D0F1B200A9FC01 /* radomePlugin.cpp */,
+				5B4D496119D0F1B200A9FC01 /* radomePlugin.h */,
 			);
 			path = src;
 			sourceTree = SOURCE_ROOT;
@@ -1066,25 +1208,37 @@
 				5BFD4E6A19CF922700F42053 /* ofxSyphonClient.mm in Sources */,
 				5BF5F24516D1A68E0026DF72 /* radome.frag in Sources */,
 				5BF5F24616D1A68E0026DF72 /* radome.vert in Sources */,
+				5B4D495719D0F18100A9FC01 /* ofxOscSender.cpp in Sources */,
+				5B4D495519D0F18100A9FC01 /* ofxOscMessage.cpp in Sources */,
 				5B15C1CD16D2CA8E004E20D4 /* icosohedron.cpp in Sources */,
 				5BFD4E6C19CF922700F42053 /* ofxSyphonServerDirectory.mm in Sources */,
 				5BFD4E1E19CF922700F42053 /* ofxAssimpModelLoader.cpp in Sources */,
 				5BFD4E4319CF922700F42053 /* ofxFenster.cpp in Sources */,
 				5BD6E52016D9BC2C00C39777 /* turntableCam.cpp in Sources */,
 				5BFD4ECE19CF922700F42053 /* tinyxmlparser.cpp in Sources */,
+				5B4D495419D0F18100A9FC01 /* ofxOscBundle.cpp in Sources */,
 				5BFD4E4519CF922700F42053 /* ofxFensterManager.cpp in Sources */,
+				5B4D495E19D0F18100A9FC01 /* OscTypes.cpp in Sources */,
+				5B4D495B19D0F18100A9FC01 /* OscOutboundPacketStream.cpp in Sources */,
+				5B4D495619D0F18100A9FC01 /* ofxOscReceiver.cpp in Sources */,
 				5B78A8EC16E8717E00CBDB28 /* radomeSyphonClient.cpp in Sources */,
 				5B78AA6616E9CD4A00CBDB28 /* radomeProjector.cpp in Sources */,
 				5BFD4E4419CF922700F42053 /* ofxFensterCanvas.cpp in Sources */,
 				5BFD4ECD19CF922700F42053 /* tinyxmlerror.cpp in Sources */,
+				5B4D495C19D0F18100A9FC01 /* OscPrintReceivedElements.cpp in Sources */,
 				5BFD4E2219CF922700F42053 /* ofxAutoReloadedShader.cpp in Sources */,
 				5B78AA6916EA94A600CBDB28 /* radomeUtils.cpp in Sources */,
 				5BFD4E4019CF922700F42053 /* ofxDisplay.cpp in Sources */,
 				5BFD4E6B19CF922700F42053 /* ofxSyphonServer.mm in Sources */,
 				5BFD4E2319CF922700F42053 /* ofxCubeMap.cpp in Sources */,
+				5B4D495D19D0F18100A9FC01 /* OscReceivedElements.cpp in Sources */,
 				5BFD4E6919CF922700F42053 /* SyphonNameboundClient.m in Sources */,
 				5BFD4ECF19CF922700F42053 /* ofxXmlSettings.cpp in Sources */,
+				5B4D496219D0F1B200A9FC01 /* radomePlugin.cpp in Sources */,
 				5B78ABD216EAAB9F00CBDB28 /* main.cpp in Sources */,
+				5B4D495A19D0F18100A9FC01 /* UdpSocket.cpp in Sources */,
+				5B4D495919D0F18100A9FC01 /* NetworkingUtils.cpp in Sources */,
+				5B4D495819D0F18100A9FC01 /* IpEndpointName.cpp in Sources */,
 				5B78ABD516EB19D200CBDB28 /* radomeModel.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1188,6 +1342,7 @@
 				PREBINDING = NO;
 				PRODUCT_NAME = RadomeDebug;
 				SDKROOT = macosx;
+				USER_HEADER_SEARCH_PATHS = "$(OF_PATH)/addons/ofxOsc/libs/oscpack/src/";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1220,6 +1375,7 @@
 				PREBINDING = NO;
 				PRODUCT_NAME = Radome;
 				SDKROOT = macosx;
+				USER_HEADER_SEARCH_PATHS = "$(OF_PATH)/addons/ofxOsc/libs/oscpack/src/";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
