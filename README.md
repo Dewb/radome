@@ -5,7 +5,7 @@ Radome is a platform for realtime interactive animation on a dome. It manages bo
 for projection onto a fulldome installation with multiple projectors.
 
 This is pre-release software optimized for our particular circumstances and hardware, but it should
-theoretically deliver value in other use cases involving rear projection onto domes.
+theoretically be useful to other people doing rear projection onto skinned domes (or, with small modifications, other geometry.)
 
 Radome has been tested on OSX 10.8 and 10.9. Windows support (without Syphon) is planned,
 but at the moment the build tree is Mac only.
