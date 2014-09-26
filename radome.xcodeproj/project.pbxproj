@@ -1341,7 +1341,7 @@
 				);
 				PREBINDING = NO;
 				PRODUCT_NAME = RadomeDebug;
-				SDKROOT = macosx;
+				SDKROOT = macosx10.8;
 				USER_HEADER_SEARCH_PATHS = "$(OF_PATH)/addons/ofxOsc/libs/oscpack/src/";
 				WRAPPER_EXTENSION = app;
 			};
@@ -1374,7 +1374,7 @@
 				);
 				PREBINDING = NO;
 				PRODUCT_NAME = Radome;
-				SDKROOT = macosx;
+				SDKROOT = macosx10.8;
 				USER_HEADER_SEARCH_PATHS = "$(OF_PATH)/addons/ofxOsc/libs/oscpack/src/";
 				WRAPPER_EXTENSION = app;
 			};
