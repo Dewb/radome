@@ -136,7 +136,7 @@ void radomeApp::initGUI() {
     _pUI->setFont("GUI/Exo-Regular.ttf", true, true, false, 0.0, OFX_UI_FONT_RESOLUTION);
     //setUIColors(_pUI);
     
-    _pUI->addWidgetDown(new ofxUILabel("RADOME 0.2", OFX_UI_FONT_LARGE));
+    _pUI->addWidgetDown(new ofxUILabel("RADOME 0.3", OFX_UI_FONT_LARGE));
     _pUI->addWidgetDown(new ofxUILabel("Build " __DATE__ " " __TIME__, OFX_UI_FONT_SMALL));
     _pUI->addSpacer(0, 12);
     

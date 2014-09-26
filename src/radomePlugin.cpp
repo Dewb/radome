@@ -32,9 +32,6 @@ void radomePlugin::setEnabled(bool enabled) {
 }
 
 PluginLibrary::~PluginLibrary() {
-    for (auto plug : _plugins) {
-        delete plug;
-    }
 }
 
 
