@@ -80,7 +80,7 @@ public:
         
         distance = 8;
         
-        rebroadcast.setup("192.168.1.139", 8338);
+        rebroadcast.setup("127.0.0.1", 8338);
     }
     
     virtual void renderScene(DomeInfo& dome) {
