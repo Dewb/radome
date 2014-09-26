@@ -86,9 +86,6 @@ void radomeApp::setup() {
     for (int ii = 0; ii < NUM_PROJECTORS; ii++) {
         _projectorList.push_back(new radomeProjector(ii*360.0/(NUM_PROJECTORS*1.0)+60.0, _domeDiameter*1.5, PROJECTOR_INITIAL_HEIGHT));
     }    
-
-    // todo: replace with static initialization objects
-    instantiatePlugins();
     
     initGUI();
     
@@ -489,17 +486,29 @@ void radomeApp::drawScene() {
         model->draw();
     }
     
+    DomeInfo dome;
+    dome.height = _domeHeight;
+    dome.radius = _domeDiameter/2;
+    dome.frameTime = ofGetSystemTime();
+    
     // Draw 3D scene plugins
     for (auto plug : PluginLibrary::getList()) {
         if (plug->isEnabled()) {
-            DomeInfo dome;
-            dome.height = _domeHeight;
-            dome.radius = _domeDiameter/2;
+
             ofPushStyle();
             ofPushMatrix();
+            glPushAttrib(GL_ALL_ATTRIB_BITS);
+            glPushClientAttrib(GL_CLIENT_ALL_ATTRIB_BITS);
+
             plug->renderScene(dome);
+            
+            glPopClientAttrib();
+            glPopAttrib();
             ofPopMatrix();
             ofPopStyle();
+            
+            ofDisableLighting();
+            
         }
     }
 }

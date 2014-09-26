@@ -27,6 +27,7 @@
 		5B78ABD216EAAB9F00CBDB28 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5B78ABD116EAAB9F00CBDB28 /* main.cpp */; };
 		5B78ABD516EB19D200CBDB28 /* radomeModel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5B78ABD316EB19D200CBDB28 /* radomeModel.cpp */; };
 		5BD6E52016D9BC2C00C39777 /* turntableCam.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5BD6E51E16D9BC2C00C39777 /* turntableCam.cpp */; };
+		5BD6EF0C19D4FA73008EE4C9 /* SwayTestPlugin.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5BD6EF0A19D4FA73008EE4C9 /* SwayTestPlugin.cpp */; };
 		5BF5F24516D1A68E0026DF72 /* radome.frag in Sources */ = {isa = PBXBuildFile; fileRef = 5BF5F24316D1A68E0026DF72 /* radome.frag */; };
 		5BF5F24616D1A68E0026DF72 /* radome.vert in Sources */ = {isa = PBXBuildFile; fileRef = 5BF5F24416D1A68E0026DF72 /* radome.vert */; };
 		5BFD4E1D19CF922700F42053 /* assimp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BFD48F419CF922100F42053 /* assimp.a */; };
@@ -152,6 +153,7 @@
 		5B78ABD416EB19D200CBDB28 /* radomeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = radomeModel.h; sourceTree = "<group>"; };
 		5BD6E51E16D9BC2C00C39777 /* turntableCam.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = turntableCam.cpp; sourceTree = "<group>"; };
 		5BD6E51F16D9BC2C00C39777 /* turntableCam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = turntableCam.h; sourceTree = "<group>"; };
+		5BD6EF0A19D4FA73008EE4C9 /* SwayTestPlugin.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SwayTestPlugin.cpp; path = src/plugins/SwayTestPlugin.cpp; sourceTree = "<group>"; };
 		5BF5F24316D1A68E0026DF72 /* radome.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = radome.frag; sourceTree = "<group>"; };
 		5BF5F24416D1A68E0026DF72 /* radome.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = radome.vert; sourceTree = "<group>"; };
 		5BFD48C919CF922100F42053 /* install.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = install.xml; sourceTree = "<group>"; };
@@ -483,6 +485,14 @@
 				5B4D495319D0F18100A9FC01 /* OscTypes.h */,
 			);
 			path = osc;
+			sourceTree = "<group>";
+		};
+		5BD6EF0819D4FA5E008EE4C9 /* plugins */ = {
+			isa = PBXGroup;
+			children = (
+				5BD6EF0A19D4FA73008EE4C9 /* SwayTestPlugin.cpp */,
+			);
+			name = plugins;
 			sourceTree = "<group>";
 		};
 		5BF5F24216D1A68E0026DF72 /* data */ = {
@@ -1069,6 +1079,7 @@
 		E4B69B4A0A3A1720003C02F2 = {
 			isa = PBXGroup;
 			children = (
+				5BD6EF0819D4FA5E008EE4C9 /* plugins */,
 				5BFD4F8519CF99A200F42053 /* GLUT.framework */,
 				E4B6FCAD0C3E899E008CF71C /* openFrameworks-Info.plist */,
 				E4EB6923138AFD0F00A09F29 /* Project.xcconfig */,
@@ -1207,6 +1218,7 @@
 				5BFD4ECC19CF922700F42053 /* tinyxml.cpp in Sources */,
 				5BFD4E6A19CF922700F42053 /* ofxSyphonClient.mm in Sources */,
 				5BF5F24516D1A68E0026DF72 /* radome.frag in Sources */,
+				5BD6EF0C19D4FA73008EE4C9 /* SwayTestPlugin.cpp in Sources */,
 				5BF5F24616D1A68E0026DF72 /* radome.vert in Sources */,
 				5B4D495719D0F18100A9FC01 /* ofxOscSender.cpp in Sources */,
 				5B4D495519D0F18100A9FC01 /* ofxOscMessage.cpp in Sources */,

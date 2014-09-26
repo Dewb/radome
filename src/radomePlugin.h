@@ -11,11 +11,15 @@
 
 #include <list>
 
+#include "ofMain.h"
+#include "ofxOsc.h"
+
 class ofxOscMessage;
 
 struct DomeInfo {
     int radius;
     int height;
+    long long frameTime;
 };
 
 class radomePlugin {
@@ -62,7 +66,5 @@ protected:
     PluginList _plugins;
     
 };
-
-void instantiatePlugins();
 
 #endif /* defined(__radome__radomePlugin__) */
