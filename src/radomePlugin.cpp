@@ -10,6 +10,27 @@
 #include "radomePlugin.h"
 #include "ofxOsc.h"
 
+
+radomePlugin::radomePlugin() : _initialized(false), _enabled(false) {
+}
+
+radomePlugin::~radomePlugin() {
+    if (_initialized) {
+        destroy();
+    }
+}
+
+void radomePlugin::setEnabled(bool enabled) {
+    if (enabled && !_initialized) {
+        initialize();
+        _initialized = true;
+    } else if (!enabled && _initialized) {
+        destroy();
+        _initialized = false;
+    }
+    _enabled = enabled;
+}
+
 PluginLibrary::~PluginLibrary() {
     for (auto plug : _plugins) {
         delete plug;
@@ -38,10 +59,15 @@ public:
     ofxOscSender rebroadcast;
     
     virtual void initialize() {
-        users.push_back(User(ofColor(255, 0, 0), ofVec3f(0, 100, 0)));
-        users.push_back(User(ofColor(0, 255, 0), ofVec3f(0, 100, 0)));
-        users.push_back(User(ofColor(255, 0, 255), ofVec3f(0, 100, 0)));
-        users.push_back(User(ofColor(0, 0, 255), ofVec3f(0, 100, 0)));
+        users.push_back(User(ofColor(255, 0, 0),   ofVec3f(0, 100, 0))); // red
+        users.push_back(User(ofColor(0, 255, 0),   ofVec3f(0, 100, 0))); // green
+        users.push_back(User(ofColor(255, 0, 255), ofVec3f(0, 100, 0))); // purple
+        users.push_back(User(ofColor(0, 0, 255),   ofVec3f(0, 100, 0))); // blue
+        users.push_back(User(ofColor(255, 255, 0), ofVec3f(0, 100, 0))); // yellow
+        users.push_back(User(ofColor(255, 128, 0), ofVec3f(0, 100, 0))); // orange
+        users.push_back(User(ofColor(0, 255, 255), ofVec3f(0, 100, 0))); // cyan
+        users.push_back(User(ofColor(128, 128, 0), ofVec3f(0, 100, 0))); // olive
+
         distance = 8;
         s = 20;
         
@@ -95,9 +121,17 @@ public:
     }
 };
 
+class FlockingPlugin : public radomePlugin {
+public:
+    virtual void renderScene(DomeInfo& dome) {
+        ofBox(0, 0, 0, 40);
+    }
+};
+
 
 void instantiatePlugins() {
  
     PluginLibrary::addPlugin(new SwayTestPlugin());
+    PluginLibrary::addPlugin(new FlockingPlugin());
 
 }

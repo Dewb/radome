@@ -20,13 +20,19 @@ struct DomeInfo {
 
 class radomePlugin {
 public:
-    radomePlugin() {};
-    virtual ~radomePlugin() { destroy(); }
+    radomePlugin();
+    virtual ~radomePlugin();
     
     virtual void initialize() {};
     virtual void renderScene(DomeInfo& dome) = 0;
     virtual void receiveOscMessage(ofxOscMessage& message) {};
     virtual void destroy() {};
+    
+    bool isEnabled() { return _enabled; }
+    void setEnabled(bool enabled = true);
+protected:
+    bool _enabled;
+    bool _initialized;
 };
 
 typedef std::list<radomePlugin*> PluginList;

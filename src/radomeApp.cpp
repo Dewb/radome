@@ -86,6 +86,9 @@ void radomeApp::setup() {
     for (int ii = 0; ii < NUM_PROJECTORS; ii++) {
         _projectorList.push_back(new radomeProjector(ii*360.0/(NUM_PROJECTORS*1.0)+60.0, _domeDiameter*1.5, PROJECTOR_INITIAL_HEIGHT));
     }    
+
+    // todo: replace with static initialization objects
+    instantiatePlugins();
     
     initGUI();
     
@@ -93,11 +96,6 @@ void radomeApp::setup() {
     
     glEnable(GL_DEPTH_TEST);
     prepDrawList();
-    
-    instantiatePlugins();
-    for (auto plug : PluginLibrary::getList()) {
-        plug->initialize();
-    }
     
     _oscReceiver.setup(6000);
 }
@@ -184,6 +182,7 @@ void radomeApp::initGUI() {
     _pInputUI->setWidgetSpacing(5.0);
     _pInputUI->setDrawBack(true);
     _pInputUI->setFont("GUI/Exo-Regular.ttf", true, true, false, 0.0, OFX_UI_FONT_RESOLUTION);
+    
     //setUIColors(_pInputUI);
     
     _pInputUI->addWidgetDown(new ofxUILabel("VIDEO INPUT", OFX_UI_FONT_LARGE));
@@ -196,6 +195,14 @@ void radomeApp::initGUI() {
     _pInputUI->addWidgetDown(new ofxUILabel("TEST PATTERN", OFX_UI_FONT_MEDIUM));    
 	_pInputUI->addToggle("Show Pattern", false, 25, 25);
     _pInputUI->setVisible(false);
+    _pInputUI->addSpacer(0, 12);
+    _pInputUI->addWidgetDown(new ofxUILabel("SYPHON PREVIEW", OFX_UI_FONT_LARGE));
+    _pInputUI->addSpacer(0, 320);
+
+    _pInputUI->addWidgetDown(new ofxUILabel("PLUGINS", OFX_UI_FONT_LARGE));
+    for (auto plug : PluginLibrary::getList()) {
+        _pInputUI->addToggle(typeid(*plug).name(), false, 25, 25);
+    }
     
     _pCalibrationUI = new ofxUICanvas(SIDEBAR_WIDTH + 5, 0, CALIBRATIONUI_WIDTH, ofGetHeight());
     _pCalibrationUI->setWidgetSpacing(5.0);
@@ -314,7 +321,10 @@ void radomeApp::update() {
 		ofxOscMessage m;
 		_oscReceiver.getNextMessage(&m);
         for (auto plug : PluginLibrary::getList()) {
-            plug->receiveOscMessage(m);
+            if (plug->isEnabled()) {
+                plug->receiveOscMessage(m);
+
+            }
         }
     }
 }
@@ -481,12 +491,17 @@ void radomeApp::drawScene() {
     
     // Draw 3D scene plugins
     for (auto plug : PluginLibrary::getList()) {
-        DomeInfo dome;
-        dome.height = _domeHeight;
-        dome.radius = _domeDiameter/2;
-        plug->renderScene(dome);
+        if (plug->isEnabled()) {
+            DomeInfo dome;
+            dome.height = _domeHeight;
+            dome.radius = _domeDiameter/2;
+            ofPushStyle();
+            ofPushMatrix();
+            plug->renderScene(dome);
+            ofPopMatrix();
+            ofPopStyle();
+        }
     }
-
 }
 
 void radomeApp::drawDome() {
@@ -835,6 +850,11 @@ void radomeApp::guiEvent(ofxUIEventArgs &e) {
         if (slider) {
             _domeSliceParameterization = slider->getScaledValue();
             prepDrawList();
+        }
+    }
+    for (auto plug : PluginLibrary::getList()) {
+        if (typeid(*plug).name() == name) {
+            plug->setEnabled(!plug->isEnabled());
         }
     }
 }
