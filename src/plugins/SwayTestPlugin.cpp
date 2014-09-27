@@ -70,13 +70,13 @@ public:
         users.push_back(User(ofColor(250, 250, 250), ngon(8, 7, 3), "martini.stl", 0.1)); // olive
         
         users.push_back(User(ofColor(255,   0,   0), ngon(8, 0, 4), "fighter.obj", 0.1)); // red
-        users.push_back(User(ofColor(  0, 255, 255), ngon(8, 1, 4), "fighter.obj", 0.1)); // cyan
+        users.push_back(User(ofColor(  0, 255, 255), ngon(8, 1, 4), "hheli.obj", 0.1)); // cyan
         users.push_back(User(ofColor(  0, 255,   0), ngon(8, 2, 4), "fighter.obj", 0.1)); // green
-        users.push_back(User(ofColor(  0,   0, 255), ngon(8, 3, 4), "fighter.obj", 0.1)); // blue
+        users.push_back(User(ofColor(  0,   0, 255), ngon(8, 3, 4), "hheli.obj", 0.1)); // blue
         users.push_back(User(ofColor(128, 128, 128), ngon(8, 4, 4), "fighter.obj", 0.1)); // gray
-        users.push_back(User(ofColor(255, 128,   0), ngon(8, 5, 4), "fighter.obj", 0.1)); // orange
+        users.push_back(User(ofColor(255, 128,   0), ngon(8, 5, 4), "hheli.obj", 0.1)); // orange
         users.push_back(User(ofColor(255, 255,   0), ngon(8, 6, 4), "fighter.obj", 0.1)); // yellow
-        users.push_back(User(ofColor(250, 250, 250), ngon(8, 7, 4), "fighter.obj", 0.1)); // olive
+        users.push_back(User(ofColor(250, 250, 250), ngon(8, 7, 4), "hheli.obj", 0.1)); // olive
         
         ofLight light1, light2, light3;
         light1.setPointLight();
