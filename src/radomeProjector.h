@@ -34,11 +34,12 @@ public:
     float getFOV() const { return _fov; }
     void setTargetHeight(float h) { _targetHeight = h; updateCamera(); }
     float getTargetHeight() const { return _targetHeight; }
-    
     void setLensOffsetX(float x) { _lensOffsetX = x; updateCamera(); }
     float getLensOffsetX() const { return _lensOffsetX; }
     void setLensOffsetY(float y) { _lensOffsetY = y; updateCamera(); }
     float getLensOffsetY() const { return _lensOffsetY; }
+    void getRoll() const { return _roll; }
+    float setRoll(float r) { _roll = r; updateCamera(); }
         
 protected:
     void updateCamera();
@@ -55,6 +56,7 @@ protected:
     float _targetHeight;
     float _lensOffsetX;
     float _lensOffsetY;
+    float _roll;
 };
 
 class radomeProjectorWindowListener : public ofxFensterListener {

@@ -115,6 +115,8 @@ void radomeApp::createProjectorCalibrationUI(ofxUICanvas* pCanvas, int index) {
     pCanvas->addMinimalSlider(buf, 0.0, 40.0, 2.0, w, 15);
     sprintf(buf, "P%d SHIFT", index);
     pCanvas->addMinimalSlider(buf, -3.0, 3.0, 0.0, w, 15);
+    sprintf(buf, "P%d ROLL", index);
+    pCanvas->addMinimalSlider(buf, -30.0, 30.0, 0.0, w, 15);
 
 }
 
@@ -750,6 +752,11 @@ void radomeApp::guiEvent(ofxUIEventArgs &e) {
         if (slider && _projectorList.size() > 0 && _projectorList[0]) {
             _projectorList[0]->setLensOffsetY(slider->getScaledValue());
         }
+    } else if (name == "P1 ROLL") {
+        auto slider = dynamic_cast<ofxUISlider*>(e.widget);
+        if (slider && _projectorList.size() > 0 && _projectorList[0]) {
+            _projectorList[0]->setRoll(slider->getScaledValue());
+        }
     } else if (name == "P2 HEIGHT") {
         auto slider = dynamic_cast<ofxUISlider*>(e.widget);
         if (slider && _projectorList.size() > 1 && _projectorList[1]) {
@@ -780,6 +787,11 @@ void radomeApp::guiEvent(ofxUIEventArgs &e) {
         if (slider && _projectorList.size() > 1 && _projectorList[1]) {
             _projectorList[1]->setLensOffsetY(slider->getScaledValue());
         }
+    } else if (name == "P2 ROLL") {
+        auto slider = dynamic_cast<ofxUISlider*>(e.widget);
+        if (slider && _projectorList.size() > 0 && _projectorList[0]) {
+            _projectorList[1]->setRoll(slider->getScaledValue());
+        }
     } else if (name == "P3 HEIGHT") {
         auto slider = dynamic_cast<ofxUISlider*>(e.widget);
         if (slider && _projectorList.size() > 2 && _projectorList[2]) {
@@ -809,6 +821,11 @@ void radomeApp::guiEvent(ofxUIEventArgs &e) {
         auto slider = dynamic_cast<ofxUISlider*>(e.widget);
         if (slider && _projectorList.size() > 2 && _projectorList[2]) {
             _projectorList[2]->setLensOffsetY(slider->getScaledValue());
+        }
+    } else if (name == "P3 ROLL") {
+        auto slider = dynamic_cast<ofxUISlider*>(e.widget);
+        if (slider && _projectorList.size() > 0 && _projectorList[0]) {
+            _projectorList[2]->setRoll(slider->getScaledValue());
         }
     } else if (name == "Load") {
         if (_pCalibrationUI) {
