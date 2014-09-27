@@ -60,6 +60,24 @@ public:
         users.push_back(User(ofColor(255, 255,   0), ngon(8, 6, 2), "BANANA.stl", 0.1)); // yellow
         users.push_back(User(ofColor(250, 250, 250), ngon(8, 7, 2), "toilet.obj", 0.1)); // olive
         
+        users.push_back(User(ofColor(255,   0,   0), ngon(8, 0, 3), "martini.stl", 0.1)); // red
+        users.push_back(User(ofColor(128, 128, 128), ngon(8, 1, 3), "martini.stl", 0.1)); // gray
+        users.push_back(User(ofColor(  0, 255,   0), ngon(8, 2, 3), "martini.stl", 0.1)); // green
+        users.push_back(User(ofColor(  0,   0, 255), ngon(8, 3, 3), "martini.stl", 0.1)); // blue
+        users.push_back(User(ofColor(255,   0, 255), ngon(8, 4, 3), "martini.stl", 0.1)); // purple
+        users.push_back(User(ofColor(255, 128,   0), ngon(8, 5, 3), "martini.stl", 0.1)); // orange
+        users.push_back(User(ofColor(255, 255,   0), ngon(8, 6, 3), "martini.stl", 0.1)); // yellow
+        users.push_back(User(ofColor(250, 250, 250), ngon(8, 7, 3), "martini.stl", 0.1)); // olive
+        
+        users.push_back(User(ofColor(255,   0,   0), ngon(8, 0, 4), "fighter.obj", 0.1)); // red
+        users.push_back(User(ofColor(  0, 255, 255), ngon(8, 1, 4), "fighter.obj", 0.1)); // cyan
+        users.push_back(User(ofColor(  0, 255,   0), ngon(8, 2, 4), "fighter.obj", 0.1)); // green
+        users.push_back(User(ofColor(  0,   0, 255), ngon(8, 3, 4), "fighter.obj", 0.1)); // blue
+        users.push_back(User(ofColor(128, 128, 128), ngon(8, 4, 4), "fighter.obj", 0.1)); // gray
+        users.push_back(User(ofColor(255, 128,   0), ngon(8, 5, 4), "fighter.obj", 0.1)); // orange
+        users.push_back(User(ofColor(255, 255,   0), ngon(8, 6, 4), "fighter.obj", 0.1)); // yellow
+        users.push_back(User(ofColor(250, 250, 250), ngon(8, 7, 4), "fighter.obj", 0.1)); // olive
+        
         ofLight light1, light2, light3;
         light1.setPointLight();
         light1.setPosition(0, 0, 0);
@@ -95,18 +113,25 @@ public:
         }
         
         for (auto& user : users) {
-            if (user.lastSeenTime < dome.frameTime - 30000)
-                continue;
+            bool timeout = true;
+            if (timeout) {
+                if (user.lastSeenTime < dome.frameTime - 30000) {
+                    continue;
+                }
+            }
             
             ofPoint origin(0, 0, 0);
             origin += user.ray * (dome.radius + distance);
             origin.y *= -1;
             
             float s = user.scale;
-            if (user.lastSeenTime < dome.frameTime - 20000)
-                s *= 1 - (dome.frameTime - user.lastSeenTime - 20000)/10000;
-            if (s == 0)
-                continue;
+            
+            if (timeout) {
+                if (user.lastSeenTime < dome.frameTime - 20000)
+                    s *= 1 - (dome.frameTime - user.lastSeenTime - 20000)/10000;
+                if (s == 0)
+                    continue;
+            }
             
             ofSetColor(user.color);
             
