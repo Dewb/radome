@@ -70,7 +70,7 @@ void radomeApp::setup() {
     _cam.setRotation(0.66, 0.5);
     _cam.setupPerspective(false);
     
-    _triangles = icosohedron::createsphere(4);
+    _triangles = icosohedron::create(4);
     
     _vidOverlay.initialize(DEFAULT_SYPHON_APP, DEFAULT_SYPHON_SERVER);
     _vidOverlay.setFaderValue(0.75);
@@ -214,7 +214,7 @@ void radomeApp::initGUI() {
     
     _pCalibrationUI->addMinimalSlider("DOME HEIGHT", 5.0, 30.0, _domeHeight/10, w, 15);
     _pCalibrationUI->addMinimalSlider("DOME DIAMETER", 5.0, 50.0, _domeDiameter/10, w, 15);
-    _pCalibrationUI->addMinimalSlider("DOME SLICE", 0.1, 1.0, _domeSliceParameterization, w, 15);
+    _pCalibrationUI->addMinimalSlider("DOME SLICE", 0.75, 1.0, _domeSliceParameterization, w, 15);
 
     _pCalibrationUI->addSpacer(0, 12);
     
@@ -238,36 +238,32 @@ void radomeApp::initGUI() {
 void radomeApp::prepDrawList()
 {
     domeDrawIndex = glGenLists(1);
-    std::vector<icosohedron::Triangle>::iterator i = _triangles.begin();
-
     glNewList(domeDrawIndex, GL_COMPILE);
     glBegin(GL_TRIANGLES);
-    int sx = _domeDiameter/2.0, sy = _domeHeight, sz = _domeDiameter/2.0;
-    while (i != _triangles.end())
-    {
-        icosohedron::Triangle& t = *i++;
+    float yshift = (1 - _domeSliceParameterization) * _domeHeight;
+    
+    // desired slice radius b = sqrt(radius * radius - yshift * yshift);
+    float b = _domeDiameter/2.0;
+    float radius = sqrt(b * b + yshift * yshift);
+    
+    ofVec3f d, s = ofVec3f(radius, _domeHeight + yshift, radius);
+    for (auto& t : _triangles) {
+        d = t.v0 * s;
+        d.y -= yshift;
+        glNormal3fv(&d[0]);
+        glVertex3fv(&d[0]);
 
-        float dx, dy, dz;
+        d = t.v1 * s;
+        d.y -= yshift;
+        glNormal3fv(&d[0]);
+        glVertex3fv(&d[0]);
 
-        dx = t.v0[0] * sx;
-        dy = t.v0[1] * sy;
-        dz = t.v0[2] * sz;
-        glNormal3f(dx, dy, dz);
-        glVertex3f(dx, dy, dz);
-
-        dx = t.v1[0] * sx;
-        dy = t.v1[1] * sy;
-        dz = t.v1[2] * sz;
-        glNormal3f(dx, dy, dz);
-        glVertex3f(dx, dy, dz);
-
-        dx = t.v2[0] * sx;
-        dy = t.v2[1] * sy;
-        dz = t.v2[2] * sz;
-        glNormal3f(dx, dy, dz);
-        glVertex3f(dx, dy, dz);
+        d = t.v2 * s;
+        d.y -= yshift;
+        glNormal3fv(&d[0]);
+        glVertex3fv(&d[0]);
     }
-glEnd();
+    glEnd();
     glEndList();
 }
 
@@ -522,7 +518,7 @@ void radomeApp::drawDome() {
 }
 
 void radomeApp::drawGroundPlane() {
-    float size = _domeDiameter * 5;
+    float size = 300 * 5;
     float ticks = 40.0;
     
     float step = size / ticks;
