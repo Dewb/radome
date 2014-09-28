@@ -58,7 +58,7 @@ public:
         users.push_back(User(ofColor(255,   0, 255), ngon(8, 4, 2), "fighter.obj", 0.1)); // purple
         users.push_back(User(ofColor(255, 128,   0), ngon(8, 5, 2), "hheli.obj", 0.16)); // orange
         users.push_back(User(ofColor(255, 255,   0), ngon(8, 6, 2), "BANANA.stl", 0.1)); // yellow
-        users.push_back(User(ofColor(250, 250, 250), ngon(8, 7, 2), "toilet.obj", 0.1)); // olive
+        users.push_back(User(ofColor(250, 250, 250), ngon(8, 7, 2), "toilet.obj", 0.1)); // white
         
         users.push_back(User(ofColor(255,   0,   0), ngon(8, 0, 3), "martini.stl", 0.1)); // red
         users.push_back(User(ofColor(128, 128, 128), ngon(8, 1, 3), "martini.stl", 0.1)); // gray
