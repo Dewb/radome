@@ -26,6 +26,8 @@
 		5B78AA6916EA94A600CBDB28 /* radomeUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5B78AA6716EA94A600CBDB28 /* radomeUtils.cpp */; };
 		5B78ABD216EAAB9F00CBDB28 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5B78ABD116EAAB9F00CBDB28 /* main.cpp */; };
 		5B78ABD516EB19D200CBDB28 /* radomeModel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5B78ABD316EB19D200CBDB28 /* radomeModel.cpp */; };
+		5B9DA00C19DB95BE00852F3D /* FlockingPlugin.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5B9DA00A19DB95BE00852F3D /* FlockingPlugin.cpp */; };
+		5B9DA00F19DB981700852F3D /* Flock.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5B9DA00D19DB981700852F3D /* Flock.cpp */; };
 		5BD6E52016D9BC2C00C39777 /* turntableCam.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5BD6E51E16D9BC2C00C39777 /* turntableCam.cpp */; };
 		5BD6EF0C19D4FA73008EE4C9 /* SwayTestPlugin.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5BD6EF0A19D4FA73008EE4C9 /* SwayTestPlugin.cpp */; };
 		5BF5F24516D1A68E0026DF72 /* radome.frag in Sources */ = {isa = PBXBuildFile; fileRef = 5BF5F24316D1A68E0026DF72 /* radome.frag */; };
@@ -151,9 +153,12 @@
 		5B78ABD116EAAB9F00CBDB28 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		5B78ABD316EB19D200CBDB28 /* radomeModel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = radomeModel.cpp; sourceTree = "<group>"; };
 		5B78ABD416EB19D200CBDB28 /* radomeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = radomeModel.h; sourceTree = "<group>"; };
+		5B9DA00A19DB95BE00852F3D /* FlockingPlugin.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = FlockingPlugin.cpp; path = src/plugins/Flocking/FlockingPlugin.cpp; sourceTree = "<group>"; };
+		5B9DA00D19DB981700852F3D /* Flock.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Flock.cpp; sourceTree = "<group>"; };
+		5B9DA00E19DB981700852F3D /* Flock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flock.h; sourceTree = "<group>"; };
 		5BD6E51E16D9BC2C00C39777 /* turntableCam.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = turntableCam.cpp; sourceTree = "<group>"; };
 		5BD6E51F16D9BC2C00C39777 /* turntableCam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = turntableCam.h; sourceTree = "<group>"; };
-		5BD6EF0A19D4FA73008EE4C9 /* SwayTestPlugin.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SwayTestPlugin.cpp; path = src/plugins/SwayTestPlugin.cpp; sourceTree = "<group>"; };
+		5BD6EF0A19D4FA73008EE4C9 /* SwayTestPlugin.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SwayTestPlugin.cpp; path = src/plugins/SwayTest/SwayTestPlugin.cpp; sourceTree = "<group>"; };
 		5BF5F24316D1A68E0026DF72 /* radome.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = radome.frag; sourceTree = "<group>"; };
 		5BF5F24416D1A68E0026DF72 /* radome.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = radome.vert; sourceTree = "<group>"; };
 		5BFD48C919CF922100F42053 /* install.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = install.xml; sourceTree = "<group>"; };
@@ -487,10 +492,29 @@
 			path = osc;
 			sourceTree = "<group>";
 		};
-		5BD6EF0819D4FA5E008EE4C9 /* plugins */ = {
+		5B9DA00719DB93D300852F3D /* Flocking */ = {
+			isa = PBXGroup;
+			children = (
+				5B9DA00A19DB95BE00852F3D /* FlockingPlugin.cpp */,
+				5B9DA00D19DB981700852F3D /* Flock.cpp */,
+				5B9DA00E19DB981700852F3D /* Flock.h */,
+			);
+			name = Flocking;
+			sourceTree = "<group>";
+		};
+		5B9DA00919DB93DA00852F3D /* SwayTest */ = {
 			isa = PBXGroup;
 			children = (
 				5BD6EF0A19D4FA73008EE4C9 /* SwayTestPlugin.cpp */,
+			);
+			name = SwayTest;
+			sourceTree = "<group>";
+		};
+		5BD6EF0819D4FA5E008EE4C9 /* plugins */ = {
+			isa = PBXGroup;
+			children = (
+				5B9DA00919DB93DA00852F3D /* SwayTest */,
+				5B9DA00719DB93D300852F3D /* Flocking */,
 			);
 			name = plugins;
 			sourceTree = "<group>";
@@ -1238,10 +1262,12 @@
 				5BFD4E4419CF922700F42053 /* ofxFensterCanvas.cpp in Sources */,
 				5BFD4ECD19CF922700F42053 /* tinyxmlerror.cpp in Sources */,
 				5B4D495C19D0F18100A9FC01 /* OscPrintReceivedElements.cpp in Sources */,
+				5B9DA00C19DB95BE00852F3D /* FlockingPlugin.cpp in Sources */,
 				5BFD4E2219CF922700F42053 /* ofxAutoReloadedShader.cpp in Sources */,
 				5B78AA6916EA94A600CBDB28 /* radomeUtils.cpp in Sources */,
 				5BFD4E4019CF922700F42053 /* ofxDisplay.cpp in Sources */,
 				5BFD4E6B19CF922700F42053 /* ofxSyphonServer.mm in Sources */,
+				5B9DA00F19DB981700852F3D /* Flock.cpp in Sources */,
 				5BFD4E2319CF922700F42053 /* ofxCubeMap.cpp in Sources */,
 				5B4D495D19D0F18100A9FC01 /* OscReceivedElements.cpp in Sources */,
 				5BFD4E6919CF922700F42053 /* SyphonNameboundClient.m in Sources */,

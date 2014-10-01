@@ -29,6 +29,7 @@ public:
     
     virtual void initialize() {};
     virtual void renderScene(DomeInfo& dome) = 0;
+    virtual void update(DomeInfo& dome) {};
     virtual void receiveOscMessage(ofxOscMessage& message) {};
     virtual void destroy() {};
     

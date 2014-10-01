@@ -309,6 +309,17 @@ void radomeApp::update() {
         (*iter)->update(_animationTime);
     }
     
+    DomeInfo dome;
+    dome.height = _domeHeight;
+    dome.radius = _domeDiameter/2;
+    dome.frameTime = ofGetSystemTime();
+    
+    for (auto plug : PluginLibrary::getList()) {
+        if (plug->isEnabled()) {
+            plug->update(dome);
+        }
+    }
+    
     updateCubeMap();
     updateProjectorOutput();
     
