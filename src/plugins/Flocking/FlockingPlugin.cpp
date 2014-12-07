@@ -19,6 +19,7 @@ public:
     virtual void initialize() {
         
         Boid::model.loadModel("../../content/objects/Space_Invader.obj");
+        flock.init(1000);
         
         ofLight light1, light2, light3;
         light1.setPointLight();
@@ -39,7 +40,13 @@ public:
         lights.push_back(light3);
     }
     
+    virtual void destroy() {
+        lights.clear();
+        flock.clear();
+    }
+    
     virtual void update(DomeInfo& dome) {
+        flock.constrainToDome(dome.radius);
         flock.update();
     };
     

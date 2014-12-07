@@ -15,10 +15,9 @@
 
 class Boid {
 public:
-	Boid();
 	Boid(ofVec3f position, ofVec3f velocity);
 
-	void applyGlobalForce(ofVec3f velocityDelta);
+	void constrainToDome(float radius);
 	void update();
 	void draw();
 
@@ -47,8 +46,11 @@ class Flock {
 public:
     Flock();
     
+    void init(int numBoids);
     void update();
+    void constrainToDome(float radius);
     void draw();
+    void clear();
     
     std::list<Boid> boids;
 };

@@ -10,10 +10,6 @@
 #include "radomeModel.h"
 
 
-Boid::Boid() {
-    
-}
-
 Boid::Boid(ofVec3f pos, ofVec3f vel) {
     position = pos;
     velocity = vel;
@@ -25,11 +21,23 @@ Boid::Boid(ofVec3f pos, ofVec3f vel) {
     
 	decay = 0.99;
 	crowdFactor	= 1.0;
+    speedRange = ofVec2f(ofRandom(1.0, 1.5), ofRandom(2.5, 4.0));
+    speedRangeSquared = ofVec2f(speedRange[0] * speedRange[0], speedRange[1] * speedRange[1]);
 	
 }
 
-void Boid::applyGlobalForce(ofVec3f velocityDelta) {
+void Boid::constrainToDome(float radius) {
+    return;
     
+    float f = 0.003;
+    float l = position.length();
+    if (l < radius) {
+        ofVec3f delta = position.normalize() * (radius - l) * f;
+        velocity -= delta;
+    } else if (l > 2 * radius) {
+        ofVec3f delta = position.normalize() * (2 * radius - l) * f;
+        velocity -= delta;
+    }
 }
 
 void Boid::update() {
@@ -38,6 +46,18 @@ void Boid::update() {
 	
 	velocity += acceleration;
 	velocityNormalized = velocity.normalized();
+    
+
+    float maxSpeed = speedRange[0] + crowdFactor;
+    float maxSpeedSqrd = maxSpeed * maxSpeed;
+        
+    float velocitySqrd = velocity.lengthSquared();
+    if (velocitySqrd > maxSpeedSqrd) {
+        velocity = velocityNormalized * maxSpeed;
+        
+    } else if(velocitySqrd < speedRangeSquared[1]) {
+        velocity = velocityNormalized * speedRange[1];
+    }
 		
 	position += velocity;
 	
@@ -52,7 +72,7 @@ void Boid::draw() {
     ofPushMatrix();
     ofTranslate(position);
     //ofBox(position, 10);
-    ofScale(0.04, -0.04, 0.04);
+    ofScale(0.03, -0.03, 0.03);
     ofSetColor(255, 0, 0);
     model.draw();
     ofPopMatrix();
@@ -68,26 +88,31 @@ radomeModel Boid::model;
 // -----------
 
 Flock::Flock() {
-    
-    for(int i=0; i < 1000; i++)
+}
+
+void Flock::init(int numBoids) {
+
+    for(int i=0; i < numBoids; i++)
 	{
-		ofVec3f position = ofVec3f(ofRandom(-10.0, 10.0), ofRandom(-10.0, 10.0), ofRandom(-10.0, 10.0));
-		ofVec3f velocity = ofVec3f(ofRandom(-20.0, 20.0), ofRandom(-20.0, 20.0), ofRandom(-20.0, 20.0));
+		ofVec3f position = ofVec3f(ofRandom(-100.0, 100.0), ofRandom(-100.0, 100.0), ofRandom(-100.0, 100.0));
+		ofVec3f velocity = ofVec3f(ofRandom(-200.0, 200.0), ofRandom(-200.0, 200.0), ofRandom(-200.0, 200.0));
 				
 		boids.push_back(Boid(position, velocity));
 	}
+}
 
-    
+void Flock::clear() {
+    boids.clear();
 }
 
 void Flock::update() {
     
-    float zoneRadius = 8.0;
+    float zoneRadius = 40.0;
     float separationThreshold = 0.5;
     float alignmentThreshold = 0.8;
     float repelStrength = 0.004;
     float alignStrength = 0.010;
-    float attractStrength = 0.010;
+    float attractStrength = 0.020;
     
     for(list<Boid>::iterator boid1 = boids.begin(); boid1 != boids.end(); ++boid1) {
         list<Boid>::iterator boid2 = boid1;
@@ -140,5 +165,11 @@ void Flock::update() {
 void Flock::draw() {
     for (auto& boid : boids) {
         boid.draw();
+    }
+}
+
+void Flock::constrainToDome(float radius) {
+    for (auto& boid : boids) {
+        boid.constrainToDome(radius);
     }
 }
