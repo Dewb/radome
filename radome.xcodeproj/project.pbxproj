@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5B0C681D1A34FBF900C3955C /* BleepoutPlugin.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5B0C681C1A34FBF900C3955C /* BleepoutPlugin.cpp */; };
 		5B15C1CD16D2CA8E004E20D4 /* icosohedron.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5B15C1CB16D2CA8E004E20D4 /* icosohedron.cpp */; };
 		5B4D495419D0F18100A9FC01 /* ofxOscBundle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5B4D492F19D0F18100A9FC01 /* ofxOscBundle.cpp */; };
 		5B4D495519D0F18100A9FC01 /* ofxOscMessage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5B4D493119D0F18100A9FC01 /* ofxOscMessage.cpp */; };
@@ -109,6 +110,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		5B0C681C1A34FBF900C3955C /* BleepoutPlugin.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BleepoutPlugin.cpp; path = src/plugins/Bleepout/BleepoutPlugin.cpp; sourceTree = "<group>"; };
 		5B15C1CB16D2CA8E004E20D4 /* icosohedron.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = icosohedron.cpp; sourceTree = "<group>"; };
 		5B15C1CC16D2CA8E004E20D4 /* icosohedron.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = icosohedron.h; sourceTree = "<group>"; };
 		5B4D492D19D0F18100A9FC01 /* ofxOsc.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxOsc.h; sourceTree = "<group>"; };
@@ -154,8 +156,8 @@
 		5B78ABD316EB19D200CBDB28 /* radomeModel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = radomeModel.cpp; sourceTree = "<group>"; };
 		5B78ABD416EB19D200CBDB28 /* radomeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = radomeModel.h; sourceTree = "<group>"; };
 		5B9DA00A19DB95BE00852F3D /* FlockingPlugin.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = FlockingPlugin.cpp; path = src/plugins/Flocking/FlockingPlugin.cpp; sourceTree = "<group>"; };
-		5B9DA00D19DB981700852F3D /* Flock.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Flock.cpp; sourceTree = "<group>"; };
-		5B9DA00E19DB981700852F3D /* Flock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flock.h; sourceTree = "<group>"; };
+		5B9DA00D19DB981700852F3D /* Flock.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Flock.cpp; path = src/plugins/Flocking/Flock.cpp; sourceTree = "<group>"; };
+		5B9DA00E19DB981700852F3D /* Flock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Flock.h; path = src/plugins/Flocking/Flock.h; sourceTree = "<group>"; };
 		5BD6E51E16D9BC2C00C39777 /* turntableCam.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = turntableCam.cpp; sourceTree = "<group>"; };
 		5BD6E51F16D9BC2C00C39777 /* turntableCam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = turntableCam.h; sourceTree = "<group>"; };
 		5BD6EF0A19D4FA73008EE4C9 /* SwayTestPlugin.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SwayTestPlugin.cpp; path = src/plugins/SwayTest/SwayTestPlugin.cpp; sourceTree = "<group>"; };
@@ -397,6 +399,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5B0C681A1A34FB9400C3955C /* Bleepout */ = {
+			isa = PBXGroup;
+			children = (
+				5B0C681C1A34FBF900C3955C /* BleepoutPlugin.cpp */,
+			);
+			name = Bleepout;
+			sourceTree = "<group>";
+		};
 		5B4D492B19D0F18100A9FC01 /* ofxOsc */ = {
 			isa = PBXGroup;
 			children = (
@@ -513,6 +523,7 @@
 		5BD6EF0819D4FA5E008EE4C9 /* plugins */ = {
 			isa = PBXGroup;
 			children = (
+				5B0C681A1A34FB9400C3955C /* Bleepout */,
 				5B9DA00919DB93DA00852F3D /* SwayTest */,
 				5B9DA00719DB93D300852F3D /* Flocking */,
 			);
@@ -1249,6 +1260,7 @@
 				5B15C1CD16D2CA8E004E20D4 /* icosohedron.cpp in Sources */,
 				5BFD4E6C19CF922700F42053 /* ofxSyphonServerDirectory.mm in Sources */,
 				5BFD4E1E19CF922700F42053 /* ofxAssimpModelLoader.cpp in Sources */,
+				5B0C681D1A34FBF900C3955C /* BleepoutPlugin.cpp in Sources */,
 				5BFD4E4319CF922700F42053 /* ofxFenster.cpp in Sources */,
 				5BD6E52016D9BC2C00C39777 /* turntableCam.cpp in Sources */,
 				5BFD4ECE19CF922700F42053 /* tinyxmlparser.cpp in Sources */,
