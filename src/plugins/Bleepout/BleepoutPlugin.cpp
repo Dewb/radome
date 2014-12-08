@@ -25,35 +25,57 @@ public:
         _speed = speed;
         _t = 0;
         _r = radius;
-        position = _u * radius;
+        _position = _u * radius;
+        _squishFactor = 1.0;
     }
+    
     void tick() {
         _t += _speed;
-        position = _r * (_u * cos(_t) + _w * sin(_t));
-        if (position.y <= 0.0) {
+        _position = _r * (_u * cos(_t) + _w * sin(_t));
+        _position.y *= _squishFactor;
+
+        // Bounce to a reflected trajectory when hitting the ground plane.
+        if (_position.y <= 0.0) {
             _u.y *= -1;
             _w.y *= -1;
         }
     }
     
+    float getRadius() const { return _r; }
+    
+    void setRadius(float r) {
+        _r = r;
+    }
+    
+    void setSquishFactor(float s) {
+        _squishFactor = s;
+    }
+    
+    ofVec3f getPosition() const { return _position; }
+    
+protected:
     float _r;
+    float _squishFactor;
+
     ofVec3f _u;
     ofVec3f _w;
     float _t;
     float _speed;
     
-    ofVec3f position;
+    ofVec3f _position;
 };
 
 class Body {
 public:
     Body(CircleTrajectory path, ofColor color) : _path(path), _color(color) {}
-    void tick() {
+    void update(float radius, float squishFactor) {
+        _path.setRadius(radius);
+        _path.setSquishFactor(squishFactor);
         _path.tick();
     }
     ofVec3f draw() {
         ofSetColor(_color);
-        ofSphere(_path.position, 8);
+        ofSphere(_path.getPosition(), 8);
     }
 protected:
     CircleTrajectory _path;
@@ -65,9 +87,10 @@ public:
     void addBody(Body body) {
         bodies.push_back(body);
     }
-    void update() {
+    void update(DomeInfo& dome) {
+        float orbitHeight = 20;
         for (auto& body : bodies) {
-            body.tick();
+            body.update(dome.radius + orbitHeight, (dome.height + orbitHeight) / (dome.radius + orbitHeight));
         }
     }
     void draw() {
@@ -120,7 +143,7 @@ public:
     }
     
     virtual void update(DomeInfo& dome) {
-        physics.update();
+        physics.update(dome);
     };
     
     virtual void renderScene(DomeInfo& dome) {
