@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
+   LastUpgradeVersion = "0460"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -15,7 +16,7 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "E4B69B5A0A3A1756003C02F2"
                BuildableName = "Radome.app"
-               BlueprintName = "radome"
+               BlueprintName = "Radome"
                ReferencedContainer = "container:radome.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -33,7 +34,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E4B69B5A0A3A1756003C02F2"
             BuildableName = "Radome.app"
-            BlueprintName = "radome"
+            BlueprintName = "Radome"
             ReferencedContainer = "container:radome.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -52,7 +53,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E4B69B5A0A3A1756003C02F2"
             BuildableName = "Radome.app"
-            BlueprintName = "radome"
+            BlueprintName = "Radome"
             ReferencedContainer = "container:radome.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -70,7 +71,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E4B69B5A0A3A1756003C02F2"
             BuildableName = "Radome.app"
-            BlueprintName = "radome"
+            BlueprintName = "Radome"
             ReferencedContainer = "container:radome.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

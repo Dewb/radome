@@ -6,6 +6,7 @@
 //
 //
 
+
 #include "radomePlugin.h"
 
 radomePlugin::radomePlugin() {
@@ -33,5 +34,4 @@ void radomePlugin::setEnabled(bool enabled) {
 
 PluginLibrary::~PluginLibrary() {
 }
-
 

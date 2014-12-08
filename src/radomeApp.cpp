@@ -1,8 +1,6 @@
 #include "radomeApp.h"
 #include "radomeUtils.h"
 #include "radomePlugin.h"
-#include "ofxFensterManager.h"
-
 
 #define SIDEBAR_WIDTH 190
 #define CALIBRATIONUI_WIDTH 280
@@ -26,17 +24,11 @@
 
 radomeApp::radomeApp() {
     _pUI = NULL;
-    _projectorWindow = NULL;
 }
 
 radomeApp::~radomeApp() {
     if (_pUI)
         delete (_pUI);
-    
-    if (_projectorWindow) {
-        _projectorWindow->destroy();
-        ofxFensterManager::get()->deleteFenster(_projectorWindow);
-    }
     
     deletePointerCollection(_projectorList);
     deletePointerCollection(_modelList);
@@ -44,7 +36,7 @@ radomeApp::~radomeApp() {
 
 void radomeApp::setup() {
     
-    ofxFensterManager::get()->setWindowTitle("Radome");
+    _winManager.setup((ofxAppGLFWWindowMulti *)ofGetWindowPtr());
     
     ofSetFrameRate(45);
     ofEnableSmoothing();
@@ -55,7 +47,6 @@ void radomeApp::setup() {
     _mappingMode = 0;
     _animationTime = 0.0;
     _lastSystemTime = ofGetSystemTime();
-    _fullscreen = false;
 
     _shader.load("radome");
     
@@ -73,7 +64,7 @@ void radomeApp::setup() {
     _triangles = icosohedron::create(4);
     
     _vidOverlay.initialize(DEFAULT_SYPHON_APP, DEFAULT_SYPHON_SERVER);
-    _vidOverlay.setFaderValue(0.75);
+    _vidOverlay.setFaderValue(1.0);
 
     _contrast = 1.0;
     _saturation = 1.0;
@@ -138,7 +129,7 @@ void radomeApp::initGUI() {
     _pUI->setFont("GUI/Exo-Regular.ttf", true, true, false, 0.0, OFX_UI_FONT_RESOLUTION);
     //setUIColors(_pUI);
     
-    _pUI->addWidgetDown(new ofxUILabel("RADOME 0.3", OFX_UI_FONT_LARGE));
+    _pUI->addWidgetDown(new ofxUILabel("RADOME 0.4", OFX_UI_FONT_LARGE));
     _pUI->addWidgetDown(new ofxUILabel("Build " __DATE__ " " __TIME__, OFX_UI_FONT_SMALL));
     _pUI->addSpacer(0, 12);
     
@@ -272,13 +263,6 @@ void radomeApp::prepDrawList()
 void radomeApp::loadFile() {
     ofFileDialogResult result = ofSystemLoadDialog("Load Model", false, "./radome/content");
     
-    // Workaround for ofxFenster modal mouse event bug
-    ofxFenster* pWin = ofxFensterManager::get()->getActiveWindow();
-    ofxFenster* pDummy = ofxFensterManager::get()->createFenster(0,0,1,1);
-    ofxFensterManager::get()->setActiveWindow(pDummy);
-    ofxFensterManager::get()->setActiveWindow(pWin);
-    ofxFensterManager::get()->deleteFenster(pDummy);
-    
     if (result.bSuccess) {
         auto model = new radomeModel();
         model->loadModel(result.getPath());
@@ -287,14 +271,9 @@ void radomeApp::loadFile() {
 }
 
 void radomeApp::showProjectorWindow() {
-    if (_projectorWindow && _projectorWindow->id != 0) {
-        _projectorWindow->destroy();
-        ofxFensterManager::get()->deleteFenster(_projectorWindow);
+    if (_winManager.getNumWindows() == 1) {
+        _winManager.createWindow("Projector Output", 400, 300, 750, 200, false);
     }
-    _projectorWindow = ofxFensterManager::get()->createFenster(400, 300, 750, 200, OF_WINDOW);
-    _projectorWindowListener = new radomeProjectorWindowListener(&_projectorList);
-    _projectorWindow->addListener(_projectorWindowListener);
-    _projectorWindow->setWindowTitle("Projector Output");
 }
 
 void radomeApp::update() {
@@ -395,6 +374,19 @@ void radomeApp::endShader() {
 }
 
 void radomeApp::draw() {
+    if (_winManager.getActiveWindowNo() != 0) {
+        if (_projectorList.size()) {
+            int w = ofGetWidth() / _projectorList.size();
+            int h = ofGetHeight();
+            int x = 0;
+            for (auto projector : _projectorList) {
+                projector->drawFramebuffer(x, 0, w, h);
+                x += w;
+            }
+        }
+        return;
+    }
+    
     switch (_displayMode) {
         case DisplayScene: {
             ofPushStyle();
@@ -579,16 +571,9 @@ void radomeApp::keyPressed(int key) {
                 changeDisplayMode((DisplayMode)mode);
             }
             break;
-        case 'M':
-            {
-                if (_projectorWindowListener) {
-                    _projectorWindowListener->saveScreenshot();
-                }
-            }
         case 'f':
             {
-                _fullscreen = !_fullscreen;
-                ofSetFullscreen(_fullscreen);
+                _winManager.setFullscreen(1, true);
             }
             break;
         case 'p':

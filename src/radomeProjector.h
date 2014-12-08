@@ -10,7 +10,6 @@
 #define __radome__radomeProjector__
 
 #include "ofMain.h"
-#include "ofxFenster.h"
 
 #include <list>
 using std::list;
@@ -57,19 +56,6 @@ protected:
     float _lensOffsetX;
     float _lensOffsetY;
     float _roll;
-};
-
-class radomeProjectorWindowListener : public ofxFensterListener {
-public:
-    radomeProjectorWindowListener(vector<radomeProjector*>* pProjectors);
-    void setup();
-    void draw();
-    
-    void saveScreenshot() { _screenshot = true; }
-
-protected:
-    vector<radomeProjector*>* _pProjectors;
-    bool _screenshot;
 };
 
 #endif /* defined(__radome__radomeProjector__) */

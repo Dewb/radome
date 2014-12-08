@@ -10,7 +10,7 @@
 #include "radomeModel.h"
 
 
-Boid::Boid(ofVec3f pos, ofVec3f vel) {
+Boid::Boid(ofVec3f pos, ofVec3f vel, radomeModel* pMod) {
     position = pos;
     velocity = vel;
     velocity = vel.normalize();
@@ -23,7 +23,8 @@ Boid::Boid(ofVec3f pos, ofVec3f vel) {
 	crowdFactor	= 1.0;
     speedRange = ofVec2f(ofRandom(1.0, 1.5), ofRandom(2.5, 4.0));
     speedRangeSquared = ofVec2f(speedRange[0] * speedRange[0], speedRange[1] * speedRange[1]);
-	
+    
+    pModel = pMod;
 }
 
 void Boid::constrainToDome(float radius) {
@@ -74,7 +75,9 @@ void Boid::draw() {
     //ofBox(position, 10);
     ofScale(0.03, -0.03, 0.03);
     ofSetColor(255, 0, 0);
-    model.draw();
+    if (pModel) {
+        pModel->draw();
+    }
     ofPopMatrix();
 }
 
@@ -83,21 +86,19 @@ void Boid::recordNeighborPosition(ofVec3f pos) {
     numNeighbors++;
 }
 
-radomeModel Boid::model;
-
 // -----------
 
 Flock::Flock() {
 }
 
-void Flock::init(int numBoids) {
+void Flock::init(int numBoids, radomeModel* pModel) {
 
     for(int i=0; i < numBoids; i++)
 	{
 		ofVec3f position = ofVec3f(ofRandom(-100.0, 100.0), ofRandom(-100.0, 100.0), ofRandom(-100.0, 100.0));
 		ofVec3f velocity = ofVec3f(ofRandom(-200.0, 200.0), ofRandom(-200.0, 200.0), ofRandom(-200.0, 200.0));
 				
-		boids.push_back(Boid(position, velocity));
+		boids.push_back(Boid(position, velocity, pModel));
 	}
 }
 

@@ -39,11 +39,12 @@ void radomeProjector::updateCamera() {
     _camera.setFarClip(10000.0);
     _camera.setLensOffset(offset);
     
+    float cameraRadians = (_heading) * PI / 180.0;
+    ofVec3f cameraPos(_distance * cos(cameraRadians), _height, _distance * sin(cameraRadians));
     ofVec3f lookAt(0, _targetHeight, 0);
-    ofVec3f cameraPos(_distance * cos(_heading*3.14159/180.0), _height, _distance * sin(_heading*3.14159/180.0));
     ofVec3f lookVec = cameraPos - lookAt;
 
-    ofVec3f upVec(0, 1, 0);
+    ofVec3f upVec(0, -1, 0);
     ofQuaternion q;
     q.makeRotate(_roll, lookVec);
     upVec = q * upVec;
@@ -79,24 +80,30 @@ void radomeProjector::drawSceneRepresentation() {
     for (int pass = 0; pass < 2; pass++)
     {
         if (pass == 0) {
-            glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+            ofNoFill();
             ofSetColor(40, 191, 80);
         } else {
-            glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+            ofFill();
             ofSetColor(10, 80, 40);
         }
         
         ofSetLineWidth(2.0);
-        ofBox(0.0, _height, 0.0, 30);
+        ofDrawBox(0.0, _height, 0.0, 20, 10, 20);
+
+        // draw tripod
         ofSetLineWidth(5.0);
-        ofLine(0.0, _height-15.0, 0.0, 0.0, 0.0, 0.0);
+        float r = 40;
+        for (int i = 0; i < 3; i++) {
+            float theta = PI * (2 * i/3.0 + 1);
+            ofLine(0.0, _height - 5.0, 0.0, r * cos(theta), 0.0, r * sin(theta));
+        }
     }
     
     ofPopStyle();
     ofPopMatrix();
 }
 
-
+/*
 radomeProjectorWindowListener::radomeProjectorWindowListener(vector<radomeProjector*>* pProjectors) {
     _pProjectors = pProjectors;
     _screenshot = false;
@@ -121,3 +128,4 @@ void radomeProjectorWindowListener::draw() {
         }
     }
 }
+*/

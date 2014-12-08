@@ -1,12 +1,11 @@
 #pragma once
 
 #include "ofMain.h"
-#include "ofAppGlutWindow.h"
+#include "WindowManager.h"
 
 #include "ofxAssimpModelLoader.h"
 #include "ofxCubeMap.h"
 #include "ofxUI.h"
-#include "ofxFenster.h"
 #include "ofxAutoReloadedShader.h"
 #include "ofxOsc.h"
 
@@ -78,15 +77,11 @@ protected:
 
     list<radomeModel*> _modelList;
     vector<radomeProjector*> _projectorList;
-    ofxFenster* _projectorWindow;
-    radomeProjectorWindowListener* _projectorWindowListener;
     
     radomeSyphonClient _vidOverlay;
     ofImage _testPatternImage;
     bool _showTestPattern;
-    
-    bool _fullscreen;
-    
+
     float _animationTime;
     unsigned long long _lastSystemTime;
     
@@ -109,4 +104,6 @@ protected:
     float _domeSliceParameterization;
     
     ofxOscReceiver _oscReceiver;
+    
+    WindowManager _winManager;
 };

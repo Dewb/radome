@@ -15,11 +15,14 @@ public:
 
     vector<ofLight> lights;
     Flock flock;
+    radomeModel* pBoidModel;
     
     virtual void initialize() {
         
-        Boid::model.loadModel("../../content/objects/Space_Invader.obj");
-        flock.init(1000);
+        pBoidModel = new radomeModel();
+        pBoidModel->loadModel("../../content/objects/Space_Invader.obj");
+        
+        flock.init(20, pBoidModel);
         
         ofLight light1, light2, light3;
         light1.setPointLight();
@@ -43,6 +46,7 @@ public:
     virtual void destroy() {
         lights.clear();
         flock.clear();
+        delete pBoidModel;
     }
     
     virtual void update(DomeInfo& dome) {

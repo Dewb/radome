@@ -15,13 +15,14 @@
 
 class Boid {
 public:
-	Boid(ofVec3f position, ofVec3f velocity);
+	Boid(ofVec3f position, ofVec3f velocity, radomeModel *pMod);
 
 	void constrainToDome(float radius);
 	void update();
 	void draw();
 
 	void recordNeighborPosition(ofVec3f pos);
+    void setModel(radomeModel* pM) { pModel = pM; }
     
 	ofVec3f position;
 	ofVec3f velocity;
@@ -39,14 +40,14 @@ public:
 	ofVec2f speedRangeSquared;
 	float crowdFactor;
     
-    static radomeModel model;
+    radomeModel* pModel;
 };
 
 class Flock {
 public:
     Flock();
     
-    void init(int numBoids);
+    void init(int numBoids, radomeModel* pModel);
     void update();
     void constrainToDome(float radius);
     void draw();
