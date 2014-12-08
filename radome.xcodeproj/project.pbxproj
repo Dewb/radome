@@ -231,6 +231,7 @@
 		5B0C68351A35739D00C3955C /* radome.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = radome.frag; sourceTree = "<group>"; };
 		5B0C68361A35739D00C3955C /* radome.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = radome.vert; sourceTree = "<group>"; };
 		5B0C68371A35739D00C3955C /* testpatt.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = testpatt.jpg; sourceTree = "<group>"; };
+		5B557D6E1A35788200967B7B /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		5BD6EF0219D20709008EE4C9 /* radomePlugin.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = radomePlugin.cpp; sourceTree = "<group>"; };
 		5BD6EF0319D20709008EE4C9 /* radomePlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = radomePlugin.h; sourceTree = "<group>"; };
 		5BFD42E819CE089D00F42053 /* icosohedron.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = icosohedron.cpp; sourceTree = "<group>"; };
@@ -498,7 +499,7 @@
 		5B0C68201A35603000C3955C /* plugins */ = {
 			isa = PBXGroup;
 			children = (
-				5B0C682B1A3571F900C3955C /* BleepoutPlugin.cpp */,
+				5B557D6D1A35785B00967B7B /* Bleepout */,
 				5B0C68211A35603000C3955C /* Flocking */,
 				5B0C68231A35603000C3955C /* SwayTest */,
 			);
@@ -542,6 +543,14 @@
 				5B0C68321A35739D00C3955C /* Exo-Regular.ttf */,
 			);
 			path = GUI;
+			sourceTree = "<group>";
+		};
+		5B557D6D1A35785B00967B7B /* Bleepout */ = {
+			isa = PBXGroup;
+			children = (
+				5B0C682B1A3571F900C3955C /* BleepoutPlugin.cpp */,
+			);
+			name = Bleepout;
 			sourceTree = "<group>";
 		};
 		5BFD42FD19CE096500F42053 /* ofxAutoReloadedShader */ = {
@@ -894,6 +903,7 @@
 		E4B69B4A0A3A1720003C02F2 = {
 			isa = PBXGroup;
 			children = (
+				5B557D6E1A35788200967B7B /* README.md */,
 				E4B6FCAD0C3E899E008CF71C /* openFrameworks-Info.plist */,
 				E4EB6923138AFD0F00A09F29 /* Project.xcconfig */,
 				5B0C682D1A35739D00C3955C /* data */,
