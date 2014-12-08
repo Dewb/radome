@@ -80,17 +80,23 @@ void radomeProjector::drawSceneRepresentation() {
     for (int pass = 0; pass < 2; pass++)
     {
         if (pass == 0) {
-            glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+            ofNoFill();
             ofSetColor(40, 191, 80);
         } else {
-            glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+            ofFill();
             ofSetColor(10, 80, 40);
         }
         
         ofSetLineWidth(2.0);
-        ofBox(0.0, _height, 0.0, 30);
+        ofDrawBox(0.0, _height, 0.0, 20, 10, 20);
+
+        // draw tripod
         ofSetLineWidth(5.0);
-        ofLine(0.0, _height-15.0, 0.0, 0.0, 0.0, 0.0);
+        float r = 40;
+        for (int i = 0; i < 3; i++) {
+            float theta = PI * (2 * i/3.0 + 1);
+            ofLine(0.0, _height - 5.0, 0.0, r * cos(theta), 0.0, r * sin(theta));
+        }
     }
     
     ofPopStyle();
