@@ -5,34 +5,94 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>9A063A8D-2DD4-41F1-93A6-6E71FCF8288F</string>
+	<string>E267DC97-C832-4F10-9108-3E2E2B182AEA</string>
 	<key>IDESourceControlProjectName</key>
 	<string>radome</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>0DEC208C-DB14-4E83-9EA3-643FAB823359</key>
+		<key>547FB694471B1BB16C5B35052288A009885FB162</key>
 		<string>https://github.com/Dewb/radome.git</string>
+		<key>78ED1D53E69CF8962D887FE8315ABFCFCFB1E3CA</key>
+		<string>https://github.com/underdoeg/ofxFenster.git</string>
+		<key>7E804D925461714118DB355C65BC964B41D94376</key>
+		<string>https://github.com/rezaali/ofxUI</string>
+		<key>999015EE524680C74335938659F70512196F22AD</key>
+		<string>https://github.com/andreasmuller/ofxAutoReloadedShader</string>
+		<key>D3A391CBE6A216E3ED8F808E0A0C340E1DD995B2</key>
+		<string>https://github.com/andreasmuller/ofxCubeMap</string>
+		<key>F4CCB893AFADB97238A965FD2F28717F1CAAE613</key>
+		<string>https://github.com/astellato/ofxSyphon</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>radome.xcodeproj/project.xcworkspace</string>
+	<string>radome.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>0DEC208C-DB14-4E83-9EA3-643FAB823359</key>
+		<key>547FB694471B1BB16C5B35052288A009885FB162</key>
 		<string>../..</string>
+		<key>78ED1D53E69CF8962D887FE8315ABFCFCFB1E3CA</key>
+		<string>../../../of_v0073_osx_release/addons/ofxFenster</string>
+		<key>7E804D925461714118DB355C65BC964B41D94376</key>
+		<string>../../../of_v0.8.4_osx_release/addons/ofxUI</string>
+		<key>999015EE524680C74335938659F70512196F22AD</key>
+		<string>../../../of_v0.8.4_osx_release/addons/ofxAutoReloadedShader</string>
+		<key>D3A391CBE6A216E3ED8F808E0A0C340E1DD995B2</key>
+		<string>../../../of_v0.8.4_osx_release/addons/ofxCubeMap</string>
+		<key>F4CCB893AFADB97238A965FD2F28717F1CAAE613</key>
+		<string>../../../of_v0.8.4_osx_release/addons/ofxSyphon</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/Dewb/radome.git</string>
 	<key>IDESourceControlProjectVersion</key>
-	<integer>110</integer>
+	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>0DEC208C-DB14-4E83-9EA3-643FAB823359</string>
+	<string>547FB694471B1BB16C5B35052288A009885FB162</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>0DEC208C-DB14-4E83-9EA3-643FAB823359</string>
+			<string>999015EE524680C74335938659F70512196F22AD</string>
+			<key>IDESourceControlWCCName</key>
+			<string>ofxAutoReloadedShader</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>D3A391CBE6A216E3ED8F808E0A0C340E1DD995B2</string>
+			<key>IDESourceControlWCCName</key>
+			<string>ofxCubeMap</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>78ED1D53E69CF8962D887FE8315ABFCFCFB1E3CA</string>
+			<key>IDESourceControlWCCName</key>
+			<string>ofxFenster</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>F4CCB893AFADB97238A965FD2F28717F1CAAE613</string>
+			<key>IDESourceControlWCCName</key>
+			<string>ofxSyphon</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>7E804D925461714118DB355C65BC964B41D94376</string>
+			<key>IDESourceControlWCCName</key>
+			<string>ofxUI</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>547FB694471B1BB16C5B35052288A009885FB162</string>
 			<key>IDESourceControlWCCName</key>
 			<string>radome</string>
 		</dict>
