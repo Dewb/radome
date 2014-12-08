@@ -226,6 +226,11 @@
 		5B0C68271A35606F00C3955C /* Flock.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Flock.cpp; sourceTree = "<group>"; };
 		5B0C68281A35606F00C3955C /* Flock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flock.h; sourceTree = "<group>"; };
 		5B0C682B1A3571F900C3955C /* BleepoutPlugin.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BleepoutPlugin.cpp; path = Bleepout/BleepoutPlugin.cpp; sourceTree = "<group>"; };
+		5B0C68321A35739D00C3955C /* Exo-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Exo-Regular.ttf"; sourceTree = "<group>"; };
+		5B0C68341A35739D00C3955C /* projectorSettings.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = projectorSettings.xml; sourceTree = "<group>"; };
+		5B0C68351A35739D00C3955C /* radome.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = radome.frag; sourceTree = "<group>"; };
+		5B0C68361A35739D00C3955C /* radome.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = radome.vert; sourceTree = "<group>"; };
+		5B0C68371A35739D00C3955C /* testpatt.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = testpatt.jpg; sourceTree = "<group>"; };
 		5BD6EF0219D20709008EE4C9 /* radomePlugin.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = radomePlugin.cpp; sourceTree = "<group>"; };
 		5BD6EF0319D20709008EE4C9 /* radomePlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = radomePlugin.h; sourceTree = "<group>"; };
 		5BFD42E819CE089D00F42053 /* icosohedron.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = icosohedron.cpp; sourceTree = "<group>"; };
@@ -516,6 +521,27 @@
 				5B0C68241A35603000C3955C /* SwayTestPlugin.cpp */,
 			);
 			path = SwayTest;
+			sourceTree = "<group>";
+		};
+		5B0C682D1A35739D00C3955C /* data */ = {
+			isa = PBXGroup;
+			children = (
+				5B0C68311A35739D00C3955C /* GUI */,
+				5B0C68341A35739D00C3955C /* projectorSettings.xml */,
+				5B0C68351A35739D00C3955C /* radome.frag */,
+				5B0C68361A35739D00C3955C /* radome.vert */,
+				5B0C68371A35739D00C3955C /* testpatt.jpg */,
+			);
+			name = data;
+			path = bin/data;
+			sourceTree = SOURCE_ROOT;
+		};
+		5B0C68311A35739D00C3955C /* GUI */ = {
+			isa = PBXGroup;
+			children = (
+				5B0C68321A35739D00C3955C /* Exo-Regular.ttf */,
+			);
+			path = GUI;
 			sourceTree = "<group>";
 		};
 		5BFD42FD19CE096500F42053 /* ofxAutoReloadedShader */ = {
@@ -870,6 +896,7 @@
 			children = (
 				E4B6FCAD0C3E899E008CF71C /* openFrameworks-Info.plist */,
 				E4EB6923138AFD0F00A09F29 /* Project.xcconfig */,
+				5B0C682D1A35739D00C3955C /* data */,
 				E4B69E1C0A3A1BDC003C02F2 /* src */,
 				E4EEC9E9138DF44700A80321 /* openFrameworks */,
 				BB4B014C10F69532006C3DED /* addons */,

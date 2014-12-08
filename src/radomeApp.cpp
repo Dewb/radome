@@ -695,7 +695,7 @@ void radomeApp::guiEvent(ofxUIEventArgs &e) {
     if (name == "XFADE") {
         auto slider = dynamic_cast<ofxUISlider*>(e.widget);
         if (slider) {
-            _vidOverlay.setFaderValue(slider->getValue());
+            _vidOverlay.setFaderValue(slider->getValue()*0.01);
         }
     } else if (name == "Add 3D Model...") {
         auto pButton = dynamic_cast<ofxUIButton*>(e.widget);
