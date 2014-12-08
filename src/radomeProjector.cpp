@@ -39,11 +39,12 @@ void radomeProjector::updateCamera() {
     _camera.setFarClip(10000.0);
     _camera.setLensOffset(offset);
     
+    float cameraRadians = (_heading) * PI / 180.0;
+    ofVec3f cameraPos(_distance * cos(cameraRadians), _height, _distance * sin(cameraRadians));
     ofVec3f lookAt(0, _targetHeight, 0);
-    ofVec3f cameraPos(_distance * cos(_heading*3.14159/180.0), _height, _distance * sin(_heading*3.14159/180.0));
     ofVec3f lookVec = cameraPos - lookAt;
 
-    ofVec3f upVec(0, 1, 0);
+    ofVec3f upVec(0, -1, 0);
     ofQuaternion q;
     q.makeRotate(_roll, lookVec);
     upVec = q * upVec;

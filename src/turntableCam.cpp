@@ -50,7 +50,6 @@ void ofxTurntableCam::setRotation(float dx, float dy) {
     ofVec3f ux = ofCamera::getSideDir();
     
     ofVec3f arcEnd(dx, -dy, -0.5f);
-    arcEnd = arcEnd;
     arcEnd.normalize();
     ofQuaternion orientation = this->getGlobalOrientation();
     _rotation.makeRotate(orientation * ofVec3f(0.0f, 0.0f, -1.0f), orientation * arcEnd);
