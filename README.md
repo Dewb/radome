@@ -15,6 +15,7 @@ Radome is built with openFrameworks v0.8.4.  The following non-core addons are r
 * ofxUI
 * ofxSyphon
 * ofxAutoReloadedShader
+* ofxAppGLFWWindowMulti
 
 Installation instructions:
 --------------------------
@@ -25,13 +26,17 @@ Installation instructions:
   * ofxSyphon (head revision)
   * ofxCubeMap (head revision)
   * ofxAutoReloadedShader (head revision)
+  * ofxAppGLFWWindowMulti (fork)
   * ofxUI (commit 51b2dcb5d6bef17e18c23adf91ae94fce095f42d)
   ```
   cd of_v0.8.4_osx_release/addons
   git clone https://github.com/astellato/ofxSyphon
   git clone https://github.com/andreasmuller/ofxCubeMap
   git clone https://github.com/andreasmuller/ofxAutoReloadedShader
-  git clone https://github.com/underdoeg/ofxFenster.git
+  git clone https://github.com/Dewb/ofxAppGLFWWindowMulti
+  cd ofxApplGLFWWindowMulti
+  git checkout focus
+  cd ..
   git clone https://github.com/rezaali/ofxUI
   cd ofxUI
   git checkout 51b2dcb5d6bef17e18c23adf91ae94fce095f42d

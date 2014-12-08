@@ -35,6 +35,9 @@
 		5B0C68261A35603000C3955C /* SwayTestPlugin.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5B0C68241A35603000C3955C /* SwayTestPlugin.cpp */; };
 		5B0C68291A35606F00C3955C /* Flock.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5B0C68271A35606F00C3955C /* Flock.cpp */; };
 		5B0C682C1A3571F900C3955C /* BleepoutPlugin.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5B0C682B1A3571F900C3955C /* BleepoutPlugin.cpp */; };
+		5B1274281A35851B00A76407 /* ofxAppGLFWWindowMulti.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5B1274251A35851B00A76407 /* ofxAppGLFWWindowMulti.mm */; };
+		5B1274291A35851B00A76407 /* WindowManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5B1274261A35851B00A76407 /* WindowManager.cpp */; };
+		5B94A43C1A359019001CA6F5 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B94A43B1A359019001CA6F5 /* Carbon.framework */; };
 		5BD6EF0419D20709008EE4C9 /* radomePlugin.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5BD6EF0219D20709008EE4C9 /* radomePlugin.cpp */; };
 		5BFD42F619CE089D00F42053 /* icosohedron.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5BFD42E819CE089D00F42053 /* icosohedron.cpp */; };
 		5BFD42F719CE089D00F42053 /* radomeApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5BFD42EA19CE089D00F42053 /* radomeApp.cpp */; };
@@ -231,7 +234,12 @@
 		5B0C68351A35739D00C3955C /* radome.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = radome.frag; sourceTree = "<group>"; };
 		5B0C68361A35739D00C3955C /* radome.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = radome.vert; sourceTree = "<group>"; };
 		5B0C68371A35739D00C3955C /* testpatt.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = testpatt.jpg; sourceTree = "<group>"; };
+		5B1274241A35851B00A76407 /* ofxAppGLFWWindowMulti.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxAppGLFWWindowMulti.h; sourceTree = "<group>"; };
+		5B1274251A35851B00A76407 /* ofxAppGLFWWindowMulti.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ofxAppGLFWWindowMulti.mm; sourceTree = "<group>"; };
+		5B1274261A35851B00A76407 /* WindowManager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = WindowManager.cpp; sourceTree = "<group>"; };
+		5B1274271A35851B00A76407 /* WindowManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WindowManager.h; sourceTree = "<group>"; };
 		5B557D6E1A35788200967B7B /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		5B94A43B1A359019001CA6F5 /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = System/Library/Frameworks/Carbon.framework; sourceTree = SDKROOT; };
 		5BD6EF0219D20709008EE4C9 /* radomePlugin.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = radomePlugin.cpp; sourceTree = "<group>"; };
 		5BD6EF0319D20709008EE4C9 /* radomePlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = radomePlugin.h; sourceTree = "<group>"; };
 		5BFD42E819CE089D00F42053 /* icosohedron.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = icosohedron.cpp; sourceTree = "<group>"; };
@@ -389,6 +397,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5B94A43C1A359019001CA6F5 /* Carbon.framework in Frameworks */,
 				5BFD432C19CE0A8D00F42053 /* Syphon.framework in Frameworks */,
 				E7F985F815E0DEA3003869B5 /* Accelerate.framework in Frameworks */,
 				E7E077E815D3B6510020DFD4 /* QTKit.framework in Frameworks */,
@@ -543,6 +552,26 @@
 				5B0C68321A35739D00C3955C /* Exo-Regular.ttf */,
 			);
 			path = GUI;
+			sourceTree = "<group>";
+		};
+		5B1274221A35851B00A76407 /* ofxAppGLFWWindowMulti */ = {
+			isa = PBXGroup;
+			children = (
+				5B1274231A35851B00A76407 /* src */,
+			);
+			name = ofxAppGLFWWindowMulti;
+			sourceTree = "<group>";
+		};
+		5B1274231A35851B00A76407 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				5B1274241A35851B00A76407 /* ofxAppGLFWWindowMulti.h */,
+				5B1274251A35851B00A76407 /* ofxAppGLFWWindowMulti.mm */,
+				5B1274261A35851B00A76407 /* WindowManager.cpp */,
+				5B1274271A35851B00A76407 /* WindowManager.h */,
+			);
+			name = src;
+			path = ../of_v0.8.4_osx_release/addons/ofxAppGLFWWindowMulti/src;
 			sourceTree = "<group>";
 		};
 		5B557D6D1A35785B00967B7B /* Bleepout */ = {
@@ -705,6 +734,7 @@
 		BB4B014C10F69532006C3DED /* addons */ = {
 			isa = PBXGroup;
 			children = (
+				5B1274221A35851B00A76407 /* ofxAppGLFWWindowMulti */,
 				5BFD42FD19CE096500F42053 /* ofxAutoReloadedShader */,
 				2C8F245ACBE61E28646C17F2 /* ofxAssimpModelLoader */,
 				E6053AB7FEC63D5F83825B88 /* ofxOsc */,
@@ -719,6 +749,7 @@
 		BBAB23C913894ECA00AA2426 /* system frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5B94A43B1A359019001CA6F5 /* Carbon.framework */,
 				E7F985F515E0DE99003869B5 /* Accelerate.framework */,
 				E4C2424410CC5A17004149E2 /* AppKit.framework */,
 				E4C2424510CC5A17004149E2 /* Cocoa.framework */,
@@ -1114,6 +1145,7 @@
 				9357E9CE72AF3E2627AA6550 /* UdpSocket.cpp in Sources */,
 				D4627B7BABABAD76AB96B0B4 /* NetworkingUtilsWin.cpp in Sources */,
 				D0E7583D947E05273DF742BD /* UdpSocketWin.cpp in Sources */,
+				5B1274281A35851B00A76407 /* ofxAppGLFWWindowMulti.mm in Sources */,
 				4FC0D2999CA3174FBAB27018 /* OscOutboundPacketStream.cpp in Sources */,
 				4529E1396FFC7FC5C106A0EC /* OscPrintReceivedElements.cpp in Sources */,
 				2F20AA7E1C1C7BB17D277A48 /* OscReceivedElements.cpp in Sources */,
@@ -1182,6 +1214,7 @@
 				4B0A88EBC9798ED28FC1DD0B /* ofxUIWaveform.cpp in Sources */,
 				A7746B18BF26B4D3A2726174 /* ofxUIWidget.cpp in Sources */,
 				A68D2E8C0E2D21132E964D78 /* ofxUIWidgetWithLabel.cpp in Sources */,
+				5B1274291A35851B00A76407 /* WindowManager.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1441,6 +1474,7 @@
 					../of_v0.8.4_osx_release/addons/ofxAssimpModelLoader/libs/assimp/lib/osx/assimp.a,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)Debug";
+				USER_HEADER_SEARCH_PATHS = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1532,6 +1566,7 @@
 					../of_v0.8.4_osx_release/addons/ofxAssimpModelLoader/libs/assimp/lib/osx/assimp.a,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

@@ -2,23 +2,13 @@
 #include "ofMath.h"
 #include "ofUtils.h"
 
-#ifdef USE_OFXFENSTER
-#include "ofxFensterManager.h"
-#endif
-
 ofxTurntableCam::ofxTurntableCam() {
     reset();
-#ifndef USE_OFXFENSTER
-//    ofAddListener(ofEvents().update , this, &ofxTurntableCam::update);
-#endif
     _cameraDragging = false;
     setTarget(ofVec3f(0,0,0));
 }
 
 ofxTurntableCam::~ofxTurntableCam() {
-#ifndef USE_OFXFENSTER
-//    ofRemoveListener(ofEvents().update , this, &ofxTurntableCam::update);
-#endif
 }
 
 void ofxTurntableCam::mousePressed(int x, int y, int button) {

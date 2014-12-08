@@ -5,8 +5,6 @@
 #include "ofCamera.h"
 #include "ofEvents.h"
 
-//#define USE_OFXFENSTER
-
 class ofxTurntableCam : public ofCamera {
 public:
     ofxTurntableCam();

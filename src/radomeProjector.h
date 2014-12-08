@@ -58,19 +58,4 @@ protected:
     float _roll;
 };
 
-/*
-class radomeProjectorWindowListener : public ofxFensterListener {
-public:
-    radomeProjectorWindowListener(vector<radomeProjector*>* pProjectors);
-    void setup();
-    void draw();
-    
-    void saveScreenshot() { _screenshot = true; }
-
-protected:
-    vector<radomeProjector*>* _pProjectors;
-    bool _screenshot;
-};
- */
-
 #endif /* defined(__radome__radomeProjector__) */
