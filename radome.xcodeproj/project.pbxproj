@@ -34,6 +34,7 @@
 		5B0C68251A35603000C3955C /* FlockingPlugin.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5B0C68221A35603000C3955C /* FlockingPlugin.cpp */; };
 		5B0C68261A35603000C3955C /* SwayTestPlugin.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5B0C68241A35603000C3955C /* SwayTestPlugin.cpp */; };
 		5B0C68291A35606F00C3955C /* Flock.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5B0C68271A35606F00C3955C /* Flock.cpp */; };
+		5B0C682C1A3571F900C3955C /* BleepoutPlugin.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5B0C682B1A3571F900C3955C /* BleepoutPlugin.cpp */; };
 		5BD6EF0419D20709008EE4C9 /* radomePlugin.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5BD6EF0219D20709008EE4C9 /* radomePlugin.cpp */; };
 		5BFD42F619CE089D00F42053 /* icosohedron.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5BFD42E819CE089D00F42053 /* icosohedron.cpp */; };
 		5BFD42F719CE089D00F42053 /* radomeApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5BFD42EA19CE089D00F42053 /* radomeApp.cpp */; };
@@ -224,6 +225,7 @@
 		5B0C68241A35603000C3955C /* SwayTestPlugin.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SwayTestPlugin.cpp; sourceTree = "<group>"; };
 		5B0C68271A35606F00C3955C /* Flock.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Flock.cpp; sourceTree = "<group>"; };
 		5B0C68281A35606F00C3955C /* Flock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flock.h; sourceTree = "<group>"; };
+		5B0C682B1A3571F900C3955C /* BleepoutPlugin.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BleepoutPlugin.cpp; path = Bleepout/BleepoutPlugin.cpp; sourceTree = "<group>"; };
 		5BD6EF0219D20709008EE4C9 /* radomePlugin.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = radomePlugin.cpp; sourceTree = "<group>"; };
 		5BD6EF0319D20709008EE4C9 /* radomePlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = radomePlugin.h; sourceTree = "<group>"; };
 		5BFD42E819CE089D00F42053 /* icosohedron.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = icosohedron.cpp; sourceTree = "<group>"; };
@@ -491,6 +493,7 @@
 		5B0C68201A35603000C3955C /* plugins */ = {
 			isa = PBXGroup;
 			children = (
+				5B0C682B1A3571F900C3955C /* BleepoutPlugin.cpp */,
 				5B0C68211A35603000C3955C /* Flocking */,
 				5B0C68231A35603000C3955C /* SwayTest */,
 			);
@@ -1138,6 +1141,7 @@
 				4C1817940939B54992699A30 /* ofxUIToggle.cpp in Sources */,
 				E08A63C47639A623D1C12F4E /* ofxUIToggleMatrix.cpp in Sources */,
 				7E95FD33CCE401AA6C539A92 /* ofxUIValuePlotter.cpp in Sources */,
+				5B0C682C1A3571F900C3955C /* BleepoutPlugin.cpp in Sources */,
 				4B0A88EBC9798ED28FC1DD0B /* ofxUIWaveform.cpp in Sources */,
 				A7746B18BF26B4D3A2726174 /* ofxUIWidget.cpp in Sources */,
 				A68D2E8C0E2D21132E964D78 /* ofxUIWidgetWithLabel.cpp in Sources */,
