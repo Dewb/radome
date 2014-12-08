@@ -11,22 +11,34 @@
 
 #include <list>
 
+
+#include "ofMain.h"
+#include "ofxOsc.h"
+
 class ofxOscMessage;
 
 struct DomeInfo {
     int radius;
     int height;
+    long long frameTime;
 };
 
 class radomePlugin {
 public:
-    radomePlugin() {};
-    virtual ~radomePlugin() { destroy(); }
+    radomePlugin();
+    virtual ~radomePlugin();
     
     virtual void initialize() {};
     virtual void renderScene(DomeInfo& dome) = 0;
+    virtual void update(DomeInfo& dome) {};
     virtual void receiveOscMessage(ofxOscMessage& message) {};
     virtual void destroy() {};
+    
+    bool isEnabled() { return _enabled; }
+    void setEnabled(bool enabled = true);
+protected:
+    bool _enabled;
+    bool _initialized;
 };
 
 typedef std::list<radomePlugin*> PluginList;
@@ -56,7 +68,5 @@ protected:
     PluginList _plugins;
     
 };
-
-void instantiatePlugins();
 
 #endif /* defined(__radome__radomePlugin__) */

@@ -2,7 +2,6 @@
 #include "radomeUtils.h"
 #include "radomePlugin.h"
 
-
 #define SIDEBAR_WIDTH 190
 #define CALIBRATIONUI_WIDTH 280
 #define DEFAULT_SYPHON_APP "Arena"
@@ -74,7 +73,7 @@ void radomeApp::setup() {
     _cam.setRotation(0.66, 0.5);
     _cam.setupPerspective(false);
     
-    _triangles = icosohedron::createsphere(4);
+    _triangles = icosohedron::create(4);
     
     _vidOverlay.initialize(DEFAULT_SYPHON_APP, DEFAULT_SYPHON_SERVER);
     _vidOverlay.setFaderValue(0.75);
@@ -98,11 +97,6 @@ void radomeApp::setup() {
     glEnable(GL_DEPTH_TEST);
     prepDrawList();
     
-    instantiatePlugins();
-    for (auto plug : PluginLibrary::getList()) {
-        plug->initialize();
-    }
-    
     _oscReceiver.setup(6000);
 }
 
@@ -124,6 +118,8 @@ void radomeApp::createProjectorCalibrationUI(ofxUICanvas* pCanvas, int index) {
     pCanvas->addMinimalSlider(buf, 0.0, 40.0, 2.0, w, 15);
     sprintf(buf, "P%d SHIFT", index);
     pCanvas->addMinimalSlider(buf, -3.0, 3.0, 0.0, w, 15);
+    sprintf(buf, "P%d ROLL", index);
+    pCanvas->addMinimalSlider(buf, -30.0, 30.0, 0.0, w, 15);
 
 }
 
@@ -145,7 +141,7 @@ void radomeApp::initGUI() {
     _pUI->setFont("GUI/Exo-Regular.ttf", true, true, false, 0.0, OFX_UI_FONT_RESOLUTION);
     //setUIColors(_pUI);
     
-    _pUI->addWidgetDown(new ofxUILabel("RADOME 0.2", OFX_UI_FONT_LARGE));
+    _pUI->addWidgetDown(new ofxUILabel("RADOME 0.3", OFX_UI_FONT_LARGE));
     _pUI->addWidgetDown(new ofxUILabel("Build " __DATE__ " " __TIME__, OFX_UI_FONT_SMALL));
     _pUI->addSpacer(0, 12);
     
@@ -188,6 +184,7 @@ void radomeApp::initGUI() {
     _pInputUI->setWidgetSpacing(5.0);
     _pInputUI->setDrawBack(true);
     _pInputUI->setFont("GUI/Exo-Regular.ttf", true, true, false, 0.0, OFX_UI_FONT_RESOLUTION);
+    
     //setUIColors(_pInputUI);
     
     _pInputUI->addWidgetDown(new ofxUILabel("VIDEO INPUT", OFX_UI_FONT_LARGE));
@@ -200,6 +197,14 @@ void radomeApp::initGUI() {
     _pInputUI->addWidgetDown(new ofxUILabel("TEST PATTERN", OFX_UI_FONT_MEDIUM));    
 	_pInputUI->addToggle("Show Pattern", false, 25, 25);
     _pInputUI->setVisible(false);
+    _pInputUI->addSpacer(0, 12);
+    _pInputUI->addWidgetDown(new ofxUILabel("SYPHON PREVIEW", OFX_UI_FONT_LARGE));
+    _pInputUI->addSpacer(0, 320);
+
+    _pInputUI->addWidgetDown(new ofxUILabel("PLUGINS", OFX_UI_FONT_LARGE));
+    for (auto plug : PluginLibrary::getList()) {
+        _pInputUI->addToggle(typeid(*plug).name(), false, 25, 25);
+    }
     
     _pCalibrationUI = new ofxUICanvas(SIDEBAR_WIDTH + 5, 0, CALIBRATIONUI_WIDTH, ofGetHeight());
     _pCalibrationUI->setWidgetSpacing(5.0);
@@ -214,7 +219,7 @@ void radomeApp::initGUI() {
     
     _pCalibrationUI->addMinimalSlider("DOME HEIGHT", 5.0, 30.0, _domeHeight/10, w, 15);
     _pCalibrationUI->addMinimalSlider("DOME DIAMETER", 5.0, 50.0, _domeDiameter/10, w, 15);
-    _pCalibrationUI->addMinimalSlider("DOME SLICE", 0.1, 1.0, _domeSliceParameterization, w, 15);
+    _pCalibrationUI->addMinimalSlider("DOME SLICE", 0.75, 1.0, _domeSliceParameterization, w, 15);
 
     _pCalibrationUI->addSpacer(0, 12);
     
@@ -238,41 +243,37 @@ void radomeApp::initGUI() {
 void radomeApp::prepDrawList()
 {
     domeDrawIndex = glGenLists(1);
-    std::vector<icosohedron::Triangle>::iterator i = _triangles.begin();
-
     glNewList(domeDrawIndex, GL_COMPILE);
     glBegin(GL_TRIANGLES);
-    int sx = _domeDiameter/2.0, sy = _domeHeight, sz = _domeDiameter/2.0;
-    while (i != _triangles.end())
-    {
-        icosohedron::Triangle& t = *i++;
+    float yshift = (1 - _domeSliceParameterization) * _domeHeight;
+    
+    // desired slice radius b = sqrt(radius * radius - yshift * yshift);
+    float b = _domeDiameter/2.0;
+    float radius = sqrt(b * b + yshift * yshift);
+    
+    ofVec3f d, s = ofVec3f(radius, _domeHeight + yshift, radius);
+    for (auto& t : _triangles) {
+        d = t.v0 * s;
+        d.y -= yshift;
+        glNormal3fv(&d[0]);
+        glVertex3fv(&d[0]);
 
-        float dx, dy, dz;
+        d = t.v1 * s;
+        d.y -= yshift;
+        glNormal3fv(&d[0]);
+        glVertex3fv(&d[0]);
 
-        dx = t.v0[0] * sx;
-        dy = t.v0[1] * sy;
-        dz = t.v0[2] * sz;
-        glNormal3f(dx, dy, dz);
-        glVertex3f(dx, dy, dz);
-
-        dx = t.v1[0] * sx;
-        dy = t.v1[1] * sy;
-        dz = t.v1[2] * sz;
-        glNormal3f(dx, dy, dz);
-        glVertex3f(dx, dy, dz);
-
-        dx = t.v2[0] * sx;
-        dy = t.v2[1] * sy;
-        dz = t.v2[2] * sz;
-        glNormal3f(dx, dy, dz);
-        glVertex3f(dx, dy, dz);
+        d = t.v2 * s;
+        d.y -= yshift;
+        glNormal3fv(&d[0]);
+        glVertex3fv(&d[0]);
     }
-glEnd();
+    glEnd();
     glEndList();
 }
 
 void radomeApp::loadFile() {
-    ofFileDialogResult result = ofSystemLoadDialog("Load Model", false, "/Users/dewb/dev/of_v0073_osx_release/apps/video/radome/content");
+    ofFileDialogResult result = ofSystemLoadDialog("Load Model", false, "./radome/content");
     
     // removefenster
 /*
@@ -317,6 +318,17 @@ void radomeApp::update() {
         (*iter)->update(_animationTime);
     }
     
+    DomeInfo dome;
+    dome.height = _domeHeight;
+    dome.radius = _domeDiameter/2;
+    dome.frameTime = ofGetSystemTime();
+    
+    for (auto plug : PluginLibrary::getList()) {
+        if (plug->isEnabled()) {
+            plug->update(dome);
+        }
+    }
+    
     updateCubeMap();
     updateProjectorOutput();
     
@@ -324,7 +336,10 @@ void radomeApp::update() {
 		ofxOscMessage m;
 		_oscReceiver.getNextMessage(&m);
         for (auto plug : PluginLibrary::getList()) {
-            plug->receiveOscMessage(m);
+            if (plug->isEnabled()) {
+                plug->receiveOscMessage(m);
+
+            }
         }
     }
 }
@@ -489,14 +504,31 @@ void radomeApp::drawScene() {
         model->draw();
     }
     
+    DomeInfo dome;
+    dome.height = _domeHeight;
+    dome.radius = _domeDiameter/2;
+    dome.frameTime = ofGetSystemTime();
+    
     // Draw 3D scene plugins
     for (auto plug : PluginLibrary::getList()) {
-        DomeInfo dome;
-        dome.height = _domeHeight;
-        dome.radius = _domeDiameter/2;
-        plug->renderScene(dome);
-    }
+        if (plug->isEnabled()) {
 
+            ofPushStyle();
+            ofPushMatrix();
+            glPushAttrib(GL_ALL_ATTRIB_BITS);
+            glPushClientAttrib(GL_CLIENT_ALL_ATTRIB_BITS);
+
+            plug->renderScene(dome);
+            
+            glPopClientAttrib();
+            glPopAttrib();
+            ofPopMatrix();
+            ofPopStyle();
+            
+            ofDisableLighting();
+            
+        }
+    }
 }
 
 void radomeApp::drawDome() {
@@ -508,7 +540,7 @@ void radomeApp::drawDome() {
 }
 
 void radomeApp::drawGroundPlane() {
-    float size = _domeDiameter * 5;
+    float size = 300 * 5;
     float ticks = 40.0;
     
     float step = size / ticks;
@@ -743,6 +775,11 @@ void radomeApp::guiEvent(ofxUIEventArgs &e) {
         if (slider && _projectorList.size() > 0 && _projectorList[0]) {
             _projectorList[0]->setLensOffsetY(slider->getScaledValue());
         }
+    } else if (name == "P1 ROLL") {
+        auto slider = dynamic_cast<ofxUISlider*>(e.widget);
+        if (slider && _projectorList.size() > 0 && _projectorList[0]) {
+            _projectorList[0]->setRoll(slider->getScaledValue());
+        }
     } else if (name == "P2 HEIGHT") {
         auto slider = dynamic_cast<ofxUISlider*>(e.widget);
         if (slider && _projectorList.size() > 1 && _projectorList[1]) {
@@ -773,6 +810,11 @@ void radomeApp::guiEvent(ofxUIEventArgs &e) {
         if (slider && _projectorList.size() > 1 && _projectorList[1]) {
             _projectorList[1]->setLensOffsetY(slider->getScaledValue());
         }
+    } else if (name == "P2 ROLL") {
+        auto slider = dynamic_cast<ofxUISlider*>(e.widget);
+        if (slider && _projectorList.size() > 0 && _projectorList[0]) {
+            _projectorList[1]->setRoll(slider->getScaledValue());
+        }
     } else if (name == "P3 HEIGHT") {
         auto slider = dynamic_cast<ofxUISlider*>(e.widget);
         if (slider && _projectorList.size() > 2 && _projectorList[2]) {
@@ -802,6 +844,11 @@ void radomeApp::guiEvent(ofxUIEventArgs &e) {
         auto slider = dynamic_cast<ofxUISlider*>(e.widget);
         if (slider && _projectorList.size() > 2 && _projectorList[2]) {
             _projectorList[2]->setLensOffsetY(slider->getScaledValue());
+        }
+    } else if (name == "P3 ROLL") {
+        auto slider = dynamic_cast<ofxUISlider*>(e.widget);
+        if (slider && _projectorList.size() > 0 && _projectorList[0]) {
+            _projectorList[2]->setRoll(slider->getScaledValue());
         }
     } else if (name == "Load") {
         if (_pCalibrationUI) {
@@ -848,6 +895,11 @@ void radomeApp::guiEvent(ofxUIEventArgs &e) {
         if (slider) {
             _domeSliceParameterization = slider->getScaledValue();
             prepDrawList();
+        }
+    }
+    for (auto plug : PluginLibrary::getList()) {
+        if (typeid(*plug).name() == name) {
+            plug->setEnabled(!plug->isEnabled());
         }
     }
 }

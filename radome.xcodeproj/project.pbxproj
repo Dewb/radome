@@ -31,6 +31,9 @@
 		4FC0D2999CA3174FBAB27018 /* OscOutboundPacketStream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 66865D9E918585208CC48B40 /* OscOutboundPacketStream.cpp */; };
 		534EFFB9BC2F2535C803A07C /* ofxUIRadio.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 23F82985777C7F665EEAE505 /* ofxUIRadio.cpp */; };
 		584B084376ED7A5DEF6D394E /* ofxUIRectangle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3992DCCF8E7F65C760C66EFD /* ofxUIRectangle.cpp */; };
+		5B0C68251A35603000C3955C /* FlockingPlugin.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5B0C68221A35603000C3955C /* FlockingPlugin.cpp */; };
+		5B0C68261A35603000C3955C /* SwayTestPlugin.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5B0C68241A35603000C3955C /* SwayTestPlugin.cpp */; };
+		5B0C68291A35606F00C3955C /* Flock.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5B0C68271A35606F00C3955C /* Flock.cpp */; };
 		5BD6EF0419D20709008EE4C9 /* radomePlugin.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5BD6EF0219D20709008EE4C9 /* radomePlugin.cpp */; };
 		5BFD42F619CE089D00F42053 /* icosohedron.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5BFD42E819CE089D00F42053 /* icosohedron.cpp */; };
 		5BFD42F719CE089D00F42053 /* radomeApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5BFD42EA19CE089D00F42053 /* radomeApp.cpp */; };
@@ -217,6 +220,10 @@
 		57C8979AFBD1568CC6E0701B /* aiTexture.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = aiTexture.h; path = ../of_v0.8.4_osx_release/addons/ofxAssimpModelLoader/libs/assimp/include/aiTexture.h; sourceTree = SOURCE_ROOT; };
 		5980DFD20857847B77199FBD /* ofxAssimpAnimation.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxAssimpAnimation.h; path = ../of_v0.8.4_osx_release/addons/ofxAssimpModelLoader/src/ofxAssimpAnimation.h; sourceTree = SOURCE_ROOT; };
 		59928553B29E6636B8AA1F7B /* ofxUIDragableLabelButton.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofxUIDragableLabelButton.cpp; path = ../of_v0.8.4_osx_release/addons/ofxUI/src/ofxUIDragableLabelButton.cpp; sourceTree = SOURCE_ROOT; };
+		5B0C68221A35603000C3955C /* FlockingPlugin.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FlockingPlugin.cpp; sourceTree = "<group>"; };
+		5B0C68241A35603000C3955C /* SwayTestPlugin.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SwayTestPlugin.cpp; sourceTree = "<group>"; };
+		5B0C68271A35606F00C3955C /* Flock.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Flock.cpp; sourceTree = "<group>"; };
+		5B0C68281A35606F00C3955C /* Flock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flock.h; sourceTree = "<group>"; };
 		5BD6EF0219D20709008EE4C9 /* radomePlugin.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = radomePlugin.cpp; sourceTree = "<group>"; };
 		5BD6EF0319D20709008EE4C9 /* radomePlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = radomePlugin.h; sourceTree = "<group>"; };
 		5BFD42E819CE089D00F42053 /* icosohedron.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = icosohedron.cpp; sourceTree = "<group>"; };
@@ -332,7 +339,7 @@
 		E45BE9770E8CC7DD009D7055 /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = /System/Library/Frameworks/CoreServices.framework; sourceTree = "<absolute>"; };
 		E45BE9790E8CC7DD009D7055 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = /System/Library/Frameworks/OpenGL.framework; sourceTree = "<absolute>"; };
 		E45BE97A0E8CC7DD009D7055 /* QuickTime.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickTime.framework; path = /System/Library/Frameworks/QuickTime.framework; sourceTree = "<absolute>"; };
-		E4B69B5B0A3A1756003C02F2 /* radomeDebug.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = radomeDebug.app; path = RadomeDebug.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E4B69B5B0A3A1756003C02F2 /* RadomeDebug.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RadomeDebug.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4B69E1D0A3A1BDC003C02F2 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = src/main.cpp; sourceTree = SOURCE_ROOT; };
 		E4B6FCAD0C3E899E008CF71C /* openFrameworks-Info.plist */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.plist.xml; path = "openFrameworks-Info.plist"; sourceTree = "<group>"; };
 		E4C2424410CC5A17004149E2 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
@@ -479,6 +486,33 @@
 				EEFDD7AE0009AE6F77EF2A93 /* include */,
 			);
 			name = assimp;
+			sourceTree = "<group>";
+		};
+		5B0C68201A35603000C3955C /* plugins */ = {
+			isa = PBXGroup;
+			children = (
+				5B0C68211A35603000C3955C /* Flocking */,
+				5B0C68231A35603000C3955C /* SwayTest */,
+			);
+			path = plugins;
+			sourceTree = "<group>";
+		};
+		5B0C68211A35603000C3955C /* Flocking */ = {
+			isa = PBXGroup;
+			children = (
+				5B0C68271A35606F00C3955C /* Flock.cpp */,
+				5B0C68281A35606F00C3955C /* Flock.h */,
+				5B0C68221A35603000C3955C /* FlockingPlugin.cpp */,
+			);
+			path = Flocking;
+			sourceTree = "<group>";
+		};
+		5B0C68231A35603000C3955C /* SwayTest */ = {
+			isa = PBXGroup;
+			children = (
+				5B0C68241A35603000C3955C /* SwayTestPlugin.cpp */,
+			);
+			path = SwayTest;
 			sourceTree = "<group>";
 		};
 		5BFD42FD19CE096500F42053 /* ofxAutoReloadedShader */ = {
@@ -837,13 +871,14 @@
 				E4EEC9E9138DF44700A80321 /* openFrameworks */,
 				BB4B014C10F69532006C3DED /* addons */,
 				E45BE5980E8CC70C009D7055 /* frameworks */,
-				E4B69B5B0A3A1756003C02F2 /* radomeDebug.app */,
+				E4B69B5B0A3A1756003C02F2 /* RadomeDebug.app */,
 			);
 			sourceTree = "<group>";
 		};
 		E4B69E1C0A3A1BDC003C02F2 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				5B0C68201A35603000C3955C /* plugins */,
 				5BD6EF0219D20709008EE4C9 /* radomePlugin.cpp */,
 				5BD6EF0319D20709008EE4C9 /* radomePlugin.h */,
 				5BFD42E819CE089D00F42053 /* icosohedron.cpp */,
@@ -954,7 +989,7 @@
 			);
 			name = Radome;
 			productName = myOFApp;
-			productReference = E4B69B5B0A3A1756003C02F2 /* radomeDebug.app */;
+			productReference = E4B69B5B0A3A1756003C02F2 /* RadomeDebug.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -1087,12 +1122,15 @@
 				5BFD42FC19CE089D00F42053 /* turntableCam.cpp in Sources */,
 				253F9983594EAC0B06DD6604 /* ofxUISlider.cpp in Sources */,
 				765EB1D274CA2E34FEC9E5EA /* ofxUISortableList.cpp in Sources */,
+				5B0C68261A35603000C3955C /* SwayTestPlugin.cpp in Sources */,
 				5BFD42FA19CE089D00F42053 /* radomeSyphonClient.cpp in Sources */,
 				7CF5F259B840732B59DB1220 /* ofxUISpacer.cpp in Sources */,
+				5B0C68251A35603000C3955C /* FlockingPlugin.cpp in Sources */,
 				2FB51AC4FCB31064C2DA06A8 /* ofxUISpectrum.cpp in Sources */,
 				5BFD42F919CE089D00F42053 /* radomeProjector.cpp in Sources */,
 				A8E5A243757EEB1C141DFDC0 /* ofxUISuperCanvas.cpp in Sources */,
 				CD63672907D93CAFED34406A /* ofxUITabBar.cpp in Sources */,
+				5B0C68291A35606F00C3955C /* Flock.cpp in Sources */,
 				5BFD42F719CE089D00F42053 /* radomeApp.cpp in Sources */,
 				5BD6EF0419D20709008EE4C9 /* radomePlugin.cpp in Sources */,
 				8BBCC76CF52F4ABF182D5111 /* ofxUITextArea.cpp in Sources */,

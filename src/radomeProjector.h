@@ -33,13 +33,12 @@ public:
     float getFOV() const { return _fov; }
     void setTargetHeight(float h) { _targetHeight = h; updateCamera(); }
     float getTargetHeight() const { return _targetHeight; }
-    
-    // of0073 requires patched ofCamera.cpp/.h for this:
-    // https://github.com/openframeworks/openFrameworks/commit/786a8d381aece3e638ebcd2ee08a784071d5cd40
     void setLensOffsetX(float x) { _lensOffsetX = x; updateCamera(); }
     float getLensOffsetX() const { return _lensOffsetX; }
     void setLensOffsetY(float y) { _lensOffsetY = y; updateCamera(); }
     float getLensOffsetY() const { return _lensOffsetY; }
+    void getRoll() const { return _roll; }
+    float setRoll(float r) { _roll = r; updateCamera(); }
         
 protected:
     void updateCamera();
@@ -56,6 +55,7 @@ protected:
     float _targetHeight;
     float _lensOffsetX;
     float _lensOffsetY;
+    float _roll;
 };
 
 /*
