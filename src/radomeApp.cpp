@@ -64,7 +64,7 @@ void radomeApp::setup() {
     _triangles = icosohedron::create(4);
     
     _vidOverlay.initialize(DEFAULT_SYPHON_APP, DEFAULT_SYPHON_SERVER);
-    _vidOverlay.setFaderValue(0.75);
+    _vidOverlay.setFaderValue(1.0);
 
     _contrast = 1.0;
     _saturation = 1.0;
@@ -668,7 +668,7 @@ void radomeApp::guiEvent(ofxUIEventArgs &e) {
     if (name == "XFADE") {
         auto slider = dynamic_cast<ofxUISlider*>(e.widget);
         if (slider) {
-            _vidOverlay.setFaderValue(slider->getValue()*0.01);
+            _vidOverlay.setFaderValue(slider->getValue());
         }
     } else if (name == "Add 3D Model...") {
         auto pButton = dynamic_cast<ofxUIButton*>(e.widget);
