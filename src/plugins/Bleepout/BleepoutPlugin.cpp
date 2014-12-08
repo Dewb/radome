@@ -75,7 +75,7 @@ public:
     }
     ofVec3f draw() {
         ofSetColor(_color);
-        ofSphere(_path.getPosition(), 8);
+        ofDrawSphere(_path.getPosition(), 8);
     }
 protected:
     CircleTrajectory _path;
