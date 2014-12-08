@@ -21,11 +21,11 @@ class CircleTrajectory {
 public:
     CircleTrajectory(float radius, ofVec3f u, ofVec3f v, float speed = 0.02) {
         _u = u.normalized();
-        _w = u.getCrossed(v.normalized()).getCrossed(_u).normalized();
+        _w = _u.getCrossed(v.normalized()).getCrossed(_u).normalized();
         _speed = speed;
         _t = 0;
         _r = radius;
-        position = u * radius;
+        position = _u * radius;
     }
     void tick() {
         _t += _speed;
