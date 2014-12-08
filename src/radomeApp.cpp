@@ -6,21 +6,11 @@
 #define CALIBRATIONUI_WIDTH 280
 #define DEFAULT_SYPHON_APP "Arena"
 #define DEFAULT_SYPHON_SERVER "Composition"
-
-// Big dome (in deci-feet)
-//#define DOME_DIAMETER 300
-//#define DOME_HEIGHT 110
-
-// Small dome (in deci-feet)
-//#define DOME_DIAMETER 180
-//#define DOME_HEIGHT 110
-
-
 #define NUM_PROJECTORS 3
 #define DEFAULT_SETTINGS_FILE "projectorSettings.xml"
-
 #define PROJECTOR_INITIAL_HEIGHT 147.5
-//#define PROJECTOR_INITIAL_DISTANCE DOME_DIAMETER*1.5
+
+#define APP_VERSION "v0.4"
 
 radomeApp::radomeApp() {
     _pUI = NULL;
@@ -37,6 +27,7 @@ radomeApp::~radomeApp() {
 void radomeApp::setup() {
     
     _winManager.setup((ofxAppGLFWWindowMulti *)ofGetWindowPtr());
+    ofSetWindowTitle("Radome");
     
     ofSetFrameRate(45);
     ofEnableSmoothing();
@@ -123,18 +114,19 @@ void setUIColors(ofxUICanvas* pCanvas) {
 }
 
 void radomeApp::initGUI() {
-    _pUI = new ofxUICanvas(5, 0, SIDEBAR_WIDTH, ofGetHeight());
+    _pUI = new ofxUICanvas(10, 0, SIDEBAR_WIDTH, ofGetHeight());
     _pUI->setWidgetSpacing(5.0);
     _pUI->setDrawBack(true);
     _pUI->setFont("GUI/Exo-Regular.ttf", true, true, false, 0.0, OFX_UI_FONT_RESOLUTION);
-    //setUIColors(_pUI);
     
-    _pUI->addWidgetDown(new ofxUILabel("RADOME 0.4", OFX_UI_FONT_LARGE));
-    _pUI->addWidgetDown(new ofxUILabel("Build " __DATE__ " " __TIME__, OFX_UI_FONT_SMALL));
+    _pUI->addWidgetDown(new ofxUILabel("RADOME " APP_VERSION, OFX_UI_FONT_LARGE));
+    _pUI->addWidgetDown(new ofxUILabel(__DATE__ " " __TIME__, OFX_UI_FONT_SMALL));
     _pUI->addSpacer(0, 12);
     
     _displayModeNames.push_back("3D Scene");
+#ifdef SHOW_CUBE_MAP
     _displayModeNames.push_back("Cube Map");
+#endif
     _displayModeNames.push_back("Dome Preview");
     _displayModeNames.push_back("Output Preview");
     addRadioAndSetFirstItem(_pUI, "DISPLAY MODE", _displayModeNames, OFX_UI_ORIENTATION_VERTICAL, 16, 16);
@@ -414,6 +406,7 @@ void radomeApp::draw() {
             ofPopStyle();
         }
         break;
+#ifdef SHOW_CUBE_MAP
         case DisplayCubeMap: {
             ofSetColor(200,220,255);
             int margin = 2;
@@ -428,6 +421,7 @@ void radomeApp::draw() {
             }
         }
         break;
+#endif
         case DisplayDome: {
 
             ofClear(20, 100, 50);

@@ -22,7 +22,9 @@ using std::string;
 
 enum DisplayMode {
     DisplayScene = 0,
+#ifdef SHOW_CUBE_MAP
     DisplayCubeMap,
+#endif
     DisplayDome,
     DisplayProjectorOutput,
     LastDisplayMode,
