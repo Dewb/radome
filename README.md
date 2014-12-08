@@ -19,7 +19,7 @@ Radome is built with openFrameworks v0.8.4.  The following non-core addons are r
 Installation instructions:
 --------------------------
 
-1. Download [openFrameworks v0.8.4](http://openframeworks.cc/download/older.html)
+1. Download [openFrameworks v0.8.4](http://openframeworks.cc/versions/v0.8.4/)
 
 2. Clone the following oF extensions into the addons folder:
   * ofxSyphon (head revision)
@@ -27,7 +27,7 @@ Installation instructions:
   * ofxAutoReloadedShader (head revision)
   * ofxUI (commit 51b2dcb5d6bef17e18c23adf91ae94fce095f42d)
   ```
-  cd of_v0.7.4_osx_release/addons
+  cd of_v0.8.4_osx_release/addons
   git clone https://github.com/astellato/ofxSyphon
   git clone https://github.com/andreasmuller/ofxCubeMap
   git clone https://github.com/andreasmuller/ofxAutoReloadedShader
