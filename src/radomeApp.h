@@ -79,7 +79,7 @@ protected:
 
     list<radomeModel*> _modelList;
     vector<radomeProjector*> _projectorList;
-    
+
     radomeSyphonClient _vidOverlay;
     ofImage _testPatternImage;
     bool _showTestPattern;

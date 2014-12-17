@@ -75,8 +75,9 @@ void radomeApp::setup() {
     
     glEnable(GL_DEPTH_TEST);
     prepDrawList();
-    
+#ifdef USE_OSC
     _oscReceiver.setup(6000);
+#endif
 }
 
 void radomeApp::createProjectorCalibrationUI(ofxUICanvas* pCanvas, int index) {
@@ -293,7 +294,8 @@ void radomeApp::update() {
     
     updateCubeMap();
     updateProjectorOutput();
-    
+
+#ifdef USE_OSC
     while(_oscReceiver.hasWaitingMessages()){
 		ofxOscMessage m;
 		_oscReceiver.getNextMessage(&m);
@@ -304,6 +306,7 @@ void radomeApp::update() {
             }
         }
     }
+#endif
 }
 
 void radomeApp::updateCubeMap() {

@@ -8,6 +8,7 @@
 
 #include "radomeSyphonClient.h"
 
+
 radomeSyphonClient::radomeSyphonClient()
 : bEnabled(true)
 , bBound(false)
@@ -16,10 +17,12 @@ radomeSyphonClient::radomeSyphonClient()
 }
 
 void radomeSyphonClient::initialize(string app, string server) {
-    if (!bSetup)
+#ifdef USE_SYPHON
+   if (!bSetup)
         setup();
     setApplicationName(app);
     setServerName(server);
+#endif
 }
 
 // Binds only if the client is actually connected to a server and receiving frames.
@@ -40,14 +43,19 @@ bool radomeSyphonClient::maybeBind() {
 }
 
 void radomeSyphonClient::bind() {
+#ifdef USE_SYPHON
     ofxSyphonClient::bind();
     bBound = true;
+#endif
 }
 
 void radomeSyphonClient::unbind() {
     if (!bBound) {
         return;
     }
+#ifdef USE_SYPHON
     ofxSyphonClient::unbind();
     bBound = false;
+#endif
 }
+
