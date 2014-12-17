@@ -2,6 +2,24 @@
 *.app/
 *Debug.app/
 bin/data/*.xml
+bin/*
+obj
+!bin/data
+
+# Visual Studio
+
+obj
+*.aps
+*.user
+*.opensdf
+*.sdf
+*.cachefile
+*.sln.docstates
+*.vspscc
+*.scc
+*.vssscc
+*.pdb
+*.suo
 
 # https://github.com/github/gitignore/blob/master/Global/Xcode.gitignore
 build/

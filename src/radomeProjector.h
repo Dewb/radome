@@ -37,8 +37,8 @@ public:
     float getLensOffsetX() const { return _lensOffsetX; }
     void setLensOffsetY(float y) { _lensOffsetY = y; updateCamera(); }
     float getLensOffsetY() const { return _lensOffsetY; }
-    void getRoll() const { return _roll; }
-    float setRoll(float r) { _roll = r; updateCamera(); }
+    float getRoll() const { return _roll; }
+    void setRoll(float r) { _roll = r; updateCamera(); }
         
 protected:
     void updateCamera();

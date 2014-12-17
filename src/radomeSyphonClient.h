@@ -9,9 +9,28 @@
 #ifndef __radome__radomeSyphonClient__
 #define __radome__radomeSyphonClient__
 
+#ifdef USE_SYPHON
+
 #include "ofxSyphon.h"
 
-class radomeSyphonClient : public ofxSyphonClient {
+typedef ofxSyphonClient ClientBase;
+#else
+
+#include "ofTexture.h"
+
+class ClientBase {
+public:
+   ofTexture mTex;
+   float getWidth() { return 0; }
+   float getHeight() { return 0; }
+   void setApplicationName(string s) {}
+   void setServerName(string s) {}
+};
+
+#endif
+
+class radomeSyphonClient : public ClientBase {
+
 public:
     radomeSyphonClient();
     void initialize(string app, string server);
@@ -32,5 +51,6 @@ protected:
     bool bEnabled;
     bool bBound;
 };
+
 
 #endif /* defined(__radome__radomeSyphonClient__) */

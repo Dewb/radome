@@ -54,7 +54,7 @@ protected:
     ofxTurntableCam _cam;
 
     vector<radomeProjector*> _projectorList;
-        
+
     enum DisplayMode _displayMode;
     vector<string> _displayModeNames;
     vector<string> _mixModeNames;

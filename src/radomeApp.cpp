@@ -57,7 +57,9 @@ void radomeApp::setup() {
     
     glEnable(GL_DEPTH_TEST);
 
+#ifdef USE_OSC
     _oscReceiver.setup(6000);
+#endif
 }
 
 void radomeApp::createProjectorCalibrationUI(ofxUICanvas* pCanvas, int index) {
@@ -241,6 +243,7 @@ void radomeApp::update() {
 
     _renderer.render(_projectorList);
     
+#ifdef USE_OSC
     while(_oscReceiver.hasWaitingMessages()){
 		ofxOscMessage m;
 		_oscReceiver.getNextMessage(&m);
@@ -251,11 +254,12 @@ void radomeApp::update() {
             }
         }
     }
-    
+
     _pUI->setHeight(ofGetHeight());
     _pCalibrationUI->setHeight(ofGetHeight());
     _pCalibrationUI2->setHeight(ofGetHeight());
     _pInputUI->setHeight(ofGetHeight());
+#endif
 }
 
 void radomeApp::draw() {

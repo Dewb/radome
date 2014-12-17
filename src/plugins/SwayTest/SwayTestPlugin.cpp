@@ -8,6 +8,7 @@
 
 #include "radomePlugin.h"
 #include "radomeModel.h"
+#include "ofxOsc.h"
 
 class User {
 public:
