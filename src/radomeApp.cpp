@@ -620,23 +620,53 @@ void radomeApp::keyPressed(int key) {
             }
             break;
     }
+    
+    for (auto plug : PluginLibrary::getList()) {
+        if (plug->isEnabled()) {
+            plug->keyPressed(key);
+        }
+    }
 }
 
 void radomeApp::mousePressed(int x, int y, int button) {
     if ((x > SIDEBAR_WIDTH + 5) &&
-        (!_pCalibrationUI || !_pCalibrationUI->isVisible() || x > (SIDEBAR_WIDTH + CALIBRATIONUI_WIDTH + 10)))
+        (!_pCalibrationUI || !_pCalibrationUI->isVisible() || x > (SIDEBAR_WIDTH + CALIBRATIONUI_WIDTH + 10))) {
         _cam.mousePressed(x, y, button);
+    }
+    
+    for (auto plug : PluginLibrary::getList()) {
+        if (plug->isEnabled()) {
+            plug->mousePressed(x, y, button);
+        }
+    }
 }
 
 void radomeApp::mouseReleased(int x, int y, int button) {
     _cam.mouseReleased(x, y, button);
+
+    for (auto plug : PluginLibrary::getList()) {
+        if (plug->isEnabled()) {
+            plug->mouseReleased(x, y, button);
+        }
+    }
 }
 
 void radomeApp::mouseDragged(int x, int y, int button) {
     _cam.mouseDragged(x, y, button);
+    
+    for (auto plug : PluginLibrary::getList()) {
+        if (plug->isEnabled()) {
+            plug->mouseDragged(x, y, button);
+        }
+    }
 }
 
 void radomeApp::mouseMoved(int x, int y) {
+    for (auto plug : PluginLibrary::getList()) {
+        if (plug->isEnabled()) {
+            plug->mouseMoved(x, y);
+        }
+    }
 }
 
 void radomeApp::changeDisplayMode(DisplayMode mode) {
