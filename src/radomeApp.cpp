@@ -387,6 +387,7 @@ void radomeApp::draw() {
         case DisplayScene: {
             ofPushStyle();
             ofEnableBlendMode(OF_BLENDMODE_ALPHA);
+            ofClear(0, 0, 0);
 
             _cam.setDistance(_domeDiameter*1.6);
             _cam.begin();
@@ -448,6 +449,7 @@ void radomeApp::draw() {
         break;
         case DisplayProjectorOutput:
         case LastDisplayMode: {
+            ofClear(0, 0, 0);
             ofSetColor(200,220,255);
             int margin = 2;
             int w = (ofGetWindowWidth() - SIDEBAR_WIDTH - margin*4) / 2;
