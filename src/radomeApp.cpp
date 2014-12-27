@@ -160,7 +160,7 @@ void radomeApp::initGUI() {
     addRadioAndSetFirstItem(_pUI, "MAPPING MODE", _mappingModeNames, OFX_UI_ORIENTATION_VERTICAL, 16, 16);
     _pUI->addSpacer(0, 12);
     
-    _pInputUI = new ofxUICanvas(SIDEBAR_WIDTH + 5, 0, CALIBRATIONUI_WIDTH, ofGetHeight());
+    _pInputUI = new ofxUICanvas(SIDEBAR_WIDTH + 10, 0, CALIBRATIONUI_WIDTH, ofGetHeight());
     _pInputUI->setWidgetSpacing(5.0);
     _pInputUI->setDrawBack(true);
     _pInputUI->setFont("GUI/Exo-Regular.ttf", true, true, false, 0.0, OFX_UI_FONT_RESOLUTION);
@@ -186,7 +186,7 @@ void radomeApp::initGUI() {
         _pInputUI->addToggle(typeid(*plug).name(), false, 25, 25);
     }
     
-    _pCalibrationUI = new ofxUICanvas(SIDEBAR_WIDTH + 5, 0, CALIBRATIONUI_WIDTH, ofGetHeight());
+    _pCalibrationUI = new ofxUICanvas(SIDEBAR_WIDTH + 10, 0, CALIBRATIONUI_WIDTH, ofGetHeight());
     _pCalibrationUI->setWidgetSpacing(5.0);
     _pCalibrationUI->setDrawBack(true);
     _pCalibrationUI->setFont("GUI/Exo-Regular.ttf", true, true, false, 0.0, OFX_UI_FONT_RESOLUTION);
@@ -304,6 +304,10 @@ void radomeApp::update() {
             }
         }
     }
+    
+    _pUI->setHeight(ofGetHeight());
+    _pCalibrationUI->setHeight(ofGetHeight());
+    _pInputUI->setHeight(ofGetHeight());
 }
 
 void radomeApp::updateCubeMap() {
