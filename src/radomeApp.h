@@ -19,6 +19,9 @@ using std::list;
 using std::vector;
 using std::string;
 
+#define SHOW_CUBE_MAP
+
+
 
 enum DisplayMode {
     DisplayScene = 0,

@@ -138,6 +138,7 @@
 		5BB4EA171A4E56670047F957 /* ofxTCPManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5BB4EA101A4E56670047F957 /* ofxTCPManager.cpp */; };
 		5BB4EA181A4E56670047F957 /* ofxTCPServer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5BB4EA121A4E56670047F957 /* ofxTCPServer.cpp */; };
 		5BB4EA191A4E56670047F957 /* ofxUDPManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5BB4EA141A4E56670047F957 /* ofxUDPManager.cpp */; };
+		5BB4EA2A1A53ACF70047F957 /* RoundResults.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5BB4EA281A53ACF70047F957 /* RoundResults.cpp */; };
 		5BD6EF0419D20709008EE4C9 /* radomePlugin.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5BD6EF0219D20709008EE4C9 /* radomePlugin.cpp */; };
 		5BFD42F619CE089D00F42053 /* icosohedron.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5BFD42E819CE089D00F42053 /* icosohedron.cpp */; };
 		5BFD42F719CE089D00F42053 /* radomeApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5BFD42EA19CE089D00F42053 /* radomeApp.cpp */; };
@@ -526,6 +527,8 @@
 		5BB4EA131A4E56670047F957 /* ofxTCPServer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxTCPServer.h; sourceTree = "<group>"; };
 		5BB4EA141A4E56670047F957 /* ofxUDPManager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ofxUDPManager.cpp; sourceTree = "<group>"; };
 		5BB4EA151A4E56670047F957 /* ofxUDPManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxUDPManager.h; sourceTree = "<group>"; };
+		5BB4EA281A53ACF70047F957 /* RoundResults.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RoundResults.cpp; sourceTree = "<group>"; };
+		5BB4EA291A53ACF70047F957 /* RoundResults.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoundResults.h; sourceTree = "<group>"; };
 		5BD6EF0219D20709008EE4C9 /* radomePlugin.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = radomePlugin.cpp; sourceTree = "<group>"; };
 		5BD6EF0319D20709008EE4C9 /* radomePlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = radomePlugin.h; sourceTree = "<group>"; };
 		5BFD42E819CE089D00F42053 /* icosohedron.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = icosohedron.cpp; sourceTree = "<group>"; };
@@ -948,6 +951,8 @@
 		5BB4E6311A4E55E30047F957 /* core */ = {
 			isa = PBXGroup;
 			children = (
+				5BB4EA281A53ACF70047F957 /* RoundResults.cpp */,
+				5BB4EA291A53ACF70047F957 /* RoundResults.h */,
 				5BB4E6321A4E55E30047F957 /* AdminController.cpp */,
 				5BB4E6331A4E55E30047F957 /* AdminController.h */,
 				5BB4E6341A4E55E30047F957 /* AudioManager.cpp */,
@@ -1877,6 +1882,7 @@
 				5B94A4CD1A35A4C4001CA6F5 /* ofxUIToggleMatrix.cpp in Sources */,
 				5BB4EA041A4E565A0047F957 /* Client.cpp in Sources */,
 				5BB4EA021A4E565A0047F957 /* jsoncpp.cpp in Sources */,
+				5BB4EA2A1A53ACF70047F957 /* RoundResults.cpp in Sources */,
 				5BB4E9101A4E56550047F957 /* ofxBulletCustomShape.cpp in Sources */,
 				5B94A4CC1A35A4C4001CA6F5 /* ofxUIToggle.cpp in Sources */,
 				5BB4E68D1A4E55E30047F957 /* Common.cpp in Sources */,

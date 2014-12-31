@@ -23,6 +23,12 @@ struct DomeInfo {
     long long frameTime;
 };
 
+class LineWidthAdjuster {
+public:
+    static void setLineWidth(float w) { ofSetLineWidth(factor * w); }
+    static float factor;
+};
+
 class radomePlugin {
 public:
     radomePlugin();

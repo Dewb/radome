@@ -9,6 +9,8 @@
 
 #include "radomePlugin.h"
 
+float LineWidthAdjuster::factor = 1.0;
+
 radomePlugin::radomePlugin() {
     _enabled = false;
     _initialized = false;

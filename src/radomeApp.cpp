@@ -41,7 +41,7 @@ void radomeApp::setup() {
 
     _shader.load("radome");
     
-    _cubeMap.initEmptyTextures(1024, GL_RGBA);
+    _cubeMap.initEmptyTextures(2048, GL_RGBA);
     _cubeMap.setNearFar(ofVec2f(0.01, 8192.0));
     
     _domeHeight = 110;
@@ -312,12 +312,20 @@ void radomeApp::update() {
 
 void radomeApp::updateCubeMap() {
     glEnable(GL_DEPTH_TEST);
+    _cubeMap.setPosition(0, 0, 0);
+    LineWidthAdjuster::factor = 7.0;
+    
     for(int i = 0; i < 6; i++) {
         _cubeMap.beginDrawingInto3D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i);
+        ofPushStyle();
+        ofEnableBlendMode(OF_BLENDMODE_ALPHA);
         ofClear(0,0,0,0);
         drawScene();
+        ofPopStyle();
         _cubeMap.endDrawingInto3D();
     }
+    
+    LineWidthAdjuster::factor = 1.0;
 }
 
 void radomeApp::updateProjectorOutput() {
@@ -413,6 +421,7 @@ void radomeApp::draw() {
         break;
 #ifdef SHOW_CUBE_MAP
         case DisplayCubeMap: {
+            ofClear(0, 0, 0);
             ofSetColor(200,220,255);
             int margin = 2;
             int w = (ofGetWindowWidth() - SIDEBAR_WIDTH - margin*4) / 3;
@@ -507,9 +516,6 @@ void radomeApp::drawScene() {
             glPopAttrib();
             ofPopMatrix();
             ofPopStyle();
-            
-            ofDisableLighting();
-            
         }
     }
 }
