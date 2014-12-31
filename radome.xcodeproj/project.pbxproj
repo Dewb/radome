@@ -88,7 +88,6 @@
 		5BB4E6931A4E55E30047F957 /* PlayerManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5BB4E6441A4E55E30047F957 /* PlayerManager.cpp */; };
 		5BB4E6941A4E55E30047F957 /* RoundComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5BB4E6461A4E55E30047F957 /* RoundComponent.cpp */; };
 		5BB4E6951A4E55E30047F957 /* RoundManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5BB4E6481A4E55E30047F957 /* RoundManager.cpp */; };
-		5BB4E6961A4E55E30047F957 /* SetupController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5BB4E64A1A4E55E30047F957 /* SetupController.cpp */; };
 		5BB4E6971A4E55E30047F957 /* SpaceController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5BB4E64C1A4E55E30047F957 /* SpaceController.cpp */; };
 		5BB4E6981A4E55E30047F957 /* Timing.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5BB4E64E1A4E55E30047F957 /* Timing.cpp */; };
 		5BB4E6991A4E55E30047F957 /* AnimationObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5BB4E6511A4E55E30047F957 /* AnimationObject.cpp */; };
@@ -411,8 +410,6 @@
 		5BB4E6471A4E55E30047F957 /* RoundComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoundComponent.h; sourceTree = "<group>"; };
 		5BB4E6481A4E55E30047F957 /* RoundManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RoundManager.cpp; sourceTree = "<group>"; };
 		5BB4E6491A4E55E30047F957 /* RoundManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoundManager.h; sourceTree = "<group>"; };
-		5BB4E64A1A4E55E30047F957 /* SetupController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SetupController.cpp; sourceTree = "<group>"; };
-		5BB4E64B1A4E55E30047F957 /* SetupController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetupController.h; sourceTree = "<group>"; };
 		5BB4E64C1A4E55E30047F957 /* SpaceController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SpaceController.cpp; sourceTree = "<group>"; };
 		5BB4E64D1A4E55E30047F957 /* SpaceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpaceController.h; sourceTree = "<group>"; };
 		5BB4E64E1A4E55E30047F957 /* Timing.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Timing.cpp; sourceTree = "<group>"; };
@@ -977,8 +974,6 @@
 				5BB4E6471A4E55E30047F957 /* RoundComponent.h */,
 				5BB4E6481A4E55E30047F957 /* RoundManager.cpp */,
 				5BB4E6491A4E55E30047F957 /* RoundManager.h */,
-				5BB4E64A1A4E55E30047F957 /* SetupController.cpp */,
-				5BB4E64B1A4E55E30047F957 /* SetupController.h */,
 				5BB4E64C1A4E55E30047F957 /* SpaceController.cpp */,
 				5BB4E64D1A4E55E30047F957 /* SpaceController.h */,
 				5BB4E64E1A4E55E30047F957 /* Timing.cpp */,
@@ -1841,7 +1836,6 @@
 				039C3AD977F8E0B1BE0D63FF /* ofxCubeMap.cpp in Sources */,
 				5B94A4AA1A35A4C4001CA6F5 /* ofxUICircleSlider.cpp in Sources */,
 				412B10C711B4D0F417FA6622 /* ofxSyphonClient.mm in Sources */,
-				5BB4E6961A4E55E30047F957 /* SetupController.cpp in Sources */,
 				5BB4E6821A4E55E30047F957 /* BleepoutConfig.cpp in Sources */,
 				DCB975B922C1402BADD9612C /* ofxSyphonServer.mm in Sources */,
 				5BB4E6971A4E55E30047F957 /* SpaceController.cpp in Sources */,
