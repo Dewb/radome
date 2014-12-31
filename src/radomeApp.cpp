@@ -29,7 +29,7 @@ void radomeApp::setup() {
     _winManager.setup((ofxAppGLFWWindowMulti *)ofGetWindowPtr());
     ofSetWindowTitle("Radome");
     
-    ofSetFrameRate(45);
+    ofSetFrameRate(60);
     ofEnableSmoothing();
     ofEnableAlphaBlending();
     
