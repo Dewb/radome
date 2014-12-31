@@ -77,6 +77,11 @@ void radomeApp::setup() {
     prepDrawList();
     
     _oscReceiver.setup(6000);
+    
+    // enable Bleepout
+    if (PluginLibrary::getList().size()) {
+        PluginLibrary::getList().front()->setEnabled(true);
+    }
 }
 
 void radomeApp::createProjectorCalibrationUI(ofxUICanvas* pCanvas, int index) {
