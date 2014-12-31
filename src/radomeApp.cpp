@@ -318,7 +318,7 @@ void radomeApp::update() {
 void radomeApp::updateCubeMap() {
     glEnable(GL_DEPTH_TEST);
     _cubeMap.setPosition(0, 0, 0);
-    LineWidthAdjuster::factor = 7.0;
+    LineWidthAdjuster::factor = 4.0;
     
     for(int i = 0; i < 6; i++) {
         _cubeMap.beginDrawingInto3D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i);
