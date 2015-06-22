@@ -18,10 +18,7 @@ public:
     
     bool isEnabled() const { return bEnabled; }
     void setEnabled(bool b) { bEnabled = b; }
-    
-    float getFaderValue() const { return fFader; }
-    void setFaderValue(float f) { fFader = f; }
-    
+
     bool maybeBind();
     bool isBound() { return bBound; }
     
@@ -34,7 +31,6 @@ public:
 protected:
     bool bEnabled;
     bool bBound;
-    float fFader;
 };
 
 #endif /* defined(__radome__radomeSyphonClient__) */

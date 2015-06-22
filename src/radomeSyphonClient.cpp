@@ -11,7 +11,6 @@
 radomeSyphonClient::radomeSyphonClient()
 : bEnabled(true)
 , bBound(false)
-, fFader(1.0)
 {
 }
 

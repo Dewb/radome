@@ -21,6 +21,7 @@
 		5B0C68291A35606F00C3955C /* Flock.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5B0C68271A35606F00C3955C /* Flock.cpp */; };
 		5B1274281A35851B00A76407 /* ofxAppGLFWWindowMulti.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5B1274251A35851B00A76407 /* ofxAppGLFWWindowMulti.mm */; };
 		5B1274291A35851B00A76407 /* WindowManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5B1274261A35851B00A76407 /* WindowManager.cpp */; };
+		5B4B95701B373C6400BB6E5C /* radomeRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5B4B956E1B373C6400BB6E5C /* radomeRenderer.cpp */; };
 		5B94A43C1A359019001CA6F5 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B94A43B1A359019001CA6F5 /* Carbon.framework */; };
 		5B94A4A41A35A4C4001CA6F5 /* ofxUI2DGraph.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5B94A4441A35A4C4001CA6F5 /* ofxUI2DGraph.cpp */; };
 		5B94A4A51A35A4C4001CA6F5 /* ofxUI2DPad.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5B94A4461A35A4C4001CA6F5 /* ofxUI2DPad.cpp */; };
@@ -275,6 +276,8 @@
 		5B1274251A35851B00A76407 /* ofxAppGLFWWindowMulti.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ofxAppGLFWWindowMulti.mm; sourceTree = "<group>"; };
 		5B1274261A35851B00A76407 /* WindowManager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = WindowManager.cpp; sourceTree = "<group>"; };
 		5B1274271A35851B00A76407 /* WindowManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WindowManager.h; sourceTree = "<group>"; };
+		5B4B956E1B373C6400BB6E5C /* radomeRenderer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = radomeRenderer.cpp; sourceTree = "<group>"; };
+		5B4B956F1B373C6400BB6E5C /* radomeRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = radomeRenderer.h; sourceTree = "<group>"; };
 		5B557D6E1A35788200967B7B /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		5B94A43B1A359019001CA6F5 /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = System/Library/Frameworks/Carbon.framework; sourceTree = SDKROOT; };
 		5B94A4431A35A4C4001CA6F5 /* ofxUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxUI.h; sourceTree = "<group>"; };
@@ -1577,6 +1580,8 @@
 				5BFD42F419CE089D00F42053 /* turntableCam.cpp */,
 				5BFD42F519CE089D00F42053 /* turntableCam.h */,
 				E4B69E1D0A3A1BDC003C02F2 /* main.cpp */,
+				5B4B956E1B373C6400BB6E5C /* radomeRenderer.cpp */,
+				5B4B956F1B373C6400BB6E5C /* radomeRenderer.h */,
 			);
 			path = src;
 			sourceTree = SOURCE_ROOT;
@@ -1776,6 +1781,7 @@
 				5B94A4CE1A35A4C4001CA6F5 /* ofxUIValuePlotter.cpp in Sources */,
 				5BB4E6891A4E55E30047F957 /* Round4.cpp in Sources */,
 				5BB4E69E1A4E55E30047F957 /* Modifier.cpp in Sources */,
+				5B4B95701B373C6400BB6E5C /* radomeRenderer.cpp in Sources */,
 				1ECBAB3182F3314F46F20CEC /* ofxOscReceiver.cpp in Sources */,
 				5BB4E90E1A4E56550047F957 /* ofxBulletCone.cpp in Sources */,
 				5BB4E9091A4E56550047F957 /* ofxBulletWorldRigid.cpp in Sources */,

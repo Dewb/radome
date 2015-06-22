@@ -4,11 +4,13 @@
 
 #define SIDEBAR_WIDTH 190
 #define CALIBRATIONUI_WIDTH 280
-#define DEFAULT_SYPHON_APP "Arena"
-#define DEFAULT_SYPHON_SERVER "Composition"
 #define NUM_PROJECTORS 3
 #define DEFAULT_SETTINGS_FILE "projectorSettings.xml"
 #define PROJECTOR_INITIAL_HEIGHT 147.5
+
+#define DEFAULT_SYPHON_APP "Arena"
+#define DEFAULT_SYPHON_SERVER "Composition"
+
 
 #define APP_VERSION "v0.4"
 
@@ -21,7 +23,6 @@ radomeApp::~radomeApp() {
         delete (_pUI);
     
     deletePointerCollection(_projectorList);
-    deletePointerCollection(_modelList);
 }
 
 void radomeApp::setup() {
@@ -34,39 +35,19 @@ void radomeApp::setup() {
     ofEnableAlphaBlending();
     
     _displayMode = DisplayScene;
-    _mixMode = 0;
-    _mappingMode = 0;
-    _animationTime = 0.0;
-    _lastSystemTime = ofGetSystemTime();
 
-    _shader.load("radome");
-    
-    _cubeMap.initEmptyTextures(2048, GL_RGBA);
-    _cubeMap.setNearFar(ofVec2f(0.01, 8192.0));
-    
-    _domeHeight = 110;
-    _domeDiameter = 300;
-    _domeSliceParameterization = 1.0;
-    
-    _cam.setTarget(ofVec3f(0.0, _domeHeight*0.25, 0.0));
+    _renderer.setup();
+    _renderer.params.domeHeight = 110;
+    _renderer.params.domeDiameter = 300;
+    _renderer.params.domeCurve = 1.0;
+    _renderer.updateDomeModel();
+
+    _cam.setTarget(ofVec3f(0.0, _renderer.params.domeHeight*0.25, 0.0));
     _cam.setRotation(0.66, 0.5);
     _cam.setupPerspective(false);
-    
-    _triangles = icosohedron::create(4);
-    
-    _vidOverlay.initialize(DEFAULT_SYPHON_APP, DEFAULT_SYPHON_SERVER);
-    _vidOverlay.setFaderValue(1.0);
-
-    _contrast = 1.0;
-    _saturation = 1.0;
-    _brightness = 1.0;
-    
-    _testPatternImage.setUseTexture(true);
-    _testPatternImage.loadImage("testpatt.jpg");
-    _showTestPattern = false;
-    
+            
     for (int ii = 0; ii < NUM_PROJECTORS; ii++) {
-        _projectorList.push_back(new radomeProjector(ii*360.0/(NUM_PROJECTORS*1.0)+60.0, _domeDiameter*1.5, PROJECTOR_INITIAL_HEIGHT));
+        _projectorList.push_back(new radomeProjector(ii*360.0/(NUM_PROJECTORS*1.0)+60.0, _renderer.params.domeDiameter*1.5, PROJECTOR_INITIAL_HEIGHT));
     }    
     
     initGUI();
@@ -74,8 +55,7 @@ void radomeApp::setup() {
     _pCalibrationUI->loadSettings(DEFAULT_SETTINGS_FILE);
     
     glEnable(GL_DEPTH_TEST);
-    prepDrawList();
-    
+
     _oscReceiver.setup(6000);
     
     // enable Bleepout
@@ -95,7 +75,7 @@ void radomeApp::createProjectorCalibrationUI(ofxUICanvas* pCanvas, int index) {
     sprintf(buf, "P%d HEADING", index);
     pCanvas->addMinimalSlider(buf, 0.0, 360.0, 120.0 * index, w, 15);
     sprintf(buf, "P%d DISTANCE", index);
-    pCanvas->addMinimalSlider(buf, _domeHeight/20.0, _domeDiameter/5.0, _domeDiameter*0.15, w, 15);
+    pCanvas->addMinimalSlider(buf, _renderer.params.domeHeight/20.0, _renderer.params.domeDiameter/5.0, _renderer.params.domeDiameter*0.15, w, 15);
     sprintf(buf, "P%d FOV", index);
     pCanvas->addMinimalSlider(buf, 20.0, 90.0, 30.0, w, 15);
     sprintf(buf, "P%d TARGET", index);
@@ -151,7 +131,7 @@ void radomeApp::initGUI() {
     _pUI->addWidgetDown(new ofxUIBiLabelSlider(0, 0, SIDEBAR_WIDTH-10, 12, 0, 2.0, 1, "CONTRAST", "CONTRAST", "2X", OFX_UI_FONT_MEDIUM));
     _pUI->addWidgetDown(new ofxUIBiLabelSlider(0, 0, SIDEBAR_WIDTH-10, 12, 0, 2.0, 1, "SATURATION", "SATURATION", "2X", OFX_UI_FONT_MEDIUM));
     _pUI->addWidgetDown(new ofxUIBiLabelSlider(0, 0, SIDEBAR_WIDTH-10, 12, 0, 2.0, 1, "BRIGHTNESS", "BRIGHTNESS", "2X", OFX_UI_FONT_MEDIUM));
-    _pUI->addWidgetDown(new ofxUIBiLabelSlider(0, 0, SIDEBAR_WIDTH-10, 25, 0, 100, _vidOverlay.getFaderValue()*100.0, "XFADE", "2D", "3D", OFX_UI_FONT_MEDIUM));
+    _pUI->addWidgetDown(new ofxUIBiLabelSlider(0, 0, SIDEBAR_WIDTH-10, 25, 0, 100, _renderer.params.inputOpacity*100.0, "XFADE", "2D", "3D", OFX_UI_FONT_MEDIUM));
     
     _mixModeNames.push_back("Underlay");
     _mixModeNames.push_back("Overlay");
@@ -202,9 +182,9 @@ void radomeApp::initGUI() {
     
     int w = CALIBRATIONUI_WIDTH - 10;
     
-    _pCalibrationUI->addMinimalSlider("DOME HEIGHT", 5.0, 30.0, _domeHeight/10, w, 15);
-    _pCalibrationUI->addMinimalSlider("DOME DIAMETER", 5.0, 50.0, _domeDiameter/10, w, 15);
-    _pCalibrationUI->addMinimalSlider("DOME SLICE", 0.75, 1.0, _domeSliceParameterization, w, 15);
+    _pCalibrationUI->addMinimalSlider("DOME HEIGHT", 5.0, 30.0, _renderer.params.domeHeight/10, w, 15);
+    _pCalibrationUI->addMinimalSlider("DOME DIAMETER", 5.0, 50.0, _renderer.params.domeDiameter/10, w, 15);
+    _pCalibrationUI->addMinimalSlider("DOME CURVE", 0.75, 1.0, _renderer.params.domeCurve, w, 15);
 
     _pCalibrationUI->addSpacer(0, 12);
     
@@ -225,45 +205,11 @@ void radomeApp::initGUI() {
     ofAddListener(_pCalibrationUI->newGUIEvent, this, &radomeApp::guiEvent);
 }
 
-void radomeApp::prepDrawList()
-{
-    domeDrawIndex = glGenLists(1);
-    glNewList(domeDrawIndex, GL_COMPILE);
-    glBegin(GL_TRIANGLES);
-    float yshift = (1 - _domeSliceParameterization) * _domeHeight;
-    
-    // desired slice radius b = sqrt(radius * radius - yshift * yshift);
-    float b = _domeDiameter/2.0;
-    float radius = sqrt(b * b + yshift * yshift);
-    
-    ofVec3f d, s = ofVec3f(radius, _domeHeight + yshift, radius);
-    for (auto& t : _triangles) {
-        d = t.v0 * s;
-        d.y -= yshift;
-        glNormal3fv(&d[0]);
-        glVertex3fv(&d[0]);
-
-        d = t.v1 * s;
-        d.y -= yshift;
-        glNormal3fv(&d[0]);
-        glVertex3fv(&d[0]);
-
-        d = t.v2 * s;
-        d.y -= yshift;
-        glNormal3fv(&d[0]);
-        glVertex3fv(&d[0]);
-    }
-    glEnd();
-    glEndList();
-}
-
 void radomeApp::loadFile() {
     ofFileDialogResult result = ofSystemLoadDialog("Load Model", false, "./radome/content");
     
     if (result.bSuccess) {
-        auto model = new radomeModel();
-        model->loadModel(result.getPath());
-        _modelList.push_back(model);
+        _renderer.addModelFromFile(result.getPath());
     }
 }
 
@@ -274,20 +220,11 @@ void radomeApp::showProjectorWindow() {
 }
 
 void radomeApp::update() {
-    unsigned long long time = ofGetSystemTime();
-    _animationTime += (time - _lastSystemTime)/1000.0;
-    _lastSystemTime = time;
-    
-    if (_animationTime >= 1.0) {
-        _animationTime = 0.0;
-    }
-    for (auto iter = _modelList.begin(); iter != _modelList.end(); ++iter) {
-        (*iter)->update(_animationTime);
-    }
+
     
     DomeInfo dome;
-    dome.height = _domeHeight;
-    dome.radius = _domeDiameter/2;
+    dome.height = _renderer.params.domeHeight;
+    dome.radius = _renderer.params.domeDiameter/2;
     dome.frameTime = ofGetSystemTime();
     
     for (auto plug : PluginLibrary::getList()) {
@@ -295,9 +232,8 @@ void radomeApp::update() {
             plug->update(dome);
         }
     }
-    
-    updateCubeMap();
-    updateProjectorOutput();
+
+    _renderer.render(_projectorList);
     
     while(_oscReceiver.hasWaitingMessages()){
 		ofxOscMessage m;
@@ -315,73 +251,6 @@ void radomeApp::update() {
     _pInputUI->setHeight(ofGetHeight());
 }
 
-void radomeApp::updateCubeMap() {
-    glEnable(GL_DEPTH_TEST);
-    _cubeMap.setPosition(0, 0, 0);
-    LineWidthAdjuster::factor = 4.0;
-    
-    for(int i = 0; i < 6; i++) {
-        _cubeMap.beginDrawingInto3D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i);
-        ofPushStyle();
-        ofEnableBlendMode(OF_BLENDMODE_ALPHA);
-        ofClear(0,0,0,0);
-        drawScene();
-        ofPopStyle();
-        _cubeMap.endDrawingInto3D();
-    }
-    
-    LineWidthAdjuster::factor = 1.0;
-}
-
-void radomeApp::updateProjectorOutput() {
-    glEnable(GL_DEPTH_TEST);
-    for (auto iter = _projectorList.begin(); iter != _projectorList.end(); ++iter) {
-        (*iter)->renderBegin();
-
-        beginShader();
-        drawDome();
-        endShader();
-
-        (*iter)->renderEnd();
-    }
-}
-
-void radomeApp::beginShader() {
-    _shader.begin();
-    _cubeMap.bind();
-
-    _shader.setUniform1i("EnvMap", 0);
-    _shader.setUniform1i("mixMode", _mixMode);
-    _shader.setUniform1i("mappingMode", _mappingMode);
-    _shader.setUniform1f("domeDiameter", _domeDiameter);
-    _shader.setUniform1f("domeHeight", _domeHeight);
-    _shader.setUniform1f("contrast", _contrast);
-    _shader.setUniform1f("saturation", _saturation);
-    _shader.setUniform1f("brightness", _brightness);
-    
-    
-    if (_showTestPattern) {
-        _shader.setUniform1f("videoMix", 0.0);
-        _shader.setUniform2f("videoSize", _testPatternImage.getWidth(), _testPatternImage.getHeight());
-        _shader.setUniformTexture("video", _testPatternImage.getTextureReference(), 1);
-    } else if (_vidOverlay.maybeBind()) {
-        _shader.setUniform1f("videoMix", _vidOverlay.getFaderValue());
-        _shader.setUniform2f("videoSize", _vidOverlay.getWidth(), _vidOverlay.getHeight());
-        _shader.setUniformTexture("video", _vidOverlay.getTexture(), 1);
-    } else {
-        _shader.setUniform1f("videoMix", -1.0);
-        _shader.setUniform2f("videoSize", 0.0, 0.0);
-        _shader.setUniformTexture("video", _testPatternImage.getTextureReference(), 1);
-    }
-}
-
-void radomeApp::endShader() {
-    if (_vidOverlay.isBound())
-        _vidOverlay.unbind();
-    _cubeMap.unbind();
-    _shader.end();
-}
-
 void radomeApp::draw() {
     if (_winManager.getActiveWindowNo() != 0) {
         if (_projectorList.size()) {
@@ -395,90 +264,8 @@ void radomeApp::draw() {
         }
         return;
     }
-    
-    switch (_displayMode) {
-        case DisplayScene: {
-            ofPushStyle();
-            ofEnableBlendMode(OF_BLENDMODE_ALPHA);
-            ofClear(0, 0, 0);
 
-            _cam.setDistance(_domeDiameter*1.6);
-            _cam.begin();
-                        
-            ofPushMatrix();
-            drawScene();
-            ofPopMatrix();
-
-            ofSetColor(128,128,255,128);
-            
-            glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-            ofSetLineWidth(1);
-            drawDome();
-            glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-            
-            ofSetColor(80,80,192,128);
-            drawGroundPlane();
-
-            _cam.end();
-            
-            ofPopStyle();
-        }
-        break;
-#ifdef SHOW_CUBE_MAP
-        case DisplayCubeMap: {
-            ofClear(0, 0, 0);
-            ofSetColor(200,220,255);
-            int margin = 2;
-            int w = (ofGetWindowWidth() - SIDEBAR_WIDTH - margin*4) / 3;
-            int h = (ofGetWindowHeight() - margin*3) / 2;
-            for (int i = 0; i < 6; i++) {
-                int x = margin + i%3 * (w + margin) + SIDEBAR_WIDTH;
-                int y = margin + i/3 * (h + margin);
-                //ofDrawBitmapString(_cubeMap.getDescriptiveStringForFace(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i), x+margin*1.5, y+10+margin*1.5);
-                _cubeMap.drawFace(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i , x, y, w, h);
-                ofRect(x-1, y-1, w + margin, h + margin);
-            }
-        }
-        break;
-#endif
-        case DisplayDome: {
-
-            ofClear(20, 100, 50);
-            
-            _cam.setDistance(_domeDiameter*1.10);
-            _cam.begin();
-            
-            beginShader();
-            drawDome();
-            drawGroundPlane();
-            endShader();
-            
-            for (auto iter = _projectorList.begin(); iter != _projectorList.end(); ++iter)
-            {
-                (*iter)->drawSceneRepresentation();
-            }
-            
-            _cam.end();
-        }
-        break;
-        case DisplayProjectorOutput:
-        case LastDisplayMode: {
-            ofClear(0, 0, 0);
-            ofSetColor(200,220,255);
-            int margin = 2;
-            int w = (ofGetWindowWidth() - SIDEBAR_WIDTH - margin*4) / 2;
-            int h = (ofGetWindowHeight() - margin*3) / 2;
-            auto iter = _projectorList.begin();
-            for (int i = 0; iter != _projectorList.end(); i++, ++iter) {
-                int x = margin + i%2 * (w + margin) + SIDEBAR_WIDTH;
-                int y = margin + i/2 * (h + margin);
-                (*iter)->drawFramebuffer(x, y, w, h);
-                ofRect(x-1, y-1, w + margin, h + margin);
-            }
-        }
-        break;            
-    }
-    
+    _renderer.drawScenePreview(_displayMode, _cam, _projectorList, SIDEBAR_WIDTH);
     
     glDisable(GL_DEPTH_TEST);
     _pUI->draw();
@@ -487,71 +274,11 @@ void radomeApp::draw() {
     }
     if (_pInputUI->isVisible()) {
         _pInputUI->draw();
-        _vidOverlay.getTexture().draw(SIDEBAR_WIDTH, 260, 290, 290 * _vidOverlay.getHeight() / _vidOverlay.getWidth());
+        _renderer.drawInputVideo(SIDEBAR_WIDTH, 260, 290);
     }
     glEnable(GL_DEPTH_TEST);
 }
 
-void radomeApp::drawScene() {
-    ofSetColor(180, 192, 192);
-    
-    // Draw static and animated 3D models
-    for (auto model : _modelList)
-    {
-        model->draw();
-    }
-    
-    DomeInfo dome;
-    dome.height = _domeHeight;
-    dome.radius = _domeDiameter/2;
-    dome.frameTime = ofGetSystemTime();
-    
-    // Draw 3D scene plugins
-    for (auto plug : PluginLibrary::getList()) {
-        if (plug->isEnabled()) {
-
-            ofPushStyle();
-            ofPushMatrix();
-            glPushAttrib(GL_ALL_ATTRIB_BITS);
-            glPushClientAttrib(GL_CLIENT_ALL_ATTRIB_BITS);
-
-            plug->renderScene(dome);
-            
-            glPopClientAttrib();
-            glPopAttrib();
-            ofPopMatrix();
-            ofPopStyle();
-        }
-    }
-}
-
-void radomeApp::drawDome() {
-    double clipPlane[4] = { 0.0, 1.0, 0.0, 0.0 };
-    glEnable(GL_CLIP_PLANE0);
-    glClipPlane(GL_CLIP_PLANE0, clipPlane);
-    glCallList(domeDrawIndex);
-    glDisable(GL_CLIP_PLANE0);
-}
-
-void radomeApp::drawGroundPlane() {
-    float size = 300 * 5;
-    float ticks = 40.0;
-    
-    float step = size / ticks;
-    float major =  step * 2.0f;
-    
-    for (float k =- size; k <= size; k += step) {
-        if (fabs(k) == size || k == 0)
-            ofSetLineWidth(4);
-        else if (k / major == floor(k / major))
-            ofSetLineWidth(2);
-        else
-            ofSetLineWidth(1);
-        
-        ofLine(k, 0, -size, k, 0, size);
-        ofLine(-size, 0, k, size, 0, k);
-    }
-}
 
 void radomeApp::keyPressed(int key) {
     
@@ -559,7 +286,7 @@ void radomeApp::keyPressed(int key) {
         return;
     
     float accel = 3.0;
-    auto model = *(_modelList.rbegin());
+    auto model = *(_renderer.getModelList().rbegin());
     
     switch (key) {
         case 'w': if (model) model->_origin.y += accel; break;
@@ -605,10 +332,10 @@ void radomeApp::keyPressed(int key) {
             break;
         case 'C':
             {
-                if (_modelList.size() > 0)
+                if (_renderer.getModelList().size() > 0)
                 {
-                    auto m = _modelList.back();
-                    _modelList.pop_back();
+                    auto m = _renderer.getModelList().back();
+                    _renderer.getModelList().pop_back();
                     if (m) delete(m);
                 }
             }
@@ -700,16 +427,16 @@ void radomeApp::guiEvent(ofxUIEventArgs &e) {
         return;
     }
     
-    if (matchRadioButton(name, _mixModeNames, &_mixMode))
+    if (matchRadioButton(name, _mixModeNames, &_renderer.params.mixMode))
         return;
 
-    if (matchRadioButton(name, _mappingModeNames, &_mappingMode))
+    if (matchRadioButton(name, _mappingModeNames, &_renderer.params.mappingMode))
         return;
             
     if (name == "XFADE") {
         auto slider = dynamic_cast<ofxUISlider*>(e.widget);
         if (slider) {
-            _vidOverlay.setFaderValue(slider->getValue());
+            _renderer.params.inputOpacity = slider->getValue();
         }
     } else if (name == "Add 3D Model...") {
         auto pButton = dynamic_cast<ofxUIButton*>(e.widget);
@@ -751,13 +478,13 @@ void radomeApp::guiEvent(ofxUIEventArgs &e) {
         ofxUITextInput* pInput = (ofxUITextInput*)e.widget;
         if (pInput)
         {
-            _vidOverlay.setApplicationName(trim(pInput->getTextString()));
+            _renderer.setInputApplicationName(trim(pInput->getTextString()));
         }
     } else if(name == "SYPHON_SERVER") {
         ofxUITextInput* pInput = (ofxUITextInput*)e.widget;
         if (pInput)
         {
-            _vidOverlay.setServerName(trim(pInput->getTextString()));
+            _renderer.setInputServerName(trim(pInput->getTextString()));
         }
     } else if (name == "P1 HEIGHT") {
         auto slider = dynamic_cast<ofxUISlider*>(e.widget);
@@ -875,40 +602,40 @@ void radomeApp::guiEvent(ofxUIEventArgs &e) {
     } else if (name == "Show Pattern") {
         auto pButton = dynamic_cast<ofxUIButton*>(e.widget);
         if (pButton) {
-            _showTestPattern = pButton->getValue();
+            _renderer.params.showTestPattern = pButton->getValue();
         }
     } else if (name == "CONTRAST") {
         auto slider = dynamic_cast<ofxUISlider*>(e.widget);
         if (slider) {
-            _contrast = slider->getScaledValue();
+            _renderer.params.contrast = slider->getScaledValue();
         }
     } else if (name == "SATURATION") {
         auto slider = dynamic_cast<ofxUISlider*>(e.widget);
         if (slider) {
-            _saturation = slider->getScaledValue();
+            _renderer.params.saturation = slider->getScaledValue();
         }
     } else if (name == "BRIGHTNESS") {
         auto slider = dynamic_cast<ofxUISlider*>(e.widget);
         if (slider) {
-            _brightness = slider->getScaledValue();
+            _renderer.params.brightness = slider->getScaledValue();
         }
     } else if (name == "DOME HEIGHT") {
         auto slider = dynamic_cast<ofxUISlider*>(e.widget);
         if (slider) {
-            _domeHeight = slider->getScaledValue() * 10;
-            prepDrawList();
+            _renderer.params.domeHeight = slider->getScaledValue() * 10;
+            _renderer.updateDomeModel();
         }
     } else if (name == "DOME DIAMETER") {
         auto slider = dynamic_cast<ofxUISlider*>(e.widget);
         if (slider) {
-            _domeDiameter = slider->getScaledValue() * 10;
-            prepDrawList();
+            _renderer.params.domeDiameter = slider->getScaledValue() * 10;
+            _renderer.updateDomeModel();
         }
     } else if (name == "DOME SLICE") {
         auto slider = dynamic_cast<ofxUISlider*>(e.widget);
         if (slider) {
-            _domeSliceParameterization = slider->getScaledValue();
-            prepDrawList();
+            _renderer.params.domeCurve = slider->getScaledValue();
+            _renderer.updateDomeModel();
         }
     }
     for (auto plug : PluginLibrary::getList()) {
