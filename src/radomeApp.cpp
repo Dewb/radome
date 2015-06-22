@@ -180,6 +180,7 @@ void radomeApp::initGUI() {
     _pCalibrationUI->addMinimalSlider("DOME HEIGHT", 5.0, 30.0, _renderer.params.domeHeight/10, w, 15);
     _pCalibrationUI->addMinimalSlider("DOME DIAMETER", 5.0, 50.0, _renderer.params.domeDiameter/10, w, 15);
     _pCalibrationUI->addMinimalSlider("DOME CURVE", 0.75, 1.0, _renderer.params.domeCurve, w, 15);
+    _pCalibrationUI->addMinimalSlider("DOME BASE HEIGHT", 0.0, 10.0, _renderer.params.domeBaseHeight/10, w, 15);
 
     _pCalibrationUI->addSpacer(0, 12);
     
@@ -626,13 +627,20 @@ void radomeApp::guiEvent(ofxUIEventArgs &e) {
             _renderer.params.domeDiameter = slider->getScaledValue() * 10;
             _renderer.updateDomeModel();
         }
-    } else if (name == "DOME SLICE") {
+    } else if (name == "DOME CURVE") {
         auto slider = dynamic_cast<ofxUISlider*>(e.widget);
         if (slider) {
             _renderer.params.domeCurve = slider->getScaledValue();
             _renderer.updateDomeModel();
         }
+    } else if (name == "DOME BASE HEIGHT") {
+        auto slider = dynamic_cast<ofxUISlider*>(e.widget);
+        if (slider) {
+            _renderer.params.domeBaseHeight = slider->getScaledValue() * 10;
+            _renderer.updateDomeModel();
+        }
     }
+
     for (auto plug : PluginLibrary::getList()) {
         if (typeid(*plug).name() == name) {
             plug->setEnabled(!plug->isEnabled());

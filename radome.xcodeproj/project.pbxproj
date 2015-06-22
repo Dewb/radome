@@ -667,6 +667,19 @@
 			path = ../of_v0.8.4_osx_release/addons/ofxAppGLFWWindowMulti/src;
 			sourceTree = "<group>";
 		};
+		5B4B95721B378C3C00BB6E5C /* utils */ = {
+			isa = PBXGroup;
+			children = (
+				5BFD42E819CE089D00F42053 /* icosohedron.cpp */,
+				5BFD42E919CE089D00F42053 /* icosohedron.h */,
+				5BFD42F219CE089D00F42053 /* radomeUtils.cpp */,
+				5BFD42F319CE089D00F42053 /* radomeUtils.h */,
+				5BFD42F419CE089D00F42053 /* turntableCam.cpp */,
+				5BFD42F519CE089D00F42053 /* turntableCam.h */,
+			);
+			name = utils;
+			sourceTree = "<group>";
+		};
 		5B94A4421A35A4C4001CA6F5 /* src */ = {
 			isa = PBXGroup;
 			children = (
@@ -1281,11 +1294,10 @@
 		E4B69E1C0A3A1BDC003C02F2 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				5B4B95721B378C3C00BB6E5C /* utils */,
 				5B0C68201A35603000C3955C /* plugins */,
 				5BD6EF0219D20709008EE4C9 /* radomePlugin.cpp */,
 				5BD6EF0319D20709008EE4C9 /* radomePlugin.h */,
-				5BFD42E819CE089D00F42053 /* icosohedron.cpp */,
-				5BFD42E919CE089D00F42053 /* icosohedron.h */,
 				5BFD42EA19CE089D00F42053 /* radomeApp.cpp */,
 				5BFD42EB19CE089D00F42053 /* radomeApp.h */,
 				5BFD42EC19CE089D00F42053 /* radomeModel.cpp */,
@@ -1294,10 +1306,6 @@
 				5BFD42EF19CE089D00F42053 /* radomeProjector.h */,
 				5BFD42F019CE089D00F42053 /* radomeSyphonClient.cpp */,
 				5BFD42F119CE089D00F42053 /* radomeSyphonClient.h */,
-				5BFD42F219CE089D00F42053 /* radomeUtils.cpp */,
-				5BFD42F319CE089D00F42053 /* radomeUtils.h */,
-				5BFD42F419CE089D00F42053 /* turntableCam.cpp */,
-				5BFD42F519CE089D00F42053 /* turntableCam.h */,
 				E4B69E1D0A3A1BDC003C02F2 /* main.cpp */,
 				5B4B956E1B373C6400BB6E5C /* radomeRenderer.cpp */,
 				5B4B956F1B373C6400BB6E5C /* radomeRenderer.h */,

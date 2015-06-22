@@ -180,16 +180,19 @@ void radomeRendererImpl::updateDomeModel()
         d = t.v0 * s;
         d.y -= yshift;
         glNormal3fv(&d[0]);
+        d.y += _interface->params.domeBaseHeight;
         glVertex3fv(&d[0]);
 
         d = t.v1 * s;
         d.y -= yshift;
         glNormal3fv(&d[0]);
+        d.y += _interface->params.domeBaseHeight;
         glVertex3fv(&d[0]);
 
         d = t.v2 * s;
         d.y -= yshift;
         glNormal3fv(&d[0]);
+        d.y += _interface->params.domeBaseHeight;
         glVertex3fv(&d[0]);
     }
     glEnd();
@@ -256,7 +259,7 @@ void radomeRendererImpl::beginShader() {
     _shader.setUniform1f("contrast", _interface->params.contrast);
     _shader.setUniform1f("saturation", _interface->params.saturation);
     _shader.setUniform1f("brightness", _interface->params.brightness);
-
+    _shader.setUniform1f("baseHeight", 0);
 
     if (_interface->params.showTestPattern) {
         _shader.setUniform1f("videoMix", 0.0);
@@ -314,7 +317,7 @@ void radomeRendererImpl::drawScene() {
 }
 
 void radomeRendererImpl::drawDome() {
-    double clipPlane[4] = { 0.0, 1.0, 0.0, 0.0 };
+    double clipPlane[4] = { 0.0, 1.0, 0.0, -_interface->params.domeBaseHeight };
     glEnable(GL_CLIP_PLANE0);
     glClipPlane(GL_CLIP_PLANE0, clipPlane);
     glCallList(_domeDrawIndex);
@@ -395,7 +398,9 @@ void radomeRendererImpl::drawScenePreview(DisplayMode mode, ofxTurntableCam& cam
             cam.begin();
 
             beginShader();
+            _shader.setUniform1f("baseHeight", _interface->params.domeBaseHeight);
             drawDome();
+            _shader.setUniform1f("baseHeight", 0);
             drawGroundPlane();
             endShader();
 

@@ -12,31 +12,35 @@ uniform int mixMode;
 uniform int mappingMode;
 uniform float domeHeight;
 uniform float domeDiameter;
+uniform float baseHeight;
 
 uniform float contrast;
 uniform float saturation;
 uniform float brightness;
 
 vec2 getUV() {
-    
-    float theta = atan(position.x, position.z) + 3.141592;
-    float r = sqrt(pow(position.x, 2.0) + pow(position.z, 2.0));
-    float phi = (3.141592/2.0 - atan(position.y/r));
+
+    vec4 uvpos = position;
+    uvpos.y -= baseHeight;
+
+    float theta = atan(uvpos.x, uvpos.z) + 3.141592;
+    float r = sqrt(pow(uvpos.x, 2.0) + pow(uvpos.z, 2.0));
+    float phi = (3.141592/2.0 - atan(uvpos.y/r));
     float radius = videoSize.y / 3.1;
     
     // cut out door (20' dome only)
     //if (theta > 2.73 && theta < 3.12 && phi > 0.86)
     //    return vec2(videoSize.x+1.0, videoSize.y + 1.0);
-    
+
     vec2 normalUV;
     if (mappingMode == 1) {
         // Basic latitude/longitude mapping
-        normalUV = vec2(0.5 - atan(position.x, position.z)/(2.0*3.141592),
-                        4.0 * asin(position.y/domeHeight)/(2.0*3.141592));
+        normalUV = vec2(0.5 - atan(uvpos.x, uvpos.z)/(2.0*3.141592),
+                        4.0 * asin(uvpos.y/domeHeight)/(2.0*3.141592));
     } else if (mappingMode == 2) {
         // Mirrored quadrants
-        normalUV = vec2(abs(position.x)/domeDiameter,
-                        4.0 * asin(position.y/domeHeight)/(2.0*3.141592));
+        normalUV = vec2(abs(uvpos.x)/domeDiameter,
+                        4.0 * asin(uvpos.y/domeHeight)/(2.0*3.141592));
     } else if (mappingMode == 0) {
         // Fisheye        
         return vec2(0.5 * videoSize.x, 0.5 * videoSize.y) + (phi * radius) * vec2(sin(theta), cos(theta));
@@ -98,8 +102,8 @@ vec3 ContrastSaturationBrightness(vec3 color, float con, float sat, float brt)
 void main()
 {
     // clip below the y-plane
-    if (position.y < -1.5) discard;
-    
+    if (position.y < baseHeight - 1.5) discard;
+
     // draw the y-plane green
     if (position.y < 0.1) {
         float distSquared = pow(position.x, 2.0) + pow(position.z, 2.0);

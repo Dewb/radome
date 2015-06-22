@@ -45,6 +45,7 @@ struct RendererParams {
     float domeDiameter;
     float domeHeight;
     float domeCurve;
+    float domeBaseHeight;
 
     bool showTestPattern;
 };
