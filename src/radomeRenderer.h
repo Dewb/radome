@@ -68,7 +68,6 @@ public:
     ModelList& getModelList();
 
     RendererParams params;
-    radomeSyphonClient inputVideo;
 
 protected:
     radomeRendererImpl* _impl;
