@@ -4,7 +4,7 @@
 
 #define SIDEBAR_WIDTH 190
 #define CALIBRATIONUI_WIDTH 280
-#define NUM_PROJECTORS 3
+#define NUM_PROJECTORS 4
 #define DEFAULT_SETTINGS_FILE "projectorSettings.xml"
 #define PROJECTOR_INITIAL_HEIGHT 147.5
 
@@ -40,6 +40,7 @@ void radomeApp::setup() {
     _renderer.params.domeHeight = 110;
     _renderer.params.domeDiameter = 300;
     _renderer.params.domeCurve = 1.0;
+    _renderer.params.domeBaseHeight = 0.0;
     _renderer.updateDomeModel();
 
     _cam.setTarget(ofVec3f(0.0, _renderer.params.domeHeight*0.25, 0.0));
@@ -62,7 +63,7 @@ void radomeApp::setup() {
 void radomeApp::createProjectorCalibrationUI(ofxUICanvas* pCanvas, int index) {
     index++;
     char buf[30];
-    int w = CALIBRATIONUI_WIDTH - 10;
+    int w = CALIBRATIONUI_WIDTH - 40;
     sprintf(buf, "PROJECTOR %d", index);
     pCanvas->addWidgetDown(new ofxUILabel(buf, OFX_UI_FONT_MEDIUM));    
     sprintf(buf, "P%d HEIGHT", index);
@@ -171,7 +172,7 @@ void radomeApp::initGUI() {
     _pCalibrationUI->setDrawBack(true);
     _pCalibrationUI->setFont("GUI/Exo-Regular.ttf", true, true, false, 0.0, OFX_UI_FONT_RESOLUTION);
     //setUIColors(_pCalibrationUI);
-    
+
     _pCalibrationUI->addWidgetDown(new ofxUILabel("CALIBRATION", OFX_UI_FONT_LARGE));
     _pCalibrationUI->addSpacer(0, 12);
     
@@ -183,22 +184,31 @@ void radomeApp::initGUI() {
     _pCalibrationUI->addMinimalSlider("DOME BASE HEIGHT", 0.0, 10.0, _renderer.params.domeBaseHeight/10, w, 15);
 
     _pCalibrationUI->addSpacer(0, 12);
-    
-    for (int ii = 0; ii < 3; ii++) {
-        createProjectorCalibrationUI(_pCalibrationUI, ii);
-        _pCalibrationUI->addSpacer(0, 8);
+
+    _pCalibrationUI2 = new ofxUICanvas(SIDEBAR_WIDTH + CALIBRATIONUI_WIDTH + 10, 0, CALIBRATIONUI_WIDTH, ofGetHeight());
+    _pCalibrationUI2->setWidgetSpacing(5.0);
+    _pCalibrationUI2->setDrawBack(true);
+    _pCalibrationUI2->setFont("GUI/Exo-Regular.ttf", true, true, false, 0.0, OFX_UI_FONT_RESOLUTION);
+    _pCalibrationUI2->addSpacer(0, 140);
+
+    for (int ii = 0; ii < NUM_PROJECTORS; ii++) {
+        auto pUI = ii < 2 ? _pCalibrationUI : _pCalibrationUI2;
+        createProjectorCalibrationUI(pUI, ii);
+        pUI->addSpacer(0, 8);
     }
     
     _pCalibrationUI->addWidgetDown(new ofxUILabelButton("Load", false, 0, 25, 0, 0, OFX_UI_FONT_SMALL));
     _pCalibrationUI->addWidgetRight(new ofxUILabelButton("Save", false, 0, 25, 0, 0, OFX_UI_FONT_SMALL));
 
     _pCalibrationUI->setVisible(false);
-    
+    _pCalibrationUI2->setVisible(false);
+
     ofBackground(40, 20, 32);
 
     ofAddListener(_pUI->newGUIEvent, this, &radomeApp::guiEvent);
     ofAddListener(_pInputUI->newGUIEvent, this, &radomeApp::guiEvent);
     ofAddListener(_pCalibrationUI->newGUIEvent, this, &radomeApp::guiEvent);
+    ofAddListener(_pCalibrationUI2->newGUIEvent, this, &radomeApp::guiEvent);
 }
 
 void radomeApp::loadFile() {
@@ -244,6 +254,7 @@ void radomeApp::update() {
     
     _pUI->setHeight(ofGetHeight());
     _pCalibrationUI->setHeight(ofGetHeight());
+    _pCalibrationUI2->setHeight(ofGetHeight());
     _pInputUI->setHeight(ofGetHeight());
 }
 
@@ -265,8 +276,10 @@ void radomeApp::draw() {
     
     glDisable(GL_DEPTH_TEST);
     _pUI->draw();
+    _pCalibrationUI2->setVisible(_pCalibrationUI->isVisible());
     if (_pCalibrationUI->isVisible()) {
         _pCalibrationUI->draw();
+        _pCalibrationUI2->draw();
     }
     if (_pInputUI->isVisible()) {
         _pInputUI->draw();
@@ -364,7 +377,7 @@ void radomeApp::keyPressed(int key) {
 
 void radomeApp::mousePressed(int x, int y, int button) {
     if ((x > SIDEBAR_WIDTH + 5) &&
-        (!_pCalibrationUI || !_pCalibrationUI->isVisible() || x > (SIDEBAR_WIDTH + CALIBRATIONUI_WIDTH + 10))) {
+        (!_pCalibrationUI || !_pCalibrationUI->isVisible() || x > (SIDEBAR_WIDTH + CALIBRATIONUI_WIDTH * 2 + 10))) {
         _cam.mousePressed(x, y, button);
     }
     
@@ -482,110 +495,26 @@ void radomeApp::guiEvent(ofxUIEventArgs &e) {
         {
             _renderer.setInputServerName(trim(pInput->getTextString()));
         }
-    } else if (name == "P1 HEIGHT") {
+    } else if (name[0] == 'P' && name[2] == ' ') {
+        char p[2] = { name[1], 0 };
+        int pindex = atoi(p) - 1;
         auto slider = dynamic_cast<ofxUISlider*>(e.widget);
-        if (slider && _projectorList.size() > 0 && _projectorList[0]) {
-            _projectorList[0]->setHeight(slider->getScaledValue() * 10);
-        }
-    } else if (name == "P1 HEADING") {
-        auto slider = dynamic_cast<ofxUISlider*>(e.widget);
-        if (slider && _projectorList.size() > 0 && _projectorList[0]) {
-            _projectorList[0]->setHeading(slider->getScaledValue());
-        }
-    } else if (name == "P1 DISTANCE") {
-        auto slider = dynamic_cast<ofxUISlider*>(e.widget);
-        if (slider && _projectorList.size() > 0 && _projectorList[0]) {
-            _projectorList[0]->setDistance(slider->getScaledValue() * 10);
-        }
-    } else if (name == "P1 FOV") {
-        auto slider = dynamic_cast<ofxUISlider*>(e.widget);
-        if (slider && _projectorList.size() > 0 && _projectorList[0]) {
-            _projectorList[0]->setFOV(slider->getScaledValue());
-        }
-    } else if (name == "P1 TARGET") {
-        auto slider = dynamic_cast<ofxUISlider*>(e.widget);
-        if (slider && _projectorList.size() > 0 && _projectorList[0]) {
-            _projectorList[0]->setTargetHeight(slider->getScaledValue() * 10);
-        }
-    } else if (name == "P1 SHIFT") {
-        auto slider = dynamic_cast<ofxUISlider*>(e.widget);
-        if (slider && _projectorList.size() > 0 && _projectorList[0]) {
-            _projectorList[0]->setLensOffsetY(slider->getScaledValue());
-        }
-    } else if (name == "P1 ROLL") {
-        auto slider = dynamic_cast<ofxUISlider*>(e.widget);
-        if (slider && _projectorList.size() > 0 && _projectorList[0]) {
-            _projectorList[0]->setRoll(slider->getScaledValue());
-        }
-    } else if (name == "P2 HEIGHT") {
-        auto slider = dynamic_cast<ofxUISlider*>(e.widget);
-        if (slider && _projectorList.size() > 1 && _projectorList[1]) {
-            _projectorList[1]->setHeight(slider->getScaledValue() * 10);
-        }
-    } else if (name == "P2 HEADING") {
-        auto slider = dynamic_cast<ofxUISlider*>(e.widget);
-        if (slider && _projectorList.size() > 1 && _projectorList[1]) {
-            _projectorList[1]->setHeading(slider->getScaledValue());
-        }
-    } else if (name == "P2 DISTANCE") {
-        auto slider = dynamic_cast<ofxUISlider*>(e.widget);
-        if (slider && _projectorList.size() > 1 && _projectorList[1]) {
-            _projectorList[1]->setDistance(slider->getScaledValue() * 10);
-        }
-    } else if (name == "P2 FOV") {
-        auto slider = dynamic_cast<ofxUISlider*>(e.widget);
-        if (slider && _projectorList.size() > 1 && _projectorList[1]) {
-            _projectorList[1]->setFOV(slider->getScaledValue());
-        }
-    } else if (name == "P2 TARGET") {
-        auto slider = dynamic_cast<ofxUISlider*>(e.widget);
-        if (slider && _projectorList.size() > 1 && _projectorList[1]) {
-            _projectorList[1]->setTargetHeight(slider->getScaledValue() * 10);
-        }
-    } else if (name == "P2 SHIFT") {
-        auto slider = dynamic_cast<ofxUISlider*>(e.widget);
-        if (slider && _projectorList.size() > 1 && _projectorList[1]) {
-            _projectorList[1]->setLensOffsetY(slider->getScaledValue());
-        }
-    } else if (name == "P2 ROLL") {
-        auto slider = dynamic_cast<ofxUISlider*>(e.widget);
-        if (slider && _projectorList.size() > 0 && _projectorList[0]) {
-            _projectorList[1]->setRoll(slider->getScaledValue());
-        }
-    } else if (name == "P3 HEIGHT") {
-        auto slider = dynamic_cast<ofxUISlider*>(e.widget);
-        if (slider && _projectorList.size() > 2 && _projectorList[2]) {
-            _projectorList[2]->setHeight(slider->getScaledValue() * 10);
-        }
-    } else if (name == "P3 HEADING") {
-        auto slider = dynamic_cast<ofxUISlider*>(e.widget);
-        if (slider && _projectorList.size() > 2 && _projectorList[2]) {
-            _projectorList[2]->setHeading(slider->getScaledValue());
-        }
-    } else if (name == "P3 DISTANCE") {
-        auto slider = dynamic_cast<ofxUISlider*>(e.widget);
-        if (slider && _projectorList.size() > 2 && _projectorList[2]) {
-            _projectorList[2]->setDistance(slider->getScaledValue() * 10);
-        }
-    } else if (name == "P3 FOV") {
-        auto slider = dynamic_cast<ofxUISlider*>(e.widget);
-        if (slider && _projectorList.size() > 2 && _projectorList[2]) {
-            _projectorList[2]->setFOV(slider->getScaledValue());
-        }
-    } else if (name == "P3 TARGET") {
-        auto slider = dynamic_cast<ofxUISlider*>(e.widget);
-        if (slider && _projectorList.size() > 2 && _projectorList[2]) {
-            _projectorList[2]->setTargetHeight(slider->getScaledValue() * 10);
-        }
-    } else if (name == "P3 SHIFT") {
-        auto slider = dynamic_cast<ofxUISlider*>(e.widget);
-        if (slider && _projectorList.size() > 2 && _projectorList[2]) {
-            _projectorList[2]->setLensOffsetY(slider->getScaledValue());
-        }
-    } else if (name == "P3 ROLL") {
-        auto slider = dynamic_cast<ofxUISlider*>(e.widget);
-        if (slider && _projectorList.size() > 0 && _projectorList[0]) {
-            _projectorList[2]->setRoll(slider->getScaledValue());
+        if (slider && _projectorList.size() > pindex && _projectorList[pindex]) {
+            if (name.substr(3) == "HEIGHT") {
+                _projectorList[pindex]->setHeight(slider->getScaledValue() * 10);
+            } else if (name.substr(3) == "HEADING") {
+                _projectorList[pindex]->setHeading(slider->getScaledValue());
+            } else if (name.substr(3) == "DISTANCE") {
+                _projectorList[pindex]->setDistance(slider->getScaledValue() * 10);
+            } else if (name.substr(3) == "FOV") {
+                _projectorList[pindex]->setFOV(slider->getScaledValue());
+            } else if (name.substr(3) == "TARGET") {
+                _projectorList[pindex]->setTargetHeight(slider->getScaledValue() * 10);
+            } else if (name.substr(3) == "SHIFT") {
+                _projectorList[pindex]->setLensOffsetY(slider->getScaledValue());
+            } else if (name.substr(3) == "ROLL") {
+                _projectorList[pindex]->setRoll(slider->getScaledValue());
+            }
         }
     } else if (name == "Load") {
         if (_pCalibrationUI) {

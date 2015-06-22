@@ -90,6 +90,9 @@ void radomeRenderer::setup() {
     params.mixMode = 0;
     params.mappingMode = 0;
 
+    params.inputOpacity = 1.0;
+    params.showTestPattern = false;
+
     if (_impl) {
         _impl->setup();
     }

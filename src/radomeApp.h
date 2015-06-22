@@ -47,6 +47,8 @@ protected:
     
     ofxUICanvas* _pUI;
     ofxUICanvas* _pCalibrationUI;
+    ofxUICanvas* _pCalibrationUI2;
+
     ofxUICanvas* _pInputUI;
 
     ofxTurntableCam _cam;
