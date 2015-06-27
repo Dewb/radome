@@ -9,6 +9,12 @@
 #ifndef __radome__radomeSyphonClient__
 #define __radome__radomeSyphonClient__
 
+#ifdef _WINDOWS
+#define USE_SPOUT
+#else
+#define USE_SYPHON
+#endif
+
 #ifdef USE_SYPHON
 
 #include "ofxSyphon.h"

@@ -12,7 +12,7 @@
 #define DEFAULT_SYPHON_SERVER "Composition"
 
 
-#define APP_VERSION "v0.4"
+#define APP_VERSION "v0.5"
 
 radomeApp::radomeApp() {
     _pUI = NULL;
