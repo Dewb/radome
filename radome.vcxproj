@@ -168,6 +168,7 @@
     <ClCompile Include="src\radomeModel.cpp" />
     <ClCompile Include="src\radomePlugin.cpp" />
     <ClCompile Include="src\radomeProjector.cpp" />
+    <ClCompile Include="src\radomeRenderer.cpp" />
     <ClCompile Include="src\radomeSyphonClient.cpp" />
     <ClCompile Include="src\radomeUtils.cpp" />
     <ClCompile Include="src\turntableCam.cpp" />
@@ -291,6 +292,7 @@
     <ClInclude Include="src\radomeModel.h" />
     <ClInclude Include="src\radomePlugin.h" />
     <ClInclude Include="src\radomeProjector.h" />
+    <ClInclude Include="src\radomeRenderer.h" />
     <ClInclude Include="src\radomeSyphonClient.h" />
     <ClInclude Include="src\radomeUtils.h" />
     <ClInclude Include="src\turntableCam.h" />
