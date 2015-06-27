@@ -25,7 +25,7 @@ public:
     void draw();
     
     void loadFile();
-    void showProjectorWindow();
+    void showProjectorWindows();
 
     DisplayMode getDisplayMode() const { return _displayMode; }
     void changeDisplayMode(DisplayMode mode);
