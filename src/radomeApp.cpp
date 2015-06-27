@@ -299,21 +299,44 @@ void radomeApp::keyPressed(int key) {
         return;
     
     float accel = 3.0;
-    auto model = *(_renderer.getModelList().rbegin());
+	if (_renderer.getModelList().rbegin() != _renderer.getModelList().rend()) {
+
+		auto model = *(_renderer.getModelList().rbegin());
     
-    switch (key) {
-        case 'w': if (model) model->_origin.y += accel; break;
-        case 's': if (model) model->_origin.y -= accel; break;
-        case 'a': if (model) model->_origin.x -= accel; break;
-        case 'd': if (model) model->_origin.x += accel; break;
-        case 'z': if (model) model->_origin.z += accel; break;
-        case 'x': if (model) model->_origin.z -= accel; break;
-        case 'W': if (model) model->_origin.y += accel * 4; break;
-        case 'S': if (model) model->_origin.y -= accel * 4; break;
-        case 'A': if (model) model->_origin.x -= accel * 4; break;
-        case 'D': if (model) model->_origin.x += accel * 4; break;
-        case 'Z': if (model) model->_origin.z += accel * 4; break;
-        case 'X': if (model) model->_origin.z -= accel * 4; break;
+	    switch (key) {
+			case 'w': if (model) model->_origin.y += accel; return;
+			case 's': if (model) model->_origin.y -= accel; return;
+			case 'a': if (model) model->_origin.x -= accel; return;
+			case 'd': if (model) model->_origin.x += accel; return;
+			case 'z': if (model) model->_origin.z += accel; return;
+			case 'x': if (model) model->_origin.z -= accel; return;
+			case 'W': if (model) model->_origin.y += accel * 4; return;
+			case 'S': if (model) model->_origin.y -= accel * 4; return;
+			case 'A': if (model) model->_origin.x -= accel * 4; return;
+			case 'D': if (model) model->_origin.x += accel * 4; return;
+			case 'Z': if (model) model->_origin.z += accel * 4; return;
+			case 'X': if (model) model->_origin.z -= accel * 4; return;
+			case 'r':
+				{
+					if (model) {
+						if (model->getRotationIncrement() == 0) {
+							model->setRotationOrigin(model->getOrigin());
+							model->setRotation(ofVec4f(0.0,
+														frand_bounded(),
+														frand_bounded(),
+														frand_bounded()));
+						}
+						model->setRotationIncrement(model->getRotationIncrement() + 2.0);
+						if (model->getRotationIncrement() == 10.0) {
+							model->setRotationIncrement(0.0);
+						}
+					}
+				}
+				return;
+		}
+	} 
+
+	switch(key) {
         case 'l': loadFile(); break;
         case 'm':
             {
@@ -353,23 +376,7 @@ void radomeApp::keyPressed(int key) {
                 }
             }
             break;
-        case 'r':
-            {
-                if (model) {
-                    if (model->getRotationIncrement() == 0) {
-                        model->setRotationOrigin(model->getOrigin());
-                        model->setRotation(ofVec4f(0.0,
-                                                   frand_bounded(),
-                                                   frand_bounded(),
-                                                   frand_bounded()));
-                    }
-                    model->setRotationIncrement(model->getRotationIncrement() + 2.0);
-                    if (model->getRotationIncrement() == 10.0) {
-                        model->setRotationIncrement(0.0);
-                    }
-                }
-            }
-            break;
+   
     }
     
     for (auto plug : PluginLibrary::getList()) {
