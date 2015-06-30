@@ -58,7 +58,7 @@
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);..\of_v0.8.4_vs_release\addons\ofxAssimpModelLoader\libs;..\of_v0.8.4_vs_release\addons\ofxAssimpModelLoader\src;..\of_v0.8.4_vs_release\addons\ofxAssimpModelLoader\libs\assimp;..\of_v0.8.4_vs_release\addons\ofxAssimpModelLoader\libs\assimp\include;..\of_v0.8.4_vs_release\addons\ofxAssimpModelLoader\libs\assimp\include\Compiler;..\of_v0.8.4_vs_release\addons\ofxAssimpModelLoader\libs\assimp\lib;..\of_v0.8.4_vs_release\addons\ofxAssimpModelLoader\libs\assimp\lib\vs;..\of_v0.8.4_vs_release\addons\ofxOsc\libs;..\of_v0.8.4_vs_release\addons\ofxOsc\src;..\of_v0.8.4_vs_release\addons\ofxOsc\libs\oscpack;..\of_v0.8.4_vs_release\addons\ofxOsc\libs\oscpack\src;..\of_v0.8.4_vs_release\addons\ofxOsc\libs\oscpack\src\ip;..\of_v0.8.4_vs_release\addons\ofxOsc\libs\oscpack\src\ip\posix;..\of_v0.8.4_vs_release\addons\ofxOsc\libs\oscpack\src\ip\win32;..\of_v0.8.4_vs_release\addons\ofxOsc\libs\oscpack\src\osc;..\of_v0.8.4_vs_release\addons\ofxXmlSettings\libs;..\of_v0.8.4_vs_release\addons\ofxXmlSettings\src;..\of_v0.8.4_vs_release\addons\ofxAppGLFWWindowMulti\libs;..\of_v0.8.4_vs_release\addons\ofxAppGLFWWindowMulti\src;..\of_v0.8.4_vs_release\addons\ofxAutoReloadedShader\libs;..\of_v0.8.4_vs_release\addons\ofxAutoReloadedShader\src;..\of_v0.8.4_vs_release\addons\ofxCubeMap\libs;..\of_v0.8.4_vs_release\addons\ofxCubeMap\src;..\of_v0.8.4_vs_release\addons\ofxUI\libs;..\of_v0.8.4_vs_release\addons\ofxUI\src</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>lib;%(AdditionalIncludeDirectories);..\of_v0.8.4_vs_release\addons\ofxAssimpModelLoader\libs;..\of_v0.8.4_vs_release\addons\ofxAssimpModelLoader\src;..\of_v0.8.4_vs_release\addons\ofxAssimpModelLoader\libs\assimp;..\of_v0.8.4_vs_release\addons\ofxAssimpModelLoader\libs\assimp\include;..\of_v0.8.4_vs_release\addons\ofxAssimpModelLoader\libs\assimp\include\Compiler;..\of_v0.8.4_vs_release\addons\ofxAssimpModelLoader\libs\assimp\lib;..\of_v0.8.4_vs_release\addons\ofxAssimpModelLoader\libs\assimp\lib\vs;..\of_v0.8.4_vs_release\addons\ofxOsc\libs;..\of_v0.8.4_vs_release\addons\ofxOsc\src;..\of_v0.8.4_vs_release\addons\ofxOsc\libs\oscpack;..\of_v0.8.4_vs_release\addons\ofxOsc\libs\oscpack\src;..\of_v0.8.4_vs_release\addons\ofxOsc\libs\oscpack\src\ip;..\of_v0.8.4_vs_release\addons\ofxOsc\libs\oscpack\src\ip\posix;..\of_v0.8.4_vs_release\addons\ofxOsc\libs\oscpack\src\ip\win32;..\of_v0.8.4_vs_release\addons\ofxOsc\libs\oscpack\src\osc;..\of_v0.8.4_vs_release\addons\ofxXmlSettings\libs;..\of_v0.8.4_vs_release\addons\ofxXmlSettings\src;..\of_v0.8.4_vs_release\addons\ofxAppGLFWWindowMulti\libs;..\of_v0.8.4_vs_release\addons\ofxAppGLFWWindowMulti\src;..\of_v0.8.4_vs_release\addons\ofxAutoReloadedShader\libs;..\of_v0.8.4_vs_release\addons\ofxAutoReloadedShader\src;..\of_v0.8.4_vs_release\addons\ofxCubeMap\libs;..\of_v0.8.4_vs_release\addons\ofxCubeMap\src;..\of_v0.8.4_vs_release\addons\ofxUI\libs;..\of_v0.8.4_vs_release\addons\ofxUI\src</AdditionalIncludeDirectories>
       <CompileAs>CompileAsCpp</CompileAs>
     </ClCompile>
     <Link>
@@ -75,7 +75,7 @@
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);..\of_v0.8.4_vs_release\addons\ofxAssimpModelLoader\libs;..\of_v0.8.4_vs_release\addons\ofxAssimpModelLoader\src;..\of_v0.8.4_vs_release\addons\ofxAssimpModelLoader\libs\assimp;..\of_v0.8.4_vs_release\addons\ofxAssimpModelLoader\libs\assimp\include;..\of_v0.8.4_vs_release\addons\ofxAssimpModelLoader\libs\assimp\include\Compiler;..\of_v0.8.4_vs_release\addons\ofxAssimpModelLoader\libs\assimp\lib;..\of_v0.8.4_vs_release\addons\ofxAssimpModelLoader\libs\assimp\lib\vs;..\of_v0.8.4_vs_release\addons\ofxOsc\libs;..\of_v0.8.4_vs_release\addons\ofxOsc\src;..\of_v0.8.4_vs_release\addons\ofxOsc\libs\oscpack;..\of_v0.8.4_vs_release\addons\ofxOsc\libs\oscpack\src;..\of_v0.8.4_vs_release\addons\ofxOsc\libs\oscpack\src\ip;..\of_v0.8.4_vs_release\addons\ofxOsc\libs\oscpack\src\ip\posix;..\of_v0.8.4_vs_release\addons\ofxOsc\libs\oscpack\src\ip\win32;..\of_v0.8.4_vs_release\addons\ofxOsc\libs\oscpack\src\osc;..\of_v0.8.4_vs_release\addons\ofxXmlSettings\libs;..\of_v0.8.4_vs_release\addons\ofxXmlSettings\src;..\of_v0.8.4_vs_release\addons\ofxAppGLFWWindowMulti\libs;..\of_v0.8.4_vs_release\addons\ofxAppGLFWWindowMulti\src;..\of_v0.8.4_vs_release\addons\ofxAutoReloadedShader\libs;..\of_v0.8.4_vs_release\addons\ofxAutoReloadedShader\src;..\of_v0.8.4_vs_release\addons\ofxCubeMap\libs;..\of_v0.8.4_vs_release\addons\ofxCubeMap\src;..\of_v0.8.4_vs_release\addons\ofxUI\libs;..\of_v0.8.4_vs_release\addons\ofxUI\src</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>lib;%(AdditionalIncludeDirectories);..\of_v0.8.4_vs_release\addons\ofxAssimpModelLoader\libs;..\of_v0.8.4_vs_release\addons\ofxAssimpModelLoader\src;..\of_v0.8.4_vs_release\addons\ofxAssimpModelLoader\libs\assimp;..\of_v0.8.4_vs_release\addons\ofxAssimpModelLoader\libs\assimp\include;..\of_v0.8.4_vs_release\addons\ofxAssimpModelLoader\libs\assimp\include\Compiler;..\of_v0.8.4_vs_release\addons\ofxAssimpModelLoader\libs\assimp\lib;..\of_v0.8.4_vs_release\addons\ofxAssimpModelLoader\libs\assimp\lib\vs;..\of_v0.8.4_vs_release\addons\ofxOsc\libs;..\of_v0.8.4_vs_release\addons\ofxOsc\src;..\of_v0.8.4_vs_release\addons\ofxOsc\libs\oscpack;..\of_v0.8.4_vs_release\addons\ofxOsc\libs\oscpack\src;..\of_v0.8.4_vs_release\addons\ofxOsc\libs\oscpack\src\ip;..\of_v0.8.4_vs_release\addons\ofxOsc\libs\oscpack\src\ip\posix;..\of_v0.8.4_vs_release\addons\ofxOsc\libs\oscpack\src\ip\win32;..\of_v0.8.4_vs_release\addons\ofxOsc\libs\oscpack\src\osc;..\of_v0.8.4_vs_release\addons\ofxXmlSettings\libs;..\of_v0.8.4_vs_release\addons\ofxXmlSettings\src;..\of_v0.8.4_vs_release\addons\ofxAppGLFWWindowMulti\libs;..\of_v0.8.4_vs_release\addons\ofxAppGLFWWindowMulti\src;..\of_v0.8.4_vs_release\addons\ofxAutoReloadedShader\libs;..\of_v0.8.4_vs_release\addons\ofxAutoReloadedShader\src;..\of_v0.8.4_vs_release\addons\ofxCubeMap\libs;..\of_v0.8.4_vs_release\addons\ofxCubeMap\src;..\of_v0.8.4_vs_release\addons\ofxUI\libs;..\of_v0.8.4_vs_release\addons\ofxUI\src</AdditionalIncludeDirectories>
       <CompileAs>CompileAsCpp</CompileAs>
     </ClCompile>
     <Link>
@@ -162,6 +162,15 @@
     <ClCompile Include="..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIWaveform.cpp" />
     <ClCompile Include="..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIWidget.cpp" />
     <ClCompile Include="..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIWidgetWithLabel.cpp" />
+    <ClCompile Include="lib\Spout2\SpoutDirectX.cpp" />
+    <ClCompile Include="lib\Spout2\SpoutGLDXinterop.cpp" />
+    <ClCompile Include="lib\Spout2\SpoutGLextensions.cpp" />
+    <ClCompile Include="lib\Spout2\SpoutMemoryShare.cpp" />
+    <ClCompile Include="lib\Spout2\SpoutReceiver.cpp" />
+    <ClCompile Include="lib\Spout2\SpoutSDK.cpp" />
+    <ClCompile Include="lib\Spout2\SpoutSender.cpp" />
+    <ClCompile Include="lib\Spout2\SpoutSenderNames.cpp" />
+    <ClCompile Include="lib\Spout2\SpoutSharedMemory.cpp" />
     <ClCompile Include="src\icosohedron.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\radomeApp.cpp" />
@@ -287,6 +296,17 @@
     <ClInclude Include="..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIWidget.h" />
     <ClInclude Include="..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIWidgetWithLabel.h" />
     <ClInclude Include="..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIWrapper.h" />
+    <ClInclude Include="lib\Spout2\Spout.h" />
+    <ClInclude Include="lib\Spout2\SpoutCommon.h" />
+    <ClInclude Include="lib\Spout2\SpoutDirectX.h" />
+    <ClInclude Include="lib\Spout2\SpoutGLDXinterop.h" />
+    <ClInclude Include="lib\Spout2\SpoutGLextensions.h" />
+    <ClInclude Include="lib\Spout2\SpoutMemoryShare.h" />
+    <ClInclude Include="lib\Spout2\SpoutReceiver.h" />
+    <ClInclude Include="lib\Spout2\SpoutSDK.h" />
+    <ClInclude Include="lib\Spout2\SpoutSender.h" />
+    <ClInclude Include="lib\Spout2\SpoutSenderNames.h" />
+    <ClInclude Include="lib\Spout2\SpoutSharedMemory.h" />
     <ClInclude Include="src\icosohedron.h" />
     <ClInclude Include="src\radomeApp.h" />
     <ClInclude Include="src\radomeModel.h" />

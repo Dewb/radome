@@ -2,220 +2,220 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="..\of_v0.8.4_vs_release\addons\ofxAssimpModelLoader\src\ofxAssimpAnimation.cpp">
-      <Filter>src\addons\ofxAssimpModelLoader\src</Filter>
+      <Filter>addons\ofxAssimpModelLoader\src</Filter>
     </ClCompile>
     <ClCompile Include="..\of_v0.8.4_vs_release\addons\ofxAssimpModelLoader\src\ofxAssimpMeshHelper.cpp">
-      <Filter>src\addons\ofxAssimpModelLoader\src</Filter>
+      <Filter>addons\ofxAssimpModelLoader\src</Filter>
     </ClCompile>
     <ClCompile Include="..\of_v0.8.4_vs_release\addons\ofxAssimpModelLoader\src\ofxAssimpModelLoader.cpp">
-      <Filter>src\addons\ofxAssimpModelLoader\src</Filter>
+      <Filter>addons\ofxAssimpModelLoader\src</Filter>
     </ClCompile>
     <ClCompile Include="..\of_v0.8.4_vs_release\addons\ofxAssimpModelLoader\src\ofxAssimpTexture.cpp">
-      <Filter>src\addons\ofxAssimpModelLoader\src</Filter>
+      <Filter>addons\ofxAssimpModelLoader\src</Filter>
     </ClCompile>
     <ClCompile Include="..\of_v0.8.4_vs_release\addons\ofxOsc\src\ofxOscBundle.cpp">
-      <Filter>src\addons\ofxOsc\src</Filter>
+      <Filter>addons\ofxOsc\src</Filter>
     </ClCompile>
     <ClCompile Include="..\of_v0.8.4_vs_release\addons\ofxOsc\src\ofxOscMessage.cpp">
-      <Filter>src\addons\ofxOsc\src</Filter>
+      <Filter>addons\ofxOsc\src</Filter>
     </ClCompile>
     <ClCompile Include="..\of_v0.8.4_vs_release\addons\ofxOsc\src\ofxOscParameterSync.cpp">
-      <Filter>src\addons\ofxOsc\src</Filter>
+      <Filter>addons\ofxOsc\src</Filter>
     </ClCompile>
     <ClCompile Include="..\of_v0.8.4_vs_release\addons\ofxOsc\src\ofxOscReceiver.cpp">
-      <Filter>src\addons\ofxOsc\src</Filter>
+      <Filter>addons\ofxOsc\src</Filter>
     </ClCompile>
     <ClCompile Include="..\of_v0.8.4_vs_release\addons\ofxOsc\src\ofxOscSender.cpp">
-      <Filter>src\addons\ofxOsc\src</Filter>
+      <Filter>addons\ofxOsc\src</Filter>
     </ClCompile>
     <ClCompile Include="..\of_v0.8.4_vs_release\addons\ofxOsc\libs\oscpack\src\ip\IpEndpointName.cpp">
-      <Filter>src\addons\ofxOsc\libs\oscpack\src\ip</Filter>
+      <Filter>addons\ofxOsc\libs\oscpack\src\ip</Filter>
     </ClCompile>
     <ClCompile Include="..\of_v0.8.4_vs_release\addons\ofxOsc\libs\oscpack\src\ip\posix\NetworkingUtils.cpp">
-      <Filter>src\addons\ofxOsc\libs\oscpack\src\ip\posix</Filter>
+      <Filter>addons\ofxOsc\libs\oscpack\src\ip\posix</Filter>
     </ClCompile>
     <ClCompile Include="..\of_v0.8.4_vs_release\addons\ofxOsc\libs\oscpack\src\ip\posix\UdpSocket.cpp">
-      <Filter>src\addons\ofxOsc\libs\oscpack\src\ip\posix</Filter>
+      <Filter>addons\ofxOsc\libs\oscpack\src\ip\posix</Filter>
     </ClCompile>
     <ClCompile Include="..\of_v0.8.4_vs_release\addons\ofxOsc\libs\oscpack\src\ip\win32\NetworkingUtilsWin.cpp">
-      <Filter>src\addons\ofxOsc\libs\oscpack\src\ip\win32</Filter>
+      <Filter>addons\ofxOsc\libs\oscpack\src\ip\win32</Filter>
     </ClCompile>
     <ClCompile Include="..\of_v0.8.4_vs_release\addons\ofxOsc\libs\oscpack\src\ip\win32\UdpSocketWin.cpp">
-      <Filter>src\addons\ofxOsc\libs\oscpack\src\ip\win32</Filter>
+      <Filter>addons\ofxOsc\libs\oscpack\src\ip\win32</Filter>
     </ClCompile>
     <ClCompile Include="..\of_v0.8.4_vs_release\addons\ofxOsc\libs\oscpack\src\osc\OscOutboundPacketStream.cpp">
-      <Filter>src\addons\ofxOsc\libs\oscpack\src\osc</Filter>
+      <Filter>addons\ofxOsc\libs\oscpack\src\osc</Filter>
     </ClCompile>
     <ClCompile Include="..\of_v0.8.4_vs_release\addons\ofxOsc\libs\oscpack\src\osc\OscPrintReceivedElements.cpp">
-      <Filter>src\addons\ofxOsc\libs\oscpack\src\osc</Filter>
+      <Filter>addons\ofxOsc\libs\oscpack\src\osc</Filter>
     </ClCompile>
     <ClCompile Include="..\of_v0.8.4_vs_release\addons\ofxOsc\libs\oscpack\src\osc\OscReceivedElements.cpp">
-      <Filter>src\addons\ofxOsc\libs\oscpack\src\osc</Filter>
+      <Filter>addons\ofxOsc\libs\oscpack\src\osc</Filter>
     </ClCompile>
     <ClCompile Include="..\of_v0.8.4_vs_release\addons\ofxOsc\libs\oscpack\src\osc\OscTypes.cpp">
-      <Filter>src\addons\ofxOsc\libs\oscpack\src\osc</Filter>
+      <Filter>addons\ofxOsc\libs\oscpack\src\osc</Filter>
     </ClCompile>
     <ClCompile Include="..\of_v0.8.4_vs_release\addons\ofxXmlSettings\src\ofxXmlSettings.cpp">
-      <Filter>src\addons\ofxXmlSettings\src</Filter>
+      <Filter>addons\ofxXmlSettings\src</Filter>
     </ClCompile>
     <ClCompile Include="..\of_v0.8.4_vs_release\addons\ofxXmlSettings\libs\tinyxml.cpp">
-      <Filter>src\addons\ofxXmlSettings\libs</Filter>
+      <Filter>addons\ofxXmlSettings\libs</Filter>
     </ClCompile>
     <ClCompile Include="..\of_v0.8.4_vs_release\addons\ofxXmlSettings\libs\tinyxmlerror.cpp">
-      <Filter>src\addons\ofxXmlSettings\libs</Filter>
+      <Filter>addons\ofxXmlSettings\libs</Filter>
     </ClCompile>
     <ClCompile Include="..\of_v0.8.4_vs_release\addons\ofxXmlSettings\libs\tinyxmlparser.cpp">
-      <Filter>src\addons\ofxXmlSettings\libs</Filter>
+      <Filter>addons\ofxXmlSettings\libs</Filter>
     </ClCompile>
     <ClCompile Include="..\of_v0.8.4_vs_release\addons\ofxAppGLFWWindowMulti\src\ofxAppGLFWWindowMulti.mm">
-      <Filter>src\addons\ofxAppGLFWWindowMulti\src</Filter>
+      <Filter>addons\ofxAppGLFWWindowMulti\src</Filter>
     </ClCompile>
     <ClCompile Include="..\of_v0.8.4_vs_release\addons\ofxAppGLFWWindowMulti\src\WindowManager.cpp">
-      <Filter>src\addons\ofxAppGLFWWindowMulti\src</Filter>
+      <Filter>addons\ofxAppGLFWWindowMulti\src</Filter>
     </ClCompile>
     <ClCompile Include="..\of_v0.8.4_vs_release\addons\ofxAutoReloadedShader\src\ofxAutoReloadedShader.cpp">
-      <Filter>src\addons\ofxAutoReloadedShader\src</Filter>
+      <Filter>addons\ofxAutoReloadedShader\src</Filter>
     </ClCompile>
     <ClCompile Include="..\of_v0.8.4_vs_release\addons\ofxCubeMap\src\ofxCubeMap.cpp">
-      <Filter>src\addons\ofxCubeMap\src</Filter>
+      <Filter>addons\ofxCubeMap\src</Filter>
     </ClCompile>
     <ClCompile Include="..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUI2DGraph.cpp">
-      <Filter>src\addons\ofxUI\src</Filter>
+      <Filter>addons\ofxUI\src</Filter>
     </ClCompile>
     <ClCompile Include="..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUI2DPad.cpp">
-      <Filter>src\addons\ofxUI\src</Filter>
+      <Filter>addons\ofxUI\src</Filter>
     </ClCompile>
     <ClCompile Include="..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIBaseDraws.cpp">
-      <Filter>src\addons\ofxUI\src</Filter>
+      <Filter>addons\ofxUI\src</Filter>
     </ClCompile>
     <ClCompile Include="..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIBiLabelSlider.cpp">
-      <Filter>src\addons\ofxUI\src</Filter>
+      <Filter>addons\ofxUI\src</Filter>
     </ClCompile>
     <ClCompile Include="..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIButton.cpp">
-      <Filter>src\addons\ofxUI\src</Filter>
+      <Filter>addons\ofxUI\src</Filter>
     </ClCompile>
     <ClCompile Include="..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUICanvas.cpp">
-      <Filter>src\addons\ofxUI\src</Filter>
+      <Filter>addons\ofxUI\src</Filter>
     </ClCompile>
     <ClCompile Include="..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUICircleSlider.cpp">
-      <Filter>src\addons\ofxUI\src</Filter>
+      <Filter>addons\ofxUI\src</Filter>
     </ClCompile>
     <ClCompile Include="..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUICustomImageButton.cpp">
-      <Filter>src\addons\ofxUI\src</Filter>
+      <Filter>addons\ofxUI\src</Filter>
     </ClCompile>
     <ClCompile Include="..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIDragableLabelButton.cpp">
-      <Filter>src\addons\ofxUI\src</Filter>
+      <Filter>addons\ofxUI\src</Filter>
     </ClCompile>
     <ClCompile Include="..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIDropDownList.cpp">
-      <Filter>src\addons\ofxUI\src</Filter>
+      <Filter>addons\ofxUI\src</Filter>
     </ClCompile>
     <ClCompile Include="..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIEventArgs.cpp">
-      <Filter>src\addons\ofxUI\src</Filter>
+      <Filter>addons\ofxUI\src</Filter>
     </ClCompile>
     <ClCompile Include="..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIFPS.cpp">
-      <Filter>src\addons\ofxUI\src</Filter>
+      <Filter>addons\ofxUI\src</Filter>
     </ClCompile>
     <ClCompile Include="..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIFPSSlider.cpp">
-      <Filter>src\addons\ofxUI\src</Filter>
+      <Filter>addons\ofxUI\src</Filter>
     </ClCompile>
     <ClCompile Include="..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIImage.cpp">
-      <Filter>src\addons\ofxUI\src</Filter>
+      <Filter>addons\ofxUI\src</Filter>
     </ClCompile>
     <ClCompile Include="..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIImageButton.cpp">
-      <Filter>src\addons\ofxUI\src</Filter>
+      <Filter>addons\ofxUI\src</Filter>
     </ClCompile>
     <ClCompile Include="..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIImageSampler.cpp">
-      <Filter>src\addons\ofxUI\src</Filter>
+      <Filter>addons\ofxUI\src</Filter>
     </ClCompile>
     <ClCompile Include="..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIImageSlider.cpp">
-      <Filter>src\addons\ofxUI\src</Filter>
+      <Filter>addons\ofxUI\src</Filter>
     </ClCompile>
     <ClCompile Include="..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIImageToggle.cpp">
-      <Filter>src\addons\ofxUI\src</Filter>
+      <Filter>addons\ofxUI\src</Filter>
     </ClCompile>
     <ClCompile Include="..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIIntSlider.cpp">
-      <Filter>src\addons\ofxUI\src</Filter>
+      <Filter>addons\ofxUI\src</Filter>
     </ClCompile>
     <ClCompile Include="..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUILabel.cpp">
-      <Filter>src\addons\ofxUI\src</Filter>
+      <Filter>addons\ofxUI\src</Filter>
     </ClCompile>
     <ClCompile Include="..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUILabelButton.cpp">
-      <Filter>src\addons\ofxUI\src</Filter>
+      <Filter>addons\ofxUI\src</Filter>
     </ClCompile>
     <ClCompile Include="..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUILabelToggle.cpp">
-      <Filter>src\addons\ofxUI\src</Filter>
+      <Filter>addons\ofxUI\src</Filter>
     </ClCompile>
     <ClCompile Include="..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIMinimalSlider.cpp">
-      <Filter>src\addons\ofxUI\src</Filter>
+      <Filter>addons\ofxUI\src</Filter>
     </ClCompile>
     <ClCompile Include="..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIMovingGraph.cpp">
-      <Filter>src\addons\ofxUI\src</Filter>
+      <Filter>addons\ofxUI\src</Filter>
     </ClCompile>
     <ClCompile Include="..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIMultiImageButton.cpp">
-      <Filter>src\addons\ofxUI\src</Filter>
+      <Filter>addons\ofxUI\src</Filter>
     </ClCompile>
     <ClCompile Include="..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIMultiImageToggle.cpp">
-      <Filter>src\addons\ofxUI\src</Filter>
+      <Filter>addons\ofxUI\src</Filter>
     </ClCompile>
     <ClCompile Include="..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUINumberDialer.cpp">
-      <Filter>src\addons\ofxUI\src</Filter>
+      <Filter>addons\ofxUI\src</Filter>
     </ClCompile>
     <ClCompile Include="..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIRadio.cpp">
-      <Filter>src\addons\ofxUI\src</Filter>
+      <Filter>addons\ofxUI\src</Filter>
     </ClCompile>
     <ClCompile Include="..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIRangeSlider.cpp">
-      <Filter>src\addons\ofxUI\src</Filter>
+      <Filter>addons\ofxUI\src</Filter>
     </ClCompile>
     <ClCompile Include="..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIRectangle.cpp">
-      <Filter>src\addons\ofxUI\src</Filter>
+      <Filter>addons\ofxUI\src</Filter>
     </ClCompile>
     <ClCompile Include="..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIRotarySlider.cpp">
-      <Filter>src\addons\ofxUI\src</Filter>
+      <Filter>addons\ofxUI\src</Filter>
     </ClCompile>
     <ClCompile Include="..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIScrollableCanvas.cpp">
-      <Filter>src\addons\ofxUI\src</Filter>
+      <Filter>addons\ofxUI\src</Filter>
     </ClCompile>
     <ClCompile Include="..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUISlider.cpp">
-      <Filter>src\addons\ofxUI\src</Filter>
+      <Filter>addons\ofxUI\src</Filter>
     </ClCompile>
     <ClCompile Include="..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUISortableList.cpp">
-      <Filter>src\addons\ofxUI\src</Filter>
+      <Filter>addons\ofxUI\src</Filter>
     </ClCompile>
     <ClCompile Include="..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUISpacer.cpp">
-      <Filter>src\addons\ofxUI\src</Filter>
+      <Filter>addons\ofxUI\src</Filter>
     </ClCompile>
     <ClCompile Include="..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUISpectrum.cpp">
-      <Filter>src\addons\ofxUI\src</Filter>
+      <Filter>addons\ofxUI\src</Filter>
     </ClCompile>
     <ClCompile Include="..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUISuperCanvas.cpp">
-      <Filter>src\addons\ofxUI\src</Filter>
+      <Filter>addons\ofxUI\src</Filter>
     </ClCompile>
     <ClCompile Include="..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUITabBar.cpp">
-      <Filter>src\addons\ofxUI\src</Filter>
+      <Filter>addons\ofxUI\src</Filter>
     </ClCompile>
     <ClCompile Include="..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUITextArea.cpp">
-      <Filter>src\addons\ofxUI\src</Filter>
+      <Filter>addons\ofxUI\src</Filter>
     </ClCompile>
     <ClCompile Include="..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUITextInput.cpp">
-      <Filter>src\addons\ofxUI\src</Filter>
+      <Filter>addons\ofxUI\src</Filter>
     </ClCompile>
     <ClCompile Include="..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIToggle.cpp">
-      <Filter>src\addons\ofxUI\src</Filter>
+      <Filter>addons\ofxUI\src</Filter>
     </ClCompile>
     <ClCompile Include="..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIToggleMatrix.cpp">
-      <Filter>src\addons\ofxUI\src</Filter>
+      <Filter>addons\ofxUI\src</Filter>
     </ClCompile>
     <ClCompile Include="..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIValuePlotter.cpp">
-      <Filter>src\addons\ofxUI\src</Filter>
+      <Filter>addons\ofxUI\src</Filter>
     </ClCompile>
     <ClCompile Include="..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIWaveform.cpp">
-      <Filter>src\addons\ofxUI\src</Filter>
+      <Filter>addons\ofxUI\src</Filter>
     </ClCompile>
     <ClCompile Include="..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIWidget.cpp">
-      <Filter>src\addons\ofxUI\src</Filter>
+      <Filter>addons\ofxUI\src</Filter>
     </ClCompile>
     <ClCompile Include="..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIWidgetWithLabel.cpp">
-      <Filter>src\addons\ofxUI\src</Filter>
+      <Filter>addons\ofxUI\src</Filter>
     </ClCompile>
     <ClCompile Include="src\icosohedron.cpp">
       <Filter>src</Filter>
@@ -247,432 +247,465 @@
     <ClCompile Include="src\radomeRenderer.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="lib\Spout2\SpoutDirectX.cpp">
+      <Filter>lib\Spout2</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\Spout2\SpoutGLDXinterop.cpp">
+      <Filter>lib\Spout2</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\Spout2\SpoutGLextensions.cpp">
+      <Filter>lib\Spout2</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\Spout2\SpoutMemoryShare.cpp">
+      <Filter>lib\Spout2</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\Spout2\SpoutReceiver.cpp">
+      <Filter>lib\Spout2</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\Spout2\SpoutSDK.cpp">
+      <Filter>lib\Spout2</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\Spout2\SpoutSender.cpp">
+      <Filter>lib\Spout2</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\Spout2\SpoutSenderNames.cpp">
+      <Filter>lib\Spout2</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\Spout2\SpoutSharedMemory.cpp">
+      <Filter>lib\Spout2</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
       <UniqueIdentifier>{4a4393a6-31ca-4108-8887-76a68f69b444}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\addons">
+    <Filter Include="lib">
+      <UniqueIdentifier>{25560363-7615-48f2-bea5-dcaae0752219}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="lib\Spout2">
+      <UniqueIdentifier>{b84a9c54-c381-4162-8d71-1918cb89018c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons">
       <UniqueIdentifier>{71834F65-F3A9-211E-73B8-DC85}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\addons\ofxAssimpModelLoader">
+    <Filter Include="addons\ofxAssimpModelLoader">
       <UniqueIdentifier>{DE65D9F7-840A-CD0A-A555-EA3B}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\addons\ofxAssimpModelLoader\src">
+    <Filter Include="addons\ofxAssimpModelLoader\src">
       <UniqueIdentifier>{B84008DC-4B5E-271B-05DA-D8C8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\addons\ofxAssimpModelLoader\libs">
+    <Filter Include="addons\ofxAssimpModelLoader\libs">
       <UniqueIdentifier>{3D854F79-FA4A-75FA-FC0A-2B25}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\addons\ofxAssimpModelLoader\libs\assimp">
+    <Filter Include="addons\ofxAssimpModelLoader\libs\assimp">
       <UniqueIdentifier>{FE8B5295-D3A7-B9CD-89C9-2613}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\addons\ofxAssimpModelLoader\libs\assimp\include">
+    <Filter Include="addons\ofxAssimpModelLoader\libs\assimp\include">
       <UniqueIdentifier>{EDC34C4F-5D44-FB76-337E-EE48}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\addons\ofxAssimpModelLoader\libs\assimp\include\Compiler">
+    <Filter Include="addons\ofxAssimpModelLoader\libs\assimp\include\Compiler">
       <UniqueIdentifier>{E4500551-64E5-7412-70FA-BC1B}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\addons\ofxOsc">
+    <Filter Include="addons\ofxOsc">
       <UniqueIdentifier>{D91DCA33-6E5D-4481-2AEC-9FBB}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\addons\ofxOsc\src">
+    <Filter Include="addons\ofxOsc\src">
       <UniqueIdentifier>{B9DD339A-D93D-92A1-0A2F-4B41}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\addons\ofxOsc\libs">
+    <Filter Include="addons\ofxOsc\libs">
       <UniqueIdentifier>{99ECA1D9-873F-4622-8FC0-FC7B}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\addons\ofxOsc\libs\oscpack">
+    <Filter Include="addons\ofxOsc\libs\oscpack">
       <UniqueIdentifier>{D3A98534-1602-4FEF-57A6-6593}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\addons\ofxOsc\libs\oscpack\src">
+    <Filter Include="addons\ofxOsc\libs\oscpack\src">
       <UniqueIdentifier>{BFB5BB47-98C8-BBCB-3066-1046}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\addons\ofxOsc\libs\oscpack\src\ip">
+    <Filter Include="addons\ofxOsc\libs\oscpack\src\ip">
       <UniqueIdentifier>{5A029128-EB41-95C5-CBC0-CDED}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\addons\ofxOsc\libs\oscpack\src\ip\posix">
+    <Filter Include="addons\ofxOsc\libs\oscpack\src\ip\posix">
       <UniqueIdentifier>{354C95CF-A234-0360-C6BC-AF41}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\addons\ofxOsc\libs\oscpack\src\ip\win32">
+    <Filter Include="addons\ofxOsc\libs\oscpack\src\ip\win32">
       <UniqueIdentifier>{79DFDFE2-400B-8654-3675-01A3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\addons\ofxOsc\libs\oscpack\src\osc">
+    <Filter Include="addons\ofxOsc\libs\oscpack\src\osc">
       <UniqueIdentifier>{EDACB89C-9768-9551-4D41-B590}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\addons\ofxXmlSettings">
+    <Filter Include="addons\ofxXmlSettings">
       <UniqueIdentifier>{877F005D-13E6-0592-1D97-F2E3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\addons\ofxXmlSettings\src">
+    <Filter Include="addons\ofxXmlSettings\src">
       <UniqueIdentifier>{CCB2AC63-49D2-977C-CFE8-AEAD}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\addons\ofxXmlSettings\libs">
+    <Filter Include="addons\ofxXmlSettings\libs">
       <UniqueIdentifier>{687714A8-1662-FA1C-261F-50F0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\addons\ofxAppGLFWWindowMulti">
+    <Filter Include="addons\ofxAppGLFWWindowMulti">
       <UniqueIdentifier>{ACC32AAE-6372-DAD5-7BA7-5C05}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\addons\ofxAppGLFWWindowMulti\src">
+    <Filter Include="addons\ofxAppGLFWWindowMulti\src">
       <UniqueIdentifier>{1A1B2CBA-554D-3890-1818-28C2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\addons\ofxAutoReloadedShader">
+    <Filter Include="addons\ofxAutoReloadedShader">
       <UniqueIdentifier>{521D26BE-55F6-47AB-3222-444B}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\addons\ofxAutoReloadedShader\src">
+    <Filter Include="addons\ofxAutoReloadedShader\src">
       <UniqueIdentifier>{0051F69E-E543-1BA2-D150-22F5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\addons\ofxCubeMap">
+    <Filter Include="addons\ofxCubeMap">
       <UniqueIdentifier>{B9D17F6C-2369-3D35-A736-1A4B}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\addons\ofxCubeMap\src">
+    <Filter Include="addons\ofxCubeMap\src">
       <UniqueIdentifier>{1C1CC97B-FE16-22FF-3F9F-B9FD}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\addons\ofxUI">
+    <Filter Include="addons\ofxUI">
       <UniqueIdentifier>{B492C5B0-FF91-9C5A-638A-3142}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\addons\ofxUI\src">
+    <Filter Include="addons\ofxUI\src">
       <UniqueIdentifier>{A00C2D23-6C11-BC86-3993-2CF0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\of_v0.8.4_vs_release\addons\ofxAssimpModelLoader\src\ofxAssimpAnimation.h">
-      <Filter>src\addons\ofxAssimpModelLoader\src</Filter>
+      <Filter>addons\ofxAssimpModelLoader\src</Filter>
     </ClInclude>
     <ClInclude Include="..\of_v0.8.4_vs_release\addons\ofxAssimpModelLoader\src\ofxAssimpMeshHelper.h">
-      <Filter>src\addons\ofxAssimpModelLoader\src</Filter>
+      <Filter>addons\ofxAssimpModelLoader\src</Filter>
     </ClInclude>
     <ClInclude Include="..\of_v0.8.4_vs_release\addons\ofxAssimpModelLoader\src\ofxAssimpModelLoader.h">
-      <Filter>src\addons\ofxAssimpModelLoader\src</Filter>
+      <Filter>addons\ofxAssimpModelLoader\src</Filter>
     </ClInclude>
     <ClInclude Include="..\of_v0.8.4_vs_release\addons\ofxAssimpModelLoader\src\ofxAssimpTexture.h">
-      <Filter>src\addons\ofxAssimpModelLoader\src</Filter>
+      <Filter>addons\ofxAssimpModelLoader\src</Filter>
     </ClInclude>
     <ClInclude Include="..\of_v0.8.4_vs_release\addons\ofxAssimpModelLoader\src\ofxAssimpUtils.h">
-      <Filter>src\addons\ofxAssimpModelLoader\src</Filter>
+      <Filter>addons\ofxAssimpModelLoader\src</Filter>
     </ClInclude>
     <ClInclude Include="..\of_v0.8.4_vs_release\addons\ofxAssimpModelLoader\libs\assimp\include\aiAnim.h">
-      <Filter>src\addons\ofxAssimpModelLoader\libs\assimp\include</Filter>
+      <Filter>addons\ofxAssimpModelLoader\libs\assimp\include</Filter>
     </ClInclude>
     <ClInclude Include="..\of_v0.8.4_vs_release\addons\ofxAssimpModelLoader\libs\assimp\include\aiAssert.h">
-      <Filter>src\addons\ofxAssimpModelLoader\libs\assimp\include</Filter>
+      <Filter>addons\ofxAssimpModelLoader\libs\assimp\include</Filter>
     </ClInclude>
     <ClInclude Include="..\of_v0.8.4_vs_release\addons\ofxAssimpModelLoader\libs\assimp\include\aiCamera.h">
-      <Filter>src\addons\ofxAssimpModelLoader\libs\assimp\include</Filter>
+      <Filter>addons\ofxAssimpModelLoader\libs\assimp\include</Filter>
     </ClInclude>
     <ClInclude Include="..\of_v0.8.4_vs_release\addons\ofxAssimpModelLoader\libs\assimp\include\aiColor4D.h">
-      <Filter>src\addons\ofxAssimpModelLoader\libs\assimp\include</Filter>
+      <Filter>addons\ofxAssimpModelLoader\libs\assimp\include</Filter>
     </ClInclude>
     <ClInclude Include="..\of_v0.8.4_vs_release\addons\ofxAssimpModelLoader\libs\assimp\include\aiConfig.h">
-      <Filter>src\addons\ofxAssimpModelLoader\libs\assimp\include</Filter>
+      <Filter>addons\ofxAssimpModelLoader\libs\assimp\include</Filter>
     </ClInclude>
     <ClInclude Include="..\of_v0.8.4_vs_release\addons\ofxAssimpModelLoader\libs\assimp\include\aiDefines.h">
-      <Filter>src\addons\ofxAssimpModelLoader\libs\assimp\include</Filter>
+      <Filter>addons\ofxAssimpModelLoader\libs\assimp\include</Filter>
     </ClInclude>
     <ClInclude Include="..\of_v0.8.4_vs_release\addons\ofxAssimpModelLoader\libs\assimp\include\aiFileIO.h">
-      <Filter>src\addons\ofxAssimpModelLoader\libs\assimp\include</Filter>
+      <Filter>addons\ofxAssimpModelLoader\libs\assimp\include</Filter>
     </ClInclude>
     <ClInclude Include="..\of_v0.8.4_vs_release\addons\ofxAssimpModelLoader\libs\assimp\include\aiLight.h">
-      <Filter>src\addons\ofxAssimpModelLoader\libs\assimp\include</Filter>
+      <Filter>addons\ofxAssimpModelLoader\libs\assimp\include</Filter>
     </ClInclude>
     <ClInclude Include="..\of_v0.8.4_vs_release\addons\ofxAssimpModelLoader\libs\assimp\include\aiMaterial.h">
-      <Filter>src\addons\ofxAssimpModelLoader\libs\assimp\include</Filter>
+      <Filter>addons\ofxAssimpModelLoader\libs\assimp\include</Filter>
     </ClInclude>
     <ClInclude Include="..\of_v0.8.4_vs_release\addons\ofxAssimpModelLoader\libs\assimp\include\aiMatrix3x3.h">
-      <Filter>src\addons\ofxAssimpModelLoader\libs\assimp\include</Filter>
+      <Filter>addons\ofxAssimpModelLoader\libs\assimp\include</Filter>
     </ClInclude>
     <ClInclude Include="..\of_v0.8.4_vs_release\addons\ofxAssimpModelLoader\libs\assimp\include\aiMatrix4x4.h">
-      <Filter>src\addons\ofxAssimpModelLoader\libs\assimp\include</Filter>
+      <Filter>addons\ofxAssimpModelLoader\libs\assimp\include</Filter>
     </ClInclude>
     <ClInclude Include="..\of_v0.8.4_vs_release\addons\ofxAssimpModelLoader\libs\assimp\include\aiMesh.h">
-      <Filter>src\addons\ofxAssimpModelLoader\libs\assimp\include</Filter>
+      <Filter>addons\ofxAssimpModelLoader\libs\assimp\include</Filter>
     </ClInclude>
     <ClInclude Include="..\of_v0.8.4_vs_release\addons\ofxAssimpModelLoader\libs\assimp\include\aiPostProcess.h">
-      <Filter>src\addons\ofxAssimpModelLoader\libs\assimp\include</Filter>
+      <Filter>addons\ofxAssimpModelLoader\libs\assimp\include</Filter>
     </ClInclude>
     <ClInclude Include="..\of_v0.8.4_vs_release\addons\ofxAssimpModelLoader\libs\assimp\include\aiQuaternion.h">
-      <Filter>src\addons\ofxAssimpModelLoader\libs\assimp\include</Filter>
+      <Filter>addons\ofxAssimpModelLoader\libs\assimp\include</Filter>
     </ClInclude>
     <ClInclude Include="..\of_v0.8.4_vs_release\addons\ofxAssimpModelLoader\libs\assimp\include\aiScene.h">
-      <Filter>src\addons\ofxAssimpModelLoader\libs\assimp\include</Filter>
+      <Filter>addons\ofxAssimpModelLoader\libs\assimp\include</Filter>
     </ClInclude>
     <ClInclude Include="..\of_v0.8.4_vs_release\addons\ofxAssimpModelLoader\libs\assimp\include\aiTexture.h">
-      <Filter>src\addons\ofxAssimpModelLoader\libs\assimp\include</Filter>
+      <Filter>addons\ofxAssimpModelLoader\libs\assimp\include</Filter>
     </ClInclude>
     <ClInclude Include="..\of_v0.8.4_vs_release\addons\ofxAssimpModelLoader\libs\assimp\include\aiTypes.h">
-      <Filter>src\addons\ofxAssimpModelLoader\libs\assimp\include</Filter>
+      <Filter>addons\ofxAssimpModelLoader\libs\assimp\include</Filter>
     </ClInclude>
     <ClInclude Include="..\of_v0.8.4_vs_release\addons\ofxAssimpModelLoader\libs\assimp\include\aiVector2D.h">
-      <Filter>src\addons\ofxAssimpModelLoader\libs\assimp\include</Filter>
+      <Filter>addons\ofxAssimpModelLoader\libs\assimp\include</Filter>
     </ClInclude>
     <ClInclude Include="..\of_v0.8.4_vs_release\addons\ofxAssimpModelLoader\libs\assimp\include\aiVector3D.h">
-      <Filter>src\addons\ofxAssimpModelLoader\libs\assimp\include</Filter>
+      <Filter>addons\ofxAssimpModelLoader\libs\assimp\include</Filter>
     </ClInclude>
     <ClInclude Include="..\of_v0.8.4_vs_release\addons\ofxAssimpModelLoader\libs\assimp\include\aiVersion.h">
-      <Filter>src\addons\ofxAssimpModelLoader\libs\assimp\include</Filter>
+      <Filter>addons\ofxAssimpModelLoader\libs\assimp\include</Filter>
     </ClInclude>
     <ClInclude Include="..\of_v0.8.4_vs_release\addons\ofxAssimpModelLoader\libs\assimp\include\assimp.h">
-      <Filter>src\addons\ofxAssimpModelLoader\libs\assimp\include</Filter>
+      <Filter>addons\ofxAssimpModelLoader\libs\assimp\include</Filter>
     </ClInclude>
     <ClInclude Include="..\of_v0.8.4_vs_release\addons\ofxAssimpModelLoader\libs\assimp\include\assimp.hpp">
-      <Filter>src\addons\ofxAssimpModelLoader\libs\assimp\include</Filter>
+      <Filter>addons\ofxAssimpModelLoader\libs\assimp\include</Filter>
     </ClInclude>
     <ClInclude Include="..\of_v0.8.4_vs_release\addons\ofxAssimpModelLoader\libs\assimp\include\Compiler\poppack1.h">
-      <Filter>src\addons\ofxAssimpModelLoader\libs\assimp\include\Compiler</Filter>
+      <Filter>addons\ofxAssimpModelLoader\libs\assimp\include\Compiler</Filter>
     </ClInclude>
     <ClInclude Include="..\of_v0.8.4_vs_release\addons\ofxAssimpModelLoader\libs\assimp\include\Compiler\pushpack1.h">
-      <Filter>src\addons\ofxAssimpModelLoader\libs\assimp\include\Compiler</Filter>
+      <Filter>addons\ofxAssimpModelLoader\libs\assimp\include\Compiler</Filter>
     </ClInclude>
     <ClInclude Include="..\of_v0.8.4_vs_release\addons\ofxAssimpModelLoader\libs\assimp\include\DefaultLogger.h">
-      <Filter>src\addons\ofxAssimpModelLoader\libs\assimp\include</Filter>
+      <Filter>addons\ofxAssimpModelLoader\libs\assimp\include</Filter>
     </ClInclude>
     <ClInclude Include="..\of_v0.8.4_vs_release\addons\ofxAssimpModelLoader\libs\assimp\include\IOStream.h">
-      <Filter>src\addons\ofxAssimpModelLoader\libs\assimp\include</Filter>
+      <Filter>addons\ofxAssimpModelLoader\libs\assimp\include</Filter>
     </ClInclude>
     <ClInclude Include="..\of_v0.8.4_vs_release\addons\ofxAssimpModelLoader\libs\assimp\include\IOSystem.h">
-      <Filter>src\addons\ofxAssimpModelLoader\libs\assimp\include</Filter>
+      <Filter>addons\ofxAssimpModelLoader\libs\assimp\include</Filter>
     </ClInclude>
     <ClInclude Include="..\of_v0.8.4_vs_release\addons\ofxAssimpModelLoader\libs\assimp\include\Logger.h">
-      <Filter>src\addons\ofxAssimpModelLoader\libs\assimp\include</Filter>
+      <Filter>addons\ofxAssimpModelLoader\libs\assimp\include</Filter>
     </ClInclude>
     <ClInclude Include="..\of_v0.8.4_vs_release\addons\ofxAssimpModelLoader\libs\assimp\include\LogStream.h">
-      <Filter>src\addons\ofxAssimpModelLoader\libs\assimp\include</Filter>
+      <Filter>addons\ofxAssimpModelLoader\libs\assimp\include</Filter>
     </ClInclude>
     <ClInclude Include="..\of_v0.8.4_vs_release\addons\ofxAssimpModelLoader\libs\assimp\include\NullLogger.h">
-      <Filter>src\addons\ofxAssimpModelLoader\libs\assimp\include</Filter>
+      <Filter>addons\ofxAssimpModelLoader\libs\assimp\include</Filter>
     </ClInclude>
     <ClInclude Include="..\of_v0.8.4_vs_release\addons\ofxAssimpModelLoader\libs\assimp\include\ProgressHandler.h">
-      <Filter>src\addons\ofxAssimpModelLoader\libs\assimp\include</Filter>
+      <Filter>addons\ofxAssimpModelLoader\libs\assimp\include</Filter>
     </ClInclude>
     <ClInclude Include="..\of_v0.8.4_vs_release\addons\ofxOsc\src\ofxOsc.h">
-      <Filter>src\addons\ofxOsc\src</Filter>
+      <Filter>addons\ofxOsc\src</Filter>
     </ClInclude>
     <ClInclude Include="..\of_v0.8.4_vs_release\addons\ofxOsc\src\ofxOscArg.h">
-      <Filter>src\addons\ofxOsc\src</Filter>
+      <Filter>addons\ofxOsc\src</Filter>
     </ClInclude>
     <ClInclude Include="..\of_v0.8.4_vs_release\addons\ofxOsc\src\ofxOscBundle.h">
-      <Filter>src\addons\ofxOsc\src</Filter>
+      <Filter>addons\ofxOsc\src</Filter>
     </ClInclude>
     <ClInclude Include="..\of_v0.8.4_vs_release\addons\ofxOsc\src\ofxOscMessage.h">
-      <Filter>src\addons\ofxOsc\src</Filter>
+      <Filter>addons\ofxOsc\src</Filter>
     </ClInclude>
     <ClInclude Include="..\of_v0.8.4_vs_release\addons\ofxOsc\src\ofxOscParameterSync.h">
-      <Filter>src\addons\ofxOsc\src</Filter>
+      <Filter>addons\ofxOsc\src</Filter>
     </ClInclude>
     <ClInclude Include="..\of_v0.8.4_vs_release\addons\ofxOsc\src\ofxOscReceiver.h">
-      <Filter>src\addons\ofxOsc\src</Filter>
+      <Filter>addons\ofxOsc\src</Filter>
     </ClInclude>
     <ClInclude Include="..\of_v0.8.4_vs_release\addons\ofxOsc\src\ofxOscSender.h">
-      <Filter>src\addons\ofxOsc\src</Filter>
+      <Filter>addons\ofxOsc\src</Filter>
     </ClInclude>
     <ClInclude Include="..\of_v0.8.4_vs_release\addons\ofxOsc\libs\oscpack\src\ip\IpEndpointName.h">
-      <Filter>src\addons\ofxOsc\libs\oscpack\src\ip</Filter>
+      <Filter>addons\ofxOsc\libs\oscpack\src\ip</Filter>
     </ClInclude>
     <ClInclude Include="..\of_v0.8.4_vs_release\addons\ofxOsc\libs\oscpack\src\ip\NetworkingUtils.h">
-      <Filter>src\addons\ofxOsc\libs\oscpack\src\ip</Filter>
+      <Filter>addons\ofxOsc\libs\oscpack\src\ip</Filter>
     </ClInclude>
     <ClInclude Include="..\of_v0.8.4_vs_release\addons\ofxOsc\libs\oscpack\src\ip\PacketListener.h">
-      <Filter>src\addons\ofxOsc\libs\oscpack\src\ip</Filter>
+      <Filter>addons\ofxOsc\libs\oscpack\src\ip</Filter>
     </ClInclude>
     <ClInclude Include="..\of_v0.8.4_vs_release\addons\ofxOsc\libs\oscpack\src\ip\TimerListener.h">
-      <Filter>src\addons\ofxOsc\libs\oscpack\src\ip</Filter>
+      <Filter>addons\ofxOsc\libs\oscpack\src\ip</Filter>
     </ClInclude>
     <ClInclude Include="..\of_v0.8.4_vs_release\addons\ofxOsc\libs\oscpack\src\ip\UdpSocket.h">
-      <Filter>src\addons\ofxOsc\libs\oscpack\src\ip</Filter>
+      <Filter>addons\ofxOsc\libs\oscpack\src\ip</Filter>
     </ClInclude>
     <ClInclude Include="..\of_v0.8.4_vs_release\addons\ofxOsc\libs\oscpack\src\osc\MessageMappingOscPacketListener.h">
-      <Filter>src\addons\ofxOsc\libs\oscpack\src\osc</Filter>
+      <Filter>addons\ofxOsc\libs\oscpack\src\osc</Filter>
     </ClInclude>
     <ClInclude Include="..\of_v0.8.4_vs_release\addons\ofxOsc\libs\oscpack\src\osc\OscException.h">
-      <Filter>src\addons\ofxOsc\libs\oscpack\src\osc</Filter>
+      <Filter>addons\ofxOsc\libs\oscpack\src\osc</Filter>
     </ClInclude>
     <ClInclude Include="..\of_v0.8.4_vs_release\addons\ofxOsc\libs\oscpack\src\osc\OscHostEndianness.h">
-      <Filter>src\addons\ofxOsc\libs\oscpack\src\osc</Filter>
+      <Filter>addons\ofxOsc\libs\oscpack\src\osc</Filter>
     </ClInclude>
     <ClInclude Include="..\of_v0.8.4_vs_release\addons\ofxOsc\libs\oscpack\src\osc\OscOutboundPacketStream.h">
-      <Filter>src\addons\ofxOsc\libs\oscpack\src\osc</Filter>
+      <Filter>addons\ofxOsc\libs\oscpack\src\osc</Filter>
     </ClInclude>
     <ClInclude Include="..\of_v0.8.4_vs_release\addons\ofxOsc\libs\oscpack\src\osc\OscPacketListener.h">
-      <Filter>src\addons\ofxOsc\libs\oscpack\src\osc</Filter>
+      <Filter>addons\ofxOsc\libs\oscpack\src\osc</Filter>
     </ClInclude>
     <ClInclude Include="..\of_v0.8.4_vs_release\addons\ofxOsc\libs\oscpack\src\osc\OscPrintReceivedElements.h">
-      <Filter>src\addons\ofxOsc\libs\oscpack\src\osc</Filter>
+      <Filter>addons\ofxOsc\libs\oscpack\src\osc</Filter>
     </ClInclude>
     <ClInclude Include="..\of_v0.8.4_vs_release\addons\ofxOsc\libs\oscpack\src\osc\OscReceivedElements.h">
-      <Filter>src\addons\ofxOsc\libs\oscpack\src\osc</Filter>
+      <Filter>addons\ofxOsc\libs\oscpack\src\osc</Filter>
     </ClInclude>
     <ClInclude Include="..\of_v0.8.4_vs_release\addons\ofxOsc\libs\oscpack\src\osc\OscTypes.h">
-      <Filter>src\addons\ofxOsc\libs\oscpack\src\osc</Filter>
+      <Filter>addons\ofxOsc\libs\oscpack\src\osc</Filter>
     </ClInclude>
     <ClInclude Include="..\of_v0.8.4_vs_release\addons\ofxXmlSettings\src\ofxXmlSettings.h">
-      <Filter>src\addons\ofxXmlSettings\src</Filter>
+      <Filter>addons\ofxXmlSettings\src</Filter>
     </ClInclude>
     <ClInclude Include="..\of_v0.8.4_vs_release\addons\ofxXmlSettings\libs\tinyxml.h">
-      <Filter>src\addons\ofxXmlSettings\libs</Filter>
+      <Filter>addons\ofxXmlSettings\libs</Filter>
     </ClInclude>
     <ClInclude Include="..\of_v0.8.4_vs_release\addons\ofxAppGLFWWindowMulti\src\ofxAppGLFWWindowMulti.h">
-      <Filter>src\addons\ofxAppGLFWWindowMulti\src</Filter>
+      <Filter>addons\ofxAppGLFWWindowMulti\src</Filter>
     </ClInclude>
     <ClInclude Include="..\of_v0.8.4_vs_release\addons\ofxAppGLFWWindowMulti\src\WindowManager.h">
-      <Filter>src\addons\ofxAppGLFWWindowMulti\src</Filter>
+      <Filter>addons\ofxAppGLFWWindowMulti\src</Filter>
     </ClInclude>
     <ClInclude Include="..\of_v0.8.4_vs_release\addons\ofxAutoReloadedShader\src\ofxAutoReloadedShader.h">
-      <Filter>src\addons\ofxAutoReloadedShader\src</Filter>
+      <Filter>addons\ofxAutoReloadedShader\src</Filter>
     </ClInclude>
     <ClInclude Include="..\of_v0.8.4_vs_release\addons\ofxCubeMap\src\ofxCubeMap.h">
-      <Filter>src\addons\ofxCubeMap\src</Filter>
+      <Filter>addons\ofxCubeMap\src</Filter>
     </ClInclude>
     <ClInclude Include="..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUI.h">
-      <Filter>src\addons\ofxUI\src</Filter>
+      <Filter>addons\ofxUI\src</Filter>
     </ClInclude>
     <ClInclude Include="..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUI2DGraph.h">
-      <Filter>src\addons\ofxUI\src</Filter>
+      <Filter>addons\ofxUI\src</Filter>
     </ClInclude>
     <ClInclude Include="..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUI2DPad.h">
-      <Filter>src\addons\ofxUI\src</Filter>
+      <Filter>addons\ofxUI\src</Filter>
     </ClInclude>
     <ClInclude Include="..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIBaseDraws.h">
-      <Filter>src\addons\ofxUI\src</Filter>
+      <Filter>addons\ofxUI\src</Filter>
     </ClInclude>
     <ClInclude Include="..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIBiLabelSlider.h">
-      <Filter>src\addons\ofxUI\src</Filter>
+      <Filter>addons\ofxUI\src</Filter>
     </ClInclude>
     <ClInclude Include="..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIButton.h">
-      <Filter>src\addons\ofxUI\src</Filter>
+      <Filter>addons\ofxUI\src</Filter>
     </ClInclude>
     <ClInclude Include="..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUICanvas.h">
-      <Filter>src\addons\ofxUI\src</Filter>
+      <Filter>addons\ofxUI\src</Filter>
     </ClInclude>
     <ClInclude Include="..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUICircleSlider.h">
-      <Filter>src\addons\ofxUI\src</Filter>
+      <Filter>addons\ofxUI\src</Filter>
     </ClInclude>
     <ClInclude Include="..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUICustomImageButton.h">
-      <Filter>src\addons\ofxUI\src</Filter>
+      <Filter>addons\ofxUI\src</Filter>
     </ClInclude>
     <ClInclude Include="..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIDefines.h">
-      <Filter>src\addons\ofxUI\src</Filter>
+      <Filter>addons\ofxUI\src</Filter>
     </ClInclude>
     <ClInclude Include="..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIDragableLabelButton.h">
-      <Filter>src\addons\ofxUI\src</Filter>
+      <Filter>addons\ofxUI\src</Filter>
     </ClInclude>
     <ClInclude Include="..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIDropDownList.h">
-      <Filter>src\addons\ofxUI\src</Filter>
+      <Filter>addons\ofxUI\src</Filter>
     </ClInclude>
     <ClInclude Include="..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIEventArgs.h">
-      <Filter>src\addons\ofxUI\src</Filter>
+      <Filter>addons\ofxUI\src</Filter>
     </ClInclude>
     <ClInclude Include="..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIFPS.h">
-      <Filter>src\addons\ofxUI\src</Filter>
+      <Filter>addons\ofxUI\src</Filter>
     </ClInclude>
     <ClInclude Include="..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIFPSSlider.h">
-      <Filter>src\addons\ofxUI\src</Filter>
+      <Filter>addons\ofxUI\src</Filter>
     </ClInclude>
     <ClInclude Include="..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIImage.h">
-      <Filter>src\addons\ofxUI\src</Filter>
+      <Filter>addons\ofxUI\src</Filter>
     </ClInclude>
     <ClInclude Include="..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIImageButton.h">
-      <Filter>src\addons\ofxUI\src</Filter>
+      <Filter>addons\ofxUI\src</Filter>
     </ClInclude>
     <ClInclude Include="..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIImageSampler.h">
-      <Filter>src\addons\ofxUI\src</Filter>
+      <Filter>addons\ofxUI\src</Filter>
     </ClInclude>
     <ClInclude Include="..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIImageSlider.h">
-      <Filter>src\addons\ofxUI\src</Filter>
+      <Filter>addons\ofxUI\src</Filter>
     </ClInclude>
     <ClInclude Include="..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIImageToggle.h">
-      <Filter>src\addons\ofxUI\src</Filter>
+      <Filter>addons\ofxUI\src</Filter>
     </ClInclude>
     <ClInclude Include="..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIIntSlider.h">
-      <Filter>src\addons\ofxUI\src</Filter>
+      <Filter>addons\ofxUI\src</Filter>
     </ClInclude>
     <ClInclude Include="..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUILabel.h">
-      <Filter>src\addons\ofxUI\src</Filter>
+      <Filter>addons\ofxUI\src</Filter>
     </ClInclude>
     <ClInclude Include="..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUILabelButton.h">
-      <Filter>src\addons\ofxUI\src</Filter>
+      <Filter>addons\ofxUI\src</Filter>
     </ClInclude>
     <ClInclude Include="..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUILabelToggle.h">
-      <Filter>src\addons\ofxUI\src</Filter>
+      <Filter>addons\ofxUI\src</Filter>
     </ClInclude>
     <ClInclude Include="..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIMinimalSlider.h">
-      <Filter>src\addons\ofxUI\src</Filter>
+      <Filter>addons\ofxUI\src</Filter>
     </ClInclude>
     <ClInclude Include="..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIMovingGraph.h">
-      <Filter>src\addons\ofxUI\src</Filter>
+      <Filter>addons\ofxUI\src</Filter>
     </ClInclude>
     <ClInclude Include="..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIMultiImageButton.h">
-      <Filter>src\addons\ofxUI\src</Filter>
+      <Filter>addons\ofxUI\src</Filter>
     </ClInclude>
     <ClInclude Include="..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIMultiImageToggle.h">
-      <Filter>src\addons\ofxUI\src</Filter>
+      <Filter>addons\ofxUI\src</Filter>
     </ClInclude>
     <ClInclude Include="..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUINumberDialer.h">
-      <Filter>src\addons\ofxUI\src</Filter>
+      <Filter>addons\ofxUI\src</Filter>
     </ClInclude>
     <ClInclude Include="..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIOFWrapper.h">
-      <Filter>src\addons\ofxUI\src</Filter>
+      <Filter>addons\ofxUI\src</Filter>
     </ClInclude>
     <ClInclude Include="..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIRadio.h">
-      <Filter>src\addons\ofxUI\src</Filter>
+      <Filter>addons\ofxUI\src</Filter>
     </ClInclude>
     <ClInclude Include="..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIRangeSlider.h">
-      <Filter>src\addons\ofxUI\src</Filter>
+      <Filter>addons\ofxUI\src</Filter>
     </ClInclude>
     <ClInclude Include="..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIRectangle.h">
-      <Filter>src\addons\ofxUI\src</Filter>
+      <Filter>addons\ofxUI\src</Filter>
     </ClInclude>
     <ClInclude Include="..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIRotarySlider.h">
-      <Filter>src\addons\ofxUI\src</Filter>
+      <Filter>addons\ofxUI\src</Filter>
     </ClInclude>
     <ClInclude Include="..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIScrollableCanvas.h">
-      <Filter>src\addons\ofxUI\src</Filter>
+      <Filter>addons\ofxUI\src</Filter>
     </ClInclude>
     <ClInclude Include="..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUISlider.h">
-      <Filter>src\addons\ofxUI\src</Filter>
+      <Filter>addons\ofxUI\src</Filter>
     </ClInclude>
     <ClInclude Include="..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUISortableList.h">
-      <Filter>src\addons\ofxUI\src</Filter>
+      <Filter>addons\ofxUI\src</Filter>
     </ClInclude>
     <ClInclude Include="..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUISpacer.h">
-      <Filter>src\addons\ofxUI\src</Filter>
+      <Filter>addons\ofxUI\src</Filter>
     </ClInclude>
     <ClInclude Include="..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUISpectrum.h">
-      <Filter>src\addons\ofxUI\src</Filter>
+      <Filter>addons\ofxUI\src</Filter>
     </ClInclude>
     <ClInclude Include="..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUISuperCanvas.h">
-      <Filter>src\addons\ofxUI\src</Filter>
+      <Filter>addons\ofxUI\src</Filter>
     </ClInclude>
     <ClInclude Include="..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUITabBar.h">
-      <Filter>src\addons\ofxUI\src</Filter>
+      <Filter>addons\ofxUI\src</Filter>
     </ClInclude>
     <ClInclude Include="..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUITextArea.h">
-      <Filter>src\addons\ofxUI\src</Filter>
+      <Filter>addons\ofxUI\src</Filter>
     </ClInclude>
     <ClInclude Include="..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUITextInput.h">
-      <Filter>src\addons\ofxUI\src</Filter>
+      <Filter>addons\ofxUI\src</Filter>
     </ClInclude>
     <ClInclude Include="..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIToggle.h">
-      <Filter>src\addons\ofxUI\src</Filter>
+      <Filter>addons\ofxUI\src</Filter>
     </ClInclude>
     <ClInclude Include="..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIToggleMatrix.h">
-      <Filter>src\addons\ofxUI\src</Filter>
+      <Filter>addons\ofxUI\src</Filter>
     </ClInclude>
     <ClInclude Include="..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIUtils.h">
-      <Filter>src\addons\ofxUI\src</Filter>
+      <Filter>addons\ofxUI\src</Filter>
     </ClInclude>
     <ClInclude Include="..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIValuePlotter.h">
-      <Filter>src\addons\ofxUI\src</Filter>
+      <Filter>addons\ofxUI\src</Filter>
     </ClInclude>
     <ClInclude Include="..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIWaveform.h">
-      <Filter>src\addons\ofxUI\src</Filter>
+      <Filter>addons\ofxUI\src</Filter>
     </ClInclude>
     <ClInclude Include="..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIWidget.h">
-      <Filter>src\addons\ofxUI\src</Filter>
+      <Filter>addons\ofxUI\src</Filter>
     </ClInclude>
     <ClInclude Include="..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIWidgetWithLabel.h">
-      <Filter>src\addons\ofxUI\src</Filter>
+      <Filter>addons\ofxUI\src</Filter>
     </ClInclude>
     <ClInclude Include="..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIWrapper.h">
-      <Filter>src\addons\ofxUI\src</Filter>
+      <Filter>addons\ofxUI\src</Filter>
     </ClInclude>
     <ClInclude Include="src\icosohedron.h">
       <Filter>src</Filter>
@@ -700,6 +733,39 @@
     </ClInclude>
     <ClInclude Include="src\radomeRenderer.h">
       <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\Spout2\Spout.h">
+      <Filter>lib\Spout2</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\Spout2\SpoutCommon.h">
+      <Filter>lib\Spout2</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\Spout2\SpoutDirectX.h">
+      <Filter>lib\Spout2</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\Spout2\SpoutGLDXinterop.h">
+      <Filter>lib\Spout2</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\Spout2\SpoutGLextensions.h">
+      <Filter>lib\Spout2</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\Spout2\SpoutMemoryShare.h">
+      <Filter>lib\Spout2</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\Spout2\SpoutReceiver.h">
+      <Filter>lib\Spout2</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\Spout2\SpoutSDK.h">
+      <Filter>lib\Spout2</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\Spout2\SpoutSender.h">
+      <Filter>lib\Spout2</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\Spout2\SpoutSenderNames.h">
+      <Filter>lib\Spout2</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\Spout2\SpoutSharedMemory.h">
+      <Filter>lib\Spout2</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

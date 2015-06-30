@@ -15,11 +15,33 @@
 #define USE_SYPHON
 #endif
 
-#ifdef USE_SYPHON
+#if defined(USE_SYPHON)
 
 #include "ofxSyphon.h"
 
 typedef ofxSyphonClient ClientBase;
+#elif defined(USE_SPOUT)
+
+#include "ofTexture.h"
+class SpoutReceiver;
+
+class ClientBase {
+public:
+	ClientBase() : receiver(NULL) {};
+	ofTexture mTex;
+	float getWidth() { return width; }
+	float getHeight() { return height; }
+	void setApplicationName(string s) {}
+	void setServerName(string s) { senderName = s; }
+protected:
+	void setup();
+	SpoutReceiver *receiver;
+	bool bSetup;
+	int width;
+	int height;
+	string senderName;
+};
+
 #else
 
 #include "ofTexture.h"
@@ -38,7 +60,7 @@ public:
 class radomeSyphonClient : public ClientBase {
 
 public:
-    radomeSyphonClient();
+	radomeSyphonClient();
     void initialize(string app, string server);
     
     bool isEnabled() const { return bEnabled; }
