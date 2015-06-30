@@ -9,7 +9,7 @@
 #ifndef __radome__radomeSyphonClient__
 #define __radome__radomeSyphonClient__
 
-#ifdef _WINDOWS
+#ifdef _WIN32
 #define USE_SPOUT
 #else
 #define USE_SYPHON
