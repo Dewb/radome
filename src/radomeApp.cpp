@@ -12,7 +12,7 @@
 #define DEFAULT_SYPHON_SERVER "Composition"
 
 
-#define APP_VERSION "v0.4"
+#define APP_VERSION "v0.5"
 
 radomeApp::radomeApp() {
     _pUI = NULL;
@@ -50,7 +50,7 @@ void radomeApp::setup() {
     for (int ii = 0; ii < NUM_PROJECTORS; ii++) {
         _projectorList.push_back(new radomeProjector(ii*360.0/(NUM_PROJECTORS*1.0)+60.0, _renderer.params.domeDiameter*1.5, PROJECTOR_INITIAL_HEIGHT));
     }    
-    
+
     initGUI();
     
     _pCalibrationUI->loadSettings(DEFAULT_SETTINGS_FILE);
@@ -82,7 +82,8 @@ void radomeApp::createProjectorCalibrationUI(ofxUICanvas* pCanvas, int index) {
     pCanvas->addMinimalSlider(buf, -3.0, 3.0, 0.0, w, 15);
     sprintf(buf, "P%d ROLL", index);
     pCanvas->addMinimalSlider(buf, -30.0, 30.0, 0.0, w, 15);
-
+    sprintf(buf, "P%d JOINED", index);
+    pCanvas->addToggle(buf, true);
 }
 
 void setUIColors(ofxUICanvas* pCanvas) {
@@ -221,9 +222,30 @@ void radomeApp::loadFile() {
     }
 }
 
-void radomeApp::showProjectorWindow() {
+void radomeApp::showProjectorWindows() {
+
     if (_winManager.getNumWindows() == 1) {
-        _winManager.createWindow("Projector Output", 400, 300, 750, 200, false);
+        int joinedProjectors = 0;
+        for (auto projector : _projectorList) {
+            if (projector->isJoined()) {
+                joinedProjectors++;
+            }
+        }
+        if (joinedProjectors > 0) {
+            _winManager.createWindow("Joined Output", 400, 300, 250 * joinedProjectors, 200, false);
+        }
+        if (_projectorList.size() - joinedProjectors > 0) {
+            _winManager.createWindow("Output A", 400, 300, 400, 300, false);
+        }
+        if (_projectorList.size() - joinedProjectors > 1) {
+            _winManager.createWindow("Output B", 400, 300, 400, 300, false);
+        }
+        if (_projectorList.size() - joinedProjectors > 2) {
+            _winManager.createWindow("Output C", 400, 300, 400, 300, false);
+        }
+        if (_projectorList.size() - joinedProjectors > 3) {
+            _winManager.createWindow("Output D", 400, 300, 400, 300, false);
+        }
     }
 }
 
@@ -265,12 +287,35 @@ void radomeApp::update() {
 void radomeApp::draw() {
     if (_winManager.getActiveWindowNo() != 0) {
         if (_projectorList.size()) {
-            int w = ofGetWidth() / _projectorList.size();
+            int joinedProjectors = 0;
+            for (auto projector : _projectorList) {
+                if (projector->isJoined()) {
+                    joinedProjectors++;
+                }
+            }
             int h = ofGetHeight();
             int x = 0;
-            for (auto projector : _projectorList) {
-                projector->drawFramebuffer(x, 0, w, h);
-                x += w;
+            if (_winManager.getActiveWindowNo() == 1 && joinedProjectors > 0) {
+                int w = ofGetWidth() / joinedProjectors;
+                for (auto projector : _projectorList) {
+                    if (projector->isJoined()) {
+                        projector->drawFramebuffer(x, 0, w, h);
+                        x += w;
+                    }
+                }
+            } else {
+                int w = ofGetWidth();
+                int unjoinedProjectorIndex = 0;
+                for (auto projector : _projectorList) {
+                    if (!projector->isJoined()) {
+                        if (_winManager.getActiveWindowNo() == unjoinedProjectorIndex + 2) {
+                            projector->drawFramebuffer(x, 0, w, h);
+                            break;
+                        } else {
+                            unjoinedProjectorIndex++;
+                        }
+                    }
+                }
             }
         }
         return;
@@ -347,12 +392,19 @@ void radomeApp::keyPressed(int key) {
             break;
         case 'f':
             {
-                _winManager.setFullscreen(1, true);
+                // use OS native fullscreen features for now
+                /*
+                int screen = _winManager.getActiveWindowNo();
+                if (screen == 0) {
+                    screen = 1;
+                }
+                _winManager.setFullscreen(screen, true);
+                */
             }
             break;
         case 'p':
             {
-                showProjectorWindow();
+                showProjectorWindows();
             }
             break;
         case 'c':
@@ -468,7 +520,7 @@ void radomeApp::guiEvent(ofxUIEventArgs &e) {
         auto pButton = dynamic_cast<ofxUIButton*>(e.widget);
         if (pButton && !pButton->getValue())
         {
-            showProjectorWindow();
+            showProjectorWindows();
         }
     } else if (name == "Calibrate...") {
         auto pButton = dynamic_cast<ofxUIButton*>(e.widget);
@@ -510,6 +562,7 @@ void radomeApp::guiEvent(ofxUIEventArgs &e) {
         char p[2] = { name[1], 0 };
         int pindex = atoi(p) - 1;
         auto slider = dynamic_cast<ofxUISlider*>(e.widget);
+        auto togglebox = dynamic_cast<ofxUIToggle*>(e.widget);
         if (slider && _projectorList.size() > pindex && _projectorList[pindex]) {
             if (name.substr(3) == "HEIGHT") {
                 _projectorList[pindex]->setHeight(slider->getScaledValue() * 10);
@@ -525,6 +578,10 @@ void radomeApp::guiEvent(ofxUIEventArgs &e) {
                 _projectorList[pindex]->setLensOffsetY(slider->getScaledValue());
             } else if (name.substr(3) == "ROLL") {
                 _projectorList[pindex]->setRoll(slider->getScaledValue());
+            }
+        } else if (togglebox && _projectorList.size() > pindex && _projectorList[pindex]) {
+            if (name.substr(3) == "JOINED") {
+                _projectorList[pindex]->setJoined(togglebox->getValue());
             }
         }
     } else if (name == "Load") {

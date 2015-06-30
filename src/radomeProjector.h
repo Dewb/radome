@@ -39,6 +39,9 @@ public:
     float getLensOffsetY() const { return _lensOffsetY; }
     float getRoll() const { return _roll; }
     void setRoll(float r) { _roll = r; updateCamera(); }
+
+    bool isJoined() const { return _isJoined; }
+    void setJoined(bool b) { _isJoined = b; }
         
 protected:
     void updateCamera();
@@ -56,6 +59,8 @@ protected:
     float _lensOffsetX;
     float _lensOffsetY;
     float _roll;
+
+    bool _isJoined;
 };
 
 #endif /* defined(__radome__radomeProjector__) */

@@ -17,6 +17,7 @@ radomeProjector::radomeProjector(float heading, float distance, float height, fl
 , _lensOffsetX(0)
 , _lensOffsetY(0)
 , _roll(0)
+, _isJoined(true)
 {
     _camera.setupPerspective();
     updateCamera();
