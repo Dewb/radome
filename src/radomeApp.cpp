@@ -71,18 +71,20 @@ void radomeApp::createProjectorCalibrationUI(ofxUICanvas* pCanvas, int index) {
     sprintf(buf, "PROJECTOR %d", index);
     pCanvas->addWidgetDown(new ofxUILabel(buf, OFX_UI_FONT_MEDIUM));    
     sprintf(buf, "P%d HEIGHT", index);
-    pCanvas->addMinimalSlider(buf, 5.0, 30.0, PROJECTOR_INITIAL_HEIGHT/10.0, w, 15);
+    pCanvas->addMinimalSlider(buf, 0.0, 30.0, PROJECTOR_INITIAL_HEIGHT/10.0, w, 15);
     sprintf(buf, "P%d HEADING", index);
     pCanvas->addMinimalSlider(buf, 0.0, 360.0, 120.0 * index, w, 15);
     sprintf(buf, "P%d DISTANCE", index);
-    pCanvas->addMinimalSlider(buf, _renderer.params.domeHeight/20.0, _renderer.params.domeDiameter/5.0, _renderer.params.domeDiameter*0.15, w, 15);
+    pCanvas->addMinimalSlider(buf, 0, _renderer.params.domeDiameter/5.0, _renderer.params.domeDiameter*0.15, w, 15);
     sprintf(buf, "P%d FOV", index);
-    pCanvas->addMinimalSlider(buf, 20.0, 90.0, 30.0, w, 15);
+    pCanvas->addMinimalSlider(buf, 10.0, 120.0, 30.0, w, 15);
     sprintf(buf, "P%d TARGET", index);
-    pCanvas->addMinimalSlider(buf, 0.0, 40.0, 2.0, w, 15);
+    pCanvas->addMinimalSlider(buf, 0.0, 60.0, 2.0, w, 15);
     sprintf(buf, "P%d SHIFT", index);
     pCanvas->addMinimalSlider(buf, -3.0, 3.0, 0.0, w, 15);
     sprintf(buf, "P%d ROLL", index);
+    pCanvas->addMinimalSlider(buf, -30.0, 30.0, 0.0, w, 15);
+    sprintf(buf, "P%d YAW", index);
     pCanvas->addMinimalSlider(buf, -30.0, 30.0, 0.0, w, 15);
     sprintf(buf, "P%d JOINED", index);
     pCanvas->addToggle(buf, true);
@@ -580,6 +582,8 @@ void radomeApp::guiEvent(ofxUIEventArgs &e) {
                 _projectorList[pindex]->setLensOffsetY(slider->getScaledValue());
             } else if (name.substr(3) == "ROLL") {
                 _projectorList[pindex]->setRoll(slider->getScaledValue());
+            } else if (name.substr(3) == "YAW") {
+                _projectorList[pindex]->setYaw(slider->getScaledValue());
             }
         } else if (togglebox && _projectorList.size() > pindex && _projectorList[pindex]) {
             if (name.substr(3) == "JOINED") {
