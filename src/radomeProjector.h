@@ -39,6 +39,8 @@ public:
     float getLensOffsetY() const { return _lensOffsetY; }
     float getRoll() const { return _roll; }
     void setRoll(float r) { _roll = r; updateCamera(); }
+    float getYaw() const { return _yaw; }
+    void setYaw(float y) { _yaw = y; updateCamera(); }
 
     bool isJoined() const { return _isJoined; }
     void setJoined(bool b) { _isJoined = b; }
@@ -59,6 +61,7 @@ protected:
     float _lensOffsetX;
     float _lensOffsetY;
     float _roll;
+    float _yaw;
 
     bool _isJoined;
 };

@@ -49,9 +49,12 @@ void radomeProjector::updateCamera() {
     ofQuaternion q;
     q.makeRotate(_roll, lookVec);
     upVec = q * upVec;
-    
+
+    q.makeRotate(_yaw, upVec);
+    lookVec = q * lookVec;
+
     _camera.setPosition(cameraPos);
-    _camera.lookAt(ofVec3f(0.0, _targetHeight, 0.0), upVec);
+    _camera.lookAt(-lookVec + cameraPos, upVec);
 }
 
 void radomeProjector::renderBegin()
