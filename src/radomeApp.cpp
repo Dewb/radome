@@ -5,7 +5,8 @@
 #define SIDEBAR_WIDTH 190
 #define CALIBRATIONUI_WIDTH 280
 #define NUM_PROJECTORS 4
-#define DEFAULT_SETTINGS_FILE "projectorSettings.xml"
+#define DEFAULT_SETTINGS_FILE "projectorSettings1.xml"
+#define DEFAULT_SETTINGS_FILE2 "projectorSettings2.xml"
 #define PROJECTOR_INITIAL_HEIGHT 147.5
 
 #define DEFAULT_SYPHON_APP "Arena"
@@ -54,7 +55,8 @@ void radomeApp::setup() {
     initGUI();
     
     _pCalibrationUI->loadSettings(DEFAULT_SETTINGS_FILE);
-    
+    _pCalibrationUI2->loadSettings(DEFAULT_SETTINGS_FILE2);
+
     glEnable(GL_DEPTH_TEST);
 
 #ifdef USE_OSC
@@ -369,14 +371,14 @@ void radomeApp::keyPressed(int key) {
             break;
         case 'f':
             {
-                // use OS native fullscreen features for now
                 /*
                 int screen = _winManager.getActiveWindowNo();
                 if (screen == 0) {
                     screen = 1;
                 }
                 _winManager.setFullscreen(screen, true);
-                */
+                 */
+                _winManager.setFullscreen(1, true);
             }
             break;
         case 'p':
@@ -581,9 +583,15 @@ void radomeApp::guiEvent(ofxUIEventArgs &e) {
         if (_pCalibrationUI) {
             _pCalibrationUI->loadSettings(DEFAULT_SETTINGS_FILE);
         }
+        if (_pCalibrationUI2) {
+            _pCalibrationUI2->loadSettings(DEFAULT_SETTINGS_FILE2);
+        }
     } else if (name == "Save") {
         if (_pCalibrationUI) {
             _pCalibrationUI->saveSettings(DEFAULT_SETTINGS_FILE);
+        }
+        if (_pCalibrationUI2) {
+            _pCalibrationUI2->saveSettings(DEFAULT_SETTINGS_FILE2);
         }
     } else if (name == "Show Pattern") {
         auto pButton = dynamic_cast<ofxUIButton*>(e.widget);
