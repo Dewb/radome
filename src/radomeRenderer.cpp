@@ -40,6 +40,7 @@ protected:
     void drawScene();
     void drawDome();
     void drawGroundPlane();
+	void drawDomeTriangles();
 
     void beginShader();
     void endShader();
@@ -171,7 +172,14 @@ void radomeRendererImpl::updateDomeModel()
 {
     _domeDrawIndex = glGenLists(1);
     glNewList(_domeDrawIndex, GL_COMPILE);
+	drawDomeTriangles();
+    glEndList();
+}
+
+
+void radomeRendererImpl::drawDomeTriangles() {
     glBegin(GL_TRIANGLES);
+
     float yshift = (1 - _interface->params.domeCurve) * _interface->params.domeHeight;
 
     // desired slice radius b = sqrt(radius * radius - yshift * yshift);
@@ -199,7 +207,6 @@ void radomeRendererImpl::updateDomeModel()
         glVertex3fv(&d[0]);
     }
     glEnd();
-    glEndList();
 }
 
 void radomeRendererImpl::render(vector<radomeProjector*>& projectorList) {
@@ -240,13 +247,12 @@ void radomeRendererImpl::renderToCubeMap() {
 void radomeRendererImpl::renderProjectorBuffers(vector<radomeProjector*>& projectorList) {
     glEnable(GL_DEPTH_TEST);
     for (auto iter = projectorList.begin(); iter != projectorList.end(); ++iter) {
-        (*iter)->renderBegin();
-
         beginShader();
+        (*iter)->renderBegin();
         drawDome();
-        endShader();
 
         (*iter)->renderEnd();
+        endShader();
     }
 }
 

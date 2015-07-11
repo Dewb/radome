@@ -15,7 +15,10 @@
 void ClientBase::setup() {
 	unsigned int w = width, h = height;
 
-	if(receiver && receiver->CreateReceiver(const_cast<char*>(senderName.c_str()), w, h, true)) {
+	char name[256];
+	strcpy_s(name, senderName.c_str());
+
+	if(receiver && receiver->CreateReceiver(name, w, h, true)) {
 		if(width != w || height != h ) {
 			// Sender dimensions have changed
 			width = w;
@@ -48,7 +51,7 @@ void radomeSyphonClient::initialize(string app, string server) {
 		receiver = NULL;
 	}
 	receiver = new SpoutReceiver();
-	setServerName(server);
+	setServerName("arena");
 	bSetup = false;
 	width = 320;
 	height = 240;
@@ -84,7 +87,9 @@ void radomeSyphonClient::bind() {
 
 	unsigned int w = width, h = height;
 
-	if(receiver && receiver->ReceiveTexture(const_cast<char*>(senderName.c_str()), w, h,
+	char name[256];
+	strcpy_s(name, senderName.c_str());
+	if(receiver && receiver->ReceiveTexture(name, w, h,
 											mTex.getTextureData().textureID, mTex.getTextureData().textureTarget)) {
 		if(width != w || height != h ) {
 			// Sender dimensions have changed

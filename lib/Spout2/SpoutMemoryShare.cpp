@@ -62,7 +62,7 @@
 //----------------------------------------
 spoutMemoryShare::spoutMemoryShare()
 {
-	setSharedMemoryName("ofxMemoryShare"); // can be set externally
+	setSharedMemoryName("spoutMemoryShare"); // can be set externally
 }
 
 

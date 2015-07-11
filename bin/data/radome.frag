@@ -101,6 +101,7 @@ vec3 ContrastSaturationBrightness(vec3 color, float con, float sat, float brt)
 
 void main()
 {
+
     // clip below the y-plane
     if (position.y < baseHeight - 1.5) discard;
 
@@ -139,4 +140,3 @@ void main()
         gl_FragColor.rgb = ContrastSaturationBrightness(gl_FragColor.rgb, contrast, saturation, brightness);
     }
 }
-

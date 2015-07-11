@@ -22,7 +22,7 @@ radomeProjector::radomeProjector(float heading, float distance, float height, fl
     _camera.setupPerspective();
     updateCamera();
     
-    _resolution = ofVec2f(1280.0, 1024.0);
+    _resolution = ofVec2f(1024.0, 768.0);
     
     _fbo.allocate(_resolution.x, _resolution.y, GL_RGB);
     _fbo.begin();
@@ -60,7 +60,7 @@ void radomeProjector::updateCamera() {
 void radomeProjector::renderBegin()
 {
     _fbo.begin();
-	ofClear(0,0,0,1);
+	ofClear(0,0,0,255);
     _camera.begin();
 }
 
