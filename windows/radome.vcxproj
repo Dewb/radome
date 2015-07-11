@@ -1,0 +1,331 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{7FD42DF7-442E-479A-BA76-D0022F99702A}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>radome</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v110</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <PlatformToolset>v110</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="openFrameworksRelease.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="openFrameworksDebug.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>..\bin\</OutDir>
+    <IntDir>obj\$(Configuration)\</IntDir>
+    <TargetName>$(ProjectName)_debug</TargetName>
+    <LinkIncremental>true</LinkIncremental>
+    <GenerateManifest>true</GenerateManifest>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>..\bin\</OutDir>
+    <IntDir>obj\$(Configuration)\</IntDir>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <AdditionalIncludeDirectories>..\lib;%(AdditionalIncludeDirectories);..\..\of_v0.8.4_vs_release\addons\ofxAssimpModelLoader\libs;..\..\of_v0.8.4_vs_release\addons\ofxAssimpModelLoader\src;..\..\of_v0.8.4_vs_release\addons\ofxAssimpModelLoader\libs\assimp;..\..\of_v0.8.4_vs_release\addons\ofxAssimpModelLoader\libs\assimp\include;..\..\of_v0.8.4_vs_release\addons\ofxAssimpModelLoader\libs\assimp\include\Compiler;..\..\of_v0.8.4_vs_release\addons\ofxAssimpModelLoader\libs\assimp\lib;..\..\of_v0.8.4_vs_release\addons\ofxAssimpModelLoader\libs\assimp\lib\vs;..\..\of_v0.8.4_vs_release\addons\ofxOsc\libs;..\..\of_v0.8.4_vs_release\addons\ofxOsc\src;..\..\of_v0.8.4_vs_release\addons\ofxOsc\libs\oscpack;..\..\of_v0.8.4_vs_release\addons\ofxOsc\libs\oscpack\src;..\..\of_v0.8.4_vs_release\addons\ofxOsc\libs\oscpack\src\ip;..\..\of_v0.8.4_vs_release\addons\ofxOsc\libs\oscpack\src\ip\posix;..\..\of_v0.8.4_vs_release\addons\ofxOsc\libs\oscpack\src\ip\win32;..\..\of_v0.8.4_vs_release\addons\ofxOsc\libs\oscpack\src\osc;..\..\of_v0.8.4_vs_release\addons\ofxXmlSettings\libs;..\..\of_v0.8.4_vs_release\addons\ofxXmlSettings\src;..\..\of_v0.8.4_vs_release\addons\ofxAppGLFWWindowMulti\libs;..\..\of_v0.8.4_vs_release\addons\ofxAppGLFWWindowMulti\src;..\..\of_v0.8.4_vs_release\addons\ofxAutoReloadedShader\libs;..\..\of_v0.8.4_vs_release\addons\ofxAutoReloadedShader\src;..\..\of_v0.8.4_vs_release\addons\ofxCubeMap\libs;..\..\of_v0.8.4_vs_release\addons\ofxCubeMap\src;..\..\of_v0.8.4_vs_release\addons\ofxUI\libs;..\..\of_v0.8.4_vs_release\addons\ofxUI\src</AdditionalIncludeDirectories>
+      <CompileAs>CompileAsCpp</CompileAs>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <AdditionalDependencies>%(AdditionalDependencies);assimp.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories);..\..\of_v0.8.4_vs_release\addons\ofxAssimpModelLoader\libs\assimp\lib\vs</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <WarningLevel>Level3</WarningLevel>
+      <AdditionalIncludeDirectories>..\lib;%(AdditionalIncludeDirectories);..\..\of_v0.8.4_vs_release\addons\ofxAssimpModelLoader\libs;..\..\of_v0.8.4_vs_release\addons\ofxAssimpModelLoader\src;..\..\of_v0.8.4_vs_release\addons\ofxAssimpModelLoader\libs\assimp;..\..\of_v0.8.4_vs_release\addons\ofxAssimpModelLoader\libs\assimp\include;..\..\of_v0.8.4_vs_release\addons\ofxAssimpModelLoader\libs\assimp\include\Compiler;..\..\of_v0.8.4_vs_release\addons\ofxAssimpModelLoader\libs\assimp\lib;..\..\of_v0.8.4_vs_release\addons\ofxAssimpModelLoader\libs\assimp\lib\vs;..\..\of_v0.8.4_vs_release\addons\ofxOsc\libs;..\..\of_v0.8.4_vs_release\addons\ofxOsc\src;..\..\of_v0.8.4_vs_release\addons\ofxOsc\libs\oscpack;..\..\of_v0.8.4_vs_release\addons\ofxOsc\libs\oscpack\src;..\..\of_v0.8.4_vs_release\addons\ofxOsc\libs\oscpack\src\ip;..\..\of_v0.8.4_vs_release\addons\ofxOsc\libs\oscpack\src\ip\posix;..\..\of_v0.8.4_vs_release\addons\ofxOsc\libs\oscpack\src\ip\win32;..\..\of_v0.8.4_vs_release\addons\ofxOsc\libs\oscpack\src\osc;..\..\of_v0.8.4_vs_release\addons\ofxXmlSettings\libs;..\..\of_v0.8.4_vs_release\addons\ofxXmlSettings\src;..\..\of_v0.8.4_vs_release\addons\ofxAppGLFWWindowMulti\libs;..\..\of_v0.8.4_vs_release\addons\ofxAppGLFWWindowMulti\src;..\..\of_v0.8.4_vs_release\addons\ofxAutoReloadedShader\libs;..\..\of_v0.8.4_vs_release\addons\ofxAutoReloadedShader\src;..\..\of_v0.8.4_vs_release\addons\ofxCubeMap\libs;..\..\of_v0.8.4_vs_release\addons\ofxCubeMap\src;..\..\of_v0.8.4_vs_release\addons\ofxUI\libs;..\..\of_v0.8.4_vs_release\addons\ofxUI\src</AdditionalIncludeDirectories>
+      <CompileAs>CompileAsCpp</CompileAs>
+    </ClCompile>
+    <Link>
+      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <AdditionalDependencies>%(AdditionalDependencies);assimp.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories);..\..\of_v0.8.4_vs_release\addons\ofxAssimpModelLoader\libs\assimp\lib\vs</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\of_v0.8.4_vs_release\addons\ofxAssimpModelLoader\src\ofxAssimpAnimation.cpp" />
+    <ClCompile Include="..\..\of_v0.8.4_vs_release\addons\ofxAssimpModelLoader\src\ofxAssimpMeshHelper.cpp" />
+    <ClCompile Include="..\..\of_v0.8.4_vs_release\addons\ofxAssimpModelLoader\src\ofxAssimpModelLoader.cpp" />
+    <ClCompile Include="..\..\of_v0.8.4_vs_release\addons\ofxAssimpModelLoader\src\ofxAssimpTexture.cpp" />
+    <ClCompile Include="..\..\of_v0.8.4_vs_release\addons\ofxOsc\src\ofxOscBundle.cpp" />
+    <ClCompile Include="..\..\of_v0.8.4_vs_release\addons\ofxOsc\src\ofxOscMessage.cpp" />
+    <ClCompile Include="..\..\of_v0.8.4_vs_release\addons\ofxOsc\src\ofxOscParameterSync.cpp" />
+    <ClCompile Include="..\..\of_v0.8.4_vs_release\addons\ofxOsc\src\ofxOscReceiver.cpp" />
+    <ClCompile Include="..\..\of_v0.8.4_vs_release\addons\ofxOsc\src\ofxOscSender.cpp" />
+    <ClCompile Include="..\..\of_v0.8.4_vs_release\addons\ofxOsc\libs\oscpack\src\ip\IpEndpointName.cpp" />
+    <ClCompile Include="..\..\of_v0.8.4_vs_release\addons\ofxOsc\libs\oscpack\src\ip\posix\NetworkingUtils.cpp" />
+    <ClCompile Include="..\..\of_v0.8.4_vs_release\addons\ofxOsc\libs\oscpack\src\ip\posix\UdpSocket.cpp" />
+    <ClCompile Include="..\..\of_v0.8.4_vs_release\addons\ofxOsc\libs\oscpack\src\ip\win32\NetworkingUtilsWin.cpp" />
+    <ClCompile Include="..\..\of_v0.8.4_vs_release\addons\ofxOsc\libs\oscpack\src\ip\win32\UdpSocketWin.cpp" />
+    <ClCompile Include="..\..\of_v0.8.4_vs_release\addons\ofxOsc\libs\oscpack\src\osc\OscOutboundPacketStream.cpp" />
+    <ClCompile Include="..\..\of_v0.8.4_vs_release\addons\ofxOsc\libs\oscpack\src\osc\OscPrintReceivedElements.cpp" />
+    <ClCompile Include="..\..\of_v0.8.4_vs_release\addons\ofxOsc\libs\oscpack\src\osc\OscReceivedElements.cpp" />
+    <ClCompile Include="..\..\of_v0.8.4_vs_release\addons\ofxOsc\libs\oscpack\src\osc\OscTypes.cpp" />
+    <ClCompile Include="..\..\of_v0.8.4_vs_release\addons\ofxXmlSettings\src\ofxXmlSettings.cpp" />
+    <ClCompile Include="..\..\of_v0.8.4_vs_release\addons\ofxXmlSettings\libs\tinyxml.cpp" />
+    <ClCompile Include="..\..\of_v0.8.4_vs_release\addons\ofxXmlSettings\libs\tinyxmlerror.cpp" />
+    <ClCompile Include="..\..\of_v0.8.4_vs_release\addons\ofxXmlSettings\libs\tinyxmlparser.cpp" />
+    <ClCompile Include="..\..\of_v0.8.4_vs_release\addons\ofxAppGLFWWindowMulti\src\ofxAppGLFWWindowMulti.mm" />
+    <ClCompile Include="..\..\of_v0.8.4_vs_release\addons\ofxAppGLFWWindowMulti\src\WindowManager.cpp" />
+    <ClCompile Include="..\..\of_v0.8.4_vs_release\addons\ofxAutoReloadedShader\src\ofxAutoReloadedShader.cpp" />
+    <ClCompile Include="..\..\of_v0.8.4_vs_release\addons\ofxCubeMap\src\ofxCubeMap.cpp" />
+    <ClCompile Include="..\..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUI2DGraph.cpp" />
+    <ClCompile Include="..\..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUI2DPad.cpp" />
+    <ClCompile Include="..\..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIBaseDraws.cpp" />
+    <ClCompile Include="..\..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIBiLabelSlider.cpp" />
+    <ClCompile Include="..\..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIButton.cpp" />
+    <ClCompile Include="..\..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUICanvas.cpp" />
+    <ClCompile Include="..\..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUICircleSlider.cpp" />
+    <ClCompile Include="..\..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUICustomImageButton.cpp" />
+    <ClCompile Include="..\..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIDragableLabelButton.cpp" />
+    <ClCompile Include="..\..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIDropDownList.cpp" />
+    <ClCompile Include="..\..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIEventArgs.cpp" />
+    <ClCompile Include="..\..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIFPS.cpp" />
+    <ClCompile Include="..\..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIFPSSlider.cpp" />
+    <ClCompile Include="..\..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIImage.cpp" />
+    <ClCompile Include="..\..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIImageButton.cpp" />
+    <ClCompile Include="..\..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIImageSampler.cpp" />
+    <ClCompile Include="..\..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIImageSlider.cpp" />
+    <ClCompile Include="..\..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIImageToggle.cpp" />
+    <ClCompile Include="..\..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIIntSlider.cpp" />
+    <ClCompile Include="..\..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUILabel.cpp" />
+    <ClCompile Include="..\..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUILabelButton.cpp" />
+    <ClCompile Include="..\..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUILabelToggle.cpp" />
+    <ClCompile Include="..\..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIMinimalSlider.cpp" />
+    <ClCompile Include="..\..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIMovingGraph.cpp" />
+    <ClCompile Include="..\..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIMultiImageButton.cpp" />
+    <ClCompile Include="..\..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIMultiImageToggle.cpp" />
+    <ClCompile Include="..\..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUINumberDialer.cpp" />
+    <ClCompile Include="..\..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIRadio.cpp" />
+    <ClCompile Include="..\..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIRangeSlider.cpp" />
+    <ClCompile Include="..\..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIRectangle.cpp" />
+    <ClCompile Include="..\..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIRotarySlider.cpp" />
+    <ClCompile Include="..\..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIScrollableCanvas.cpp" />
+    <ClCompile Include="..\..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUISlider.cpp" />
+    <ClCompile Include="..\..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUISortableList.cpp" />
+    <ClCompile Include="..\..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUISpacer.cpp" />
+    <ClCompile Include="..\..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUISpectrum.cpp" />
+    <ClCompile Include="..\..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUISuperCanvas.cpp" />
+    <ClCompile Include="..\..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUITabBar.cpp" />
+    <ClCompile Include="..\..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUITextArea.cpp" />
+    <ClCompile Include="..\..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUITextInput.cpp" />
+    <ClCompile Include="..\..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIToggle.cpp" />
+    <ClCompile Include="..\..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIToggleMatrix.cpp" />
+    <ClCompile Include="..\..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIValuePlotter.cpp" />
+    <ClCompile Include="..\..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIWaveform.cpp" />
+    <ClCompile Include="..\..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIWidget.cpp" />
+    <ClCompile Include="..\..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIWidgetWithLabel.cpp" />
+    <ClCompile Include="..\lib\Spout2\SpoutDirectX.cpp" />
+    <ClCompile Include="..\lib\Spout2\SpoutGLDXinterop.cpp" />
+    <ClCompile Include="..\lib\Spout2\SpoutGLextensions.cpp" />
+    <ClCompile Include="..\lib\Spout2\SpoutMemoryShare.cpp" />
+    <ClCompile Include="..\lib\Spout2\SpoutReceiver.cpp" />
+    <ClCompile Include="..\lib\Spout2\SpoutSDK.cpp" />
+    <ClCompile Include="..\lib\Spout2\SpoutSender.cpp" />
+    <ClCompile Include="..\lib\Spout2\SpoutSenderNames.cpp" />
+    <ClCompile Include="..\lib\Spout2\SpoutSharedMemory.cpp" />
+    <ClCompile Include="..\src\icosohedron.cpp" />
+    <ClCompile Include="..\src\main.cpp" />
+    <ClCompile Include="..\src\radomeApp.cpp" />
+    <ClCompile Include="..\src\radomeModel.cpp" />
+    <ClCompile Include="..\src\radomePlugin.cpp" />
+    <ClCompile Include="..\src\radomeProjector.cpp" />
+    <ClCompile Include="..\src\radomeRenderer.cpp" />
+    <ClCompile Include="..\src\radomeSyphonClient.cpp" />
+    <ClCompile Include="..\src\radomeUtils.cpp" />
+    <ClCompile Include="..\src\turntableCam.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\of_v0.8.4_vs_release\addons\ofxAssimpModelLoader\src\ofxAssimpAnimation.h" />
+    <ClInclude Include="..\..\of_v0.8.4_vs_release\addons\ofxAssimpModelLoader\src\ofxAssimpMeshHelper.h" />
+    <ClInclude Include="..\..\of_v0.8.4_vs_release\addons\ofxAssimpModelLoader\src\ofxAssimpModelLoader.h" />
+    <ClInclude Include="..\..\of_v0.8.4_vs_release\addons\ofxAssimpModelLoader\src\ofxAssimpTexture.h" />
+    <ClInclude Include="..\..\of_v0.8.4_vs_release\addons\ofxAssimpModelLoader\src\ofxAssimpUtils.h" />
+    <ClInclude Include="..\..\of_v0.8.4_vs_release\addons\ofxAssimpModelLoader\libs\assimp\include\aiAnim.h" />
+    <ClInclude Include="..\..\of_v0.8.4_vs_release\addons\ofxAssimpModelLoader\libs\assimp\include\aiAssert.h" />
+    <ClInclude Include="..\..\of_v0.8.4_vs_release\addons\ofxAssimpModelLoader\libs\assimp\include\aiCamera.h" />
+    <ClInclude Include="..\..\of_v0.8.4_vs_release\addons\ofxAssimpModelLoader\libs\assimp\include\aiColor4D.h" />
+    <ClInclude Include="..\..\of_v0.8.4_vs_release\addons\ofxAssimpModelLoader\libs\assimp\include\aiConfig.h" />
+    <ClInclude Include="..\..\of_v0.8.4_vs_release\addons\ofxAssimpModelLoader\libs\assimp\include\aiDefines.h" />
+    <ClInclude Include="..\..\of_v0.8.4_vs_release\addons\ofxAssimpModelLoader\libs\assimp\include\aiFileIO.h" />
+    <ClInclude Include="..\..\of_v0.8.4_vs_release\addons\ofxAssimpModelLoader\libs\assimp\include\aiLight.h" />
+    <ClInclude Include="..\..\of_v0.8.4_vs_release\addons\ofxAssimpModelLoader\libs\assimp\include\aiMaterial.h" />
+    <ClInclude Include="..\..\of_v0.8.4_vs_release\addons\ofxAssimpModelLoader\libs\assimp\include\aiMatrix3x3.h" />
+    <ClInclude Include="..\..\of_v0.8.4_vs_release\addons\ofxAssimpModelLoader\libs\assimp\include\aiMatrix4x4.h" />
+    <ClInclude Include="..\..\of_v0.8.4_vs_release\addons\ofxAssimpModelLoader\libs\assimp\include\aiMesh.h" />
+    <ClInclude Include="..\..\of_v0.8.4_vs_release\addons\ofxAssimpModelLoader\libs\assimp\include\aiPostProcess.h" />
+    <ClInclude Include="..\..\of_v0.8.4_vs_release\addons\ofxAssimpModelLoader\libs\assimp\include\aiQuaternion.h" />
+    <ClInclude Include="..\..\of_v0.8.4_vs_release\addons\ofxAssimpModelLoader\libs\assimp\include\aiScene.h" />
+    <ClInclude Include="..\..\of_v0.8.4_vs_release\addons\ofxAssimpModelLoader\libs\assimp\include\aiTexture.h" />
+    <ClInclude Include="..\..\of_v0.8.4_vs_release\addons\ofxAssimpModelLoader\libs\assimp\include\aiTypes.h" />
+    <ClInclude Include="..\..\of_v0.8.4_vs_release\addons\ofxAssimpModelLoader\libs\assimp\include\aiVector2D.h" />
+    <ClInclude Include="..\..\of_v0.8.4_vs_release\addons\ofxAssimpModelLoader\libs\assimp\include\aiVector3D.h" />
+    <ClInclude Include="..\..\of_v0.8.4_vs_release\addons\ofxAssimpModelLoader\libs\assimp\include\aiVersion.h" />
+    <ClInclude Include="..\..\of_v0.8.4_vs_release\addons\ofxAssimpModelLoader\libs\assimp\include\assimp.h" />
+    <ClInclude Include="..\..\of_v0.8.4_vs_release\addons\ofxAssimpModelLoader\libs\assimp\include\assimp.hpp" />
+    <ClInclude Include="..\..\of_v0.8.4_vs_release\addons\ofxAssimpModelLoader\libs\assimp\include\Compiler\poppack1.h" />
+    <ClInclude Include="..\..\of_v0.8.4_vs_release\addons\ofxAssimpModelLoader\libs\assimp\include\Compiler\pushpack1.h" />
+    <ClInclude Include="..\..\of_v0.8.4_vs_release\addons\ofxAssimpModelLoader\libs\assimp\include\DefaultLogger.h" />
+    <ClInclude Include="..\..\of_v0.8.4_vs_release\addons\ofxAssimpModelLoader\libs\assimp\include\IOStream.h" />
+    <ClInclude Include="..\..\of_v0.8.4_vs_release\addons\ofxAssimpModelLoader\libs\assimp\include\IOSystem.h" />
+    <ClInclude Include="..\..\of_v0.8.4_vs_release\addons\ofxAssimpModelLoader\libs\assimp\include\Logger.h" />
+    <ClInclude Include="..\..\of_v0.8.4_vs_release\addons\ofxAssimpModelLoader\libs\assimp\include\LogStream.h" />
+    <ClInclude Include="..\..\of_v0.8.4_vs_release\addons\ofxAssimpModelLoader\libs\assimp\include\NullLogger.h" />
+    <ClInclude Include="..\..\of_v0.8.4_vs_release\addons\ofxAssimpModelLoader\libs\assimp\include\ProgressHandler.h" />
+    <ClInclude Include="..\..\of_v0.8.4_vs_release\addons\ofxOsc\src\ofxOsc.h" />
+    <ClInclude Include="..\..\of_v0.8.4_vs_release\addons\ofxOsc\src\ofxOscArg.h" />
+    <ClInclude Include="..\..\of_v0.8.4_vs_release\addons\ofxOsc\src\ofxOscBundle.h" />
+    <ClInclude Include="..\..\of_v0.8.4_vs_release\addons\ofxOsc\src\ofxOscMessage.h" />
+    <ClInclude Include="..\..\of_v0.8.4_vs_release\addons\ofxOsc\src\ofxOscParameterSync.h" />
+    <ClInclude Include="..\..\of_v0.8.4_vs_release\addons\ofxOsc\src\ofxOscReceiver.h" />
+    <ClInclude Include="..\..\of_v0.8.4_vs_release\addons\ofxOsc\src\ofxOscSender.h" />
+    <ClInclude Include="..\..\of_v0.8.4_vs_release\addons\ofxOsc\libs\oscpack\src\ip\IpEndpointName.h" />
+    <ClInclude Include="..\..\of_v0.8.4_vs_release\addons\ofxOsc\libs\oscpack\src\ip\NetworkingUtils.h" />
+    <ClInclude Include="..\..\of_v0.8.4_vs_release\addons\ofxOsc\libs\oscpack\src\ip\PacketListener.h" />
+    <ClInclude Include="..\..\of_v0.8.4_vs_release\addons\ofxOsc\libs\oscpack\src\ip\TimerListener.h" />
+    <ClInclude Include="..\..\of_v0.8.4_vs_release\addons\ofxOsc\libs\oscpack\src\ip\UdpSocket.h" />
+    <ClInclude Include="..\..\of_v0.8.4_vs_release\addons\ofxOsc\libs\oscpack\src\osc\MessageMappingOscPacketListener.h" />
+    <ClInclude Include="..\..\of_v0.8.4_vs_release\addons\ofxOsc\libs\oscpack\src\osc\OscException.h" />
+    <ClInclude Include="..\..\of_v0.8.4_vs_release\addons\ofxOsc\libs\oscpack\src\osc\OscHostEndianness.h" />
+    <ClInclude Include="..\..\of_v0.8.4_vs_release\addons\ofxOsc\libs\oscpack\src\osc\OscOutboundPacketStream.h" />
+    <ClInclude Include="..\..\of_v0.8.4_vs_release\addons\ofxOsc\libs\oscpack\src\osc\OscPacketListener.h" />
+    <ClInclude Include="..\..\of_v0.8.4_vs_release\addons\ofxOsc\libs\oscpack\src\osc\OscPrintReceivedElements.h" />
+    <ClInclude Include="..\..\of_v0.8.4_vs_release\addons\ofxOsc\libs\oscpack\src\osc\OscReceivedElements.h" />
+    <ClInclude Include="..\..\of_v0.8.4_vs_release\addons\ofxOsc\libs\oscpack\src\osc\OscTypes.h" />
+    <ClInclude Include="..\..\of_v0.8.4_vs_release\addons\ofxXmlSettings\src\ofxXmlSettings.h" />
+    <ClInclude Include="..\..\of_v0.8.4_vs_release\addons\ofxXmlSettings\libs\tinyxml.h" />
+    <ClInclude Include="..\..\of_v0.8.4_vs_release\addons\ofxAppGLFWWindowMulti\src\ofxAppGLFWWindowMulti.h" />
+    <ClInclude Include="..\..\of_v0.8.4_vs_release\addons\ofxAppGLFWWindowMulti\src\WindowManager.h" />
+    <ClInclude Include="..\..\of_v0.8.4_vs_release\addons\ofxAutoReloadedShader\src\ofxAutoReloadedShader.h" />
+    <ClInclude Include="..\..\of_v0.8.4_vs_release\addons\ofxCubeMap\src\ofxCubeMap.h" />
+    <ClInclude Include="..\..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUI.h" />
+    <ClInclude Include="..\..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUI2DGraph.h" />
+    <ClInclude Include="..\..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUI2DPad.h" />
+    <ClInclude Include="..\..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIBaseDraws.h" />
+    <ClInclude Include="..\..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIBiLabelSlider.h" />
+    <ClInclude Include="..\..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIButton.h" />
+    <ClInclude Include="..\..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUICanvas.h" />
+    <ClInclude Include="..\..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUICircleSlider.h" />
+    <ClInclude Include="..\..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUICustomImageButton.h" />
+    <ClInclude Include="..\..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIDefines.h" />
+    <ClInclude Include="..\..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIDragableLabelButton.h" />
+    <ClInclude Include="..\..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIDropDownList.h" />
+    <ClInclude Include="..\..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIEventArgs.h" />
+    <ClInclude Include="..\..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIFPS.h" />
+    <ClInclude Include="..\..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIFPSSlider.h" />
+    <ClInclude Include="..\..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIImage.h" />
+    <ClInclude Include="..\..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIImageButton.h" />
+    <ClInclude Include="..\..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIImageSampler.h" />
+    <ClInclude Include="..\..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIImageSlider.h" />
+    <ClInclude Include="..\..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIImageToggle.h" />
+    <ClInclude Include="..\..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIIntSlider.h" />
+    <ClInclude Include="..\..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUILabel.h" />
+    <ClInclude Include="..\..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUILabelButton.h" />
+    <ClInclude Include="..\..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUILabelToggle.h" />
+    <ClInclude Include="..\..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIMinimalSlider.h" />
+    <ClInclude Include="..\..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIMovingGraph.h" />
+    <ClInclude Include="..\..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIMultiImageButton.h" />
+    <ClInclude Include="..\..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIMultiImageToggle.h" />
+    <ClInclude Include="..\..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUINumberDialer.h" />
+    <ClInclude Include="..\..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIOFWrapper.h" />
+    <ClInclude Include="..\..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIRadio.h" />
+    <ClInclude Include="..\..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIRangeSlider.h" />
+    <ClInclude Include="..\..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIRectangle.h" />
+    <ClInclude Include="..\..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIRotarySlider.h" />
+    <ClInclude Include="..\..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIScrollableCanvas.h" />
+    <ClInclude Include="..\..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUISlider.h" />
+    <ClInclude Include="..\..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUISortableList.h" />
+    <ClInclude Include="..\..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUISpacer.h" />
+    <ClInclude Include="..\..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUISpectrum.h" />
+    <ClInclude Include="..\..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUISuperCanvas.h" />
+    <ClInclude Include="..\..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUITabBar.h" />
+    <ClInclude Include="..\..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUITextArea.h" />
+    <ClInclude Include="..\..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUITextInput.h" />
+    <ClInclude Include="..\..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIToggle.h" />
+    <ClInclude Include="..\..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIToggleMatrix.h" />
+    <ClInclude Include="..\..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIUtils.h" />
+    <ClInclude Include="..\..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIValuePlotter.h" />
+    <ClInclude Include="..\..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIWaveform.h" />
+    <ClInclude Include="..\..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIWidget.h" />
+    <ClInclude Include="..\..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIWidgetWithLabel.h" />
+    <ClInclude Include="..\..\of_v0.8.4_vs_release\addons\ofxUI\src\ofxUIWrapper.h" />
+    <ClInclude Include="..\lib\Spout2\Spout.h" />
+    <ClInclude Include="..\lib\Spout2\SpoutCommon.h" />
+    <ClInclude Include="..\lib\Spout2\SpoutDirectX.h" />
+    <ClInclude Include="..\lib\Spout2\SpoutGLDXinterop.h" />
+    <ClInclude Include="..\lib\Spout2\SpoutGLextensions.h" />
+    <ClInclude Include="..\lib\Spout2\SpoutMemoryShare.h" />
+    <ClInclude Include="..\lib\Spout2\SpoutReceiver.h" />
+    <ClInclude Include="..\lib\Spout2\SpoutSDK.h" />
+    <ClInclude Include="..\lib\Spout2\SpoutSender.h" />
+    <ClInclude Include="..\lib\Spout2\SpoutSenderNames.h" />
+    <ClInclude Include="..\lib\Spout2\SpoutSharedMemory.h" />
+    <ClInclude Include="..\src\icosohedron.h" />
+    <ClInclude Include="..\src\radomeApp.h" />
+    <ClInclude Include="..\src\radomeModel.h" />
+    <ClInclude Include="..\src\radomePlugin.h" />
+    <ClInclude Include="..\src\radomeProjector.h" />
+    <ClInclude Include="..\src\radomeRenderer.h" />
+    <ClInclude Include="..\src\radomeSyphonClient.h" />
+    <ClInclude Include="..\src\radomeUtils.h" />
+    <ClInclude Include="..\src\turntableCam.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\of_v0.8.4_vs_release\libs\openFrameworksCompiled\project\vs\openframeworksLib.vcxproj">
+      <Project>{5837595d-aca9-485c-8e76-729040ce4b0b}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="icon.rc">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">/D_DEBUG %(AdditionalOptions)</AdditionalOptions>
+    </ResourceCompile>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+</Project>
