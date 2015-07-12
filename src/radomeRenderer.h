@@ -9,7 +9,7 @@
 #ifndef __radome__radomeRenderer__
 #define __radome__radomeRenderer__
 
-#define SHOW_CUBE_MAP
+//#define SHOW_CUBE_MAP
 
 #include <ofMain.h>
 #include "radomeProjector.h"
